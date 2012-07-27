@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Integration Tests</title>
+    <link rel="stylesheet" href="lib/jasmine.css" type="text/css" charset="utf-8">
+    <script src="application.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/jasmine.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/jasmine-html.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/jasmine.phantomjs-reporter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="lib/coffee-script.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      specs = [
+        'specs/zooniverse.coffee'
+      ];
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      var loaded = 0;
+      
+      function runTests() {
+        jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+        jasmine.getEnv().addReporter(new jasmine.PhantomJSReporter());
+        jasmine.getEnv().execute();
+      }
+      
+      window.specs.forEach(function(name) {
+        CoffeeScript.load(name, function() {
+          loaded++;
+          
+          if(loaded == window.specs.length) {
+            runTests();
+          }
+        })
+      });
+    </script>
+  </body>
+</html>
