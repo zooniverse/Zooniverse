@@ -1,1 +1,3 @@
 node_modules
+test/application.js
+test/application.css
