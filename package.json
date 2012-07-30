@@ -10,8 +10,8 @@
   },
   "main" : "./index.js",
   "scripts": {
-    "pretest": "hem server & echo $! > ./hem.pid",
-    "test": "phantomjs test/lib/run-jasmine.js http://localhost:9294",
+    "pretest": "hem server --port 9289 & echo $! > ./hem.pid",
+    "test": "phantomjs test/lib/run-jasmine.js http://localhost:9289",
     "posttest": "kill `cat hem.pid`; rm hem.pid"
   },
   "dependencies": {
