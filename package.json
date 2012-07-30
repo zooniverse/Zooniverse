@@ -1,5 +1,6 @@
 {
   "name": "Zooniverse",
+  "private": true,
   "description": "Zooniverse front end library",
   "version": "0.0.1",
   "author": "zooniverse",
@@ -14,7 +15,7 @@
     "posttest": "kill `cat hem.pid`; rm hem.pid"
   },
   "dependencies": {
-    "hem": "*"
+    "hem": "git://github.com/maccman/hem.git#517c97a3ce7"
   },
   "devDependencies": {
     
