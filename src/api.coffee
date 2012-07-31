@@ -45,8 +45,7 @@ class Api
   
   process: (id) =>
     Api.requests[id].processed = true
-    { id, type, url, data, headers } = Api.requests[id]
-    message = { id, type, url, data, headers }
+    message = _(Api.requests[id]).pick 'id', 'type', 'url', 'data', 'headers'
     Api.proxy.send message
   
   nextId: ->
