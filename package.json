@@ -15,6 +15,8 @@
     "posttest": "kill `cat hem.pid`; rm hem.pid"
   },
   "dependencies": {
+    "jqueryify": "~0.0.1",
+    "underscore": "*",
     "hem": "git://github.com/maccman/hem.git#517c97a3ce7"
   },
   "devDependencies": {

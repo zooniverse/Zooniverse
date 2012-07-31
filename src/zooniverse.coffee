@@ -1,4 +1,4 @@
 Zooniverse =
-  awesome: true
+  Api: require 'api'
 
 module.exports = Zooniverse

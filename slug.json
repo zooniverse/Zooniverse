@@ -1,5 +1,9 @@
 {
   "main": "index.js",
   "paths": ["lib"],
-  "public": "test"
+  "public": "test",
+  "dependencies": [
+    "jqueryify",
+    "underscore"
+  ]
 }
