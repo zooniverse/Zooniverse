@@ -1,3 +1,5 @@
+User = require('user')
+
 class ProxyFrame
   constructor: (@host) ->
     @append()
@@ -26,11 +28,19 @@ class ProxyFrame
     @el().on event, callback
   
   send: (message) =>
+    message.headers = @headers()
     @elFrame().contentWindow.postMessage JSON.stringify(message), @host
   
   receive: ({ originalEvent: e }) =>
     return unless e.origin is @host
     message = JSON.parse e.data
     @el().trigger('response', message) unless message.id is 'READY'
+  
+  headers: ->
+    if user = User.current
+      auth = base64.encode "#{ user.name }:#{ user.apiKey }"
+      { 'Authorization': "Basic #{ auth }" }
+    else
+      { }
 
 module.exports = ProxyFrame

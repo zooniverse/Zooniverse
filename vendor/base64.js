@@ -173,4 +173,4 @@ base64.encode = function(s) {
         break;
     }
     return x.join('');
-}
+};

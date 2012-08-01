@@ -10,6 +10,12 @@ class Api
   constructor: (@host) ->
     @createProxy() unless Api.proxy
   
+  get: => @request 'get', arguments...
+  getJSON: => @request 'getJSON', arguments...
+  post: => @request 'post', arguments...
+  put: => @request 'put', arguments...
+  delete: => @request 'delete', arguments...
+  
   createProxy: ->
     Api.proxy = new ProxyFrame @host
     Api.proxy.bind 'load', @loaded
@@ -21,15 +27,13 @@ class Api
   
   request: (type, url, data, done, fail) ->
     id = @nextId()
-    headers = { }
     
     if typeof data is 'function'
       fail = done
       done = data
       data = null
     
-    message = {id, type, url, data, done, fail, headers}
-    
+    message = { id, type, url, data, done, fail }
     Api.requests[id] = message
     if Api.ready then @process id else message.processed = false
   

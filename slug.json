@@ -2,6 +2,9 @@
   "main": "index.js",
   "paths": ["lib"],
   "public": "test",
+  "libs": [
+    "vendor/base64.js"
+  ],
   "dependencies": [
     "jqueryify",
     "underscore"

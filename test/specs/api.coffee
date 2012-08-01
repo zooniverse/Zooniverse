@@ -15,10 +15,10 @@ describe 'Api', ->
     expect(iframe).toHaveAttr 'src', 'http://localhost:3000/proxy'
     expect(iframe).toBeHidden()
   
-  it 'should accept requests', ->
+  it 'should handle successful requests', ->
     done = jasmine.createSpy()
     fail = jasmine.createSpy()
-    @api.request 'getJSON', '/current_user', done, fail
+    @api.getJSON '/current_user', done, fail
     
     waitsFor ->
       done.wasCalled or fail.wasCalled
