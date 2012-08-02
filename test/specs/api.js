@@ -5,32 +5,41 @@
   Api = require('api');
 
   describe('Api', function() {
-    beforeEach(function() {
-      return this.api = new Api;
-    });
     it('should have an incrementing id', function() {
-      expect(this.api.nextId()).toBe('api-0');
-      return expect(this.api.nextId()).toBe('api-1');
+      expect(Api.nextId()).toBe('api-0');
+      return expect(Api.nextId()).toBe('api-1');
     });
     it('should append a proxy frame', function() {
-      var iframe;
-      iframe = $('iframe');
-      expect(iframe.length).toEqual(1);
-      expect(iframe).toHaveId('api-proxy-frame');
-      expect(iframe).toHaveAttr('src', "" + this.api.host + "/proxy");
-      return expect(iframe).toBeHidden();
-    });
-    return it('should handle successful requests', function() {
-      var done, fail;
-      done = jasmine.createSpy();
-      fail = jasmine.createSpy();
-      this.api.getJSON('/projects/foo/current_user', done, fail);
+      Api.init();
       waitsFor(function() {
-        return done.wasCalled || fail.wasCalled;
+        return Api.ready;
       });
       return runs(function() {
-        expect(done).toHaveBeenCalled();
-        return expect(fail).not.toHaveBeenCalled();
+        var iframe;
+        iframe = $('iframe');
+        expect(iframe.length).toEqual(1);
+        expect(iframe).toHaveId('api-proxy-frame');
+        expect(iframe).toHaveAttr('src', "" + Api.host + "/proxy");
+        return expect(iframe).toBeHidden();
+      });
+    });
+    return it('should handle successful requests', function() {
+      Api.init();
+      waitsFor(function() {
+        return Api.ready;
+      });
+      return runs(function() {
+        var done, fail;
+        done = jasmine.createSpy();
+        fail = jasmine.createSpy();
+        Api.getJSON('/projects/foo/current_user', done, fail);
+        waitsFor(function() {
+          return done.wasCalled || fail.wasCalled;
+        });
+        return runs(function() {
+          expect(done).toHaveBeenCalled();
+          return expect(fail).not.toHaveBeenCalled();
+        });
       });
     });
   });

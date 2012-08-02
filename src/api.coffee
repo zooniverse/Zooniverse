@@ -6,28 +6,26 @@ class Api
   @requests = { }
   @ready = false
   @proxy = undefined
+  @host = "#{ window.location.protocol }//#{ window.location.host }"
   
-  constructor: (@host) ->
-    @host or= "#{ window.location.protocol }//#{ window.location.host }"
-    @createProxy() unless Api.proxy
+  @get: -> Api.request 'get', arguments...
+  @getJSON: -> Api.request 'getJSON', arguments...
+  @post: -> Api.request 'post', arguments...
+  @put: -> Api.request 'put', arguments...
+  @delete: -> Api.request 'delete', arguments...
   
-  get: => @request 'get', arguments...
-  getJSON: => @request 'getJSON', arguments...
-  post: => @request 'post', arguments...
-  put: => @request 'put', arguments...
-  delete: => @request 'delete', arguments...
+  @init: ->
+    return if Api.proxy
+    Api.proxy = new ProxyFrame Api.host
+    Api.proxy.bind 'load', Api.loaded
+    Api.proxy.bind 'response', Api.respond
   
-  createProxy: ->
-    Api.proxy = new ProxyFrame @host
-    Api.proxy.bind 'load', @loaded
-    Api.proxy.bind 'response', @respond
-  
-  loaded: =>
+  @loaded: ->
     Api.ready = true
-    @process(id) for id, request of Api.requests when not request.processed
+    Api.process(id) for id, request of Api.requests when not request.processed
   
-  request: (type, url, data, done, fail) ->
-    id = @nextId()
+  @request: (type, url, data, done, fail) ->
+    id = Api.nextId()
     
     if typeof data is 'function'
       fail = done
@@ -36,9 +34,9 @@ class Api
     
     message = { id, type, url, data, done, fail }
     Api.requests[id] = message
-    if Api.ready then @process id else message.processed = false
+    if Api.ready then Api.process id else message.processed = false
   
-  respond: (ev, message) =>
+  @respond: (ev, message) ->
     request = Api.requests[message.id]
     
     if message.failure
@@ -48,12 +46,12 @@ class Api
     
     delete Api.requests[message.id]
   
-  process: (id) =>
+  @process: (id) ->
     Api.requests[id].processed = true
-    message = _(Api.requests[id]).pick 'id', 'type', 'url', 'data', 'headers'
+    message = _(Api.requests[id]).pick 'id', 'type', 'url', 'data'
     Api.proxy.send message
   
-  nextId: ->
+  @nextId: ->
     _.uniqueId 'api-'
 
 module.exports = Api
