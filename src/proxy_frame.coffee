@@ -27,9 +27,12 @@ class ProxyFrame
   bind: (event, callback) ->
     @el().on event, callback
   
+  postMessage: (message) =>
+    @elFrame().contentWindow.postMessage JSON.stringify(message), @host
+  
   send: (message) =>
     message.headers = @headers()
-    @elFrame().contentWindow.postMessage JSON.stringify(message), @host
+    @postMessage message
   
   receive: ({ originalEvent: e }) =>
     return unless e.origin is @host

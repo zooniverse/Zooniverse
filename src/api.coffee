@@ -8,6 +8,7 @@ class Api
   @proxy = undefined
   
   constructor: (@host) ->
+    @host or= "#{ window.location.protocol }//#{ window.location.host }"
     @createProxy() unless Api.proxy
   
   get: => @request 'get', arguments...

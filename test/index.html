@@ -9,33 +9,16 @@
     <script src="lib/jasmine-html.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/jasmine.phantomjs-reporter.js" type="text/javascript" charset="utf-8"></script>
     <script src="lib/jasmine.jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="lib/coffee-script.js" type="text/javascript" charset="utf-8"></script>
     
-    <script type="text/javascript" charset="utf-8">
-      specs = [
-        'specs/api.coffee'
-      ];
-    </script>
+    <script src="specs/api.js" type="text/javascript" charset="utf-8"></script>
   </head>
   <body>
     <script type="text/javascript" charset="utf-8">
-      var loaded = 0;
-      
-      function runTests() {
-        jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-        jasmine.getEnv().addReporter(new jasmine.PhantomJSReporter());
+      jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+      jasmine.getEnv().addReporter(new jasmine.PhantomJSReporter());
+      window.onload = function() {
         jasmine.getEnv().execute();
-      }
-      
-      window.specs.forEach(function(name) {
-        CoffeeScript.load(name, function() {
-          loaded++;
-          
-          if(loaded == window.specs.length) {
-            runTests();
-          }
-        })
-      });
+      };
     </script>
   </body>
 </html>

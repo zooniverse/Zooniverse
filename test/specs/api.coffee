@@ -2,7 +2,7 @@ Api = require 'api'
 
 describe 'Api', ->
   beforeEach ->
-    @api = new Api 'http://localhost:3000'
+    @api = new Api
   
   it 'should have an incrementing id', ->
     expect(@api.nextId()).toBe 'api-0'
@@ -12,13 +12,13 @@ describe 'Api', ->
     iframe = $('iframe')
     expect(iframe.length).toEqual 1
     expect(iframe).toHaveId 'api-proxy-frame'
-    expect(iframe).toHaveAttr 'src', 'http://localhost:3000/proxy'
+    expect(iframe).toHaveAttr 'src', "#{ @api.host }/proxy"
     expect(iframe).toBeHidden()
   
   it 'should handle successful requests', ->
     done = jasmine.createSpy()
     fail = jasmine.createSpy()
-    @api.getJSON '/current_user', done, fail
+    @api.getJSON '/projects/foo/current_user', done, fail
     
     waitsFor ->
       done.wasCalled or fail.wasCalled
