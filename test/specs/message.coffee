@@ -1,6 +1,6 @@
 $ = require 'jqueryify'
 _ = require 'underscore/underscore'
-Message = require 'message'
+Message = require './message'
 
 class FakeProxy
   send: (@message) ->
@@ -21,7 +21,7 @@ describe 'Message', ->
     @message.send()
     expect(@message.sent).toBe true
     
-  it 'should know when it is delivered'
+  it 'should know when it is delivered', ->
     expect(@message.isDelivered()).toBe false
     @message.send()
     expect(@message.isDelivered()).toBe false

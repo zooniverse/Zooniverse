@@ -1,5 +1,5 @@
-{ User } = require 'zooniverse'
-Api = require 'api'
+User = require './user'
+Api = require './api'
 
 describe 'User', ->
   describe 'Not logged in', ->

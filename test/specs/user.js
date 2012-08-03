@@ -2,9 +2,9 @@
 (function() {
   var Api, User;
 
-  User = require('zooniverse').User;
+  User = require('./user');
 
-  Api = require('api');
+  Api = require('./api');
 
   describe('User', function() {
     describe('Not logged in', function() {

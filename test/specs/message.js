@@ -6,7 +6,7 @@
 
   _ = require('underscore/underscore');
 
-  Message = require('message');
+  Message = require('./message');
 
   FakeProxy = (function() {
 
@@ -42,19 +42,30 @@
       this.message.onFailure(this.failure);
       return this.message.always(this.always);
     });
-    it('should be stateful', function() {});
-    it('handles success', function() {
+    it('should know when it is sent', function() {
       expect(this.message.sent).toBe(false);
       this.message.send();
-      expect(this.message.sent).toBe(true);
+      return expect(this.message.sent).toBe(true);
+    });
+    it('should know when it is delivered', function() {
+      expect(this.message.isDelivered()).toBe(false);
+      this.message.send();
+      expect(this.message.isDelivered()).toBe(false);
+      this.message.proxy.succeed();
+      return expect(this.message.isDelivered()).toBe(true);
+    });
+    it('handles success', function() {
+      this.message.send();
       this.message.proxy.succeed();
       expect(this.success).toHaveBeenCalled();
+      expect(this.failure).not.toHaveBeenCalled();
       expect(this.always).toHaveBeenCalled();
       return expect(this.message.isDelivered()).toBe(true);
     });
     return it('handles failure', function() {
       this.message.send();
       this.message.proxy.fail();
+      expect(this.success).not.toHaveBeenCalled();
       expect(this.failure).toHaveBeenCalled();
       expect(this.always).toHaveBeenCalled();
       return expect(this.message.isDelivered()).toBe(false);

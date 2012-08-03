@@ -1,4 +1,4 @@
-Api = require 'api'
+Api = require './api'
 
 describe 'Api', ->
   it 'should have an incrementing id', ->

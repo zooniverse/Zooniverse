@@ -2,7 +2,7 @@
 (function() {
   var Api;
 
-  Api = require('api');
+  Api = require('./api');
 
   describe('Api', function() {
     it('should have an incrementing id', function() {
