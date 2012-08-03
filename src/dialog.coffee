@@ -27,6 +27,7 @@ class Dialog
 
     constructor: (params = {}) ->
       @[property] = value for own property, value of params
+
       @el ?= $("<#{@tag} class='#{@className}'>#{@label}</#{@tag}>")
       @el.on 'click', =>
         @dialog.deferred.resolve @value
@@ -52,26 +53,20 @@ class Dialog
     @[property] = value for own property, value of params
     @buttons ?= [new @constructor.Button label: 'OK', value: true]
 
-    for button, i in @buttons
-      unless button instanceof @constructor.Button
-        # Convert {label: value} button descriptions to Button instances
-        for own label, value of button
-          @buttons[i] = new @constructor.Button {label, value}
-      @buttons[i].dialog = @
-
-    @render()
-    @el.appendTo 'body'
-
-  render: =>
-    @el = $("""
+    @el ?= $("""
       <div class="#{@className}-underlay">
         <div class="#{@className}">
-          <header>#{@title}</header>
+          <header></header>
           <div class="content"></div>
           <footer></footer>
         </div>
       </div>
     """)
+
+    @el.appendTo 'body'
+
+  render: =>
+    @el.find('header').html @title
 
     contentContainer = @el.find '.content'
     if @content instanceof $
@@ -79,9 +74,19 @@ class Dialog
     else
       contentContainer.append $("<p>#{@content}</p>")
 
-    button.el.appendTo @el.find 'footer' for button in @buttons
+    @el.find('footer').empty
+
+    for button, i in @buttons
+      unless button instanceof @constructor.Button
+        # Convert {label: value} button descriptions to Button instances
+        for own label, value of button
+          @buttons[i] = new @constructor.Button {label, value}
+      @buttons[i].dialog = @
+      @buttons[i].el.appendTo @el.find 'footer'
 
   open: =>
+    @render()
+
     @el.addClass 'open'
     @deferred = new $.Deferred
     @deferred.then @callback if @callback?
