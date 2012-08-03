@@ -1,9 +1,10 @@
 $ = require 'jqueryify'
 _ = require 'underscore/underscore'
 ProxyFrame = require 'proxy_frame'
+Message = require 'message'
 
 Api =
-  requests: { }
+  messages: { }
   ready: false
   proxy: undefined
   host: "#{ window.location.protocol }//#{ window.location.host }"
@@ -22,7 +23,7 @@ Api =
   
   loaded: ->
     Api.ready = true
-    Api.process(id) for id, request of Api.requests when not request.processed
+    Api.process(id) for id, message of Api.messages when not message.sent
   
   request: (type, url, data, done, fail) ->
     id = Api.nextId()
@@ -32,24 +33,26 @@ Api =
       done = data
       data = null
     
-    message = { id, type, url, data, done, fail }
-    Api.requests[id] = message
-    if Api.ready then Api.process id else message.processed = false
+    message = new Message { id, type, url, data }, Api.proxy
+    message.onSuccess(done) if done
+    message.onFailure(fail) if fail
+    
+    Api.messages[id] = message
+    Api.process(id) if Api.ready
+    message
   
-  respond: (ev, message) ->
-    request = Api.requests[message.id]
+  respond: (ev, result) ->
+    message = Api.messages[result.id]
     
-    if message.failure
-      request.fail? message.response
+    if result.failure
+      message.fail result.response
     else
-      request.done? message.response
+      message.succeed result.response
     
-    delete Api.requests[message.id]
+    delete Api.messages[result.id]
   
   process: (id) ->
-    Api.requests[id].processed = true
-    message = _(Api.requests[id]).pick 'id', 'type', 'url', 'data'
-    Api.proxy.send message
+    Api.proxy.send Api.messages[id]
   
   nextId: ->
     _.uniqueId 'api-'

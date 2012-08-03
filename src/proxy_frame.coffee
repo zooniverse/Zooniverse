@@ -1,3 +1,5 @@
+$ = require 'jqueryify'
+
 class ProxyFrame
   @headers = { }
   
@@ -31,8 +33,8 @@ class ProxyFrame
     @elFrame().contentWindow.postMessage JSON.stringify(message), @host
   
   send: (message) =>
-    message.headers = ProxyFrame.headers
-    @postMessage message
+    payload = $.extend true, ProxyFrame.headers, message.payload
+    @postMessage payload
   
   receive: ({ originalEvent: e }) =>
     return unless e.origin is @host
