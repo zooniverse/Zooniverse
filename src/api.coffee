@@ -15,9 +15,9 @@ Api =
   put: -> Api.request 'put', arguments...
   delete: -> Api.request 'delete', arguments...
   
-  init: (options) ->
+  init: (options = { }) ->
     return if Api.proxy
-    options = $.merge { proxyPath: '/proxy' }, options
+    options = $.merge options, { proxyPath: '/proxy' }
     Api.proxy = new ProxyFrame Api.host, options.proxyPath
     Api.proxy.bind 'load', Api.loaded
     Api.proxy.bind 'response', Api.respond
