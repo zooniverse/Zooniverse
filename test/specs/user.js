@@ -2,7 +2,7 @@
 (function() {
   var Api, User;
 
-  User = require('./user');
+  User = require('./models/user');
 
   Api = require('./api');
 

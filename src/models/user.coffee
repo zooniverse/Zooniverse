@@ -1,7 +1,9 @@
-Api = require './api'
-ProxyFrame = require './proxy_frame'
+Model = require './model'
+Api = require '../api'
+ProxyFrame = require '../proxy_frame'
 
-User =
+class User extends Model
+  @configure 'User'
   current: null
   
   fetch: (callback) ->
