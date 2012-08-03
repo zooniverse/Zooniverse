@@ -6,7 +6,7 @@ class User extends Model
   @configure 'User'
   current: null
   
-  fetch: (callback) ->
+  @fetch: (callback) ->
     Api.getJSON '/current_user', (result) =>
       @current = if result.success
         delete result.success
@@ -17,7 +17,7 @@ class User extends Model
       @setAuthHeaders()
       callback? @current
   
-  setAuthHeaders: ->
+  @setAuthHeaders: ->
     if @current
       auth = base64.encode "#{ @current.name }:#{ @current.apiKey }"
       ProxyFrame.headers['Authorization'] = "Basic #{ auth }"
