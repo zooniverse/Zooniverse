@@ -1,7 +1,7 @@
 $ = require 'jqueryify'
 _ = require 'underscore/underscore'
 ProxyFrame = require 'proxy_frame'
-Message = require 'message'
+Message = require './message'
 
 Api =
   messages: { }

@@ -1,5 +1,5 @@
-Api = require 'api'
-ProxyFrame = require 'proxy_frame'
+Api = require './api'
+ProxyFrame = require './proxy_frame'
 
 User =
   current: null
