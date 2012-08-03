@@ -23,7 +23,7 @@ class ProxyFrame
   html: ->
     $('<iframe></iframe>')
       .attr('id', 'api-proxy-frame')
-      .attr('src', "#{ @host }/#{ @path }")
+      .attr('src', "#{ @host }#{ @path }")
       .css('display', 'none')
   
   bind: (event, callback) ->
