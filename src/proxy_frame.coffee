@@ -3,7 +3,7 @@ $ = require 'jqueryify'
 class ProxyFrame
   @headers = { }
   
-  constructor: (@host) ->
+  constructor: (@host, @path = '/proxy') ->
     @append()
     $(window).on 'message', @receive
   
@@ -23,7 +23,7 @@ class ProxyFrame
   html: ->
     $('<iframe></iframe>')
       .attr('id', 'api-proxy-frame')
-      .attr('src', "#{ @host }/proxy")
+      .attr('src', "#{ @host }/#{ @path }")
       .css('display', 'none')
   
   bind: (event, callback) ->
