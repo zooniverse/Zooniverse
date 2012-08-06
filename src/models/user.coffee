@@ -4,22 +4,21 @@ ProxyFrame = require '../proxy_frame'
 
 class User extends Model
   @configure 'User'
-  current: null
   
-  @fetch: (callback) ->
-    Api.getJSON '/current_user', (result) =>
-      @current = if result.success
+  @fetch: ->
+    fetcher = Api.getJSON '/current_user', (result) =>
+      User.current = if result.success
         delete result.success
-        result
+        new User result
       else
         null
-      
-      @setAuthHeaders()
-      callback? @current
+    
+    fetcher.always @setAuthHeaders
+    fetcher
   
   @setAuthHeaders: ->
-    if @current
-      auth = base64.encode "#{ @current.name }:#{ @current.apiKey }"
+    if User.current
+      auth = base64.encode "#{ User.current.name }:#{ User.current.apiKey }"
       ProxyFrame.headers['Authorization'] = "Basic #{ auth }"
     else
       delete ProxyFrame.headers['Authorization']

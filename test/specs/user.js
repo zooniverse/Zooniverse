@@ -9,17 +9,38 @@
   describe('User', function() {
     describe('Not logged in', function() {
       return it('should not fetch a user', function() {
-        return User.fetch(function(user) {
-          return expect(User.current).toBeFalsy();
+        return User.fetch().always(function() {
+          return expect(User.current).toBe(null);
         });
       });
     });
     return describe('Logged in', function() {
+      beforeEach(function() {
+        var loggedIn;
+        loggedIn = false;
+        Api.getJSON('/login', function() {
+          return loggedIn = true;
+        });
+        return waitsFor(function() {
+          return loggedIn;
+        });
+      });
+      afterEach(function() {
+        var loggedOut;
+        loggedOut = false;
+        Api.getJSON('/logout', function() {
+          return loggedOut = true;
+        });
+        return waitsFor(function() {
+          return loggedOut;
+        });
+      });
       return it('should fetch a user', function() {
-        return Api.getJSON('/login', function() {
-          return User.fetch(function(user) {
-            return expect(User.current).toBeTruthy();
-          });
+        User.fetch().always(function() {
+          return expect(User.current.id).toBe('4fff22b8c4039a0901000002');
+        });
+        return waitsFor(function() {
+          return User.current;
         });
       });
     });

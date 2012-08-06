@@ -4,11 +4,22 @@ Api = require './api'
 describe 'User', ->
   describe 'Not logged in', ->
     it 'should not fetch a user', ->
-      User.fetch (user) ->
-        expect(User.current).toBeFalsy()
+      User.fetch().always ->
+        expect(User.current).toBe null
   
   describe 'Logged in', ->
+    beforeEach ->
+      loggedIn = false
+      Api.getJSON '/login', -> loggedIn = true
+      waitsFor -> loggedIn
+    
+    afterEach ->
+      loggedOut = false
+      Api.getJSON '/logout', -> loggedOut = true
+      waitsFor -> loggedOut
+    
     it 'should fetch a user', ->
-      Api.getJSON '/login', ->
-        User.fetch (user) ->
-          expect(User.current).toBeTruthy()
+      User.fetch().always ->
+        expect(User.current.id).toBe '4fff22b8c4039a0901000002'
+      
+      waitsFor -> User.current
