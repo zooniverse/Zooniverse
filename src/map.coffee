@@ -61,15 +61,15 @@ class Map
   removeLayer: (layer) =>
     @map.removeLayer layer
 
-  addLabel: (lat, lng, content, options = {}) =>
-    icon = new Leaflet.DivIcon className: options.className || 'map-label'
+  addLabel: (lat, lng, html, {className} = {className: 'map-label'}) =>
+    icon = new Leaflet.DivIcon {html, className, iconSize: null}
     marker = new Leaflet.Marker [lat, lng], {icon}
     marker.addTo @map
 
     # This is a bit of a hack.
-    iconElement = $(marker._icon)
-    iconElement.css height: '', marginLeft: '', marginTop: '', width: ''
-    iconElement.append content
+    # iconElement = $(marker._icon)
+    # iconElement.css height: '', marginLeft: '', marginTop: '', width: ''
+    # iconElement.append content
     marker
 
   removeLabel: (label) =>
