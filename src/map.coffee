@@ -47,8 +47,17 @@ class Map
 
     @el.css position: '' # Don't let Leaflet override this.
 
-  setCenter: (latitude, longitude) =>
-    @map.setView new Leaflet.LatLng(latitude, longitude), @map.getZoom()
+  setCenter: (lat, lng, {center, zoom} = {center: [0.5, 0.5]}) =>
+    # NOTE: Optional center is [x, y] out of 1, relative to the element, not [lat, lng].
+    bounds = @map.getBounds()
+    ne = bounds.getNorthEast()
+    sw = bounds.getSouthWest()
+
+    shift =
+      lat: (ne.lat - sw.lat) * -(0.5 - center[1])
+      lng: (ne.lng - sw.lng) * +(0.5 - center[0])
+
+    @map.setView new Leaflet.LatLng(lat + shift.lat, lng + shift.lng), zoom || @map.getZoom()
 
   setZoom: (zoom) =>
     @map.setZoom zoom
@@ -65,11 +74,6 @@ class Map
     icon = new Leaflet.DivIcon {html, className, iconSize: null}
     marker = new Leaflet.Marker [lat, lng], {icon}
     marker.addTo @map
-
-    # This is a bit of a hack.
-    # iconElement = $(marker._icon)
-    # iconElement.css height: '', marginLeft: '', marginTop: '', width: ''
-    # iconElement.append content
     marker
 
   removeLabel: (label) =>
