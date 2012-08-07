@@ -1,14 +1,16 @@
 Subject = require './models/subject'
 
 class TestSubject extends Subject
+  @configure 'TestSubject'
   projectName: 'test'
 
 class OtherSubject extends Subject
+  @configure 'OtherSubject'
   projectName: 'other'
 
 describe 'Subject', ->
   afterEach ->
-    Subject.destroyAll()
+    klass.destroyAll() for klass in [TestSubject, OtherSubject, Subject]
   
   mockSubjects = ->
     for val in ['first', 'second', 'third']

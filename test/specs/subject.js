@@ -14,6 +14,8 @@
       return TestSubject.__super__.constructor.apply(this, arguments);
     }
 
+    TestSubject.configure('TestSubject');
+
     TestSubject.prototype.projectName = 'test';
 
     return TestSubject;
@@ -28,6 +30,8 @@
       return OtherSubject.__super__.constructor.apply(this, arguments);
     }
 
+    OtherSubject.configure('OtherSubject');
+
     OtherSubject.prototype.projectName = 'other';
 
     return OtherSubject;
@@ -37,7 +41,14 @@
   describe('Subject', function() {
     var mockSubjects;
     afterEach(function() {
-      return Subject.destroyAll();
+      var klass, _i, _len, _ref, _results;
+      _ref = [TestSubject, OtherSubject, Subject];
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        klass = _ref[_i];
+        _results.push(klass.destroyAll());
+      }
+      return _results;
     });
     mockSubjects = function() {
       var val, _i, _len, _ref, _results;
