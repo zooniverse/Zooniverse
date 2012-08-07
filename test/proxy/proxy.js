@@ -153,7 +153,7 @@
   });
 
   $.mockjax({
-    url: /^\/projects\/galaxy_zoo\/groups(\?page=1&per_page=5)?$/i,
+    url: /^\/projects\/galaxy_zoo\/groups\?page=1&per_page=5$/i,
     responseText: gz_groups
   });
 
@@ -165,7 +165,7 @@
   for (_i = 0, _len = gz_groups.length; _i < _len; _i++) {
     group = gz_groups[_i];
     $.mockjax({
-      url: /^\/projects\/galaxy_zoo\/groups\/#{ group.id }/i,
+      url: new RegExp("^\/projects\/galaxy_zoo\/groups\/" + group.id, 'i'),
       responseText: group
     });
   }

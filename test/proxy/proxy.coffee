@@ -111,7 +111,7 @@ $.mockjax
   responseText: subjects
 
 $.mockjax
-  url: /^\/projects\/galaxy_zoo\/groups(\?page=1&per_page=5)?$/i
+  url: /^\/projects\/galaxy_zoo\/groups\?page=1&per_page=5$/i
   responseText: gz_groups
 
 $.mockjax
@@ -120,7 +120,7 @@ $.mockjax
 
 for group in gz_groups
   $.mockjax
-    url: /^\/projects\/galaxy_zoo\/groups\/#{ group.id }/i
+    url: new RegExp("^\/projects\/galaxy_zoo\/groups\/#{ group.id }", 'i')
     responseText: group
 
 $(window).on 'message', ({originalEvent: e}) ->

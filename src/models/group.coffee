@@ -12,7 +12,11 @@ class Group extends Model
   
   @index: (opts = { }) ->
     opts = _(page: 1, per_page: 5).extend opts
-    fetcher = Api.get @url(opts), (results) =>
+    Api.get @url(opts), (results) =>
       @create result for result in results
+  
+  @show: (id) ->
+    Api.get "#{ @url() }/#{ id }", (result) =>
+      @create result
 
 module.exports = Group

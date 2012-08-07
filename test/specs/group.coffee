@@ -12,10 +12,10 @@ class GalaxyZooSurveyGroup extends Group
   type: 'survey'
 
 describe 'Group', ->
+  beforeEach -> Api.init()
+  afterEach -> GalaxyZooSurveyGroup.destroyAll()
+  
   describe 'index', ->
-    beforeEach -> Api.init()
-    afterEach -> GalaxyZooSurveyGroup.destroyAll()
-    
     it 'should fetch', ->
       fetched = false
       GalaxyZooSurveyGroup.index().always -> fetched = true
@@ -30,3 +30,12 @@ describe 'Group', ->
       runs ->
         expect(GalaxyZooSurveyGroup.count()).toBe 1
         expect(GalaxyZooSurveyGroup.first().name).toBe 'CANDELS'
+  
+  describe 'show', ->
+    it 'should find the group', ->
+      fetched = false
+      GalaxyZooSurveyGroup.show('50217561516bcb0fda00000d').always -> fetched = true
+      waitsFor -> fetched
+      runs ->
+        expect(GalaxyZooSurveyGroup.count()).toBe 1
+        expect(GalaxyZooSurveyGroup.first().id).toBe '50217561516bcb0fda00000d'

@@ -45,13 +45,13 @@
   })(Group);
 
   describe('Group', function() {
-    return describe('index', function() {
-      beforeEach(function() {
-        return Api.init();
-      });
-      afterEach(function() {
-        return GalaxyZooSurveyGroup.destroyAll();
-      });
+    beforeEach(function() {
+      return Api.init();
+    });
+    afterEach(function() {
+      return GalaxyZooSurveyGroup.destroyAll();
+    });
+    describe('index', function() {
       it('should fetch', function() {
         var fetched;
         fetched = false;
@@ -80,6 +80,22 @@
         return runs(function() {
           expect(GalaxyZooSurveyGroup.count()).toBe(1);
           return expect(GalaxyZooSurveyGroup.first().name).toBe('CANDELS');
+        });
+      });
+    });
+    return describe('show', function() {
+      return it('should find the group', function() {
+        var fetched;
+        fetched = false;
+        GalaxyZooSurveyGroup.show('50217561516bcb0fda00000d').always(function() {
+          return fetched = true;
+        });
+        waitsFor(function() {
+          return fetched;
+        });
+        return runs(function() {
+          expect(GalaxyZooSurveyGroup.count()).toBe(1);
+          return expect(GalaxyZooSurveyGroup.first().id).toBe('50217561516bcb0fda00000d');
         });
       });
     });
