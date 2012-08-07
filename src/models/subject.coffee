@@ -7,16 +7,7 @@ class Subject extends Model
   @configure 'Subject'
   projectName: null
   
-  @baseUrl: ->
-    if @::projectName
-      "/projects/#{ @::projectName }"
-    else
-      ''
-  
-  @url: (params) ->
-    url = "#{ @baseUrl() }/subjects"
-    url += '?' + $.param(params) if params
-    url
+  @url: (params) -> @withParams "/projects/#{ @::projectName }/subjects", params
   
   @fetch: (count = 1) ->
     fetcher = Api.get @url(limit: count), (results) =>

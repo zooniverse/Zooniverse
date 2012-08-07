@@ -7,6 +7,9 @@
   Api = require('./api');
 
   describe('User', function() {
+    beforeEach(function() {
+      return Api.init();
+    });
     describe('Not logged in', function() {
       return it('should not fetch a user', function() {
         var userCheck;

@@ -1,3 +1,4 @@
+Api = require './api'
 Subject = require './models/subject'
 
 class TestSubject extends Subject
@@ -9,6 +10,7 @@ class OtherSubject extends Subject
   projectName: 'other'
 
 describe 'Subject', ->
+  beforeEach -> Api.init()
   afterEach ->
     klass.destroyAll() for klass in [TestSubject, OtherSubject, Subject]
   
@@ -36,10 +38,8 @@ describe 'Subject', ->
   
   it 'should fetch', ->
     fetched = false
+    TestSubject.fetch(2).always -> fetched = true
     waitsFor -> fetched
-    
-    TestSubject.fetch(2).always ->
-      fetched = true
     
     runs ->
       expect(TestSubject.all().length).toBe 2

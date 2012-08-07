@@ -2,6 +2,8 @@ User = require './models/user'
 Api = require './api'
 
 describe 'User', ->
+  beforeEach -> Api.init()
+  
   describe 'Not logged in', ->
     it 'should not fetch a user', ->
       userCheck = false
