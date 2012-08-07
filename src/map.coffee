@@ -47,6 +47,12 @@ class Map
 
     @el.css position: '' # Don't let Leaflet override this.
 
+    $(window).on 'hashchange', =>
+      {x, y} = @map.getSize()
+      setTimeout @resize if 0 in [x, y]
+
+    setTimeout @resize
+
   setCenter: (lat, lng, {center, zoom} = {center: [0.5, 0.5]}) =>
     # NOTE: Optional center is [x, y] out of 1, relative to the element, not [lat, lng].
     bounds = @map.getBounds()
