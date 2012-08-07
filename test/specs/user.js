@@ -9,7 +9,15 @@
   describe('User', function() {
     describe('Not logged in', function() {
       return it('should not fetch a user', function() {
-        return User.fetch().always(function() {
+        var userCheck;
+        userCheck = false;
+        User.fetch().always(function() {
+          return userCheck = true;
+        });
+        waitsFor(function() {
+          return userCheck;
+        });
+        return runs(function() {
           return expect(User.current).toBe(null);
         });
       });
