@@ -1,6 +1,16 @@
+LoginForm = require './controllers/LoginForm'
+
 describe 'LoginForm', ->
-  describe 'on submit', ->
-    it 'gets a "waiting" class', ->
+  beforeEach ->
+    @loginForm = new LoginForm
+
+  describe '#onSubmit', ->
+    beforeEach ->
+      @loginForm.onSubmit()
+
+    it 'should show a progress indicator', ->
+      progress = $('@loginForm.el p progress').css('display')
+      expect(progress).not.toBe 'hide'
 
     it 'forgets any previous errors', ->
 

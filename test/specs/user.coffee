@@ -28,17 +28,22 @@ describe 'User', ->
       waitsFor -> User.current
 
   describe '#login', ->
-    describe 'with valid password', ->
+    beforeEach ->
+      User.current = null
 
+    afterEach ->
+      loggedOut = false
+      Api.getJSON '/logout', -> loggedOut = true
+      waitsFor -> loggedOut
+     
+    describe 'with valid password', ->
       it 'should set current user to the login', ->
-        console.log 'here'
-        User.login({username: 'user', password: 'password'}).always ->
+        User.login('user', 'password').always ->
           expect(User.current.id).toBe '4fff22b8c4039a0901000002'
         waitsFor -> User.current
 
     describe 'with invalid password', ->
-
       it 'should set the current user to null', ->
-        User.login({username: 'user', password: 'password'}).always ->
-          expect(User.current.id).toBeNull
+        User.login('user', 'password_not').always ->
+          expect(User.current.id).toBeNull()
         waitsFor -> User.current

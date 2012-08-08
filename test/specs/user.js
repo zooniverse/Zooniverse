@@ -56,13 +56,22 @@
       });
     });
     return describe('#login', function() {
+      beforeEach(function() {
+        return User.current = null;
+      });
+      afterEach(function() {
+        var loggedOut;
+        loggedOut = false;
+        Api.getJSON('/logout', function() {
+          return loggedOut = true;
+        });
+        return waitsFor(function() {
+          return loggedOut;
+        });
+      });
       describe('with valid password', function() {
         return it('should set current user to the login', function() {
-          console.log('here');
-          User.login({
-            username: 'user',
-            password: 'password'
-          }).always(function() {
+          User.login('user', 'password').always(function() {
             return expect(User.current.id).toBe('4fff22b8c4039a0901000002');
           });
           return waitsFor(function() {
@@ -72,11 +81,8 @@
       });
       return describe('with invalid password', function() {
         return it('should set the current user to null', function() {
-          User.login({
-            username: 'user',
-            password: 'password'
-          }).always(function() {
-            return expect(User.current.id).toBeNull;
+          User.login('user', 'password_not').always(function() {
+            return expect(User.current.id).toBeNull();
           });
           return waitsFor(function() {
             return User.current;

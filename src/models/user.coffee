@@ -23,8 +23,8 @@ class User extends Model
     else
       delete ProxyFrame.headers['Authorization']
 
-  @login: ({username, password}) ->
-    Api.getJSON '/login', {username, password}, (result) =>
+  @login: (username, password) ->
+    Api.getJSON '/login', {username, password}, (result) ->
       User.current = if result.success
         delete result.success
         new User result
