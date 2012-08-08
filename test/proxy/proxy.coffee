@@ -108,7 +108,7 @@ $.mockjax
 
 $.mockjax
   url: /^\/projects\/\w+\/subjects\?limit=2/i
-  responseText: subjects
+  responseText: "A Response"
 
 $.mockjax
   url: /^\/projects\/galaxy_zoo\/groups\?page=1&per_page=5$/i
