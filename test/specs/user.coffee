@@ -25,20 +25,17 @@ describe 'User', ->
     it 'should fetch a user', ->
       User.fetch().always ->
         expect(User.current.id).toBe '4fff22b8c4039a0901000002'
-      
       waitsFor -> User.current
 
   describe '#login', ->
-    beforeEach ->
-      console.log 'this gets called'
-   
     describe 'with valid password', ->
       it 'should set current user to the login', ->
         User.login({username: 'user', password: 'password'}).always ->
           expect(User.current.id).toBe '4fff22b8c4039a0901000002'
+        waitsFor -> User.current
 
     describe 'with invalid password', ->
       it 'should set the current user to null', ->
         User.login({username: 'user', password: 'password'}).always ->
           expect(User.current.id).toBeNull
-
+        waitsFor -> User.current

@@ -56,26 +56,29 @@
       });
     });
     return describe('#login', function() {
-      beforeEach(function() {
-        return console.log('this gets called');
-      });
       describe('with valid password', function() {
         return it('should set current user to the login', function() {
-          return User.login({
+          User.login({
             username: 'user',
             password: 'password'
           }).always(function() {
             return expect(User.current.id).toBe('4fff22b8c4039a0901000002');
           });
+          return waitsFor(function() {
+            return User.current;
+          });
         });
       });
       return describe('with invalid password', function() {
         return it('should set the current user to null', function() {
-          return User.login({
+          User.login({
             username: 'user',
             password: 'password'
           }).always(function() {
             return expect(User.current.id).toBeNull;
+          });
+          return waitsFor(function() {
+            return User.current;
           });
         });
       });
