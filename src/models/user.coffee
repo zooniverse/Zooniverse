@@ -23,4 +23,10 @@ class User extends Model
     else
       delete ProxyFrame.headers['Authorization']
 
+  @login: (auth) ->
+
+  @logout: (auth) ->
+    
+
+
 module.exports = User

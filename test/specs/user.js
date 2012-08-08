@@ -25,7 +25,7 @@
         });
       });
     });
-    return describe('Logged in', function() {
+    describe('Logged in', function() {
       beforeEach(function() {
         var loggedIn;
         loggedIn = false;
@@ -52,6 +52,28 @@
         });
         return waitsFor(function() {
           return User.current;
+        });
+      });
+    });
+    return describe('#login', function() {
+      describe('with valid password', function() {
+        return it('should set current user to the login', function() {
+          return User.login({
+            username: 'user',
+            password: 'password'
+          }).always(function() {
+            return expect(User.current.id).toBe('4fff22b8c4039a0901000002');
+          });
+        });
+      });
+      return describe('with invalid password', function() {
+        return it('should set the current user to null', function() {
+          return User.login({
+            username: 'user',
+            password: 'password'
+          }).always(function() {
+            return expect(User.current.id).toBeNull;
+          });
         });
       });
     });
