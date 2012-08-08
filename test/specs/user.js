@@ -56,6 +56,9 @@
       });
     });
     return describe('#login', function() {
+      beforeEach(function() {
+        return console.log('this gets called');
+      });
       describe('with valid password', function() {
         return it('should set current user to the login', function() {
           return User.login({

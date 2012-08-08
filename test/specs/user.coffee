@@ -29,6 +29,8 @@ describe 'User', ->
       waitsFor -> User.current
 
   describe '#login', ->
+    beforeEach ->
+      console.log 'this gets called'
    
     describe 'with valid password', ->
       it 'should set current user to the login', ->
