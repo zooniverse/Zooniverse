@@ -36,11 +36,11 @@ describe 'Subject', ->
     mockSubjects()
     expect(TestSubject.count()).toBe 3
   
-    #  it 'should fetch', ->
-    #    fetched = false
-    #    TestSubject.fetch(2).always -> fetched = true
-    #    waitsFor -> fetched
+  it 'should fetch', ->
+    fetched = false
+    TestSubject.fetch(2).always -> fetched = true
+    waitsFor -> fetched
     
-    #    runs ->
-    #      expect(TestSubject.all().length).toBe 2
-    #      expect(TestSubject.first().id).toBe '4fff2d0fc4039a09f10003e0'
+    runs ->
+      expect(TestSubject.all().length).toBe 2
+      expect(TestSubject.first().id).toBe '4fff2d0fc4039a09f10003e0'

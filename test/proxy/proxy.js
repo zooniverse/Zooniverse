@@ -149,7 +149,7 @@
 
   $.mockjax({
     url: /^\/projects\/\w+\/subjects\?limit=2/i,
-    responseText: "A Response"
+    responseText: subjects
   });
 
   $.mockjax({

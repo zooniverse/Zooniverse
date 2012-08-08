@@ -58,6 +58,7 @@
     return describe('#login', function() {
       describe('with valid password', function() {
         return it('should set current user to the login', function() {
+          console.log('here');
           User.login({
             username: 'user',
             password: 'password'

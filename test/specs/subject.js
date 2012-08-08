@@ -84,9 +84,23 @@
       mockSubjects();
       return expect(TestSubject.last().id).toBe('third');
     });
-    return it('should count', function() {
+    it('should count', function() {
       mockSubjects();
       return expect(TestSubject.count()).toBe(3);
+    });
+    return it('should fetch', function() {
+      var fetched;
+      fetched = false;
+      TestSubject.fetch(2).always(function() {
+        return fetched = true;
+      });
+      waitsFor(function() {
+        return fetched;
+      });
+      return runs(function() {
+        expect(TestSubject.all().length).toBe(2);
+        return expect(TestSubject.first().id).toBe('4fff2d0fc4039a09f10003e0');
+      });
     });
   });
 
