@@ -1,31 +1,45 @@
-LoginForm = require './controllers/base_form'
+SignInForm = require './controllers/base_form'
 
-describe 'BaseForm', ->
+describe 'SignInForm', ->
   beforeEach ->
-    @loginForm = new BaseForm
+    @signInForm = new SignInForm
 
   describe '#onSubmit', ->
     beforeEach ->
-      @loginForm.onSubmit()
+      @signInForm.onSubmit()
 
     it 'should show a progress indicator', ->
-      progress = @loginForm.progress.css('display')
-      expect(progress).not.toBe 'hide'
+      progress = @signInForm.progress.css('display')
+      expect(progress).not.toBe 'none'
 
     it 'forgets any previous errors', ->
-      errors = @loginFormel.errors.text()
+      errors = @signInForm.errors.text()
       expect(errors).toBe ""
 
     it 'submits a username and password to the authentication iframe', ->
+      spyOn User, 'login'
+      
 
   describe '#onErrror', ->
+    beforeEach ->
+      @signInForm.onError "Test Error"
+
     it 'shows an error', ->
-      errors = @loginForm.errors.text()
-      expect(erros).not.toBe ""
+      console.log @signInForm.errors
+      errors = @signInForm.errors.text()
+      expect(errors).toBe "Test Error"
 
     it 'hides the progress indicator', ->
-      progress = @loginForm.progress.css('display')
-      expect(progress).toBe 'hide'
+      progress = @signInForm.progress.css('display')
+      expect(progress).toBe 'none'
+  
+  describe '#onSignIn', ->
+    beforeEach ->
+      @signInForm.onSignIn()
+
+    it 'should hide the progress', ->
+      progress = @signInForm.progress.css('display')
+      expect(progress).not.toBe 'none'
 
   describe 'when given a bad username/password combo', ->
     it 'gets an "error" class', ->

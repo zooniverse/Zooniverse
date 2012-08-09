@@ -1,5 +1,5 @@
 $ = require 'jqueryify'
-User = require '../models/user'
+User = requre '../models/user'
 Controller = require './controller'
 templates = require '../views/login_form'
 
@@ -24,12 +24,36 @@ class BaseForm extends Controller
     super
     @html @template
 
-  onSubmit: (e) =>
-    e.preventDeafult()
+    User.bind 'signed-in', onSignIn
 
+  onSubmit: (e) =>
     @errors.hide()
-    @errors.clear()
+    @errors.empty()
 
     @progress.show()
 
-module.exports = LoginForm
+  onError: (error) =>
+    @progress.hide()
+
+    @errors.append error
+    @errors.show()
+
+  onInputChange: =>
+    # Only allow submit if all items are filled out
+    setTimeout =>
+      allFilledIn = Array::every.call @requiredInputs, (el) ->
+        if el.type is 'checkbox'
+          el.checked
+        else
+          !!el.value
+
+      @submitButton.attr disabled: not allFilledIn
+
+  onSignIn: =>
+    @progress.hide()
+
+class SignInForm extends BaseForm
+  className: 'sign-in'
+  template: templates.signIn
+
+module.exports = SignInForm
