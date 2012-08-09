@@ -24,4 +24,12 @@ class BaseForm extends Controller
     super
     @html @template
 
-module.exports = {}
+  onSubmit: (e) =>
+    e.preventDeafult()
+
+    @errors.hide()
+    @errors.clear()
+
+    @progress.show()
+
+module.exports = LoginForm

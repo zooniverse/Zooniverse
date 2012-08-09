@@ -44,11 +44,6 @@ describe 'User', ->
         waitsFor -> User.current
 
   describe '#logout', ->
-    beforeEach ->
-      userCheck = false
-      User.current = User.login('user', 'password').always -> userCheck = true
-      waitsFor -> userCheck
-
     it 'should set User.current to null', ->
       userCheck = false
       User.logout().always -> userCheck = true

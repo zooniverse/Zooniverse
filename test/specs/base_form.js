@@ -2,11 +2,11 @@
 (function() {
   var LoginForm;
 
-  LoginForm = require('./controllers/login_form');
+  LoginForm = require('./controllers/base_form');
 
-  describe('LoginForm', function() {
+  describe('BaseForm', function() {
     beforeEach(function() {
-      return this.loginForm = new LoginForm;
+      return this.loginForm = new BaseForm;
     });
     describe('#onSubmit', function() {
       beforeEach(function() {
@@ -14,16 +14,27 @@
       });
       it('should show a progress indicator', function() {
         var progress;
-        progress = $('@loginForm.el p progress').css('display');
+        progress = this.loginForm.progress.css('display');
         return expect(progress).not.toBe('hide');
       });
-      it('forgets any previous errors', function() {});
+      it('forgets any previous errors', function() {
+        var errors;
+        errors = this.loginFormel.errors.text();
+        return expect(errors).toBe("");
+      });
       return it('submits a username and password to the authentication iframe', function() {});
     });
-    describe('on login error', function() {
-      it('gets an "error" class', function() {});
-      it('loses its "waiting" class', function() {});
-      return it('displays the error', function() {});
+    describe('#onErrror', function() {
+      it('shows an error', function() {
+        var errors;
+        errors = this.loginForm.errors.text();
+        return expect(erros).not.toBe("");
+      });
+      return it('hides the progress indicator', function() {
+        var progress;
+        progress = this.loginForm.progress.css('display');
+        return expect(progress).toBe('hide');
+      });
     });
     describe('when given a bad username/password combo', function() {
       it('gets an "error" class', function() {});

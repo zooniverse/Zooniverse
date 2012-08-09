@@ -81,16 +81,6 @@
       });
     });
     return describe('#logout', function() {
-      beforeEach(function() {
-        var userCheck;
-        userCheck = false;
-        User.current = User.login('user', 'password').always(function() {
-          return userCheck = true;
-        });
-        return waitsFor(function() {
-          return userCheck;
-        });
-      });
       return it('should set User.current to null', function() {
         var userCheck;
         userCheck = false;

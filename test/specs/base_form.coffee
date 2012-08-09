@@ -1,27 +1,31 @@
-LoginForm = require './controllers/login_form'
+LoginForm = require './controllers/base_form'
 
-describe 'LoginForm', ->
+describe 'BaseForm', ->
   beforeEach ->
-    @loginForm = new LoginForm
+    @loginForm = new BaseForm
 
   describe '#onSubmit', ->
     beforeEach ->
       @loginForm.onSubmit()
 
     it 'should show a progress indicator', ->
-      progress = $('@loginForm.el p progress').css('display')
+      progress = @loginForm.progress.css('display')
       expect(progress).not.toBe 'hide'
 
     it 'forgets any previous errors', ->
+      errors = @loginFormel.errors.text()
+      expect(errors).toBe ""
 
     it 'submits a username and password to the authentication iframe', ->
 
-  describe 'on login error', ->
-    it 'gets an "error" class', ->
+  describe '#onErrror', ->
+    it 'shows an error', ->
+      errors = @loginForm.errors.text()
+      expect(erros).not.toBe ""
 
-    it 'loses its "waiting" class', ->
-
-    it 'displays the error', ->
+    it 'hides the progress indicator', ->
+      progress = @loginForm.progress.css('display')
+      expect(progress).toBe 'hide'
 
   describe 'when given a bad username/password combo', ->
     it 'gets an "error" class', ->
