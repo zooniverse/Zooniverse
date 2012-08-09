@@ -2,7 +2,7 @@
 (function() {
   var LoginForm;
 
-  LoginForm = require('./controllers/LoginForm');
+  LoginForm = require('./controllers/login_form');
 
   describe('LoginForm', function() {
     beforeEach(function() {

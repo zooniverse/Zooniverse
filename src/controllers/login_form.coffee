@@ -1,6 +1,7 @@
+$ = require 'jqueryify'
 User = require '../models/user'
 Controller = require './controller'
-templates = require '../views/LoginForm'
+templates = require '../views/login_form'
 
 class BaseForm extends Controller
   events:
@@ -23,4 +24,4 @@ class BaseForm extends Controller
     super
     @html @template
 
-class LoginForm extends Controller
+module.exports = {}

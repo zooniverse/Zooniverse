@@ -7,7 +7,6 @@ class User extends Model
   
   @fetch: ->
     fetcher = Api.getJSON '/current_user', @createUser
-    
     fetcher.always @setAuthHeaders
     fetcher
   
@@ -23,7 +22,7 @@ class User extends Model
     login.always @setAuthHeaders
     login unless User.current
 
-  @logout: () ->
+  @logout: ->
     logout = Api.getJSON '/logout', (result) ->
       User.current = null if result.success
 
