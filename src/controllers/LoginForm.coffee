@@ -1,4 +1,3 @@
-$ = require '../jQuery'
 User = require '../models/user'
 Controller = require './controller'
 templates = require '../views/LoginForm'
@@ -20,9 +19,8 @@ class BaseForm extends Controller
     '.progress': 'progress'
     'input[required]': 'requiredInputs'
 
-  constructor:
+  constructor: ->
     super
     @html @template
 
-    User.bind '
-
+class LoginForm extends Controller
