@@ -1,4 +1,5 @@
-LoginForm = require './controllers'
+LoginForm = require './controllers/login_form'
+User = require '../models/user'
 
 describe 'LoginForm', ->
   beforeEach ->
@@ -29,7 +30,7 @@ describe 'LoginForm', ->
       expect(signin).toBe 'none'
 
     it 'should display the signup form', ->
-      signup = @loginForm.signInContainer.css('display')
+      signup = @loginForm.signUpContainer.css('display')
       expect(signup).not.toBe 'none'
 
     it 'should hide the sign up button', ->
@@ -39,10 +40,10 @@ describe 'LoginForm', ->
   describe '#onSignIn', ->
     describe 'a user is signed in', ->
       beforeEach ->
+        User.current = null
         userCheck = false
         User.login({username: 'test', password: 'password'}).always -> userCheck = true
         waitsFor -> userCheck
-        @loginForm.onSignIn()
 
       it 'should hide all sign in forms', ->
         signins = @loginForm.signInForms.css('display')
@@ -61,12 +62,10 @@ describe 'LoginForm', ->
        User.current = null
 
      it 'should call #signIn', ->
-       spy(@loginForm, 'signIn')
+       spyOn(@loginForm, 'signIn')
        @loginForm.onSignIn()
        expect(@loginForm.signIn).toHaveBeenCalled()
 
      it 'should hide signout form', ->
        signout = @loginForm.signOutContainer.css('display')
        expect(signout).toBe 'none'
-
-

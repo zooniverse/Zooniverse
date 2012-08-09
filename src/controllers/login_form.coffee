@@ -1,7 +1,8 @@
-$ = require 'jquerify'
+$ = require 'jqueryify'
 Controller = require './controller'
-Forms = require './base_form'
-templates = require '../views/templates'
+Form = require './base_form'
+User = require '../models/user'
+templates = require '../views/login_form'
 
 class LoginForm extends Controller
   className: 'zooniverse-login-form'
