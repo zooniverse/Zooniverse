@@ -55,19 +55,9 @@
         });
       });
     });
-    return describe('#login', function() {
+    describe('#login', function() {
       beforeEach(function() {
         return User.current = null;
-      });
-      afterEach(function() {
-        var loggedOut;
-        loggedOut = false;
-        Api.getJSON('/logout', function() {
-          return loggedOut = true;
-        });
-        return waitsFor(function() {
-          return loggedOut;
-        });
       });
       describe('with valid password', function() {
         return it('should set current user to the login', function() {
@@ -82,11 +72,36 @@
       return describe('with invalid password', function() {
         return it('should set the current user to null', function() {
           User.login('user', 'password_not').always(function() {
-            return expect(User.current.id).toBeNull();
+            return expect(User.current).toBeNull();
           });
           return waitsFor(function() {
             return User.current;
           });
+        });
+      });
+    });
+    return describe('#logout', function() {
+      beforeEach(function() {
+        var userCheck;
+        userCheck = false;
+        User.current = User.login('user', 'password').always(function() {
+          return userCheck = true;
+        });
+        return waitsFor(function() {
+          return userCheck;
+        });
+      });
+      return it('should set User.current to null', function() {
+        var userCheck;
+        userCheck = false;
+        User.logout().always(function() {
+          return userCheck = true;
+        });
+        waitsFor(function() {
+          return userCheck;
+        });
+        return runs(function() {
+          return expect(User.current).toBeNull();
         });
       });
     });

@@ -6,12 +6,7 @@ class User extends Model
   @configure 'User'
   
   @fetch: ->
-    fetcher = Api.getJSON '/current_user', (result) =>
-      User.current = if result.success
-        delete result.success
-        new User result
-      else
-        null
+    fetcher = Api.getJSON '/current_user', @createUser
     
     fetcher.always @setAuthHeaders
     fetcher
@@ -24,15 +19,23 @@ class User extends Model
       delete ProxyFrame.headers['Authorization']
 
   @login: (username, password) ->
-    Api.getJSON '/login', {username, password}, (result) ->
-      User.current = if result.success
-        delete result.success
-        new User result
-      else
-        null
+    login = Api.getJSON '/login', {username, password}, @createUser
+    login.always @setAuthHeaders
+    login unless User.current
 
-  @logout: (auth) ->
-    
+  @logout: () ->
+    logout = Api.getJSON '/logout', (result) ->
+      User.current = null if result.success
+
+    logout.always @setAuthHeaders
+    logout if User.current
+
+  @createUser: (result) ->
+    User.current = if result.success
+      delete result.success
+      new User result
+    else
+      null
 
 
 module.exports = User

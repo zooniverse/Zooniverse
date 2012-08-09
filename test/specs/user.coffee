@@ -31,11 +31,6 @@ describe 'User', ->
     beforeEach ->
       User.current = null
 
-    afterEach ->
-      loggedOut = false
-      Api.getJSON '/logout', -> loggedOut = true
-      waitsFor -> loggedOut
-     
     describe 'with valid password', ->
       it 'should set current user to the login', ->
         User.login('user', 'password').always ->
@@ -45,5 +40,17 @@ describe 'User', ->
     describe 'with invalid password', ->
       it 'should set the current user to null', ->
         User.login('user', 'password_not').always ->
-          expect(User.current.id).toBeNull()
+          expect(User.current).toBeNull()
         waitsFor -> User.current
+
+  describe '#logout', ->
+    beforeEach ->
+      userCheck = false
+      User.current = User.login('user', 'password').always -> userCheck = true
+      waitsFor -> userCheck
+
+    it 'should set User.current to null', ->
+      userCheck = false
+      User.logout().always -> userCheck = true
+      waitsFor -> userCheck
+      runs -> expect(User.current).toBeNull()
