@@ -51,10 +51,27 @@ describe 'SignUpForm', ->
 
   describe '#onSumbit', ->
     beforeEach ->
-      @signInForm.usernameField.val 'test'
-      @signInForm.passwordField.val 'password'
-      @signInForm.passwordConfirmField.val 'password'
-      @signInForm.emailField.val 'test@example.com'
+      @signUpForm.usernameField.val 'test'
+      @signUpForm.passwordField.val 'password'
+      @signUpForm.emailField.val 'test@example.com'
 
-    
+    describe 'non-matching passwords', ->
+      beforeEach ->
+        @signUpForm.passwordConfirmField.val 'lump-password'
 
+      it 'should call #onError with a message', ->
+        spyOn(@signUpForm, 'onError')
+        @signUpForm.onSubmit()
+        expect(@signUpForm.onError).toHaveBeenCalledWith('Passwords must match!')
+
+    describe 'matching passwords', ->
+      beforeEach ->
+        @signUpForm.passwordConfirmField.val 'password'
+
+      it 'should call User.signup', ->
+        spyOn(User, 'signup').andCallThrough()
+        @signUpForm.onSubmit()
+        expect(User.signup).toHaveBeenCalledWith
+          username: 'test'
+          password: 'password'
+          email: 'test@example.com'

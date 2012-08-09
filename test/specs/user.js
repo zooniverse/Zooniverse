@@ -86,7 +86,7 @@
         });
       });
     });
-    return describe('#logout', function() {
+    describe('#logout', function() {
       return it('should set User.current to null', function() {
         var userCheck;
         userCheck = false;
@@ -98,6 +98,32 @@
         });
         return runs(function() {
           return expect(User.current).toBeNull();
+        });
+      });
+    });
+    return describe('#signup', function() {
+      beforeEach(function() {
+        return User.current = null;
+      });
+      it('should submit user info through the api', function() {
+        spyOn(Api, 'getJSON').andCallThrough();
+        User.signup({
+          username: 'test',
+          email: "test@example.com",
+          password: 'password'
+        });
+        return expect(Api.getJSON).toHaveBeenCalled();
+      });
+      return it('should return with the current user date', function() {
+        User.signup({
+          username: 'test',
+          email: "test@example.com",
+          password: 'password'
+        }).always(function() {
+          return expect(User.current.id).toBe('4fff22b8c4039a0901000002');
+        });
+        return waitsFor(function() {
+          return User.current;
         });
       });
     });

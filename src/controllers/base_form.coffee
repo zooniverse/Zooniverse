@@ -65,9 +65,28 @@ class SignInForm extends BaseForm
 
     login.fail @onError
 
+class SignUpForm extends BaseForm
+  className: 'sign-up'
+  template: templates.signUp
+
+  onSubmit: =>
+    super
+
+    unless @passwordField.val() is @passwordConfirmField.val()
+      @onError 'Passwords must match!'
+      @passwordField.focus()
+      return
+
+    signup = User.signup
+      username: @usernameField.val()
+      password: @passwordField.val()
+      email: @emailField.val()
+
+    signup.fail @onError
+
 module.exports = 
+  BaseForm: BaseForm
   SignInForm: SignInForm
   SignUpForm: SignUpForm
 
-class SignUpForm extends BaseForm
 

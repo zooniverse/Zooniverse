@@ -29,12 +29,16 @@ class User extends Model
     logout.always @setAuthHeaders
     logout if User.current
 
+  @signup: ({username, password, email}) ->
+    signup = Api.getJSON '/signup', {username, email, password}, @createUser
+    signup.always @setAuthHeaders
+    signup
+
   @createUser: (result) ->
     User.current = if result.success
       delete result.success
       new User result
     else
       null
-
 
 module.exports = User

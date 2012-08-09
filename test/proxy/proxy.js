@@ -84,6 +84,33 @@
   ];
 
   $.mockjax({
+    url: /^(\/projects\/(\w+))?\/signup/i,
+    response: function(settings) {
+      var key, val, _results;
+      user = {
+        id: '4fff22b8c4039a0901000002',
+        api_key: '7f4793b00cc97423ca00',
+        classification_count: 100,
+        name: 'user',
+        zooniverse_id: 123456,
+        project: {
+          classification_count: 10,
+          tutorial_done: true
+        }
+      };
+      this.responseText = {
+        success: true
+      };
+      _results = [];
+      for (key in user) {
+        val = user[key];
+        _results.push(this.responseText[key] = val);
+      }
+      return _results;
+    }
+  });
+
+  $.mockjax({
     url: /^(\/projects\/(\w+))?\/current_user/i,
     response: function(settings) {
       var key, val, _results;

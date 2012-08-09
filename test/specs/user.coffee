@@ -49,3 +49,17 @@ describe 'User', ->
       User.logout().always -> userCheck = true
       waitsFor -> userCheck
       runs -> expect(User.current).toBeNull()
+
+  describe '#signup', ->
+    beforeEach ->
+      User.current = null
+
+    it 'should submit user info through the api', ->
+      spyOn(Api, 'getJSON').andCallThrough()
+      User.signup({username: 'test', email: "test@example.com", password: 'password'})
+      expect(Api.getJSON).toHaveBeenCalled()
+
+    it 'should return with the current user date', ->
+      User.signup({username: 'test', email: "test@example.com", password: 'password'}).always ->
+        expect(User.current.id).toBe '4fff22b8c4039a0901000002'
+      waitsFor -> User.current

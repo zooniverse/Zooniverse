@@ -72,6 +72,22 @@ subjects = [
 ]
 
 $.mockjax
+  url: /^(\/projects\/(\w+))?\/signup/i
+  response: (settings) ->
+    user =
+      id: '4fff22b8c4039a0901000002'
+      api_key: '7f4793b00cc97423ca00'
+      classification_count: 100
+      name: 'user'
+      zooniverse_id: 123456
+      project:
+        classification_count: 10
+        tutorial_done: true
+    
+    @responseText = { success: true }
+    @responseText[key] = val for key, val of user
+
+$.mockjax
   url: /^(\/projects\/(\w+))?\/current_user/i
   response: (settings) ->
     if user

@@ -68,11 +68,34 @@
       return this.signUpForm = new Form.SignUpForm;
     });
     return describe('#onSumbit', function() {
-      return beforeEach(function() {
-        this.signInForm.usernameField.val('test');
-        this.signInForm.passwordField.val('password');
-        this.signInForm.passwordConfirmField.val('password');
-        return this.signInForm.emailField.val('test@example.com');
+      beforeEach(function() {
+        this.signUpForm.usernameField.val('test');
+        this.signUpForm.passwordField.val('password');
+        return this.signUpForm.emailField.val('test@example.com');
+      });
+      describe('non-matching passwords', function() {
+        beforeEach(function() {
+          return this.signUpForm.passwordConfirmField.val('lump-password');
+        });
+        return it('should call #onError with a message', function() {
+          spyOn(this.signUpForm, 'onError');
+          this.signUpForm.onSubmit();
+          return expect(this.signUpForm.onError).toHaveBeenCalledWith('Passwords must match!');
+        });
+      });
+      return describe('matching passwords', function() {
+        beforeEach(function() {
+          return this.signUpForm.passwordConfirmField.val('password');
+        });
+        return it('should call User.signup', function() {
+          spyOn(User, 'signup').andCallThrough();
+          this.signUpForm.onSubmit();
+          return expect(User.signup).toHaveBeenCalledWith({
+            username: 'test',
+            password: 'password',
+            email: 'test@example.com'
+          });
+        });
       });
     });
   });
