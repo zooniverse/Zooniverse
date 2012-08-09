@@ -102,7 +102,7 @@
       });
     });
     return describe('#signup', function() {
-      beforeEach(function() {
+      afterEach(function() {
         return User.current = null;
       });
       it('should submit user info through the api', function() {

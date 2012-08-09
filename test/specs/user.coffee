@@ -51,7 +51,7 @@ describe 'User', ->
       runs -> expect(User.current).toBeNull()
 
   describe '#signup', ->
-    beforeEach ->
+    afterEach ->
       User.current = null
 
     it 'should submit user info through the api', ->

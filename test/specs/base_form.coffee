@@ -29,7 +29,6 @@ describe 'SignInForm', ->
       @signInForm.onError "Test Error"
 
     it 'shows an error', ->
-      console.log @signInForm.errors
       errors = @signInForm.errors.text()
       expect(errors).toBe "Test Error"
 

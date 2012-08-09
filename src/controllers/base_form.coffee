@@ -59,6 +59,9 @@ class SignInForm extends BaseForm
   onSubmit: =>
     super
 
+    console.log 'here ;laksjdf;laskdjf;alsdkfja;sldfjk;'
+    console.log User.current
+
     login = User.login
       username: @usernameField.val()
       password: @passwordField.val()

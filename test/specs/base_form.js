@@ -41,7 +41,6 @@
       });
       it('shows an error', function() {
         var errors;
-        console.log(this.signInForm.errors);
         errors = this.signInForm.errors.text();
         return expect(errors).toBe("Test Error");
       });
