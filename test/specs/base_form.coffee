@@ -74,3 +74,16 @@ describe 'SignUpForm', ->
           username: 'test'
           password: 'password'
           email: 'test@example.com'
+
+describe 'SignOutForm', ->
+  beforeEach ->
+    @signOutForm = new Form.SignOutForm
+    userCheck = false
+    User.login({username: 'name', password: 'password'}).always -> userCheck = true
+    waitsFor -> userCheck
+
+  describe '#onSubmit', ->
+    it 'should log the user out', ->
+      spyOn(User, 'logout').andCallThrough()
+      @signOutForm.onSubmit()
+      expect(User.logout).toHaveBeenCalled()

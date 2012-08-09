@@ -87,9 +87,20 @@ class SignUpForm extends BaseForm
 
     signup.fail @onError
 
+class SignOutForm extends BaseForm
+  className: 'sign-out'
+  template: templates.signOut
+
+  onSubmit: =>
+    super
+    User.logout()
+
+  onSignIn: =>
+    super
+    @el.find('.current').html User.current?.name || ''
+
 module.exports = 
   BaseForm: BaseForm
   SignInForm: SignInForm
   SignUpForm: SignUpForm
-
-
+  SignOutForm: SignOutForm

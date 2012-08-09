@@ -99,4 +99,28 @@
     });
   });
 
+  describe('SignOutForm', function() {
+    beforeEach(function() {
+      var userCheck;
+      this.signOutForm = new Form.SignOutForm;
+      userCheck = false;
+      User.login({
+        username: 'name',
+        password: 'password'
+      }).always(function() {
+        return userCheck = true;
+      });
+      return waitsFor(function() {
+        return userCheck;
+      });
+    });
+    return describe('#onSubmit', function() {
+      return it('should log the user out', function() {
+        spyOn(User, 'logout').andCallThrough();
+        this.signOutForm.onSubmit();
+        return expect(User.logout).toHaveBeenCalled();
+      });
+    });
+  });
+
 }).call(this);
