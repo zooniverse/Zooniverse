@@ -7,3 +7,4 @@ exports.ProxyFrame = require('./lib/proxy_frame');
 
 exports.User = require('./lib/models/user');
 exports.Subject = require('./lib/models/subject');
+exports.Group = require('./lib/models/group');
