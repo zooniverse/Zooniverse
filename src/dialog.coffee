@@ -1,17 +1,13 @@
 $ = require 'jqueryify'
 
-# Use it like this:
+# Basic usage:
 #
 # d = new Dialog
 #   title: 'Hey'
 #   content: 'What's up?'
-#   buttons: [
-#     {'Nothing': null}
-#     {'Something': true}
-#   ]
-#   callback: (value) -> alert "You must be very busy" if value?
-#
-# d.promise.then (value) -> console.log 'Responded with', value
+#   buttons: [{'Nothing': null}, {'Something': true}]
+#   callback: (value) ->
+#     alert "You must be very busy" if value?
 
 class Dialog
   class @Button
@@ -37,14 +33,18 @@ class Dialog
       # Override this.
 
   title: ''
-  content: 'Lorem ipsum dolor sit amet.'
+  content: '<p>Lorem ipsum dolor sit amet.</p>'
   buttons: null
+  attachment: null
   callback: null
 
   className: 'dialog'
+  arrowDirection: ''
+  margin: 15
 
-  el: null
-  underlay: null
+  el: null # Including underlay
+  dialog: null
+  contentContainer: null
 
   deferred: null
   promise: null
@@ -53,29 +53,38 @@ class Dialog
     @[property] = value for own property, value of params
     @buttons ?= [new @constructor.Button label: 'OK', value: true]
 
-    @el ?= $("""
-      <div class="#{@className}-underlay">
-        <div class="#{@className}">
+    ctorClassName = @constructor::className
+
+    @el = $("""
+      <div class="#{ctorClassName}-underlay">
+        <div class="#{ctorClassName}">
+          <button name="close" class="#{ctorClassName}-closer">&times;</button>
           <header></header>
-          <div class="content"></div>
+          <div class="#{ctorClassName}-content"></div>
           <footer></footer>
+          <div class="#{ctorClassName}-arrow" data-direction="#{@arrowDirection}"></div>
         </div>
       </div>
     """)
+
+    @el.addClass @className
+
+    # TODO: Click on underlay to close.
+    @el.on 'click', ".#{ctorClassName}-closer", =>
+      @deferred.resolve null
+
+    @dialog = @el.children ".#{ctorClassName}"
+    @contentContainer = @dialog.children ".#{ctorClassName}-content"
+    @arrow = @dialog.children ".#{ctorClassName}-arrow"
 
     @el.appendTo 'body'
 
   render: =>
     @el.find('header').html @title
 
-    contentContainer = @el.find '.content'
-    if @content instanceof $
-      contentContainer.append @content
-    else
-      contentContainer.append $("<p>#{@content}</p>")
+    @contentContainer.append @content
 
-    @el.find('footer').empty
-
+    @el.find('footer').empty()
     for button, i in @buttons
       unless button instanceof @constructor.Button
         # Convert {label: value} button descriptions to Button instances
@@ -88,14 +97,62 @@ class Dialog
     @render()
 
     @el.addClass 'open'
+    @attach()
+
     @deferred = new $.Deferred
-    @deferred.then @callback if @callback?
     @deferred.then @close
     @promise = @deferred.promise()
+
+  attach: (@attachment = @attachment) ->
+    # Fill in defaults if they're not provided.
+    @attachment ?= {}
+    @attachment.x ?= 'center'
+    @attachment.y ?= 'middle'
+    @attachment.to ?= @el
+    @attachment.at ?= {}
+    @attachment.at.x ?= 'center'
+    @attachment.at.y ?= 'middle'
+
+    xStrings = left: 0, center: 0.5, right: 1
+    yStrings = top: 0, middle: 0.5, bottom: 1
+
+    @attachment.x = xStrings[@attachment.x] if @attachment.x of xStrings
+    @attachment.y = yStrings[@attachment.y] if @attachment.y of yStrings
+    @attachment.at.x = xStrings[@attachment.at.x] if @attachment.at.x of xStrings
+    @attachment.at.y = yStrings[@attachment.at.y] if @attachment.at.y of yStrings
+
+    target = $(@attachment.to).first()
+
+    targetSize = width: target.outerWidth(), height: target.outerHeight()
+    targetOffset = target.offset()
+
+    stepSize = width: @dialog.outerWidth(), height: @dialog.outerHeight()
+    stepOffset =
+      left: targetOffset.left - (stepSize.width * @attachment.x) + (targetSize.width * @attachment.at.x)
+      top: targetOffset.top - (stepSize.height * @attachment.y) + (targetSize.height * @attachment.at.y)
+
+    @dialog.css position: 'absolute'
+    @dialog.offset stepOffset
+
+    @arrow.attr 'data-direction', @arrowDirection
+
+    @dialog.css marginLeft: switch @arrowDirection
+      when 'left' then +@margin
+      when 'right' then -@margin
+      else ''
+
+    @dialog.css marginTop: switch @arrowDirection
+      when 'top' then +@margin
+      when 'bottom' then -@margin
+      else ''
 
   close: =>
     @el.removeClass 'open'
     @deferred = null
     @promise = null
+    @callback if @callback?
+
+  destroy: =>
+    @el.remove()
 
 module.exports = Dialog
