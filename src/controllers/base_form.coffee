@@ -24,7 +24,7 @@ class BaseForm extends Controller
     super
     @html @template
 
-    User.bind 'signed-in', @onSignIn
+    User.bind 'sign-in', @onSignIn
 
   onSubmit: (e) =>
     @errors.hide()
