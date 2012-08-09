@@ -32,6 +32,7 @@ class User extends Model
   @createUser: (result) ->
     User.current = if result.success
       delete result.success
+      @trigger 'signed-in', User.current
       new User result
     else
       null
