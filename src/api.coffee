@@ -7,7 +7,6 @@ Api =
   messages: { }
   ready: false
   proxy: undefined
-  host: "#{ window.location.protocol }//#{ window.location.host }"
   
   get: -> Api.request 'get', arguments...
   getJSON: -> Api.request 'getJSON', arguments...
@@ -17,7 +16,12 @@ Api =
   
   init: (options = { }) ->
     return if Api.proxy
-    options = $.merge options, { proxyPath: '/proxy' }
+    options = $.extend {
+      host: "#{ window.location.protocol }//#{ window.location.host }"
+      proxyPath: '/proxy'
+    }, options
+    
+    Api.host = options.host
     Api.proxy = new ProxyFrame Api.host, options.proxyPath
     Api.proxy.bind 'load', Api.loaded
     Api.proxy.bind 'response', Api.respond
