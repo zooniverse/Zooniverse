@@ -61,7 +61,10 @@
       });
       describe('with valid password', function() {
         return it('should set current user to the login', function() {
-          User.login('user', 'password').always(function() {
+          User.login({
+            username: 'user',
+            password: 'password'
+          }).always(function() {
             return expect(User.current.id).toBe('4fff22b8c4039a0901000002');
           });
           return waitsFor(function() {
@@ -71,7 +74,10 @@
       });
       return describe('with invalid password', function() {
         return it('should set the current user to null', function() {
-          User.login('user', 'password_not').always(function() {
+          User.login({
+            username: 'user',
+            password: 'password_not'
+          }).always(function() {
             return expect(User.current).toBeNull();
           });
           return waitsFor(function() {

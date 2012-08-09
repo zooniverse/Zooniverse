@@ -1,11 +1,14 @@
-SignInForm = require './controllers/base_form'
+Form = require './controllers/base_form'
+User = require '../models/user'
 
 describe 'SignInForm', ->
   beforeEach ->
-    @signInForm = new SignInForm
+    @signInForm = new Form.SignInForm
 
   describe '#onSubmit', ->
     beforeEach ->
+      @signInForm.usernameField.val 'test'
+      @signInForm.passwordField.val 'password'
       @signInForm.onSubmit()
 
     it 'should show a progress indicator', ->
@@ -17,8 +20,9 @@ describe 'SignInForm', ->
       expect(errors).toBe ""
 
     it 'submits a username and password to the authentication iframe', ->
-      spyOn User, 'login'
-      
+      spyOn(User, 'login').andCallThrough()
+      @signInForm.onSubmit()
+      expect(User.login).toHaveBeenCalledWith({username: 'test', password: 'password'})
 
   describe '#onErrror', ->
     beforeEach ->
@@ -39,16 +43,18 @@ describe 'SignInForm', ->
 
     it 'should hide the progress', ->
       progress = @signInForm.progress.css('display')
-      expect(progress).not.toBe 'none'
+      expect(progress).toBe 'none'
 
-  describe 'when given a bad username/password combo', ->
-    it 'gets an "error" class', ->
+describe 'SignUpForm', ->
+  beforeEach ->
+    @signUpForm = new Form.SignUpForm
 
-    it 'loses its "waiting" class', ->
+  describe '#onSumbit', ->
+    beforeEach ->
+      @signInForm.usernameField.val 'test'
+      @signInForm.passwordField.val 'password'
+      @signInForm.passwordConfirmField.val 'password'
+      @signInForm.emailField.val 'test@example.com'
 
-    it 'displays the error', ->
+    
 
-  describe 'on successful login', ->
-    it 'updates the logged in username', ->
-
-    it 'clears the login form', ->

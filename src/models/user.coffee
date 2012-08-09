@@ -17,7 +17,7 @@ class User extends Model
     else
       delete ProxyFrame.headers['Authorization']
 
-  @login: (username, password) ->
+  @login: ({username, password}) ->
     login = Api.getJSON '/login', {username, password}, @createUser
     login.always @setAuthHeaders
     login unless User.current
@@ -32,7 +32,6 @@ class User extends Model
   @createUser: (result) ->
     User.current = if result.success
       delete result.success
-      @trigger 'signed-in', User.current
       new User result
     else
       null

@@ -1,5 +1,5 @@
 $ = require 'jqueryify'
-User = requre '../models/user'
+User = require '../models/user'
 Controller = require './controller'
 templates = require '../views/login_form'
 
@@ -14,7 +14,7 @@ class BaseForm extends Controller
     'input[name="username"]': 'usernameField'
     'input[name="email"]': 'emailField'
     'input[name="password"]': 'passwordField'
-    'input[name="password-confirm"]': 'passwordCOnfirmField'
+    'input[name="password-confirm"]': 'passwordConfirmField'
     'input[name="policy"]': 'submitButton'
     'button[type="submit"]': 'submitButton'
     '.progress': 'progress'
@@ -24,7 +24,7 @@ class BaseForm extends Controller
     super
     @html @template
 
-    User.bind 'signed-in', onSignIn
+    User.bind 'signed-in', @onSignIn
 
   onSubmit: (e) =>
     @errors.hide()
@@ -56,4 +56,18 @@ class SignInForm extends BaseForm
   className: 'sign-in'
   template: templates.signIn
 
-module.exports = SignInForm
+  onSubmit: =>
+    super
+
+    login = User.login
+      username: @usernameField.val()
+      password: @passwordField.val()
+
+    login.fail @onError
+
+module.exports = 
+  SignInForm: SignInForm
+  SignUpForm: SignUpForm
+
+class SignUpForm extends BaseForm
+

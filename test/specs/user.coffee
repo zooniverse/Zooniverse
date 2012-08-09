@@ -33,13 +33,13 @@ describe 'User', ->
 
     describe 'with valid password', ->
       it 'should set current user to the login', ->
-        User.login('user', 'password').always ->
+        User.login({username: 'user', password: 'password'}).always ->
           expect(User.current.id).toBe '4fff22b8c4039a0901000002'
         waitsFor -> User.current
 
     describe 'with invalid password', ->
       it 'should set the current user to null', ->
-        User.login('user', 'password_not').always ->
+        User.login({username: 'user', password: 'password_not'}).always ->
           expect(User.current).toBeNull()
         waitsFor -> User.current
 
