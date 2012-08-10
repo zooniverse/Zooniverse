@@ -1,4 +1,4 @@
-$ = require 'jquerify'
+$ = require 'jqueryify'
 {delay, remove} = require '../util'
 
 User = require '../models/User'

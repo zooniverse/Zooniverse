@@ -9,3 +9,4 @@ exports.User = require('./lib/models/user');
 exports.Subject = require('./lib/models/subject');
 exports.Group = require('./lib/models/group');
 exports.LoginForm = require('./lib/controllers/login_form');
+exports.TopBar = require('./lib/controllers/top_bar');
