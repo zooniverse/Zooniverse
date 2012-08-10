@@ -69,13 +69,16 @@ class Dialog
 
     @el.addClass @className
 
-    # TODO: Click on underlay to close.
-    @el.on 'click', ".#{ctorClassName}-closer", =>
-      @deferred.resolve null
-
     @dialog = @el.children ".#{ctorClassName}"
     @contentContainer = @dialog.children ".#{ctorClassName}-content"
     @arrow = @dialog.children ".#{ctorClassName}-arrow"
+    closer = @dialog.children ".#{ctorClassName}-closer"
+
+    @el.on 'click', ({target}) =>
+      target = $(target)
+
+      if (target.is(@el) and @buttons.length is 0) or target.is closer
+        @deferred.resolve()
 
     @el.appendTo 'body'
 
