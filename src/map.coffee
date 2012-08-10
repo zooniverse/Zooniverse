@@ -10,6 +10,8 @@ class Map
   longitude: -87.6
   zoom: 10
 
+  className: 'map'
+
   layers: null # Default layers (from CartoDB, etc.)
 
   zoomControl: true
@@ -28,7 +30,8 @@ class Map
     @[param] = value for own param, value of params
     throw new Error 'Map class needs an apiKey!' unless @apiKey
 
-    @el ?= $('<div></div>')
+    @el ?= $("<div class=#{@constructor::className}></div>")
+    @el.addClass @className
 
     @layers ?= []
     @layers = [@layers] unless @layers instanceof Array
