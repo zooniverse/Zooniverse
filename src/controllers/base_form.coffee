@@ -24,9 +24,10 @@ class BaseForm extends Controller
     super
     @html @template
 
-    @progress.hide()
-
     User.bind 'create', @onSignIn
+
+    @onSignIn()
+    @onInputChange()
 
   onSubmit: (e) =>
     e.preventDefault() if e
