@@ -35,13 +35,9 @@ class TopBar extends Controller
     '.z-login > :first-child': 'usernameContainer'
     '.z-login > :last-child': 'loginFormContainer'
 
-  constructor: (options) ->
+  constructor:  ->
     return @constructor.instance if @constructor.instance?
     @constructor.instance = @
-
-    @languages = options.languages
-    @dropdownToHide = options.dropdownsToHide
-    @app = options.app
 
     super
     @dropdownsToHide = []
