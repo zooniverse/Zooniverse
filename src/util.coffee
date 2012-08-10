@@ -1,4 +1,4 @@
-Spine = require 'Spine'
+Spine = require 'spine'
 $ = require 'jqueryify'
 
 days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
