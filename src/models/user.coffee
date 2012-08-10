@@ -4,11 +4,14 @@ ProxyFrame = require '../proxy_frame'
 
 class User extends Model
   @configure 'User'
-  
+
   @fetch: ->
     fetcher = Api.getJSON '/current_user', @createUser
     fetcher.always @setAuthHeaders
     fetcher
+
+  signIn: ->
+    @trigger 'sign-in', this
   
   @setAuthHeaders: ->
     if User.current
@@ -40,5 +43,6 @@ class User extends Model
       new User result
     else
       null
+    User.current.signIn() if User.current
 
 module.exports = User
