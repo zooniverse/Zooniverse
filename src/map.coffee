@@ -83,6 +83,7 @@ class Map
     icon = new Leaflet.DivIcon {html, className, iconSize: null}
     marker = new Leaflet.Marker [lat, lng], {icon}
     marker.addTo @map
+    marker.el = $(marker._icon) # Sketchy...
     marker
 
   removeLabel: (label) =>
