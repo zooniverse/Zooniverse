@@ -3,8 +3,8 @@ $ = require 'jqueryify'
 
 User = require '../models/User'
 Controller = require './controller'
-LoginForm = require './controllers/LoginForm'
-template = require '../views/TopBar'
+LoginForm = require './controllers/login_form'
+template = require '../views/top_bar'
 
 class TopBar extends Controller
   @instance: null
