@@ -51,7 +51,7 @@ class TopBar extends Controller
 
     @updateLanguages()
 
-    User.bind 'sign-in', @updateLogin
+    User.bind 'create', @updateLogin
     new LoginForm el: @loginFormContainer
 
     @updateLogin()

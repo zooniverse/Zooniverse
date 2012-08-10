@@ -37,7 +37,7 @@ class LoginForm extends Controller
 
     @signOutForm = new Form.SignOutForm el: @signOutContainer
 
-    User.bind 'sign-in', @onSignIn
+    User.bind 'create', @onSignIn
     @onSignIn()
 
   signIn: =>
