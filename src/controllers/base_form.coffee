@@ -24,7 +24,7 @@ class BaseForm extends Controller
     super
     @html @template
 
-    User.bind 'create', @onSignIn
+    User.bind 'sign-in', @onSignIn
 
     @onSignIn()
     @onInputChange()
