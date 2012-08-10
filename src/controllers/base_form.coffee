@@ -29,6 +29,8 @@ class BaseForm extends Controller
     User.bind 'create', @onSignIn
 
   onSubmit: (e) =>
+    e.preventDefault() if e
+
     @errors.hide()
     @errors.empty()
 
