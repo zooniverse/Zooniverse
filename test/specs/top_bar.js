@@ -5,16 +5,23 @@
   TopBar = require('./controllers/top_bar');
 
   describe('TopBar', function() {
-    return it('should be instantiable', function() {
-      var topBar;
-      topBar = new TopBar({
+    beforeEach(function() {
+      return this.topBar = new TopBar({
         languages: {
           en: 'English',
-          fr: 'French'
+          fr: 'Français'
         },
         app: "test"
       });
-      return expect(topBar).not.toBeNull();
+    });
+    it('should be instantiable', function() {
+      return expect(this.topBar).not.toBeNull();
+    });
+    return describe('#updateLanguages', function() {
+      return it('should add a node for each language in @langauges', function() {
+        this.topBar.updateLanguages();
+        return expect(this.topBar.languageLabel.text()).toBe("EN");
+      });
     });
   });
 

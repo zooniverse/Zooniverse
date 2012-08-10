@@ -11,11 +11,6 @@ class TopBar extends Controller
 
   languages: null
 
-  langMap:
-    en: 'English'
-    po: 'Polski'
-    de: 'Deutsche'
-
   dropdownsToHide: null
 
   className: 'zooniverse-top-bar'
@@ -49,6 +44,7 @@ class TopBar extends Controller
     accordionContainers = @el.find '.z-accordion > :last-child'
     accordionContainers.css height: 0, opacity: 0
 
+    @currentLang = @currentLange || 'en'
     @updateLanguages()
 
     User.bind 'create', @updateLogin
@@ -61,13 +57,13 @@ class TopBar extends Controller
   updateLanguages: =>
     @languageLabel.empty()
     @languageList.empty()
-    for lang in @languages
-      @languageLabel.append """
-        <span lang="#{lang}">#{lang.toUpperCase()}</span>
-      """
+    @languageLabel.append """
+      <span lang="##{@currentLang}">#{@currentLang.toUpperCase()}</span>
+     """
+    for shortLang, fullLang of @languages
 
       @languageList.append """
-        <li><a href="##{lang}">#{lang.toUpperCase()} <em>#{@langMap[lang]}</em></a></li>
+        <li><a href="##{shortLang}">#{shortLang.toUpperCase()} <em>#{fullLang}</em></a></li>
       """
 
   updateLogin: =>
