@@ -33,7 +33,8 @@ class ProxyFrame
     @elFrame().contentWindow.postMessage JSON.stringify(message), @host
   
   send: (message) =>
-    payload = $.extend true, ProxyFrame.headers, message.payload
+    payload = message.payload
+    payload['headers'] = ProxyFrame.headers
     @postMessage payload
   
   receive: ({ originalEvent: e }) =>
