@@ -5,7 +5,7 @@ templates = require '../views/login_form'
 
 class BaseForm extends Controller
   events:
-    sumbit: 'onSubmit'
+    submit: 'onSubmit'
     keydown: 'onInputChange'
     change: 'onInputChange'
 
