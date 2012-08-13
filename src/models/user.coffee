@@ -14,7 +14,7 @@ class User extends Model
 
   @setAuthHeaders: ->
     if User.current
-      auth = base64.encode "#{ User.current.name }:#{ User.current.apiKey }"
+      auth = base64.encode "#{ User.current.name }:#{ User.current.api_key }"
       ProxyFrame.headers['Authorization'] = "Basic #{ auth }"
     else
       delete ProxyFrame.headers['Authorization']
