@@ -68,7 +68,7 @@ class SignInForm extends BaseForm
       username: @usernameField.val()
       password: @passwordField.val()
 
-    login.fail @onError
+    login.onFailure @onError
 
 class SignUpForm extends BaseForm
   className: 'sign-up'

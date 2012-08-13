@@ -23,14 +23,14 @@ class User extends Model
   @login: ({username, password}) ->
     login = Api.getJSON '/login', {username, password}, @createUser
     login.always @setAuthHeaders
-    login unless User.current
+    login 
 
   @logout: ->
     logout = Api.getJSON '/logout', (result) ->
       User.current = null if result.success
-
+      @trigger 'sign-in', this
     logout.always @setAuthHeaders
-    logout if User.current
+    logout
 
   @signup: ({username, password, email}) ->
     signup = Api.getJSON '/signup', {username, email, password}, @createUser
