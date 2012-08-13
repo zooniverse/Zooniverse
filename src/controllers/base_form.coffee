@@ -25,7 +25,7 @@ class BaseForm extends Controller
     @html @template
 
     User.bind 'sign-in', @onSignIn
-    User.bind 'sign-in-error', @enError
+    User.bind 'sign-in-error', @onError
 
     @onSignIn()
     @onInputChange()
@@ -85,8 +85,6 @@ class SignUpForm extends BaseForm
       username: @usernameField.val()
       password: @passwordField.val()
       email: @emailField.val()
-
-    signup.fail @onError
 
 class SignOutForm extends BaseForm
   className: 'sign-out'
