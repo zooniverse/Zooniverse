@@ -8,7 +8,7 @@ class User extends Model
   @project: 'Not Specified'
 
   @fetch: ->
-    fetcher = Api.getJSON '/current_user', @createUser
+    fetcher = Api.getJSON "/projects/#{ @project }/current_user", @createUser
     fetcher.always @setAuthHeaders
     fetcher
 
@@ -20,19 +20,19 @@ class User extends Model
       delete ProxyFrame.headers['Authorization']
 
   @login: ({username, password}) ->
-    login = Api.getJSON "projects/#{@project}/login", {username, password}, @createUser
+    login = Api.getJSON "/projects/#{ @project }/login", {username, password}, @createUser
     login.always @setAuthHeaders
     login 
 
   @logout: ->
-    logout = Api.getJSON '/logout', (result) ->
+    logout = Api.getJSON "/projects/#{ @project }/logout", (result) ->
       User.current = null if result.success
       User.trigger 'sign-in', this
     logout.always @setAuthHeaders
     logout
 
   @signup: ({username, password, email}) ->
-    signup = Api.getJSON '/signup', {username, email, password}, @createUser
+    signup = Api.getJSON "/projects/#{ @project }/signup", {username, email, password}, @createUser
     signup.always @setAuthHeaders
     signup
 
