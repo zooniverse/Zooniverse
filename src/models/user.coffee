@@ -10,7 +10,7 @@ class User extends Model
   @fetch: ->
     fetcher = Api.getJSON "/projects/#{ @project }/current_user", @createUser
     fetcher.always @setAuthHeaders
-    fetcher.always => User.trigger('sign-in') if User.current
+    fetcher.always => User.trigger('sign-in')
     fetcher
 
   @setAuthHeaders: ->
@@ -23,24 +23,25 @@ class User extends Model
   @login: ({username, password}) ->
     login = Api.getJSON "/projects/#{ @project }/login", {username, password}, @createUser
     login.always @setAuthHeaders
+    login.always => User.trigger('sign-in')
     login 
 
   @logout: ->
     logout = Api.getJSON "/projects/#{ @project }/logout", (result) ->
       User.current = null if result.success
-      User.trigger 'sign-in', this
     logout.always @setAuthHeaders
+    logout.always => User.trigger('sign-in')
     logout
 
   @signup: ({username, password, email}) ->
     signup = Api.getJSON "/projects/#{ @project }/signup", {username, email, password}, @createUser
     signup.always @setAuthHeaders
+    signup.always => User.trigger('sign-in')
     signup
 
   @createUser: (result) ->
     User.current = if result.success
       delete result.success
-      User.trigger 'sign-in', this
       new User result
     else
       User.trigger 'sign-in-error', result.message
