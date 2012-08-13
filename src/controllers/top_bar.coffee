@@ -35,6 +35,8 @@ class TopBar extends Controller
     @constructor.instance = @
 
     super
+
+    User.project = @app
     @dropdownsToHide = []
     @html @template
 
@@ -47,7 +49,7 @@ class TopBar extends Controller
     @currentLang = @currentLange || 'en'
     @updateLanguages()
 
-    User.bind 'create', @updateLogin
+    User.bind 'sign-in', @updateLogin
     new LoginForm el: @loginFormContainer
 
     @updateLogin()

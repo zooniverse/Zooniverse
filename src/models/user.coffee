@@ -5,14 +5,13 @@ ProxyFrame = require '../proxy_frame'
 class User extends Model
   @configure 'User'
 
+  @project: 'Not Specified'
+
   @fetch: ->
     fetcher = Api.getJSON '/current_user', @createUser
     fetcher.always @setAuthHeaders
     fetcher
 
-  signIn: ->
-    @trigger 'sign-in', this
-  
   @setAuthHeaders: ->
     if User.current
       auth = base64.encode "#{ User.current.name }:#{ User.current.apiKey }"
@@ -21,7 +20,7 @@ class User extends Model
       delete ProxyFrame.headers['Authorization']
 
   @login: ({username, password}) ->
-    login = Api.getJSON '/login', {username, password}, @createUser
+    login = Api.getJSON "projects/#{@project}/login", {username, password}, @createUser
     login.always @setAuthHeaders
     login 
 
@@ -43,6 +42,6 @@ class User extends Model
       new User result
     else
       null
-    User.current.signIn() if User.current
+    User.trigger 'sign-in', this if User.current
 
 module.exports = User
