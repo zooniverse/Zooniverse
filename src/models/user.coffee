@@ -28,7 +28,7 @@ class User extends Model
   @logout: ->
     logout = Api.getJSON '/logout', (result) ->
       User.current = null if result.success
-      @trigger 'sign-in', this
+      User.trigger 'sign-in', this
     logout.always @setAuthHeaders
     logout
 
