@@ -39,9 +39,10 @@ class User extends Model
   @createUser: (result) ->
     User.current = if result.success
       delete result.success
+      User.trigger 'sign-in', this
       new User result
     else
+      User.trigger 'sign-in-error', result.message
       null
-    User.trigger 'sign-in', this if User.current
 
 module.exports = User
