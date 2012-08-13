@@ -10,6 +10,7 @@ class User extends Model
   @fetch: ->
     fetcher = Api.getJSON "/projects/#{ @project }/current_user", @createUser
     fetcher.always @setAuthHeaders
+    fetcher.always => User.trigger('sign-in') if User.current
     fetcher
 
   @setAuthHeaders: ->
