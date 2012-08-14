@@ -1,6 +1,6 @@
 $ = require 'jqueryify'
 
-# Make sure "node_modules/Zooniverse/vendor/leaflet/leaflet.js" is in "libs" in your slug.json.
+# Make sure "node_modules/zooniverse/vendor/leaflet/leaflet.js" is in "libs" in your slug.json.
 # Also, you'll need this CSS: "http://cdn.leafletjs.com/leaflet-0.4.2/leaflet.css".
 Leaflet = window.L
 

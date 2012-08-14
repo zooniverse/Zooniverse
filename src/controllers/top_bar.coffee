@@ -55,6 +55,7 @@ class TopBar extends Controller
     @updateLogin()
 
     @el.find(':last-child').addClass 'last-child'
+    User.fetch()
 
   updateLanguages: =>
     @languageLabel.empty()
