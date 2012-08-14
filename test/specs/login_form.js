@@ -53,18 +53,7 @@
     describe('#onSignIn', function() {
       return describe('a user is signed in', function() {
         beforeEach(function() {
-          var userCheck;
-          User.current = null;
-          userCheck = false;
-          User.login({
-            username: 'test',
-            password: 'password'
-          }).always(function() {
-            return userCheck = true;
-          });
-          return waitsFor(function() {
-            return userCheck;
-          });
+          return this.loginForm.onSignIn();
         });
         it('should hide all sign in forms', function() {
           var signins;

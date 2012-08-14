@@ -40,10 +40,7 @@ describe 'LoginForm', ->
   describe '#onSignIn', ->
     describe 'a user is signed in', ->
       beforeEach ->
-        User.current = null
-        userCheck = false
-        User.login({username: 'test', password: 'password'}).always -> userCheck = true
-        waitsFor -> userCheck
+        @loginForm.onSignIn()
 
       it 'should hide all sign in forms', ->
         signins = @loginForm.signInForms.css('display')
@@ -69,3 +66,5 @@ describe 'LoginForm', ->
      it 'should hide signout form', ->
        signout = @loginForm.signOutContainer.css('display')
        expect(signout).toBe 'none'
+
+

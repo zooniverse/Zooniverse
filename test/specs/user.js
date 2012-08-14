@@ -8,7 +8,8 @@
 
   describe('User', function() {
     beforeEach(function() {
-      return Api.init();
+      Api.init();
+      return User.project = "test";
     });
     describe('Not logged in', function() {
       return it('should not fetch a user', function() {

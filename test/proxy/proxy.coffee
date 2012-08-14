@@ -71,6 +71,32 @@ subjects = [
   zooniverse_id: "ASP0000002"
 ]
 
+favcents = [
+  id: '50295c93ba40af5de8000001'
+  project_id: '4fdf8fb3c32dab6c95000001'
+  workflow_id: '4fdf8fb3c32dab6c95000002'
+  user:
+    id: '5022cce4ba40af3c6d00001c'
+    name: 'edpaget'
+  classification_id: '50295c92ba40af2942000003'
+  subjects:
+    0: subjects[0]
+  created_at: "2012-08-13T19:59:15Z"
+  updated_at: "2012-08-13T19:59:15Z"
+,
+  id: '50295c93ba40af5de8000002'
+  project_id: '4fdf8fb3c32dab6c95000001'
+  workflow_id: '4fdf8fb3c32dab6c95000002'
+  user:
+    id: '5022cce4ba40af3c6d00001c'
+    name: 'edpaget'
+  classification_id: '50295c92ba40af2942000003'
+  subjects:
+    0: subjects[1]
+  created_at: "2012-08-13T19:59:15Z"
+  updated_at: "2012-08-13T19:59:15Z"
+]
+
 $.mockjax
   url: /^(\/projects\/(\w+))?\/signup/i
   response: (settings) ->
@@ -133,6 +159,14 @@ $.mockjax
 $.mockjax
   url: /^\/projects\/galaxy_zoo\/groups\?page=1&per_page=1/i
   responseText: gz_groups.slice 0, 1
+
+$.mockjax
+  url: /^\/projects\/\w+\/users\/\w+\/recents/
+  responseText: favcents
+
+$.mockjax
+  url: /^\/projects\/\w+\/users\/\w+\/favorites/
+  responseText: favcents
 
 for group in gz_groups
   $.mockjax

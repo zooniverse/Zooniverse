@@ -4,7 +4,7 @@ $ = require 'jqueryify'
 _ = require 'underscore/underscore'
 
 class Subject extends Model
-  @configure 'Subject'
+  @configure 'Subject', 'zooniverse_id', 'coords', 'location', 'metadata'
   projectName: null
   
   @url: (params) -> @withParams "/projects/#{ @::projectName }/subjects", params
