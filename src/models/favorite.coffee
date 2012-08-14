@@ -7,7 +7,7 @@ class Favorite extends ProfileItem
     super
 
   @url: ->
-    "/projects/#{User.project}/users/#{User.current.id}/recents"
+    "/projects/#{User.project}/users/#{User.current.id}/favorites"
 
   @fromJSON: (results) ->
     for item in results
