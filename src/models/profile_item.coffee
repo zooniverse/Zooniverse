@@ -11,7 +11,7 @@ class ProfileItem extends Model
     @convertSubjects() if @subjects
 
   convertSubjects: ->
-    @subjects = new Subject @subjects[0]
+    @subjects = new Subject @subjects[0] if @subjects[0]
 
   @fetch: ->
     url = @url()
