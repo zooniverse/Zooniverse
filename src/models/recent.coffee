@@ -2,7 +2,7 @@ ProfileItem = require './profile_item'
 User = require './user'
 
 class Recent extends ProfileItem
-  @configure "Recent", "project_id", "workflow_id", "subjects"
+  @configure "Recent", "project_id", "workflow_id", "subjects", "created_at"
   constructor: ->
     super
 

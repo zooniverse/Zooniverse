@@ -2,7 +2,7 @@ ProfileItem = require './profile_item'
 User = require './user'
 
 class Favorite extends ProfileItem
-  @configure "Favorite", "project_id", "workflow_id", "subjects"
+  @configure "Favorite", "project_id", "workflow_id", "subjects", "created_at"
   constructor: ->
     super
 
