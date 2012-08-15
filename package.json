@@ -10,9 +10,9 @@
   },
   "main" : "./index.js",
   "scripts": {
-    "pretest": "",
-    "test": "",
-    "posttest": ""
+    "pretest": "./node_modules/hem/bin/hem server --port 9289 & echo $! > ./hem.pid",
+    "test": "sleep 2; phantomjs test/lib/run-jasmine.js http://localhost:9289",
+    "posttest": "kill `cat hem.pid`; rm hem.pid"
   },
   "dependencies": {
     "hem": "git://github.com/maccman/hem.git#517c97a3ce7",
