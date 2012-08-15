@@ -51,7 +51,5 @@ class BarGraph
             <div class="label">#{label}</div>
           </div>
         """
-        if @floor
-          console.log "Value was #{yValues[i]}, max was #{max}, floor was #{@floor}, height was #{100 * ((yValues[i] - @floor) / (max - @floor))}"
 
 module.exports = BarGraph
