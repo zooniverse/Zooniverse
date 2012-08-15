@@ -16,7 +16,7 @@ class ProfileItem extends Model
 
   @fetch: ->
     url = @url()
-    fetcher = Api.getJSON url, @fromJSON
+    fetcher = Api.get url, @fromJSON
     fetcher
 
 module.exports = ProfileItem

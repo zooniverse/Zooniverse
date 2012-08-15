@@ -1,8 +1,6 @@
 Recent = require './models/recent'
-ProfileItem = require './models/profile_item'
 User = require './models/user'
 Api = require './api'
-Subject = require './models/subject'
 
 describe 'Recent', ->
   beforeEach ->
@@ -16,12 +14,20 @@ describe 'Recent', ->
     expect(recent).not.toBeNull()
 
   describe '#fetch', ->
-    it 'should create records from the return JSON', ->
-      User.current = {id: 1}
+    beforeEach ->
       User.project = 'test'
+      User.current = 
+        id: '1'
+    it 'should retrieve recents from the user', ->
+      spyOn(Api, 'getJSON').andCallThrough()
+      expect(Api.getJSON).toHaveBeenCalledWith('/projects/test/users/1/recents')
+      Recent.fetch()
+
+    it 'should create records from the return JSON', ->
       fetchCheck = false
       Recent.fetch().always -> fetchCheck = true
       waitsFor -> fetchCheck
       runs -> 
+        console.log Recent.first()
         expect(Recent.first()).not.toBeNull()
-        expect(Recent.first().subjects).toEqual(jasmine.any(Subject))
+        expect(Recent.all()).not.toBe []

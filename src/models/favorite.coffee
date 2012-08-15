@@ -11,6 +11,6 @@ class Favorite extends ProfileItem
 
   @fromJSON: (results) ->
     for item in results
-      item = Favorite.create item
+      Favorite.create item
 
 module.exports = Favorite

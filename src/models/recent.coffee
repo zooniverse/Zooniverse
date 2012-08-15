@@ -11,6 +11,6 @@ class Recent extends ProfileItem
 
   @fromJSON: (results) ->
     for item in results
-      item = Recent.create item
+      Recent.create item
 
 module.exports = Recent
