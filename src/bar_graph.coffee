@@ -15,6 +15,8 @@ class BarGraph
   el: null
   className: 'bar-chart'
 
+  items: null
+
   constructor: (params) ->
     @[property] = value for own property, value of params
 
@@ -37,13 +39,6 @@ class BarGraph
       """
 
     for xAxisLabel, xLabels of @x
-      @el.append """
-        <div class="x axis">
-          <div class="label">#{xAxisLabel}</div>
-          <!--TODO: Y-axis Marks-->
-        </div>
-      """
-
       for label, i in xLabels
         @el.append """
           <div class="item" data-index="#{i}" data-value="#{yValues[i]}">
@@ -51,5 +46,14 @@ class BarGraph
             <div class="label">#{label}</div>
           </div>
         """
+
+      @items = @el.find '.item'
+
+      @el.append """
+        <div class="x axis">
+          <div class="label">#{xAxisLabel}</div>
+          <!--TODO: Y-axis Marks-->
+        </div>
+      """
 
 module.exports = BarGraph
