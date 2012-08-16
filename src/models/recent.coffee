@@ -7,8 +7,10 @@ class Recent extends ProfileItem
     super
 
   @url: ->
-    "/projects/#{User.project}/users/#{User.current.id}/recents"
-
+    "/projects/#{ User.project }/users/#{ User.current.id }/recents"
+  
+  @fetch: -> super if User.current
+  
   @fromJSON: (results) ->
     for item in results
       Recent.create item
