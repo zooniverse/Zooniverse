@@ -1,3 +1,4 @@
+Api = require '../api'
 ProfileItem = require './profile_item'
 User = require './user'
 
@@ -14,5 +15,9 @@ class Favorite extends ProfileItem
   @fromJSON: (results) ->
     for item in results
       Favorite.create item
+  
+  destroy: =>
+    super
+    Api.delete "/projects/#{ User.project }/favorites/#{ @id }"
 
 module.exports = Favorite
