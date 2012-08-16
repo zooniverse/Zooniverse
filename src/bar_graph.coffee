@@ -8,6 +8,8 @@ class BarGraph
   x: null
   y: null
 
+  floor: 0
+
   valueStyle: 'height' # Or "width", if you wanted a vertical bar chart for some reason.
 
   el: null
@@ -16,9 +18,8 @@ class BarGraph
   constructor: (params) ->
     @[property] = value for own property, value of params
 
-    @el ?= $('<div></div>')
+    @el ?= $("<div class='#{@constructor::className}'></div>")
     @el = $(@el)
-    @el.addClass @constructor::className
     @el.addClass @className
 
     @render()
@@ -44,10 +45,9 @@ class BarGraph
       """
 
       for label, i in xLabels
-        console.log yValues[i], max
         @el.append """
           <div class="item" data-index="#{i}" data-value="#{yValues[i]}">
-            <div class="bar" style="#{@valueStyle}: #{100 * (yValues[i] / max)}%;"></div>
+            <div class="bar" style="#{@valueStyle}: #{100 * ((yValues[i] - @floor) / (max - @floor))}%;"></div>
             <div class="label">#{label}</div>
           </div>
         """

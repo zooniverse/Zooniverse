@@ -93,6 +93,7 @@ class Dialog
         # Convert {label: value} button descriptions to Button instances
         for own label, value of button
           @buttons[i] = new @constructor.Button {label, value}
+
       @buttons[i].dialog = @
       @buttons[i].el.appendTo @el.find 'footer'
 
