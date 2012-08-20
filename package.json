@@ -10,8 +10,8 @@
   },
   "main" : "./index.js",
   "scripts": {
-    "pretest": "./node_modules/hem/bin/hem server --port 9289 & echo $! > ./hem.pid",
-    "test": "sleep 2; phantomjs test/lib/run-jasmine.js http://localhost:9289",
+    "pretest": "hem server --port 9289 & echo $! > ./hem.pid",
+    "test": "sleep 2; jasmine-phantom-node --timeout 10000 --url / --port 9289",
     "posttest": "kill `cat hem.pid`; rm hem.pid"
   },
   "dependencies": {
@@ -23,5 +23,6 @@
     "spine": "~1.0.7"
   },
   "devDependencies": {
+    "jasmine-phantom-node": "git://github.com/edpaget/jasmine-phantom-node.git"
   }
 }
