@@ -31,6 +31,8 @@ class Recent extends ProfileItem
     fetcher
   
   favorite: =>
-    Favorite.create(subjects: @subjects).send()
+    Favorite.create(subjects: @subjects).send().onSuccess (favorite) =>
+      @favorited = true
+      @favorite_id = favorite.id
 
 module.exports = Recent
