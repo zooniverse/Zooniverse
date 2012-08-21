@@ -23,6 +23,7 @@ class Favorite extends ProfileItem
   send: =>
     Api.post "/projects/#{ User.project }/favorites", @toJSON(), (response) =>
       @id = response.id
+      @save()
   
   destroy: =>
     super
