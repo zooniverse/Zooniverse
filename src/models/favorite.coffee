@@ -16,6 +16,14 @@ class Favorite extends ProfileItem
     for item in results
       Favorite.create item
   
+  toJSON: =>
+    favorite:
+      subject_ids: [@subjects.id]
+  
+  send: =>
+    Api.post "/projects/#{ User.project }/favorites", @toJSON(), (response) =>
+      @id = response.id
+  
   destroy: =>
     super
     Api.delete "/projects/#{ User.project }/favorites/#{ @id }"
