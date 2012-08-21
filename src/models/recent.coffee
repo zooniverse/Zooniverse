@@ -29,5 +29,8 @@ class Recent extends ProfileItem
     @favorited = false
     @favorite_id = null
     fetcher
+  
+  favorite: =>
+    Favorite.create(subjects: @subjects).send()
 
 module.exports = Recent
