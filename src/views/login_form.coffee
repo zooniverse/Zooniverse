@@ -1,9 +1,9 @@
 module.exports =
   signIn: '''
-    <p>Sign in with your Zooniverse account.</p>
+    <p class="title">Sign in with your Zooniverse account</p>
     <p class="errors"></p>
     <form>
-      <label><span>User name</span> <input type="text" name="username" required="required" /></label>
+      <label><span>Username</span> <input type="text" name="username" required="required" /></label>
       <label><span>Password</span> <input type="password" name="password" required="required" /></label>
       <button type="submit">Sign in</button>
     </form>
@@ -11,21 +11,21 @@ module.exports =
   '''
   
   signUp: '''
-    <p>Sign up for a new Zooniverse account.</p>
+    <p class="title">Sign up for a new Zooniverse account</p>
     <p class="errors"></p>
     <form>
-      <label><span>User name</span> <input type="text" name="username" required="required" /></label>
+      <label><span>Username</span> <input type="text" name="username" required="required" /></label>
       <label><span>Email address</span> <input type="text" name="email" required="required" /></label>
       <label><span>Password</span> <input type="password" name="password" required="required" /></label>
       <label><span>Password (confirm)</span> <input type="password" name="password-confirm" required="required" /></label>
-      <label><input type="checkbox" name="policy" required="required" /> I agree to the <a href="#">privacy policy</a>.</label>
+      <label class="privacy-policy"><input type="checkbox" name="policy" required="required" /> I agree to the <a href="#">privacy policy</a></label>
       <button type="submit">Sign up</button>
     </form>
     <p class="progress">Creating account and signing in...</p>
   '''
   
   reset: '''
-    <p>Enter your <strong>username</strong> or <strong>email address</strong> and we'll send you instructions on how to reset your password.</p>
+    <p>Enter your <strong>username</strong> or <strong>email address</strong> and we'll send you instructions on how to reset your password</p>
     <p class="errors"></p>
     <form>
       <label><input type="text" name="email" required="required" /></label>
