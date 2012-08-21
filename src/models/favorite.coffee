@@ -27,5 +27,7 @@ class Favorite extends ProfileItem
   destroy: =>
     super
     Api.delete "/projects/#{ User.project }/favorites/#{ @id }"
+  
+  unfavorite: => @destroy()
 
 module.exports = Favorite
