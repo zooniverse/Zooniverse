@@ -63,10 +63,12 @@ class LoginForm extends Controller
 
   onSignIn: =>
     if User.current
+      @el.addClass 'signed-in'
       @signInForms.hide()
       @signInPickers.hide()
       @signOutContainer.show()
     else
+      @el.removeClass 'signed-in'
       @signIn()
       @signInPickers.show()
       @signOutContainer.hide()

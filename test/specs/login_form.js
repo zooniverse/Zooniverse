@@ -50,10 +50,13 @@
         return expect(signupButton).toBe('none');
       });
     });
-    describe('#onSignIn', function() {
-      return describe('a user is signed in', function() {
+    return describe('#onSignIn', function() {
+      describe('a user is signed in', function() {
         beforeEach(function() {
           return this.loginForm.onSignIn();
+        });
+        it('should have a "signed-in" class', function() {
+          return expect(this.loginForm.el.hasClass('signed-in')).toBe(true);
         });
         it('should hide all sign in forms', function() {
           var signins;
@@ -71,20 +74,23 @@
           return expect(signout).not.toBe('none');
         });
       });
-    });
-    return describe('no user is signed in', function() {
-      beforeEach(function() {
-        return User.current = null;
-      });
-      it('should call #signIn', function() {
-        spyOn(this.loginForm, 'signIn');
-        this.loginForm.onSignIn();
-        return expect(this.loginForm.signIn).toHaveBeenCalled();
-      });
-      return it('should hide signout form', function() {
-        var signout;
-        signout = this.loginForm.signOutContainer.css('display');
-        return expect(signout).toBe('none');
+      return describe('no user is signed in', function() {
+        beforeEach(function() {
+          return User.current = null;
+        });
+        it('should call #signIn', function() {
+          spyOn(this.loginForm, 'signIn');
+          this.loginForm.onSignIn();
+          return expect(this.loginForm.signIn).toHaveBeenCalled();
+        });
+        it('should not have a "signed-in" class', function() {
+          return expect(this.loginForm.el.hasClass('signed-in')).toBe(false);
+        });
+        return it('should hide signout form', function() {
+          var signout;
+          signout = this.loginForm.signOutContainer.css('display');
+          return expect(signout).toBe('none');
+        });
       });
     });
   });

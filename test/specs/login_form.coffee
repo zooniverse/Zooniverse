@@ -42,6 +42,9 @@ describe 'LoginForm', ->
       beforeEach ->
         @loginForm.onSignIn()
 
+      it 'should have a "signed-in" class', ->
+        expect(@loginForm.el.hasClass 'signed-in').toBe true
+
       it 'should hide all sign in forms', ->
         signins = @loginForm.signInForms.css('display')
         expect(signins).toBe 'none'
@@ -54,17 +57,18 @@ describe 'LoginForm', ->
         signout = @loginForm.signOutContainer.css('display')
         expect(signout).not.toBe 'none'
 
-   describe 'no user is signed in', ->
-     beforeEach ->
-       User.current = null
+    describe 'no user is signed in', ->
+      beforeEach ->
+        User.current = null
 
-     it 'should call #signIn', ->
-       spyOn(@loginForm, 'signIn')
-       @loginForm.onSignIn()
-       expect(@loginForm.signIn).toHaveBeenCalled()
+      it 'should call #signIn', ->
+        spyOn(@loginForm, 'signIn')
+        @loginForm.onSignIn()
+        expect(@loginForm.signIn).toHaveBeenCalled()
 
-     it 'should hide signout form', ->
-       signout = @loginForm.signOutContainer.css('display')
-       expect(signout).toBe 'none'
+      it 'should not have a "signed-in" class', ->
+        expect(@loginForm.el.hasClass 'signed-in').toBe false
 
-
+      it 'should hide signout form', ->
+        signout = @loginForm.signOutContainer.css('display')
+        expect(signout).toBe 'none'
