@@ -16,10 +16,10 @@ class ProfileItem extends Model
 
   convertDates: ->
     @created_at = new Date @created_at if @created_at
-
-  @fetch: ->
-    url = @url()
-    fetcher = Api.get url, @fromJSON
+  
+  @fetch: (opts = { }) ->
+    opts = _(page: 1, per_page: 10).extend opts
+    fetcher = Api.get @url(opts), @fromJSON
     fetcher
 
 module.exports = ProfileItem

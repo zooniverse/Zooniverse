@@ -7,8 +7,8 @@ class Favorite extends ProfileItem
   constructor: ->
     super
   
-  @url: ->
-    "/projects/#{ User.project }/users/#{ User.current.id }/favorites"
+  @url: (params) =>
+    @withParams "/projects/#{ User.project }/users/#{ User.current.id }/favorites", params
   
   @fetch: -> super if User.current
   

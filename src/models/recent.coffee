@@ -9,8 +9,8 @@ class Recent extends ProfileItem
   constructor: ->
     super
   
-  @url: ->
-    "/projects/#{ User.project }/users/#{ User.current.id }/recents"
+  @url: (params) =>
+    @withParams "/projects/#{ User.project }/users/#{ User.current.id }/recents", params
   
   @fetch: -> super if User.current
   
