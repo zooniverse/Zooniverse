@@ -47,6 +47,7 @@ class Map
       doubleClickZoom: @doubleClickZoom
       attributionControl: false
       zoomControl: @zoomControl
+      worldCopyJump: false
 
     @el.css position: '' # Don't let Leaflet override this.
 
