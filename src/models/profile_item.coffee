@@ -21,6 +21,7 @@ class ProfileItem extends Model
   @fetch: (opts = { }) ->
     opts = _(page: 1, per_page: 10).extend opts
     fetcher = Api.get @url(opts), @fromJSON
+    super
     fetcher
 
 module.exports = ProfileItem
