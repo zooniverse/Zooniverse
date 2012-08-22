@@ -26,6 +26,10 @@ class Favorite extends ProfileItem
       @save()
   
   unfavorite: =>
-    Api.delete "/projects/#{ User.project }/favorites/#{ @id }"
+    Api.delete "/projects/#{ User.project }/favorites/#{ @id }", => @destroy()
   
+  User.bind 'sign-in', =>
+    @first().destroy() while @all().length > 0
+    @fetch()
+
 module.exports = Favorite
