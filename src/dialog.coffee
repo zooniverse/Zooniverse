@@ -36,6 +36,8 @@ class Dialog
   content: '<p>Lorem ipsum dolor sit amet.</p>'
   buttons: null
   attachment: null
+  openImmediately: false
+  destroyOnClose: false
   callback: null
 
   className: 'dialog'
@@ -81,6 +83,8 @@ class Dialog
         @deferred.resolve()
 
     @el.appendTo 'body'
+
+    @open() if @openImmediately
 
   render: =>
     @el.find('header').html @title
@@ -155,6 +159,7 @@ class Dialog
     @deferred = null
     @promise = null
     @callback if @callback?
+    setTimeout => @destroy() if @destroyOnClose
 
   destroy: =>
     @el.remove()
