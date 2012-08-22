@@ -2,6 +2,7 @@ Api = require '../api'
 Model = require './model'
 User = require './user'
 Subject = require './subject'
+_ = require 'underscore/underscore'
 
 class ProfileItem extends Model
   @configure "ProfileItem", "project_id", "workflow_id", "subjects", "created_at"
