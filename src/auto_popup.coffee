@@ -6,7 +6,7 @@ module.exports =
     $(document).on 'click', '[data-popup]', (e) ->
       target = $(e.currentTarget)
 
-      [contentNode, position] = target.attr('data-popup').split /\s+/
+      [contentNode, position, className] = target.attr('data-popup').split /\s+/
       contentNode = $(contentNode)
 
       # targetOffset = contentNode.offset()
@@ -40,5 +40,7 @@ module.exports =
         arrowDirection: arrowDirection
         buttons: []
         callback: -> popup.destroy()
+
+      popup.el.addClass className if className?
 
       popup.open()
