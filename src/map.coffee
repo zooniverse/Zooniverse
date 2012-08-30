@@ -47,7 +47,7 @@ class Map
       doubleClickZoom: @doubleClickZoom
       attributionControl: false
       zoomControl: @zoomControl
-      worldCopyJump: false
+      worldCopyJump: true
 
     @el.css position: '' # Don't let Leaflet override this.
 
@@ -80,12 +80,16 @@ class Map
   removeLayer: (layer) =>
     @map.removeLayer layer
 
-  addLabel: (lat, lng, html, {className} = {className: 'map-label'}) =>
-    icon = new Leaflet.DivIcon {html, className, iconSize: null}
-    marker = new Leaflet.Marker [lat, lng], {icon}
-    marker.addTo @map
-    marker.el = $(marker._icon) # Sketchy...
-    marker
+  # NOTE: BROKE!
+  # addLabel: (lat, lng, html, {className} = {className: 'map-label'}) =>
+  #   icon = new Leaflet.DivIcon {html, className, iconSize: null}
+  #   marker = new Leaflet.Marker [lat, lng], {icon}
+  #   marker.addTo @map
+  #   marker.el = $(marker._icon) # Sketchy...
+  #   marker
+
+  addLabel: (lat, lng, html) =>
+    new Leaflet.CircleMarker([lat, lng], radius: 5).addTo @map
 
   removeLabel: (label) =>
     @map.removeLayer label
