@@ -1,16 +1,21 @@
 $ = require 'jqueryify'
 
-# Make sure "node_modules/zooniverse/vendor/leaflet/leaflet.js" is in "libs" in your slug.json.
-# Also, you'll need this CSS: "http://cdn.leafletjs.com/leaflet-0.4.2/leaflet.css".
-Leaflet = window.L
+# NOTE: You'll need this CSS: "http://cdn.leafletjs.com/leaflet-0.4.2/leaflet.css".
+
+Leaflet = try
+  require 'zooniverse/vendor/leaflet/leaflet-src'
+catch e
+  console.warn 'You should use Leaflet as a CommonJS module.'
+  window.L
 
 class Map
   # Defaults only. Don't count on these to be accurate later.
   latitude: 41.9
   longitude: -87.6
+  centerOffset: null # [x, y] out of 1, relative to the element (not [lat, lng])
   zoom: 10
 
-  className: 'map'
+  className: ''
 
   layers: null # Default layers (from CartoDB, etc.)
 
@@ -30,8 +35,10 @@ class Map
     @[param] = value for own param, value of params
     throw new Error 'Map class needs an apiKey!' unless @apiKey
 
-    @el ?= $("<div class=#{@constructor::className}></div>")
-    @el.addClass @className
+    @centerOffset ?= [0.5, 0.5]
+
+    @el ?= $('<div class="map"></div>')
+    @el.addClass @className if @className
 
     @layers ?= []
     @layers = [@layers] unless @layers instanceof Array
@@ -51,23 +58,24 @@ class Map
 
     @el.css position: '' # Don't let Leaflet override this.
 
+    @setCenter @latitude, @longitude # Recenter in case there's a center offset.
+
     $(window).on 'hashchange', =>
       {x, y} = @map.getSize()
       setTimeout @resize if 0 in [x, y]
 
     setTimeout @resize
 
-  setCenter: (lat, lng, {center, zoom} = {center: [0.5, 0.5]}) =>
-    # NOTE: Optional center is [x, y] out of 1, relative to the element, not [lat, lng].
+  setCenter: (lat, lng) =>
     bounds = @map.getBounds()
     ne = bounds.getNorthEast()
     sw = bounds.getSouthWest()
 
     shift =
-      lat: (ne.lat - sw.lat) * -(0.5 - center[1])
-      lng: (ne.lng - sw.lng) * +(0.5 - center[0])
+      lat: (ne.lat - sw.lat) * -(0.5 - @centerOffset[1])
+      lng: (ne.lng - sw.lng) * +(0.5 - @centerOffset[0])
 
-    @map.setView new Leaflet.LatLng(lat + shift.lat, lng + shift.lng), zoom || @map.getZoom()
+    @map.setView new Leaflet.LatLng(lat + shift.lat, lng + shift.lng), @map.getZoom()
 
   setZoom: (zoom) =>
     @map.setZoom zoom
@@ -79,14 +87,6 @@ class Map
 
   removeLayer: (layer) =>
     @map.removeLayer layer
-
-  # NOTE: BROKE!
-  # addLabel: (lat, lng, html, {className} = {className: 'map-label'}) =>
-  #   icon = new Leaflet.DivIcon {html, className, iconSize: null}
-  #   marker = new Leaflet.Marker [lat, lng], {icon}
-  #   marker.addTo @map
-  #   marker.el = $(marker._icon) # Sketchy...
-  #   marker
 
   addLabel: (lat, lng, html) =>
     new Leaflet.CircleMarker([lat, lng], radius: 5).addTo @map
