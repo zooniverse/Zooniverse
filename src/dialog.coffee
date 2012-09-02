@@ -27,7 +27,7 @@ class Dialog
       @el ?= $("<#{@tag} class='#{@className}'>#{@label}</#{@tag}>")
       @el.on 'click', =>
         @dialog.deferred.resolve @value
-        @onClick()
+        @onClick?()
 
     onClick: ->
       # Override this.
@@ -82,14 +82,14 @@ class Dialog
       if (target.is(@el) and @buttons.length is 0) or target.is closer
         @deferred.resolve()
 
+    @render()
     @el.appendTo 'body'
 
     @open() if @openImmediately
 
   render: =>
     @el.find('header').html @title
-
-    @contentContainer.append @content
+    @contentContainer.html @content
 
     @el.find('footer').empty()
     for button, i in @buttons
@@ -102,8 +102,6 @@ class Dialog
       @buttons[i].el.appendTo @el.find 'footer'
 
   open: =>
-    @render()
-
     @el.addClass 'open'
     @attach()
 
@@ -116,7 +114,7 @@ class Dialog
     @attachment ?= {}
     @attachment.x ?= 'center'
     @attachment.y ?= 'middle'
-    @attachment.to ?= @el
+    @attachment.to ?= 'body'
     @attachment.at ?= {}
     @attachment.at.x ?= 'center'
     @attachment.at.y ?= 'middle'
