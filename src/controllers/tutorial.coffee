@@ -3,17 +3,23 @@ Dialog = require '../dialog'
 
 class Tutorial
   steps: null
+  hashMatch: null
 
   dialog: null
   current: -1
 
-  constructor: ({@target, @steps}) ->
+  constructor: ({@hashMatch, @steps}) ->
     @steps ?= []
     @dialog ?= new Dialog content: '', buttons: ['Continue': null]
     @dialog.buttons[0].el.off 'click' # Never resolve the dialog!
     @dialog.buttons[0].el.on 'click', @next
     @dialog.el.addClass 'tutorial'
     @dialog.el.addClass 'popup'
+
+    if @hashMatch
+      $(window).on 'hashchange', @onHashChange
+
+    @onHashChange()
 
   start: =>
     @steps[@current]?.leave @
@@ -35,6 +41,18 @@ class Tutorial
     @current = -1
     @dialog.close()
 
+  onHashChange: =>
+    setTimeout =>
+      return unless @dialog.el.hasClass 'open'
+
+      if location.hash.match @hashMatch
+        @dialog.el.css display: ''
+
+        if @steps[@current]?.attachment
+          @dialog.attach @steps[@current].attachment
+
+      else
+        @dialog.el.css display: 'none'
 
 class Tutorial.Step
   title: ''
@@ -62,7 +80,9 @@ class Tutorial.Step
       tutorial.dialog.el.addClass 'next-on-action'
       # Delay to prevent this from firing immediately.
       setTimeout =>
-        $(document).on eventName, selector, tutorial.next for eventName, selector of @nextOn
+        for eventName, selector of @nextOn
+          # Avoid multiple fires because of bubbling!
+          $(document).one eventName, "#{selector}:not(:has('#{selector}'))", tutorial.next
 
     tutorial.dialog.el.addClass @className if @className
     tutorial.dialog.el.css @style if @style
@@ -88,13 +108,8 @@ class Tutorial.Step
 
   leave: (tutorial) =>
     @onLeave?.call @
-
-    if @nextOn?
-      $(document).off eventName, selector, tutorial.next for eventName, selector of @nextOn
-      tutorial.dialog.el.removeClass 'next-on-action'
-
+    tutorial.dialog.el.removeClass 'next-on-action' if @nextOn
     tutorial.dialog.el.removeClass @className if @className
-
     @blockers.remove()
 
 module.exports = Tutorial
