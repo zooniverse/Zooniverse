@@ -27,7 +27,7 @@ class BrowserCheck
   support:
     mozilla: 14
     msie: 8
-    webkit: 537
+    webkit: 530 # TODO: Check mobile versions
     opera: Infinity
 
   constructor: (params = {}) ->
