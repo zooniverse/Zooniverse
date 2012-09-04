@@ -12,6 +12,8 @@ class TopBar extends Controller
     @appName ||= "Test Name"
     User.project = @app
 
+    @render()
+
   elements:
     'input[name="username"]'        : 'username'
     'input[name="password"]'        : 'password'
@@ -27,3 +29,6 @@ class TopBar extends Controller
 
   toggleDisplay: (e) =>
     @container.toggleClass 'visible'
+
+  render: =>
+    @html require('views/top_bar')(@)
