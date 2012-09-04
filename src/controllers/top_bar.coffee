@@ -31,4 +31,6 @@ class TopBar extends Controller
     @container.toggleClass 'visible'
 
   render: =>
-    @html require('views/top_bar')(@)
+    @html require('../views/top_bar')
+
+module.exports = TopBar

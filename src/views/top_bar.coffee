@@ -1,6 +1,7 @@
+module.exports = """
 <div id="zooniverse-top-bar-container">
   <div id="zooniverse-top-bar-info">
-    <h3><%= @appName %> is a <strong>Zooniverse</strong> project.</h3>
+    <h3>#{@appName} is a <strong>Zooniverse</strong> project.</h3>
     <p>The Zooniverse is a collection of web-based Citizen Science projects that use the efforts and abilities of volunteers to help reseachers deal with the flood of data that confronts them.</p>
   </div>
   <div id="zooniverse-top-bar-projects">
@@ -19,3 +20,5 @@
 <div id="zooniverse-top-bar-button">
   <a href="#" class="top-bar-button"><img src="images/zooniverseLogo.png" width="35" height="35" /></a>
 </div>
+
+"""
