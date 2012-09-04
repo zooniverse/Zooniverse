@@ -8,16 +8,20 @@ class TopBar extends Controller
     'click a.top-bar-button'      : 'toggleDisplay'
 
   constructor: ->
+    super
     @app ||= "test"
     @appName ||= "Test Name"
     User.project = @app
 
     @render()
 
+    @setAppName()
+
   elements:
     'input[name="username"]'        : 'username'
     'input[name="password"]'        : 'password'
     '.zooniverse-top-bar-container' : 'container'
+    '#app-name'                     : 'appNameContainer'
 
   logIn: (e) =>
     login = User.login
@@ -32,5 +36,8 @@ class TopBar extends Controller
 
   render: =>
     @html require('../views/top_bar')
+
+  setAppName: ->
+    @appNameContainer.append @appName
 
 module.exports = TopBar
