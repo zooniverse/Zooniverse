@@ -6,7 +6,7 @@ module.exports = """
   </div>
   <div id="zooniverse-top-bar-projects">
     <h3>Our Projects</h3>
-    <p>We currently have 12 projects on subjects ranging from <a href="SOMETHING">astronomy</a>, to <a href="SOMETHINGELSE">climatology</a>, to <a href="SOMETHINGELSEAGAIN">biology</a>, to <a href="SOMETHINGELSEFORTHELASTTIME>humanities</a>.</p>
+    <p>We currently have 12 projects on subjects ranging from <a href="SOMETHING">astronomy</a>, to <a href="SOMETHINGELSE">climatology</a>, to <a href="SOMETHINGELSEAGAIN">biology</a>, to <a href="SOMETHINGELSEFORTHELASTTIME">humanities</a>.</p>
   </div>
   <div id="zooniverse-top-bar-login">
     <input name="username" value="username" type="text" />
