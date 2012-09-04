@@ -18,7 +18,7 @@ module.exports = """
 <div id="zooinverse-top-bar-spacer">
 </div>
 <div id="zooniverse-top-bar-button">
-  <a href="#" class="top-bar-button"><img src="images/zooniverseLogo.png" width="35" height="35" /></a>
+  <a href="#" class="top-bar-button"><img src="images/zoo-icon.png" width="35" height="35" /></a>
 </div>
 
 """

@@ -32,6 +32,7 @@ class TopBar extends Controller
     alert('sign up')
 
   toggleDisplay: (e) =>
+    e.preventDefault()
     @container.toggleClass 'visible'
 
   render: =>
