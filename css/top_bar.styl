@@ -1,201 +1,28 @@
-$black = #111
-$white = #fff
+$background = #f9f8f3
 $text-color = #ddd
 $border-color = #555
 
-default-padding() {
-  display: block;
-  padding: 6px 16px;
+.zooniverse-top-bar
+  background: $background
+  color: $text-color
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif 
+  width: 100%
+  position: absolute
+  top: 0 
+  left: 0
 
-  &:hover {
-    color: $white;
-  }
-}
+  #zooniverse-top-bar-container
+    padding: 10px
 
-menu-item() {
-  border-top: 1px solid $border-color;
-  cursor: pointer;
+    #zooniverse-top-bar-info
+      border-right: 1px $border-color solid
+      float: left
 
-  &:hover {
-    background: $black
-  }
+    #zooniverse-top-bar-projects
+      float: left
 
-  > em {
-    color: $border-color;
-    font-style: normal;
-  }
-}
+    #zooniverse-top-bar-login
+      float: left
 
-.zooniverse-top-bar {
-  background: $black
-  border-bottom: 1px solid $border-color;
-  color: $text-color;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  left: 0;
-  letter-spacing: 1px;
-  position: absolute;
-  text-transform: uppercase;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-
-  > div {
-    margin: 0 auto;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  a.z-logo {
-    background: url("images/zooniverse-logo.png") center 5px no-repeat;
-    color: transparent;
-    display: inline-block;
-    height: 13px;
-    letter-spacing: -2em;
-    overflow: hidden;
-    text-indent: -4em;
-    width: 120px;
-
-    &:hover {
-      background-position: center -39px;
-    };
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-
-    > li {
-      display: block;
-    }
-  }
-
-  > div {
-    > ul {
-      float: left;
-      margin-left: 1px;
-
-      > li {
-        float: left;
-
-        > :first-child {
-          default-padding()
-          min-width: 45px
-          border-right: 1px solid $border-color;
-          cursor: pointer;
-        }
-      }
-
-      &.last-child {
-        float: right;
-        margin-right: 1px;
-
-        > li > :first-child {
-          border: {
-            left: 1px solid $border-color;
-            right: 0;
-          };
-        }
-      }
-
-      .z-dropdown {
-        position: relative;
-
-        > .last-child {
-          background: $black;
-          border: 1px solid $border-color {
-            radius: 0 0 4px 4px;
-            top: 0;
-          };
-          left: -1px;
-          margin-top: 1px;
-          min-width: 100%;
-          overflow: hidden;
-          position: absolute;
-          top: 100%;
-          white-space: nowrap;
-        }
-
-        &:hover {
-          z-index: 1;
-        }
-
-        > ul {
-          > li {
-            > a {
-              default-padding();
-              menu-item();
-            }
-          }
-        }
-      }
-
-      &.last-child .z-dropdown > .last-child {
-        left: auto;
-        right: -1px;
-      }
-
-      .z-accordion {
-        > :first-child {
-          default-padding();
-          menu-item();
-          font-size: 16px;
-          text-align: center;
-          text-transform: none;
-        }
-
-        > .last-child {
-          overflow: hidden;
-
-          > li {
-            a {
-              default-padding();
-              menu-item();
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .zooniverse-login-form {
-    border-top: 1px solid $border-color;
-
-    label {
-      display: block;
-      margin: 15px 0;
-      text-align: center;
-
-      > span {
-         display: inline-block;
-         width: 15em;
-         }
-      }
-
-      p {
-         margin: 0;
-      }
-
-      button {
-        menu-item();
-        background: transparent;
-        border: 1px solid $border-color;
-        color: inherit;
-        font: {
-          family: inherit;
-          style: inherit;
-          weight: inherit;
-        };
-        padding: 0.25em 1.5em;
-      }
-
-      > div {
-         margin: 20px;
-         text-align: center;
-         }
-  }
-}
+  #zooniverse-top-bar-button
+    padding: 10px
