@@ -166,6 +166,10 @@
 
   $.mockjax({
     url: /^(\/projects\/(\w+))?\/login/i,
+    data: {
+      username: "user",
+      password: "password"
+    },
     response: function(settings) {
       var key, val, _results;
       user = {

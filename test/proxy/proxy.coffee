@@ -124,6 +124,7 @@ $.mockjax
 
 $.mockjax
   url: /^(\/projects\/(\w+))?\/login/i
+  data: {username: "user", password: "password"}
   response: (settings) ->
     user =
       id: '4fff22b8c4039a0901000002'

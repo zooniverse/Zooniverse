@@ -40,10 +40,11 @@ describe 'LoginForm', ->
   describe '#onSignIn', ->
     describe 'a user is signed in', ->
       beforeEach ->
+        User.current = new User
         @loginForm.onSignIn()
 
       it 'should have a "signed-in" class', ->
-        expect(@loginForm.el.hasClass 'signed-in').toBe true
+        expect(@loginForm.el.hasClass 'signed-in').toBeTruthy()
 
       it 'should hide all sign in forms', ->
         signins = @loginForm.signInForms.css('display')

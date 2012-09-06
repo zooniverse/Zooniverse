@@ -43,7 +43,6 @@ describe 'User', ->
       it 'should set the current user to null', ->
         User.login({username: 'user', password: 'password_not'}).always ->
           expect(User.current).toBeNull()
-        waitsFor -> User.current
 
   describe '#logout', ->
     it 'should set User.current to null', ->
