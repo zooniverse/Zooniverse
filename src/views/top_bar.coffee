@@ -8,14 +8,15 @@ module.exports = """
     <h3>Our Projects</h3>
     <p>We currently have 12 projects on subjects ranging from <a href="SOMETHING">astronomy</a>, to <a href="SOMETHINGELSE">climatology</a>, to <a href="SOMETHINGELSEAGAIN">biology</a>, to <a href="SOMETHINGELSEFORTHELASTTIME">humanities</a>.</p>
   </div>
+  <div id="zooniverse-top-bar-languages">
+    <select class="language"></select>
+  </div>
   <div id="zooniverse-top-bar-login">
     <input name="username" value="username" type="text" />
     <input name="password" value="password" type="password" />
     <input name="login" type="button" value="Login" />
     <input name="signin" type="button" value="Sign Up" />
   </div>
-</div>
-<div id="zooinverse-top-bar-spacer">
 </div>
 <div id="zooniverse-top-bar-button">
   <a href="#" class="top-bar-button"><img src="images/zoo-icon.png" width="35" height="35" /></a>
