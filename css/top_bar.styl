@@ -1,28 +1,172 @@
 $background = #f9f8f3
-$text-color = #ddd
-$border-color = #555
+$text-color = #949392
+$border-color = #cfcec4
+$button-bg = #f2f1e9
+
+appearance(a)
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+
+body
+  transform(translateY(0))
+  transition(all 0.5s ease-in-out)
+
+body.hide-top-bar
+  transform(translateY(-105px))
 
 .zooniverse-top-bar
+  margin: 0
+  position: relative
+  top: 0
+  left: 0
+  box-shadow: 10px
+
+  label
+    display: block;
+    font-size: 11px
+
+  input, button, select
+    margin-top: 10px
+    height: 25px
+    border-radius(3px)
+    border: 1px $border-color solid
+
+  button, select
+    box-shadow: inset 0px 1px 0px white, 0px 1px 2px rgba(0,0,0,.1)
+
+  input[type="text"], input[type="password"] 
+    width: 120px
+    margin-right: 5px
+
+  button
+    background: $button-bg
+    width: 85px
+    margin-right: $gutter-size
+    padding-bottom: 2px
+
+  button[name="signout"]
+    margin-left: 5px
+
+#zooniverse-top-bar-container
+  padding: 30px
+  padding-bottom: 0px
+  display: inline-block
   background: $background
   color: $text-color
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif 
-  width: 100%
+  font-family: "Open Sans"
+
+  h3
+    font-size: 18px
+    font-weight: 200
+    line-height: 10px
+    margin-top: 0
+    margin-bottom: 0
+
+    strong
+      font-weight: 700
+
+  p
+    font-size: 11px
+    margin-bottom: 0
+
+  #zooniverse-top-bar-info
+    float: left
+    padding-right: 15px
+    width: 28%
+    border-right: 1px $border-color solid
+    margin-bottom: 30px
+
+  #zooniverse-top-bar-projects
+    border-left: 1px #fff solid
+    float: left
+    padding-left: 30px
+    padding-right: 30px
+    width: 17%
+
+    a
+      font-weight: 700
+      color: $text-color
+      text-decoration: none
+
+  #zooniverse-top-bar-login
+    display: block
+    float: right 
+    border-right: 1px $border-color solid
+    padding-right: 15px
+
+    h3
+      display: inline
+      line-height: 0
+    
+    .progress
+      display: none
+
+  #zooniverse-top-bar-languages
+    display: block
+    float: right
+    padding-left: 30px
+    border-left: 1px #fff solid
+
+    select
+      margin-top: 12px
+      margin-left: 5px
+      background: $button-bg
+      color: $text-color
+      appearance(none)
+      padding: 5px
+
+#zooniverse-top-bar-button
+  width: 50px
+  height: 50px
+  top: -10px
+  left: 105px
+  position: relative
+  background: $background
+  border-radius(0px 0px 5px 5px)
+
+  img
+    margin-left: 8px
+    margin-top: 8px
+
+.sign-up 
   position: absolute
-  top: 0 
-  left: 0
+  background: $background
+  color: $text-color
+  z-index: 999
+  top: 300px
+  left: 50%
+  height: 325px
+  width: 300px
+  margin-left: -150px
+  font-family: "Open Sans"
+  border-top: 1px solid $border-color;
+  padding: 30px
 
-  #zooniverse-top-bar-container
-    padding: 10px
+  label
+    text-align: center;
+    margin-top: 10px
 
-    #zooniverse-top-bar-info
-      border-right: 1px $border-color solid
-      float: left
+    > span
+      display: inline-block;
+      width: 15em;
 
-    #zooniverse-top-bar-projects
-      float: left
+    input[type="text"], input[type="password"]
+      width: 150px
+      margin-top: 0
+    
+  p
+    margin: 0;
+    text-align: center
 
-    #zooniverse-top-bar-login
-      float: left
+  p.errors
+    font-size: 11px
 
-  #zooniverse-top-bar-button
-    padding: 10px
+  button
+    padding: 0.25em 1.5em;
+    margin-left: 112.5px
+    width: 85px
+
+  > div 
+    margin: 20px;
+    text-align: center;
