@@ -70,10 +70,14 @@ class TopBar extends Controller
 
   loginForm: 
     """
-      <input name="username" placeholder="username" type="text" />
-      <input name="password" placeholder="password" type="password" />
-      <button name="login" type="button">Login</button>
-      <button name="signup" type="button">Sign Up</button>
+      <div class="inputs">
+        <input name="username" placeholder="username" type="text" />
+        <input name="password" placeholder="password" type="password" />
+      </div>
+      <div class="buttons">
+        <button name="login" type="button">Login</button>
+        <button name="signup" type="button">Sign Up</button>
+      </div>
       <div class="errors"></div>
       <div class="progress"><p>Signing In...</p></div>
    """

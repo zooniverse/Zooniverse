@@ -12,10 +12,6 @@ module.exports = """
     <select class="language"></select>
   </div>
   <div id="zooniverse-top-bar-login">
-    <input name="username" value="username" type="text" />
-    <input name="password" value="password" type="password" />
-    <input name="login" type="button" value="Login" />
-    <input name="signin" type="button" value="Sign Up" />
   </div>
 </div>
 <div id="zooniverse-top-bar-button">
