@@ -5,24 +5,18 @@ googleAnalyticsSrc = 'http://www.google-analytics.com/ga.js'
 if window.location.protocol is 'https:'
   googleAnalyticsSrc = googleAnalyticsSrc.replace 'http://www', 'https://ssl'
 
-getSrc = null
+init = ({account, domain}, trackHashes = true) ->
+  window._gaq ?= []
+  window._gaq.push ['_setAccount', account]
+  window._gaq.push ['_setDomainName', domain] if domain
+  window._gaq.push ['_trackPageview']
 
-queue = null
+  $(window).on 'hashchange', track if trackHashes
 
-init = ({account, domain}, noHashChange = false) ->
-  getSrc = $.getScript googleAnalyticsSrc, ->
-    queue = window._gaq ?= [
-      ['_setAccount', account]
-      ['_setDomainName', domain]
-      ['_trackPageview']
-    ]
-
-    unless noHashChange
-      $(window).on 'hashchange', => track window.location.href
-
-    getSrc
+  $.getScript googleAnalyticsSrc
 
 track = (location) =>
-  getSrc.done -> queue.push ['_trackPageview', location || window.location]
+  location = null unless typeof location is 'string'
+  window._gaq.push ['_trackPageview', location || window.location]
 
 module.exports = {init, track}
