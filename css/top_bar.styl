@@ -28,7 +28,7 @@ body.show-top-bar
     border-radius(3px)
     border: 1px $tb-border-color-1 solid
 
-  button, select
+  button
     box-shadow: inset 0px 1px 0px $tb-box-shadow-inset, 0px 1px 2px $tb-box-shadow
     background: $tb-button-bg
     color: $tb-text-color
@@ -38,12 +38,15 @@ body.show-top-bar
     margin-right: 5px
     padding-left: 5px
     background: $tb-input-bg
+    box-shadow: 0px 1px 0px #073b56, inset 0px 1px 2px rgba(0, 0, 0, 0.4)
+    border: 1px solid #000
     color: $tb-text-color
 
   button
     width: 85px
     margin-right: $gutter-size
     padding-bottom: 2px
+    margin-right: 10px
     text-shadow: 0px 1px 1px $tb-button-text-shadow
 
   button[name="signout"]
@@ -56,7 +59,7 @@ body.show-top-bar
   color: $tb-text-color
   font-family: "Open Sans"
   height: 45px
-  border: 1px $tb-bottom-border solid
+  border-bottom: 1px $tb-bottom-border solid
 
   h3
     font-size: 18px
@@ -74,15 +77,15 @@ body.show-top-bar
 
   #zooniverse-top-bar-info
     float: left
-    padding-right: 15px
-    width: 500px
+    padding-right: 10px
+    width: 470px
     border-right: 1px $tb-border-color-1 solid
     height: 45px
 
   #zooniverse-top-bar-projects
     border-left: 1px $tb-border-color-2 solid
     float: left
-    padding-left: 30px
+    padding-left: 10px
     padding-right: 15px 
     width: 300px
     height: 45px
@@ -92,10 +95,12 @@ body.show-top-bar
       color: $tb-text-color
       text-decoration: none
 
+    h3
+      a
+        font-weight: 200
+
   #zooniverse-top-bar-login
     float: right 
-    border-right: 1px $tb-border-color-1 solid
-    padding-right: 15px
     height: 45px
 
     h3
@@ -113,15 +118,17 @@ body.show-top-bar
 
   #zooniverse-top-bar-languages
     float: right
-    padding-left: 15px
-    border-left: 1px $tb-border-color-2 solid
     height: 45px
+    display: none
 
     select
+      background: $tb-background
+      color: $tb-text-color
       margin-top: 12px
-      margin-left: 5px
       appearance(none)
       padding: 5px
+      border: 0
+      margin-right: -5px
 
 #zooniverse-top-bar-button
   width: 50px
@@ -139,23 +146,18 @@ body.show-top-bar
     margin-left: 8px
     margin-top: 6px
 
-.sign-up 
-  position: absolute
-  background: $tb-background
-  color: $tb-text-color
-  z-index: 999
-  top: 300px
-  left: 50%
+.dialog.sign-up 
   height: 325px
   width: 300px
-  margin-left: -150px
   font-family: "Open Sans"
-  border-top: 1px solid $tb-border-color;
+  border: 1px solid $tb-border-color;
   padding: 30px
 
   label
     text-align: center;
     margin-top: 10px
+    font-size: 11px
+    display: block
 
     > span
       display: inline-block;
@@ -168,96 +170,52 @@ body.show-top-bar
   p
     margin: 0;
     text-align: center
+    font-size: 11px
 
   p.errors
     font-size: 11px
 
-  button
+  button[type="submit"]
     padding: 0.25em 1.5em;
-    margin-left: 112.5px
+    margin-left: 5px
     width: 85px
+
+  button.dialog-closer
+    float: right
 
   > div 
     margin: 20px;
     text-align: center;
 
-@media (max-width: 1600px)
-  body
-    transform(translateY(-115px))
-
+@media (max-width: 1385px)
   #zooniverse-top-bar-container
-    height: 60px
-
     #zooniverse-top-bar-info
-      width: 420px
-      height: 60px
+      width: 290px
+
+      h3
+        margin-top: 17px
+
+      p
+        display: none
 
     #zooniverse-top-bar-projects
-      width: 330px
-      height: 60px
+      width: 110px 
 
-@media (max-width: 1490px)
-  body
-    transform(translateY(-135px))
+      h3
+        margin-top: 17px
 
-  #zooniverse-top-bar-container
-    height: 80px
+      p
+        display: none
 
-    #zooniverse-top-bar-info
-      width: 320px
-      height: 80px
-
-    #zooniverse-top-bar-projects
-      width: 230px
-      height: 80px
-
-@media (max-width: 1290px)
-  #zooniverse-top-bar-container
-
-    #zooniverse-top-bar-info
-      width: 320px
-
-    #zooniverse-top-bar-projects
-      width: 230px
-
-    #zooniverse-top-bar-login
-      .inputs
-        display: block
-
-      .buttons
-        display: block
-
-        button[name="signup"]
-          margin-right: 5px
-          float: right
-
-        button[name='signout']
-          float: right
-          margin-right: 0
-
-    #zooniverse-top-bar-login
-      height: 80px
-
-    #zooniverse-top-bar-languages
-      height: 80px
-
-@media (max-width: 1110px)
+@media (max-width: 1050px)
   #zooniverse-top-bar-container
     padding-left: 15px
     padding-right: 15px
 
-    #zooniverse-top-bar-info
-      width: 300px
-
-    #zooniverse-top-bar-projects
-      width: 170px
-      padding-left: 15px
-
-@media (max-width: 1000px)
+@media (max-width: 990px)
   #zooniverse-top-bar-container
-
-    #zooniverse-top-bar-projects
-      display: none 
-
     #zooniverse-top-bar-info
       border: 0
+
+    #zooniverse-top-bar-projects
+      display: none

@@ -1,6 +1,7 @@
 User = require '../models/user'
 Controller = require './controller'
 Form = require './base_form'
+Dialog = require '../dialog'
 
 class TopBar extends Controller
   events: 
@@ -16,7 +17,6 @@ class TopBar extends Controller
     @app ||= "test"
     @appName ||= "Test Name"
     @currentLanguage ||= 'en'
-    @signUp = new Form.SignUpForm
 
     User.project = @app
     User.bind 'sign-in', @setUser
@@ -53,7 +53,16 @@ class TopBar extends Controller
     User.logout()
 
   startSignUp: (e) =>
-    @el.append @signUp.el
+    form = new Form.SignUpForm
+
+    d = new Dialog
+      content: form.el.html()
+      buttons: []
+
+    d.el.find('.dialog').addClass 'sign-up'
+    d.open()
+
+    console.log d
 
   toggleDisplay: (e) =>
     @el.parent().toggleClass 'show-top-bar'
@@ -94,7 +103,7 @@ class TopBar extends Controller
 
   initLanguages: =>
     for shortLang, longLang of @languages
-      @langSelect.append """<option value="#{shortLang}">#{shortLang.toUpperCase()} - #{longLang.toUpperCase()}</option>"""
+      @langSelect.append """<option value="#{shortLang}">#{shortLang.toUpperCase()}</option>"""
     @langSelect.val('en')
 
   setLanguage: (e) =>
