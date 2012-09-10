@@ -18,7 +18,7 @@ module.exports =
       <label><span>Email address</span> <input type="text" name="email" required="required" /></label>
       <label><span>Password</span> <input type="password" name="password" required="required" /></label>
       <label><span>Password (confirm)</span> <input type="password" name="password-confirm" required="required" /></label>
-      <label class="privacy-policy"><input type="checkbox" name="policy" required="required" /> I agree to the <a href="#">privacy policy</a></label>
+      <label class="privacy-policy"><input type="checkbox" name="policy" required="required" /> I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a></label>
       <button type="submit">Sign up</button>
     </form>
     <p class="progress">Creating account and signing in...</p>
