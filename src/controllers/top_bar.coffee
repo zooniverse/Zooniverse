@@ -6,7 +6,6 @@ Dialog = require '../dialog'
 class TopBar extends Controller
   events: 
     'click button[name="login"]'   : 'logIn'
-    'click button[name="signup"]'  : 'startSignUp'
     'click button[name="signout"]' : 'signOut'
     'keypress input'               : 'logInOnEnter'
     'click a.top-bar-button'       : 'toggleDisplay'
@@ -58,6 +57,9 @@ class TopBar extends Controller
     d = new Dialog
       content: form.el.html()
       buttons: []
+      attachment:
+        to: '.dialog-underlay'
+        
 
     d.el.find('.dialog').addClass 'sign-up'
     d.open()
@@ -75,7 +77,7 @@ class TopBar extends Controller
 
   setUser: =>
     if User.current
-      @signUp.el.remove()
+      @signUp?.el.remove()
       @loginContainer.hide()
       @errors.empty()
       @welcomeContainer.html @userGreeting(User.current.name)
