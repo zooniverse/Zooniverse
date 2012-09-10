@@ -17,6 +17,6 @@ init = ({account, domain}, trackHashes = true) ->
 
 track = (location) =>
   location = null unless typeof location is 'string'
-  window._gaq.push ['_trackPageview', location || window.location]
+  window._gaq.push ['_trackPageview', location || window.location.href]
 
 module.exports = {init, track}
