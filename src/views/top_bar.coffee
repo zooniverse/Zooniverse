@@ -1,66 +1,35 @@
 module.exports = """
-  <div>
-    <ul>
-      <li><a href="https://www.zooniverse.org/" class="z-logo">Zooniverse</a></li>
-
-      <li class="z-languages z-dropdown">
-        <span>
-          <!--Populated dynamically-->
-          <span lang="en">EN</span>
-        </span>
-        <ul>
-          <!--Populated dynamically-->
-          <li><a href="#en">EN <em>English</em></a></li>
-        </ul>
-      </li>
-    </ul>
-
-    <ul>
-      <li><a href="http://zooniverse.org/about">About</a></li>
-
-      <li class="z-dropdown">
-        <span>Projects</span>
-        <ul>
-          <li class="z-accordion">
-            <span>Space</span>
-            <ul>
-              <li><a href="https://www.zooniverse.org/project/hubble">Galaxy Zoo: Hubble</a></li>
-              <li><a href="https://www.zooniverse.org/project/moonzoo">Moon Zoo</a></li>
-              <li><a href="https://www.zooniverse.org/project/solarstormwatch">Solar Stormwatch</a></li>
-              <li><a href="https://www.zooniverse.org/project/mergers">Galaxy Zoo: Mergers</a></li>
-              <li><a href="https://www.zooniverse.org/project/supernovae">Galaxy Zoo: Supernovae</a></li>
-              <li><a href="https://www.zooniverse.org/project/planethunters">Planet Hunters</a></li>
-              <li><a href="https://www.zooniverse.org/project/milkyway">Milky Way Project</a></li>
-            </ul>
-          </li>
-
-          <li class="z-accordion">
-            <span>Climate</span>
-            <ul>
-              <li><a href="https://www.zooniverse.org/project/oldweather">Old Weather</a></li>
-            </ul>
-          </li>
-
-          <li class="z-accordion">
-            <span>Humanities</span>
-            <ul>
-              <li><a href="https://www.zooniverse.org/project/ancientlives">Ancient Lives</a></li>
-            </ul>
-          </li>
-
-          <li class="z-accordion">
-            <span>Nature</span>
-            <ul>
-              <li><a href="https://www.zooniverse.org/project/whalefm">Whale FM</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-      <li class="z-login z-dropdown">
-        <span></span>
-        <div></div>
-      </li>
-    </ul>
+<div id="zooniverse-top-bar-container">
+  <div id="zooniverse-top-bar-info">
+    <h3><span id="app-name"></span> is a <strong>Zooniverse</strong> project.</h3>
+    <p>The Zooniverse is a collection of web-based Citizen Science projects that use the efforts and abilities of volunteers to help reseachers deal with the flood of data that confronts them.</p>
   </div>
+  <div id="zooniverse-top-bar-projects">
+    <h3><a href="https://www.zooniverse.org/projects">Our Projects</a></h3>
+    <p>We currently have 12 projects on subjects ranging from <a href="https://www.zooniverse.org/#space">astronomy</a>, to <a href="https://www.zooniverse.org/#climate">climatology</a>, to <a href="https://www.zooniverse.org/#nature">biology</a>, to <a href="https://www.zooniverse.org/#humanities">humanities</a>.</p>
+  </div>
+  <div id="zooniverse-top-bar-languages">
+    <select class="language"></select>
+  </div>
+  <div id="zooniverse-top-bar-login">
+    <div class='login'>
+      <div class="inputs">
+        <input name="username" placeholder="username" type="text" />
+        <input name="password" placeholder="password" type="password" />
+      </div>
+      <div class="buttons">
+        <button name="login" type="button">Login</button>
+        <button name="signup" type="button">Sign Up</button>
+      </div>
+      <p class="errors"></p>
+      <div class="progress"><p>Signing In...</p></div>
+    </div>
+    <div class='welcome'>
+    </div>
+  </div>
+</div>
+<div id="zooniverse-top-bar-button">
+  <a href="#" class="top-bar-button"><img src="images/zoo-icon.png" width="30" height="30" /></a>
+</div>
+
 """
