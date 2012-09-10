@@ -69,8 +69,6 @@ class Dialog
       </div>
     """)
 
-    @el.addClass @className
-
     @dialog = @el.children ".#{ctorClassName}"
     @contentContainer = @dialog.children ".#{ctorClassName}-content"
     @arrow = @dialog.children ".#{ctorClassName}-arrow"
