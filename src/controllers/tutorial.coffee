@@ -13,6 +13,10 @@ class Tutorial
     @dialog ?= new Dialog content: '', buttons: ['Continue': null]
     @dialog.buttons[0].el.off 'click' # Never resolve the dialog!
     @dialog.buttons[0].el.on 'click', @next
+
+    # No underlay--use blockers to selectively disable areas.
+    @dialog.el.css height: 0, position: 'static', width: 0
+
     @dialog.el.addClass 'tutorial'
     @dialog.el.addClass 'popup'
 
