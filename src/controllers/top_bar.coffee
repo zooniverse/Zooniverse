@@ -23,7 +23,7 @@ class TopBar extends Controller
     User.bind 'sign-in-error', @onError
 
     User.fetch().always =>
-      @toggleDisplay() if User.current
+      @toggleDisplay() unless User.current
 
     @render()
     @setAppName()
@@ -31,10 +31,13 @@ class TopBar extends Controller
     @setUser()
 
   elements:
-    '#zooniverse-top-bar-container' : 'container'
-    '#app-name'                     : 'appNameContainer'
-    '#zooniverse-top-bar-login'     : 'loginContainer'
-    'select.language'               : 'langSelect'
+    '#zooniverse-top-bar-container'        : 'container'
+    '#app-name'                            : 'appNameContainer'
+    '#zooniverse-top-bar-login .login'     : 'loginContainer'
+    '#zooniverse-top-bar-login .welcome'   : 'welcomeContainer'
+    'select.language'                      : 'langSelect'
+    '.login .progress'                     : 'progress'
+    '.login .errors'                       : 'errors'
 
   logIn: (e) =>
     username = @el.find('input[name="username"]').val()
@@ -53,7 +56,7 @@ class TopBar extends Controller
     @el.append @signUp.el
 
   toggleDisplay: (e) =>
-    @el.parent().toggleClass 'hide-top-bar'
+    @el.parent().toggleClass 'show-top-bar'
 
   render: =>
     @html require('../views/top_bar')
@@ -64,34 +67,30 @@ class TopBar extends Controller
   setUser: =>
     if User.current
       @signUp.el.remove()
-      @loginContainer.html @userGreeting(User.current.name)
+      @loginContainer.hide()
+      @errors.empty()
+      @welcomeContainer.html @userGreeting(User.current.name)
+      @welcomeContainer.show()
+      setTimeout @toggleDisplay, 1000 if @el.parent().hasClass 'show-top-bar'
     else
-      @loginContainer.html @loginForm
-
-  loginForm: 
-    """
-      <div class="inputs">
-        <input name="username" placeholder="username" type="text" />
-        <input name="password" placeholder="password" type="password" />
-      </div>
-      <div class="buttons">
-        <button name="login" type="button">Login</button>
-        <button name="signup" type="button">Sign Up</button>
-      </div>
-      <div class="errors"></div>
-      <div class="progress"><p>Signing In...</p></div>
-   """
+      @welcomeContainer.hide()
+      @loginContainer.show()
+      @progress.hide()
 
   userGreeting: (user) ->
     """
+    <div class="inputs">
       <h3> Hi, <strong>#{user}</strong>. Welcome to #{@appName}!</h3>
+    </div>
+    <div class="buttons">
       <button name="signout" type="button">Sign Out</button>
+    </div>
     """
 
   onError: (error) =>
-    @el.find('.progress').hide()
-    @el.find('.errors').append error
-    @el.find('.errors').show()
+    @progress.hide()
+    @errors.text(error)
+    @errors.show()
 
   initLanguages: =>
     for shortLang, longLang of @languages

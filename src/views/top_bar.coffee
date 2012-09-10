@@ -6,12 +6,26 @@ module.exports = """
   </div>
   <div id="zooniverse-top-bar-projects">
     <h3>Our Projects</h3>
-    <p>We currently have 12 projects on subjects ranging from <a href="SOMETHING">astronomy</a>, to <a href="SOMETHINGELSE">climatology</a>, to <a href="SOMETHINGELSEAGAIN">biology</a>, to <a href="SOMETHINGELSEFORTHELASTTIME">humanities</a>.</p>
+    <p>We currently have 12 projects on subjects ranging from <a href="https://www.zooniverse.org/#space">astronomy</a>, to <a href="https://www.zooniverse.org/#climate">climatology</a>, to <a href="https://www.zooniverse.org/#nature">biology</a>, to <a href="https://www.zooniverse.org/#humanities">humanities</a>.</p>
   </div>
   <div id="zooniverse-top-bar-languages">
     <select class="language"></select>
   </div>
   <div id="zooniverse-top-bar-login">
+    <div class='login'>
+      <div class="inputs">
+        <input name="username" placeholder="username" type="text" />
+        <input name="password" placeholder="password" type="password" />
+      </div>
+      <div class="buttons">
+        <button name="login" type="button">Login</button>
+        <button name="signup" type="button">Sign Up</button>
+      </div>
+      <p class="errors"></p>
+      <div class="progress"><p>Signing In...</p></div>
+    </div>
+    <div class='welcome'>
+    </div>
   </div>
 </div>
 <div id="zooniverse-top-bar-button">
