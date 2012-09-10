@@ -19,13 +19,12 @@ class Tutorial
     if @hashMatch
       $(window).on 'hashchange', @onHashChange
 
-    @onHashChange()
-
   start: =>
     @steps[@current]?.leave @
     @current = -1
     @next()
     @dialog.open()
+    @onHashChange()
 
   next: =>
     @steps[@current]?.leave @
@@ -46,12 +45,14 @@ class Tutorial
       return unless @dialog.el.hasClass 'open'
 
       if location.hash.match @hashMatch
+        console.log 'Showing tutorial after hash change'
         @dialog.el.css display: ''
 
         if @steps[@current]?.attachment
           @dialog.attach @steps[@current].attachment
 
       else
+        console.log 'Hiding tutorial after hash change'
         @dialog.el.css display: 'none'
 
 class Tutorial.Step
