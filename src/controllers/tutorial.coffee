@@ -98,10 +98,10 @@ class Tutorial.Step
     for element in $(@block)
       element = $(element)
       blocker = $('<div class="tutorial-blocker"></div>')
-      blocker.insertAfter @tutorial.el
+      blocker.appendTo 'body'
       @blockers = @blockers.add blocker
 
-      blocker.css position: 'absolute'
+      blocker.css position: 'absolute', zIndex: 999
       blocker.width element.outerWidth()
       blocker.height element.outerHeight()
       blocker.offset element.offset()
