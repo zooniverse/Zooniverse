@@ -1,201 +1,172 @@
-$black = #111
-$white = #fff
-$text-color = #ddd
-$border-color = #555
+$background = #f9f8f3
+$text-color = #949392
+$border-color = #cfcec4
+$button-bg = #f2f1e9
 
-default-padding() {
-  display: block;
-  padding: 6px 16px;
+appearance(a)
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
 
-  &:hover {
-    color: $white;
-  }
-}
+body
+  transform(translateY(0))
+  transition(all 0.5s ease-in-out)
 
-menu-item() {
+body.hide-top-bar
+  transform(translateY(-105px))
+
+.zooniverse-top-bar
+  margin: 0
+  position: relative
+  top: 0
+  left: 0
+  box-shadow: 10px
+
+  label
+    display: block;
+    font-size: 11px
+
+  input, button, select
+    margin-top: 10px
+    height: 25px
+    border-radius(3px)
+    border: 1px $border-color solid
+
+  button, select
+    box-shadow: inset 0px 1px 0px white, 0px 1px 2px rgba(0,0,0,.1)
+
+  input[type="text"], input[type="password"] 
+    width: 120px
+    margin-right: 5px
+
+  button
+    background: $button-bg
+    width: 85px
+    margin-right: $gutter-size
+    padding-bottom: 2px
+
+  button[name="signout"]
+    margin-left: 5px
+
+#zooniverse-top-bar-container
+  padding: 30px
+  padding-bottom: 0px
+  display: inline-block
+  background: $background
+  color: $text-color
+  font-family: "Open Sans"
+
+  h3
+    font-size: 18px
+    font-weight: 200
+    line-height: 10px
+    margin-top: 0
+    margin-bottom: 0
+
+    strong
+      font-weight: 700
+
+  p
+    font-size: 11px
+    margin-bottom: 0
+
+  #zooniverse-top-bar-info
+    float: left
+    padding-right: 15px
+    width: 28%
+    border-right: 1px $border-color solid
+    margin-bottom: 30px
+
+  #zooniverse-top-bar-projects
+    border-left: 1px #fff solid
+    float: left
+    padding-left: 30px
+    padding-right: 30px
+    width: 17%
+
+    a
+      font-weight: 700
+      color: $text-color
+      text-decoration: none
+
+  #zooniverse-top-bar-login
+    display: block
+    float: right 
+    border-right: 1px $border-color solid
+    padding-right: 15px
+
+    h3
+      display: inline
+      line-height: 0
+    
+    .progress
+      display: none
+
+  #zooniverse-top-bar-languages
+    display: block
+    float: right
+    padding-left: 30px
+    border-left: 1px #fff solid
+
+    select
+      margin-top: 12px
+      margin-left: 5px
+      background: $button-bg
+      color: $text-color
+      appearance(none)
+      padding: 5px
+
+#zooniverse-top-bar-button
+  width: 50px
+  height: 50px
+  top: -10px
+  left: 105px
+  position: relative
+  background: $background
+  border-radius(0px 0px 5px 5px)
+
+  img
+    margin-left: 8px
+    margin-top: 8px
+
+.sign-up 
+  position: absolute
+  background: $background
+  color: $text-color
+  z-index: 999
+  top: 300px
+  left: 50%
+  height: 325px
+  width: 300px
+  margin-left: -150px
+  font-family: "Open Sans"
   border-top: 1px solid $border-color;
-  cursor: pointer;
+  padding: 30px
 
-  &:hover {
-    background: $black
-  }
+  label
+    text-align: center;
+    margin-top: 10px
 
-  > em {
-    color: $border-color;
-    font-style: normal;
-  }
-}
+    > span
+      display: inline-block;
+      width: 15em;
 
-.zooniverse-top-bar {
-  background: $black
-  border-bottom: 1px solid $border-color;
-  color: $text-color;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  left: 0;
-  letter-spacing: 1px;
-  position: absolute;
-  text-transform: uppercase;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-
-  > div {
-    margin: 0 auto;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  a.z-logo {
-    background: url("images/zooniverse-logo.png") center 5px no-repeat;
-    color: transparent;
-    display: inline-block;
-    height: 13px;
-    letter-spacing: -2em;
-    overflow: hidden;
-    text-indent: -4em;
-    width: 120px;
-
-    &:hover {
-      background-position: center -39px;
-    };
-  }
-
-  ul {
+    input[type="text"], input[type="password"]
+      width: 150px
+      margin-top: 0
+    
+  p
     margin: 0;
-    padding: 0;
+    text-align: center
 
-    > li {
-      display: block;
-    }
-  }
+  p.errors
+    font-size: 11px
 
-  > div {
-    > ul {
-      float: left;
-      margin-left: 1px;
+  button
+    padding: 0.25em 1.5em;
+    margin-left: 112.5px
+    width: 85px
 
-      > li {
-        float: left;
-
-        > :first-child {
-          default-padding()
-          min-width: 45px
-          border-right: 1px solid $border-color;
-          cursor: pointer;
-        }
-      }
-
-      &.last-child {
-        float: right;
-        margin-right: 1px;
-
-        > li > :first-child {
-          border: {
-            left: 1px solid $border-color;
-            right: 0;
-          };
-        }
-      }
-
-      .z-dropdown {
-        position: relative;
-
-        > .last-child {
-          background: $black;
-          border: 1px solid $border-color {
-            radius: 0 0 4px 4px;
-            top: 0;
-          };
-          left: -1px;
-          margin-top: 1px;
-          min-width: 100%;
-          overflow: hidden;
-          position: absolute;
-          top: 100%;
-          white-space: nowrap;
-        }
-
-        &:hover {
-          z-index: 1;
-        }
-
-        > ul {
-          > li {
-            > a {
-              default-padding();
-              menu-item();
-            }
-          }
-        }
-      }
-
-      &.last-child .z-dropdown > .last-child {
-        left: auto;
-        right: -1px;
-      }
-
-      .z-accordion {
-        > :first-child {
-          default-padding();
-          menu-item();
-          font-size: 16px;
-          text-align: center;
-          text-transform: none;
-        }
-
-        > .last-child {
-          overflow: hidden;
-
-          > li {
-            a {
-              default-padding();
-              menu-item();
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .zooniverse-login-form {
-    border-top: 1px solid $border-color;
-
-    label {
-      display: block;
-      margin: 15px 0;
-      text-align: center;
-
-      > span {
-         display: inline-block;
-         width: 15em;
-         }
-      }
-
-      p {
-         margin: 0;
-      }
-
-      button {
-        menu-item();
-        background: transparent;
-        border: 1px solid $border-color;
-        color: inherit;
-        font: {
-          family: inherit;
-          style: inherit;
-          weight: inherit;
-        };
-        padding: 0.25em 1.5em;
-      }
-
-      > div {
-         margin: 20px;
-         text-align: center;
-         }
-  }
-}
+  > div 
+    margin: 20px;
+    text-align: center;

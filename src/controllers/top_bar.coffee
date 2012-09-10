@@ -1,115 +1,104 @@
-$ = require 'jqueryify'
-{delay, remove} = require '../util'
-
 User = require '../models/user'
 Controller = require './controller'
-LoginForm = require './login_form'
-template = require '../views/top_bar'
+Form = require './base_form'
 
 class TopBar extends Controller
-  @instance: null
+  events: 
+    'click button[name="login"]'   : 'logIn'
+    'click button[name="signup"]'  : 'startSignUp'
+    'click button[name="signout"]' : 'signOut'
+    'keypress input'               : 'logInOnEnter'
+    'click a.top-bar-button'       : 'toggleDisplay'
+    'change select.language'       : 'setLanguage'
 
-  languages: null
-
-  dropdownsToHide: null
-
-  className: 'zooniverse-top-bar'
-  template: template
-
-  app: null
-
-  events:
-    'mouseenter .z-dropdown': 'onDropdownEnter'
-    'mouseleave .z-dropdown': 'onDropdownLeave'
-    'click .z-accordion > :first-child': 'onAccordionClick'
-    'click .z-languages a': 'changeLanguage'
-
-  elements:
-    '.z-languages > :first-child': 'languageLabel'
-    '.z-languages :last-child': 'languageList'
-    '.z-login > :first-child': 'usernameContainer'
-    '.z-login > :last-child': 'loginFormContainer'
-
-  constructor:  ->
-    return @constructor.instance if @constructor.instance?
-    @constructor.instance = @
-
+  constructor: ->
     super
+    @app ||= "test"
+    @appName ||= "Test Name"
+    @currentLanguage ||= 'en'
+    @signUp = new Form.SignUpForm
 
     User.project = @app
-    @dropdownsToHide = []
-    @html @template
+    User.bind 'sign-in', @setUser
+    User.bind 'sign-in-error', @onError
 
-    dropdownContainers = @el.find('.z-dropdown').children ':last-child'
-    dropdownContainers.css display: 'none', opacity: 0
+    User.fetch().always =>
+      @toggleDisplay() if User.current
 
-    accordionContainers = @el.find '.z-accordion > :last-child'
-    accordionContainers.css height: 0, opacity: 0
+    @render()
+    @setAppName()
+    @initLanguages()
+    @setUser()
 
-    @currentLang = @currentLange || 'en'
-    @updateLanguages()
+  elements:
+    '#zooniverse-top-bar-container' : 'container'
+    '#app-name'                     : 'appNameContainer'
+    '#zooniverse-top-bar-login'     : 'loginContainer'
+    'select.language'               : 'langSelect'
 
-    User.bind 'sign-in', @updateLogin
-    new LoginForm el: @loginFormContainer
+  logIn: (e) =>
+    username = @el.find('input[name="username"]').val()
+    password = @el.find('input[name="password"]').val()
+    
+    if (username != '') and (password != '')
+      @el.find('.progress').show()
+      login = User.login
+        username: username
+        password: password
 
-    @updateLogin()
+  signOut: (e) =>
+    User.logout()
 
-    @el.find(':last-child').addClass 'last-child'
-    User.fetch()
+  startSignUp: (e) =>
+    @el.append @signUp.el
 
-  updateLanguages: =>
-    @languageLabel.empty()
-    @languageList.empty()
-    @languageLabel.append """
-      <span lang="##{@currentLang}">#{@currentLang.toUpperCase()}</span>
-     """
-    for shortLang, fullLang of @languages
+  toggleDisplay: (e) =>
+    @el.parent().toggleClass 'hide-top-bar'
 
-      @languageList.append """
-        <li><a href="##{shortLang}">#{shortLang.toUpperCase()} <em>#{fullLang}</em></a></li>
-      """
+  render: =>
+    @html require('../views/top_bar')
 
-  updateLogin: =>
-    @usernameContainer.html User.current?.name || 'Sign in'
+  setAppName: ->
+    @appNameContainer.append @appName
 
-  onDropdownEnter: (e) ->
-    target = $(e.currentTarget)
-    container = target.children().last()
-
-    remove target, from: @dropdownsToHide
-
-    container.css display: ''
-    container.stop().animate opacity: 1, 1
-
-  onDropdownLeave: (e) ->
-    target = $(e.currentTarget)
-    container = target.children().last()
-
-    @dropdownsToHide.push target
-
-    delay 1, =>
-      return unless target in @dropdownsToHide
-      container.stop().animate opacity: 0, 1, =>
-        delay => container.css display: 'none'
-
-  onAccordionClick: (e) ->
-    target = $(e.currentTarget).parent()
-    container = target.children().last()
-
-    closed = container.height() is 0
-
-    if closed
-      container.css height: ''
-
-      naturalHeight = container.height()
-      container.css height: 0
-      container.animate height: naturalHeight, opacity: 1
+  setUser: =>
+    if User.current
+      @signUp.el.remove()
+      @loginContainer.html @userGreeting(User.current.name)
     else
-      container.animate height: 0, opacity: 0
+      @loginContainer.html @loginForm
 
-  changeLanguage: (e) ->
-    e.preventDefault()
-    lang = e.currentTarget.hash.slice -2
-    @el.trigger 'request-translation', lang
+  loginForm: 
+    """
+      <input name="username" placeholder="username" type="text" />
+      <input name="password" placeholder="password" type="password" />
+      <button name="login" type="button">Login</button>
+      <button name="signup" type="button">Sign Up</button>
+      <div class="errors"></div>
+      <div class="progress"><p>Signing In...</p></div>
+   """
+
+  userGreeting: (user) ->
+    """
+      <h3> Hi, <strong>#{user}</strong>. Welcome to #{@appName}!</h3>
+      <button name="signout" type="button">Sign Out</button>
+    """
+
+  onError: (error) =>
+    @el.find('.progress').hide()
+    @el.find('.errors').append error
+    @el.find('.errors').show()
+
+  initLanguages: =>
+    for shortLang, longLang of @languages
+      @langSelect.append """<option value="#{shortLang}">#{shortLang.toUpperCase()} - #{longLang.toUpperCase()}</option>"""
+    @langSelect.val('en')
+
+  setLanguage: (e) =>
+    @currentLanguage = @langSelect.val()
+    @el.trigger 'request-translation', @currentLanguage
+
+  logInOnEnter: (e) =>
+    @logIn() if (e.keyCode == 13)
 
 module.exports = TopBar
