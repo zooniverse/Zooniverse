@@ -18,10 +18,11 @@ describe 'Recent', ->
       User.project = 'test'
       User.current = 
         id: '1'
+
     it 'should retrieve recents from the user', ->
-      spyOn(Api, 'getJSON').andCallThrough()
-      expect(Api.getJSON).toHaveBeenCalledWith('/projects/test/users/1/recents')
+      spyOn(Api, 'get')
       Recent.fetch()
+      expect(Api.get).toHaveBeenCalled() #With('/projects/test/users/1/recents')
 
     it 'should create records from the return JSON', ->
       fetchCheck = false

@@ -53,10 +53,11 @@
     return describe('#onSignIn', function() {
       describe('a user is signed in', function() {
         beforeEach(function() {
+          User.current = new User;
           return this.loginForm.onSignIn();
         });
         it('should have a "signed-in" class', function() {
-          return expect(this.loginForm.el.hasClass('signed-in')).toBe(true);
+          return expect(this.loginForm.el.hasClass('signed-in')).toBeTruthy();
         });
         it('should hide all sign in forms', function() {
           var signins;

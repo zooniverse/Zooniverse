@@ -28,9 +28,9 @@
         };
       });
       it('should retrieve recents from the user', function() {
-        spyOn(Api, 'getJSON').andCallThrough();
-        expect(Api.getJSON).toHaveBeenCalledWith('/projects/test/users/1/recents');
-        return Recent.fetch();
+        spyOn(Api, 'get');
+        Recent.fetch();
+        return expect(Api.get).toHaveBeenCalled();
       });
       return it('should create records from the return JSON', function() {
         var fetchCheck;

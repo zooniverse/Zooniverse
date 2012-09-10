@@ -75,14 +75,11 @@
       });
       return describe('with invalid password', function() {
         return it('should set the current user to null', function() {
-          User.login({
+          return User.login({
             username: 'user',
             password: 'password_not'
           }).always(function() {
             return expect(User.current).toBeNull();
-          });
-          return waitsFor(function() {
-            return User.current;
           });
         });
       });

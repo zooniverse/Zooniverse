@@ -13,19 +13,22 @@ class Tutorial
     @dialog ?= new Dialog content: '', buttons: ['Continue': null]
     @dialog.buttons[0].el.off 'click' # Never resolve the dialog!
     @dialog.buttons[0].el.on 'click', @next
+
+    # No underlay--use blockers to selectively disable areas.
+    @dialog.el.css height: 0, position: 'static', width: 0
+
     @dialog.el.addClass 'tutorial'
     @dialog.el.addClass 'popup'
 
     if @hashMatch
       $(window).on 'hashchange', @onHashChange
 
-    @onHashChange()
-
   start: =>
     @steps[@current]?.leave @
     @current = -1
     @next()
     @dialog.open()
+    @onHashChange()
 
   next: =>
     @steps[@current]?.leave @
@@ -46,12 +49,14 @@ class Tutorial
       return unless @dialog.el.hasClass 'open'
 
       if location.hash.match @hashMatch
+        console.log 'Showing tutorial after hash change'
         @dialog.el.css display: ''
 
         if @steps[@current]?.attachment
           @dialog.attach @steps[@current].attachment
 
       else
+        console.log 'Hiding tutorial after hash change'
         @dialog.el.css display: 'none'
 
 class Tutorial.Step
@@ -98,10 +103,10 @@ class Tutorial.Step
     for element in $(@block)
       element = $(element)
       blocker = $('<div class="tutorial-blocker"></div>')
-      blocker.insertAfter @tutorial.el
+      blocker.appendTo 'body'
       @blockers = @blockers.add blocker
 
-      blocker.css position: 'absolute'
+      blocker.css position: 'absolute', zIndex: 999
       blocker.width element.outerWidth()
       blocker.height element.outerHeight()
       blocker.offset element.offset()
