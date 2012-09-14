@@ -4,6 +4,8 @@ Form = require './base_form'
 Dialog = require '../dialog'
 
 class TopBar extends Controller
+  className: 'zooniverse-top-bar'
+
   events: 
     'click button[name="login"]'   : 'logIn'
     'click button[name="signout"]' : 'signOut'
@@ -59,7 +61,6 @@ class TopBar extends Controller
       buttons: []
       attachment:
         to: '.dialog-underlay'
-        
 
     d.el.find('.dialog').addClass 'sign-up'
     d.open()
@@ -67,6 +68,7 @@ class TopBar extends Controller
     console.log d
 
   toggleDisplay: (e) =>
+    e?.preventDefault?()
     @el.parent().toggleClass 'show-top-bar'
 
   render: =>
