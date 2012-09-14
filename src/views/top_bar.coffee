@@ -14,9 +14,13 @@ module.exports = """
   <div id="zooniverse-top-bar-login">
     <div class='login'>
       <div class="inputs">
-        <input name="username" placeholder="username" type="text" />
-        <input name="password" placeholder="password" type="password" />
-        <p class="password-recovery"><a href="https://www.zooniverse.org/password/reset">Forgot Password?</a></p>
+        <div class="textboxs">
+          <input name="username" placeholder="username" type="text" />
+          <input name="password" placeholder="password" type="password" />
+        </div>
+        <div class="reset">
+          <p class="password-recovery"><a href="https://www.zooniverse.org/password/reset">Forgot Password?</a></p>
+        </div>
       </div>
       <div class="buttons">
         <button name="login" type="button">Login</button>
