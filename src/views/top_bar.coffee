@@ -1,7 +1,7 @@
 module.exports = """
 <div id="zooniverse-top-bar-container">
   <div id="zooniverse-top-bar-info">
-    <h3><span id="app-name"></span> is a <strong>Zooniverse</strong> project.</h3>
+    <h3><span id="app-name"></span> is a <a href="https://www.zooniverse.com">Zooniverse</a> project.</h3>
     <p>The Zooniverse is a collection of web-based Citizen Science projects that use the efforts and abilities of volunteers to help reseachers deal with the flood of data that confronts them.</p>
   </div>
   <div id="zooniverse-top-bar-projects">
@@ -16,6 +16,7 @@ module.exports = """
       <div class="inputs">
         <input name="username" placeholder="username" type="text" />
         <input name="password" placeholder="password" type="password" />
+        <p class="password-recovery"><a href="https://www.zooniverse.org/password/reset">Forgot Password?</a></p>
       </div>
       <div class="buttons">
         <button name="login" type="button">Login</button>
