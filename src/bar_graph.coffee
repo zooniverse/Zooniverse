@@ -43,7 +43,7 @@ class BarGraph
         @el.append """
           <div class="item" data-index="#{i}" data-value="#{yValues[i]}">
             <div class="bar" style="#{@valueStyle}: #{100 * ((yValues[i] - @floor) / (max - @floor))}%;"></div>
-            <div class="label">#{label}</div>
+            <div class="label">#{yValues[i]} #{yAxisLabel}</div>
           </div>
         """
 
