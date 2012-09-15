@@ -23,6 +23,8 @@ class Map
   scrollWheelZoom: false
   doubleClickZoom: false
 
+  labels: null
+
   # Set these before use.
   # It's probably okay to modify the prototype directly per project.
   # I.e. Map::apiKey = '1234567890'
@@ -42,6 +44,8 @@ class Map
 
     @layers ?= []
     @layers = [@layers] unless @layers instanceof Array
+
+    @labels ?= []
 
     @map ?= new Leaflet.Map @el.get(0),
       center: new Leaflet.LatLng @latitude, @longitude
@@ -88,8 +92,10 @@ class Map
   removeLayer: (layer) =>
     @map.removeLayer layer
 
-  addLabel: (lat, lng, html) =>
-    new Leaflet.CircleMarker([lat, lng], radius: 5).addTo @map
+  addLabel: (lat, lng, html, radius = 5) =>
+    label = new Leaflet.CircleMarker([lat, lng], {radius}).addTo @map
+    @labels.push label
+    label
 
   removeLabel: (label) =>
     @map.removeLayer label
