@@ -58,7 +58,7 @@ class Map
       doubleClickZoom: @doubleClickZoom
       attributionControl: false
       zoomControl: @zoomControl
-      worldCopyJump: true
+      worldCopyJump: false
 
     @el.css position: '' # Don't let Leaflet override this.
 
@@ -79,7 +79,7 @@ class Map
       lat: (ne.lat - sw.lat) * -(0.5 - @centerOffset[1])
       lng: (ne.lng - sw.lng) * +(0.5 - @centerOffset[0])
 
-    @map.setView new Leaflet.LatLng(lat + shift.lat, lng + shift.lng), @map.getZoom()
+    @map.setView new Leaflet.LatLng(lat + shift.lat, lng + shift.lng, true), @map.getZoom()
 
   setZoom: (zoom) =>
     @map.setZoom zoom
@@ -93,7 +93,8 @@ class Map
     @map.removeLayer layer
 
   addLabel: (lat, lng, html, radius = 5) =>
-    label = new Leaflet.CircleMarker([lat, lng], {radius}).addTo @map
+    latLng = new Leaflet.LatLng lat, lng, true
+    label = new Leaflet.CircleMarker(latLng, {radius}).addTo @map
     @labels.push label
     label.bindPopup html if html
     label
