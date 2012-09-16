@@ -95,6 +95,7 @@ class Map
   addLabel: (lat, lng, html, radius = 5) =>
     label = new Leaflet.CircleMarker([lat, lng], {radius}).addTo @map
     @labels.push label
+    label.bindPopup html if html
     label
 
   removeLabel: (label) =>
