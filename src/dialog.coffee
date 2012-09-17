@@ -116,6 +116,7 @@ class Dialog
     @attachment.at ?= {}
     @attachment.at.x ?= 'center'
     @attachment.at.y ?= 'middle'
+    @arrowDirection = @attachment.arrowDirection || @arrowDirection
 
     xStrings = left: 0, center: 0.5, right: 1
     yStrings = top: 0, middle: 0.5, bottom: 1
@@ -125,7 +126,8 @@ class Dialog
     @attachment.at.x = xStrings[@attachment.at.x] if @attachment.at.x of xStrings
     @attachment.at.y = yStrings[@attachment.at.y] if @attachment.at.y of yStrings
 
-    target = $(@attachment.to).first()
+    target = $(@attachment.to).filter(':visible').first()
+    console.log 'Attaching', @, 'to', target
 
     targetSize = width: target.outerWidth(), height: target.outerHeight()
     targetOffset = target.offset()
