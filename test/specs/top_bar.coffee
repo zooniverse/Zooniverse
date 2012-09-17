@@ -8,21 +8,22 @@ describe 'TopBar', ->
         en: 'English'
         fr: 'Français'
       app: "test"
+      appName: "Test App"
 
   it 'should be instantiable', ->
     expect(@topBar).not.toBeNull()
 
-  describe '#updateLanguages', ->
+  describe '#initLanguages', ->
     it 'should add a node for each language in @langauges', ->
-      @topBar.updateLanguages()
-      expect(@topBar.languageLabel.text()).toBe "EN"
+      @topBar.initLanguages()
+      expect(@topBar.langSelect.val()).toBe "en"
 
   describe '#logIn', ->
     it 'should call the user login method', ->
       spyOn(User, 'login')
-      @topBar.username.val 'test'
-      @topBar.password.val 'test'
-      @topBar.login()
+      @topBar.el.find('input[name="username"]').val 'test'
+      @topBar.el.find('input[name="password"]').val 'test'
+      @topBar.logIn()
       expect(User.login).toHaveBeenCalledWith
         username: 'test'
         password: 'test'

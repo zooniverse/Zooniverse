@@ -13,24 +13,25 @@
           en: 'English',
           fr: 'Français'
         },
-        app: "test"
+        app: "test",
+        appName: "Test App"
       });
     });
     it('should be instantiable', function() {
       return expect(this.topBar).not.toBeNull();
     });
-    describe('#updateLanguages', function() {
+    describe('#initLanguages', function() {
       return it('should add a node for each language in @langauges', function() {
-        this.topBar.updateLanguages();
-        return expect(this.topBar.languageLabel.text()).toBe("EN");
+        this.topBar.initLanguages();
+        return expect(this.topBar.langSelect.val()).toBe("en");
       });
     });
     describe('#logIn', function() {
       return it('should call the user login method', function() {
         spyOn(User, 'login');
-        this.topBar.username.val('test');
-        this.topBar.password.val('test');
-        this.topBar.login();
+        this.topBar.el.find('input[name="username"]').val('test');
+        this.topBar.el.find('input[name="password"]').val('test');
+        this.topBar.logIn();
         return expect(User.login).toHaveBeenCalledWith({
           username: 'test',
           password: 'test'
