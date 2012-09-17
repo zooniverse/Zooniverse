@@ -127,7 +127,7 @@ class Dialog
     @attachment.at.y = yStrings[@attachment.at.y] if @attachment.at.y of yStrings
 
     target = $(@attachment.to).filter(':visible').first()
-    console.log 'Attaching', @, 'to', target
+    return if target.length is 0
 
     targetSize = width: target.outerWidth(), height: target.outerHeight()
     targetOffset = target.offset()
