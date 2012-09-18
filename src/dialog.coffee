@@ -116,7 +116,7 @@ class Dialog
     @attachment.at ?= {}
     @attachment.at.x ?= 'center'
     @attachment.at.y ?= 'middle'
-    @arrowDirection = @attachment.arrowDirection || @arrowDirection
+    @arrowDirection = @attachment.arrowDirection || ''
 
     xStrings = left: 0, center: 0.5, right: 1
     yStrings = top: 0, middle: 0.5, bottom: 1
