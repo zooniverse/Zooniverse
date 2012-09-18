@@ -2,12 +2,14 @@ User = require '../models/user'
 Controller = require './controller'
 Form = require './base_form'
 Dialog = require '../dialog'
+LoginForm = require 'zooniverse/lib/controllers/login_form'
 
 class TopBar extends Controller
   className: 'zooniverse-top-bar'
 
   events: 
     'click button[name="login"]'   : 'logIn'
+    'click button[name="signup"]'  : 'onClickSignUp'
     'click button[name="signout"]' : 'signOut'
     'keypress input'               : 'logInOnEnter'
     'click a.top-bar-button'       : 'toggleDisplay'
@@ -30,6 +32,11 @@ class TopBar extends Controller
     @setAppName()
     @initLanguages()
     @setUser()
+
+    @loginForm = new LoginForm
+    @loginDialog = new Dialog
+      content: @loginForm.el
+      buttons: ['Close': null]
 
   elements:
     '#zooniverse-top-bar-container'        : 'container'
@@ -116,5 +123,9 @@ class TopBar extends Controller
 
   logInOnEnter: (e) =>
     @logIn() if (e.keyCode == 13)
+
+  onClickSignUp: =>
+    @loginDialog.open()
+    @loginForm.signUpButton.click()
 
 module.exports = TopBar
