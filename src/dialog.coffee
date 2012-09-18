@@ -26,6 +26,7 @@ class Dialog
 
       @el ?= $("<#{@tag} class='#{@className}'>#{@label}</#{@tag}>")
       @el.on 'click', =>
+        @dialog.callback? @value
         @dialog.deferred.resolve @value
         @onClick?()
 
@@ -87,7 +88,7 @@ class Dialog
 
   render: =>
     @el.find('header').html @title
-    @contentContainer.html @content
+    @contentContainer.append @content
 
     @el.find('footer').empty()
     for button, i in @buttons
@@ -156,7 +157,6 @@ class Dialog
     @el.removeClass 'open'
     @deferred = null
     @promise = null
-    @callback if @callback?
     setTimeout => @destroy() if @destroyOnClose
 
   destroy: =>
