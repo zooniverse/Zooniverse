@@ -9,6 +9,7 @@ class BarGraph
   y: null
 
   floor: 0
+  ceiling: NaN
 
   valueStyle: 'height' # Or "width", if you wanted a vertical bar chart for some reason.
 
@@ -30,7 +31,8 @@ class BarGraph
     @el.empty()
 
     for yAxisLabel, yValues of @y
-      max = Math.ceil Math.max yValues...
+      max = @ceiling || Math.ceil Math.max yValues...
+
       @el.append """
         <div class="y axis">
           <div class="label">#{yAxisLabel}</div>
