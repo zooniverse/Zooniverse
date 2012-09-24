@@ -86,6 +86,8 @@ class Dialog
 
     @open() if @openImmediately
 
+    $(window).on 'resize', @attach
+
   render: =>
     @el.find('header').html @title
     @contentContainer.append @content
@@ -108,7 +110,9 @@ class Dialog
     @deferred.then @close
     @promise = @deferred.promise()
 
-  attach: (@attachment = @attachment) ->
+  attach: (@attachment = @attachment) =>
+    return unless @el.hasClass 'open'
+
     # Fill in defaults if they're not provided.
     @attachment ?= {}
     @attachment.x ?= 'center'
