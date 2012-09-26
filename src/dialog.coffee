@@ -86,7 +86,7 @@ class Dialog
 
     @open() if @openImmediately
 
-    $(window).on 'resize', @attach
+    $(window).on 'resize', @reattach
 
   render: =>
     @el.find('header').html @title
@@ -156,6 +156,9 @@ class Dialog
       when 'top' then +@margin
       when 'bottom' then -@margin
       else ''
+
+  reattach: =>
+    @attach @attachment
 
   close: =>
     @el.removeClass 'open'
