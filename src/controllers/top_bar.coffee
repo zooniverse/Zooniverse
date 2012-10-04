@@ -9,7 +9,7 @@ class TopBar extends Controller
 
   events: 
     'click button[name="login"]'   : 'logIn'
-    'click button[name="signup"]'  : 'onClickSignUp'
+    # 'click button[name="signup"]'  : 'onClickSignUp'
     'click button[name="signout"]' : 'signOut'
     'keypress input'               : 'logInOnEnter'
     'click a.top-bar-button'       : 'toggleDisplay'
@@ -33,10 +33,10 @@ class TopBar extends Controller
     @initLanguages()
     @setUser()
 
-    @loginForm = new LoginForm
-    @loginDialog = new Dialog
-      content: @loginForm.el
-      buttons: ['Close': null]
+    # @loginForm = new LoginForm
+    # @loginDialog = new Dialog
+    #   content: @loginForm.el
+    #   buttons: ['Close': null]
 
   elements:
     '#zooniverse-top-bar-container'        : 'container'
