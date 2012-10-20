@@ -1,0 +1,156 @@
+$top-bar-height = 100px
+
+.zooniverse-top-bar
+  background white
+  font 10px "Open Sans", sans-serif
+  height 5px
+  position relative
+  text-shadow 0 1px 0 #fff
+  transition height 0.33s ease-in-out
+  z-index 900
+
+.show-top-bar .zooniverse-top-bar
+  height $top-bar-height
+
+#zooniverse-top-bar-container
+  background inherit
+  border-bottom 1px solid rgba(black, 0.25)
+  box-shadow 2px 4px 3px -3px black
+  box-sizing border-box
+  bottom 0
+  height $top-bar-height
+  left 0
+  padding 0 15px
+  position absolute
+  width 100%
+
+  #zooniverse-top-bar-info
+    border-right 1px solid rgba(black, 0.25)
+    box-shadow 1px 0 0 white
+    float left
+    margin 20px 15px
+    padding-right 15px
+    width 450px
+
+  #zooniverse-top-bar-projects
+    float left
+    margin 20px 15px
+    width 275px
+
+  #zooniverse-top-bar-languages
+    display none // TODO
+
+  #zooniverse-top-bar-login
+    float right
+    margin 20px 15px
+
+    .login,
+    .welcome
+      margin-top 15px
+      position relative
+
+      .inputs,
+      .buttons
+        display inline-block
+        margin-bottom 5px
+
+      h3
+        display inline-block
+        vertical-align middle
+
+      .reset
+        left 0
+        position absolute
+        top 100%
+
+  h3
+    font-size 18px
+    margin 0
+
+  p
+    margin 0
+
+  a
+    color inherit
+    font-weight bold
+
+  input
+    background white
+    border 1px solid rgba(black, 0.67)
+    border-radius 3px
+    box-shadow 0 1px 1px rgba(black, 0.25) inset, 0 2px 1px white
+    box-sizing border-box
+    height 24px
+    margin-right 5px
+    padding 0 5px
+    vertical-align middle
+    width 130px
+
+  button
+    background white
+    border 1px solid rgba(black, 0.5)
+    border-radius 5px
+    box-shadow 0 -1px 3px 0 rgba(black, 0.25) inset, 0 2px 1px white
+    color $black
+    font-weight bold
+    height 24px
+    margin-left 5px
+    padding 0
+    text-align center
+    width 80px
+
+    &:active {
+      background darken(white, 10%)
+      box-shadow 0 3px 5px 0 rgba(black, 0.25) inset, 0 2px 1px white
+    }
+
+#zooniverse-top-bar-button
+  background inherit
+  border 0px solid rgba(black, 0.25)
+  border-width 0 1px 1px
+  border-radius 0 0 5px 5px
+  box-shadow 2px 4px 3px -3px black
+  left 50%
+  margin -1px 0 0 -500px
+  position absolute
+  text-align center
+  top 100%
+
+  a
+    display block
+    overflow hidden
+
+    img
+      display block
+      margin 10px
+
+@media (max-width: 1380px)
+  #zooniverse-top-bar-container
+    #zooniverse-top-bar-info,
+    #zooniverse-top-bar-projects
+      margin 35px 0 0 15px
+      width auto
+
+      p
+        display none
+
+@media (max-width: 1080px)
+  #zooniverse-top-bar-container
+    #zooniverse-top-bar-info
+      border-right 0
+
+    #zooniverse-top-bar-projects
+      display none
+
+@media (max-width: 1050px)
+  #zooniverse-top-bar-button
+    left 20px
+    margin-left 0
+
+@media (max-width: 950px)
+  #zooniverse-top-bar-container
+    #zooniverse-top-bar-info
+      display none
+
+    #zooniverse-top-bar-login
+      float left
