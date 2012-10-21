@@ -37,6 +37,7 @@ class TopBar extends Controller
     @loginDialog = new Dialog
       content: @loginForm.el
       buttons: ['Close': null]
+    @loginDialog.dialog.addClass 'login'
 
   elements:
     '#zooniverse-top-bar-container'        : 'container'

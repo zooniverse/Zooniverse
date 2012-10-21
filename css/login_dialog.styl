@@ -1,0 +1,51 @@
+.login.dialog
+  border-radius: 5px
+  font-size: 12px
+  padding: 20px 40px
+  text-align: center
+
+  button[name="close"]
+    font-size: 18px
+    height: 1em
+    line-height: 1em
+    position: absolute
+    right: 0
+    text-align: center
+    top: 0
+    width: 1em
+
+  .title
+    font-weight: bold
+
+  form
+    label
+      display: block
+      margin: 10px 0
+
+      > span
+        display: block
+
+    button
+      background white
+      border 1px solid rgba(black, 0.5)
+      border-radius 5px
+      box-shadow 0 -1px 3px 0 rgba(black, 0.25) inset, 0 2px 1px white
+      color $black
+      font-weight bold
+      height 24px
+      margin-left 5px
+      padding 0
+      text-align center
+      width 80px
+
+      &:disabled
+        opacity: 0.5
+
+  .picker
+    margin-top: 20px
+
+    button
+      text-decoration: underline
+
+  > footer
+    display: none
