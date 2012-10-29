@@ -1,4 +1,3 @@
-module.exports = """
 <div id="zooniverse-top-bar-container">
   <div id="zooniverse-top-bar-info">
     <h3><span id="app-name"></span> is a <a href="https://www.zooniverse.org">Zooniverse</a> project.</h3>
@@ -36,5 +35,3 @@ module.exports = """
 <div id="zooniverse-top-bar-button">
   <a href="#" class="top-bar-button"><img src="images/zoo-icon.png" /></a>
 </div>
-
-"""

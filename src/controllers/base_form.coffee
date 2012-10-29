@@ -1,7 +1,12 @@
 $ = require 'jqueryify'
 User = require '../models/user'
 Controller = require './controller'
-templates = require '../views/login_form'
+templates =
+  signIn: require '../views/sign_in_form'
+  signUp: require '../views/sign_up_form'
+  reset: require '../views/reset_form'
+  signOut: require '../views/sign_out_form'
+  login: require '../views/login_form'
 
 class BaseForm extends Controller
   events:
@@ -22,7 +27,7 @@ class BaseForm extends Controller
 
   constructor: ->
     super
-    @html @template
+    @html @template()
 
     User.bind 'sign-in', @onSignIn
     User.bind 'sign-in-error', @onError

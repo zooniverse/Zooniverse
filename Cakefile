@@ -10,6 +10,14 @@ task 'build', 'Build lib/ from src/', ->
   coffee.on 'exit', (code) ->
     callback?() if code is 0
 
+  eco = spawn './bin/compile-eco'
+  eco.stderr.on 'data', (data) ->
+    process.stderr.write data.toString()
+  eco.stdout.on 'data', (data) ->
+    print data.toString()
+  eco.on 'exit', (code) ->
+    callback?() if code is 0
+
 task 'watch', 'Watch src/ for changes', ->
   coffee_src = spawn 'coffee', ['-w', '-c', '-o', 'lib', 'src']
   coffee_src.stderr.on 'data', (data) -> process.stderr.write data.toString()

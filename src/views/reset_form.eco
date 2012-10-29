@@ -1,0 +1,7 @@
+<p>Enter your <strong>username</strong> or <strong>email address</strong> and we'll send you instructions on how to reset your password</p>
+<p class="errors"></p>
+<form>
+  <label><input type="text" name="email" required="required" /></label>
+  <button type="submit">Submit</button>
+</form>
+<p class="progress">Check your email for instructions!</p>

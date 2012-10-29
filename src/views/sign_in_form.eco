@@ -1,0 +1,8 @@
+<p class="title">Sign in with your Zooniverse account</p>
+<p class="errors"></p>
+<form>
+  <label><span>Username</span> <input type="text" name="username" required="required" /></label>
+  <label><span>Password</span> <input type="password" name="password" required="required" /></label>
+  <button type="submit">Sign in</button>
+</form>
+<p class="progress">Signing in...</p>

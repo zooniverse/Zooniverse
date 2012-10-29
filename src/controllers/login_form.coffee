@@ -2,7 +2,12 @@ $ = require 'jqueryify'
 Controller = require './controller'
 Form = require './base_form'
 User = require '../models/user'
-templates = require '../views/login_form'
+templates =
+  signIn: require '../views/sign_in_form'
+  signUp: require '../views/sign_up_form'
+  reset: require '../views/reset_form'
+  signOut: require '../views/sign_out_form'
+  login: require '../views/login_form'
 
 class LoginForm extends Controller
   className: 'zooniverse-login-form'
@@ -25,7 +30,7 @@ class LoginForm extends Controller
 
   constructor: ->
     super
-    @html templates.login
+    @html templates.login()
 
     @signInForm = new Form.SignInForm el: @signInContainer
     @signUpForm = new Form.SignUpForm el: @signUpContainer

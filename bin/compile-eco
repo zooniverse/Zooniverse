@@ -3,34 +3,43 @@
 var eco = require('eco');
 var fs = require('fs');
 
+watch = (process.argv[2] == '-w') || (process.argv[2] == '--watch')
+
 fs.readdir(__dirname + '/../src/views', function(err, files) {
   if (err) {
     console.log(err);
     throw err;
   }
-  
-  files.forEach(function(file) {
+  compileFile = function(file) {
     fs.readFile(__dirname + '/../src/views/' + file, function(err, data) {
       if (err) {
         console.log(err);
         throw err;
       }
       
-      var template = eco.precompile(data.toString());
+    var template = eco.precompile(data.toString());
 
-      filename = file.substr(file.lastIndexOf('/') + 1);
-      filename = filename.replace(/\.(.+)/, '.js');
+    filename = file.substr(file.lastIndexOf('/') + 1);
+    filename = filename.replace(/\.(.+)/, '.js');
 
-      templateFile = "module.exports = " + template.toString();
+    templateFile = "module.exports = " + template.toString();
 
-      filepath = __dirname + '/../lib/views/' + filename;
+    filepath = __dirname + '/../lib/views/' + filename;
 
-      fs.writeFile(filepath, templateFile, function(err) {
-        if (err) {
-          console.log(err);
-          throw err;
-        }
-      });
+    fs.writeFile(filepath, templateFile, function(err) {
+      if (err) {
+        console.log(err);
+        throw err;
+      }
     });
-  });
+  }); };
+ 
+  if (watch) {
+    fs.watch(__dirname + '/../src/views', function(event, filename) {
+      files.forEach(compileFile);
+    });
+  }
+  else {
+    files.forEach(compileFile);
+  }
 });
