@@ -79,7 +79,7 @@ class TopBar extends Controller
     @el.parent().toggleClass 'show-top-bar'
 
   render: =>
-    @html require('../views/top_bar')
+    @html require('../views/top_bar')()
 
   setAppName: ->
     @appNameContainer.append @appName
