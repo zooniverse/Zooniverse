@@ -1,4 +1,4 @@
 <form>
-  <p>Currently logged in as <strong class="current"></strong>. <button type="submit">Sign out</button></p>
+  <p><%- I18n.t 'zooniverse.sign_out.current' %> <button type="submit"><%- I18n.t 'zooniverse.sign_out.button' %></button></p>
 </form>
-<p class="progress">Signing out...</p>
+<p class="progress"><%- I18n.t 'zooniverse.sign_out.progress' %></p>

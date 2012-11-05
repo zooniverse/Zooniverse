@@ -98,14 +98,15 @@ class TopBar extends Controller
       @progress.hide()
 
   userGreeting: (user) ->
-    """
+    html = """
     <div class="inputs">
-      <h3> Hi, <strong>#{user}</strong>. Welcome to #{@appName}!</h3>
+      <h3>#{ I18n.t 'zooniverse.top_bar.greeting' }</h3>
     </div>
     <div class="buttons">
-      <button name="signout" type="button">Sign Out</button>
+      <button name="signout" type="button">#{ I18n.t 'zooniverse.sign_out.button' }</button>
     </div>
     """
+    html.replace('{user}', user).replace '{appName}', @appName
 
   onError: (error) =>
     @progress.hide()

@@ -1,28 +1,28 @@
 $ = require 'jqueryify'
 
 class BrowserCheck
-  view: '''
+  view: """
     <div class="zooniverse-browser-warning">
       <section>
         <div class="summary">
-          <p>This site probably won't work until you update your browser.</p>
+          <p>#{ I18n.t 'zooniverse.browser_check.wont_work' }</p>
         </div>
 
         <div class="recommend">
-          <p>We recommend using <a href="http://www.mozilla.org/firefox/" target="_blank">Mozilla Firefox</a> or <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.</p>
+          <p>#{ I18n.t 'zooniverse.browser_check.recommended' }</p>
         </div>
 
         <div class="ie">
-          <p>If you use <a href="http://www.microsoft.com/windows/internet-explorer/" target="_blank">Microsoft Internet Explorer</a>, make sure you're running the latest version.</p>
-          <p>If you can't install the latest Internet Explorer, try <a href="http://google.com/chromeframe" target="_blank">Chrome Frame</a>!</p>
+          <p>#{ I18n.t 'zooniverse.browser_check.ie' }</p>
+          <p>#{ I18n.t 'zooniverse.browser_check.chrome_frame' }</p>
         </div>
 
         <div class="action">
-          <p><button name="dismiss">Dismiss</button></p>
+          <p><button name="dismiss">#{ I18n.t 'zooniverse.browser_check.dismiss' }</button></p>
         </div>
       </section>
     </div>
-  '''
+  """
 
   support:
     mozilla: 14

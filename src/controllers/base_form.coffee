@@ -82,7 +82,7 @@ class SignUpForm extends BaseForm
     super
 
     unless @passwordField.val() is @passwordConfirmField.val()
-      @onError 'Passwords must match!'
+      @onError I18n.t('zooniverse.signup.password_match')
       @passwordField.focus()
       return
 

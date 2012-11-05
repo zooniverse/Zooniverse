@@ -1,11 +1,10 @@
 <div class="sign-in"></div>
 <div class="sign-up"></div>
 <div class="reset"></div>
-    
+
 <div class="picker">
-  <button name="sign-in">Already have an account? Sign in!</button>
-  <button name="sign-up">Don't have an account? Create one!</button>
-  <!--<button name="reset">Forgot your username or password?</button>-->
+  <button name="sign-in"><%- I18n.t 'zooniverse.sign_up.sign_in' %></button>
+  <button name="sign-up"><%- I18n.t 'zooniverse.sign_in.sign_up' %></button>
 </div>
-    
+
 <div class="sign-out"></div>

@@ -1,11 +1,11 @@
 <div id="zooniverse-top-bar-container">
   <div id="zooniverse-top-bar-info">
-    <h3><span id="app-name"></span> is a <a href="https://www.zooniverse.org">Zooniverse</a> project.</h3>
-    <p>The Zooniverse is a collection of web-based Citizen Science projects that use the efforts and abilities of volunteers to help reseachers deal with the flood of data that confronts them.</p>
+    <h3><%- I18n.t 'zooniverse.top_bar.title' %></h3>
+    <p><%- I18n.t 'zooniverse.top_bar.description' %></p>
   </div>
   <div id="zooniverse-top-bar-projects">
-    <h3><a href="https://www.zooniverse.org/projects">Our Projects</a></h3>
-    <p>We currently have 12 projects on subjects ranging from <a href="https://www.zooniverse.org/#space">astronomy</a>, to <a href="https://www.zooniverse.org/#climate">climatology</a>, to <a href="https://www.zooniverse.org/#nature">biology</a>, to <a href="https://www.zooniverse.org/#humanities">humanities</a>.</p>
+    <h3><a href="https://www.zooniverse.org/projects"><%- I18n.t 'zooniverse.top_bar.projects.title' %></a></h3>
+    <p><%- I18n.t 'zooniverse.top_bar.projects.list' %></p>
   </div>
   <div id="zooniverse-top-bar-languages">
     <select class="language"></select>
@@ -14,19 +14,19 @@
     <div class='login'>
       <div class="inputs">
         <div class="textboxs">
-          <input name="username" placeholder="username" type="text" />
-          <input name="password" placeholder="password" type="password" />
+          <input name="username" placeholder="<%- I18n.t('zooniverse.login.username').toLower() %>" type="text" />
+          <input name="password" placeholder="<%- I18n.t('zooniverse.login.password').toLower() %>" type="password" />
         </div>
         <div class="reset">
-          <p class="password-recovery"><a href="https://www.zooniverse.org/password/reset">Forgot Password?</a></p>
+          <p class="password-recovery"><a href="https://www.zooniverse.org/password/reset"><%- I18n.t 'zooniverse.login.forgot_password' %></a></p>
         </div>
       </div>
       <div class="buttons">
-        <button name="login" type="button">Login</button>
-        <button name="signup" type="button">Sign Up</button>
+        <button name="login" type="button"><%- I18n.t 'zooniverse.login.login' %></button>
+        <button name="signup" type="button"><%- I18n.t 'zooniverse.sign_up.button' %></button>
       </div>
       <p class="errors"></p>
-      <div class="progress"><p>Signing In...</p></div>
+      <div class="progress"><p><%- I18n.t 'zooniverse.sign_in.progress' %></p></div>
     </div>
     <div class='welcome'>
     </div>
