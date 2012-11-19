@@ -1,5 +1,4 @@
 $ = require 'jqueryify'
-_ = require 'underscore/underscore'
 Message = require './message'
 
 class FakeProxy
@@ -9,7 +8,7 @@ class FakeProxy
 
 describe 'Message', ->
   beforeEach ->
-    [@success, @failure, @always] = _([1..3]).map -> jasmine.createSpy()
+    [@success, @failure, @always] = [1..3].map -> jasmine.createSpy()
     fakeProxy = new FakeProxy
     @message = new Message { foo: 'foo' }, fakeProxy
     @message.onSuccess @success

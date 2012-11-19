@@ -6,7 +6,6 @@
     "vendor/base64.js"
   ],
   "dependencies": [
-    "underscore",
     "es5-shimify",
     "json2ify",
     "jqueryify",

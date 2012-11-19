@@ -1,4 +1,3 @@
-Model = require './model'
 Api = require '../api'
 ProxyFrame = require '../proxy_frame'
 

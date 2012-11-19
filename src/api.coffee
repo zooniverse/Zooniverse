@@ -1,5 +1,4 @@
 $ = require 'jqueryify'
-_ = require 'underscore/underscore'
 ProxyFrame = require './proxy_frame'
 Message = require './message'
 
@@ -59,7 +58,8 @@ Api =
   process: (id) ->
     Api.proxy.send Api.messages[id]
   
+  idCounter: 0
   nextId: ->
-    _.uniqueId 'api-'
+    "api-#{ @idCounter++ }"
 
 module.exports = Api

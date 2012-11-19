@@ -1,5 +1,4 @@
 $ = require 'jqueryify'
-_ = require 'underscore/underscore'
 
 class Message
   constructor: (@payload, @proxy) ->
@@ -18,6 +17,8 @@ class Message
   fail: (args) => @tapped 'reject', args
   project: (callback) => @tapped 'pipe', callback
   isDelivered: => @deferred.isResolved()
-  tapped: (method, args...) => _(@).tap => @deferred[method] args...
+  tapped: (method, args...) =>
+    @deferred[method] args...
+    @
 
 module.exports = Message
