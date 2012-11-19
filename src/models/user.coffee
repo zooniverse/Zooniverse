@@ -2,7 +2,7 @@ Model = require './model'
 Api = require '../api'
 ProxyFrame = require '../proxy_frame'
 
-class User extends Model
+class User extends Spine.Model
   @configure 'User'
 
   @project: 'Not Specified'

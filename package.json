@@ -1,12 +1,12 @@
 {
   "name": "Zooniverse",
   "private": true,
-  "description": "Zooniverse front end library",
+  "description": "Zooniverse front end library - core",
   "version": "0.0.1",
   "author": "zooniverse",
   "repository": {
     "type" : "git",
-    "url": "https://github.com/zooniverse/Zooniverse.git"
+    "url": "https://github.com/zooniverse/Zooniverse.git#core"
   },
   "main" : "./index.js",
   "scripts": {
