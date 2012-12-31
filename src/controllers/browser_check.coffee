@@ -3,7 +3,7 @@ $ = require 'jqueryify'
 class BrowserCheck
   view: '''
     <div class="zooniverse-browser-warning">
-      <section>
+      <div class="section">
         <div class="summary">
           <p>This site probably won't work until you update your browser.</p>
         </div>
@@ -20,7 +20,7 @@ class BrowserCheck
         <div class="action">
           <p><button name="dismiss">Dismiss</button></p>
         </div>
-      </section>
+      </div>
     </div>
   '''
 

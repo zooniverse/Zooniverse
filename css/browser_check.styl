@@ -1,21 +1,21 @@
 .zooniverse-browser-warning
-  background rgba(0, 0, 0, 0.67)
+  background rgba(black, 0.75)
+  color white
+  filter unquote("progid:DXImageTransform.Microsoft.gradient(startColorStr=#cc000000, endColorStr=#cc000000)")
+  font 18px "Helvetica Neue", Arial, sans-serif
   height 100%
   left 0
   position absolute
+  text-align center
   top 0
   width 100%
   z-index 999
 
-  section
-    background #222
-    border 1px solid #fff
-    color #fff
-    font 18px/36px "Helvetica Neue", Arial, sans-serif
-    left 25%
-    padding 20px
-    position absolute
-    top 10%
+  .section
+    background inherit
+    filter inherit
+    margin 30px auto
+    padding 30px 0
     width 50%
 
   .summary
@@ -24,17 +24,20 @@
   .ie
     font-size 14px
 
+    p
+      margin 0
+
   a
     color #ea4624
-    text-decoration none
 
   .action
-    text-align right
+    margin-top 40px;
 
     button
-      background #000
-      border: 0
-      color #fff
+      background #ea4624
+      border 0
+      color white
+      cursor pointer
       font-family inherit
       font-size inherit
       font-weight bold
