@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Zooniverse tests</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+  </head>
+
+  <body>
+    <div id="mocha"></div>
+
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/sinon/lib/sinon.js"></script>
+    <script src="../node_modules/sinon/lib/sinon/spy.js"></script>
+    <script src="../node_modules/sinon/lib/sinon/util/event.js"></script>
+    <script src="../node_modules/sinon/lib/sinon/util/fake_xml_http_request.js"></script>
+    <script src="../node_modules/sinon/lib/sinon/util/fake_server.js"></script>
+    <script src="../node_modules/sinon-chai/lib/sinon-chai.js"></script>
+    <script src="./vendor/jquery.js"></script>
+    <script src="../node_modules/chai-jquery/chai-jquery.js"></script>
+    <script src="./vendor/coffee-script.js"></script>
+
+    <script>
+      mocha.setup({
+        ui: 'bdd',
+        reporter: 'html',
+        bail: false,
+        timeout: 2500,
+        ignoreLeaks: true
+      });
+
+      window.expect = chai.expect;
+    </script>
+
+    <script src="../src/lib/event-emitter.coffee" type="text/coffeescript"></script>
+    <script src="./lib/event-emitter.coffee" type="text/coffeescript"></script>
+
+    <script src="../src/lib/proxy-frame.coffee" type="text/coffeescript"></script>
+    <script src="./lib/proxy-frame.coffee" type="text/coffeescript"></script>
+
+    <script src="../src/lib/api.coffee" type="text/coffeescript"></script>
+    <script src="./lib/api.coffee" type="text/coffeescript"></script>
+
+    <script src="../vendor/base64.js"></script>
+    <script src="../src/models/user.coffee" type="text/coffeescript"></script>
+    <script src="./models/user.coffee" type="text/coffeescript"></script>
+
+    <script>
+      setTimeout(function() {
+        (window.mochaPhantomJS || window.mocha).run();
+      }, 500);
+    </script>
+  </body>
+</html>
