@@ -67,7 +67,7 @@ class Subject extends BaseModel
         fetcher.resolve newSubjects
         @trigger 'fetched', [newSubjects]
 
-      request.fail ->
+      request.fail =>
         fetcher.fail arguments...
         @trigger 'fetch-failed'
 

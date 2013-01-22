@@ -66,7 +66,7 @@
       } else {
         delete Api.current.headers['Authorization'];
       }
-      User.trigger('sign-in', [User.current]);
+      User.trigger('change', [User.current]);
       if (!result.success) {
         return User.trigger('sign-in-error', result.message);
       }

@@ -8,7 +8,7 @@ messageId = -1
 class ProxyFrame extends EventEmitter
   @REJECTION = 'ProxyFrame not connected'
 
-  host: "//#{if +location.port < 1024 then 'api' else 'dev'}.zooniverse.org"
+  host: "https://#{if +location.port < 1024 then 'api' else 'dev'}.zooniverse.org"
   path: '/proxy'
 
   loadTimeout: 5000
@@ -21,7 +21,7 @@ class ProxyFrame extends EventEmitter
   queue: null
 
   constructor: (params = {}) ->
-    @[property] = value for own property, value of params when property of @
+    @[property] = value for own property, value of params when property of @ and value?
 
     @deferreds ?= []
     @queue ?= []
@@ -29,26 +29,21 @@ class ProxyFrame extends EventEmitter
     @el = $("<iframe src='#{@host}#{@path}' class='#{@className}' style='display: none;'></iframe>")
     @el.appendTo 'body'
 
-    @el.on 'load', => @onLoad arguments...
     setTimeout (=> @onFailed() unless @ready), @loadTimeout
 
     $(window).on 'message', ({originalEvent: e}) =>
       @onMessage arguments... if e.source is @el.get(0).contentWindow
 
-  onLoad: ->
+  onReady: ->
     return if @failed
-
-    if !!~@el.get(0).contentDocument.title.toUpperCase().indexOf 'PROXY'
-      @ready = true
-      @trigger 'ready'
-      setTimeout (=> @process payload for payload in @queue), 100
-
-    else
-      @onFailed()
-      @deferreds[payload.id].reject(@constructor.REJECTION) for payload in @queue
+    @ready = true
+    setTimeout (=> @process payload for payload in @queue), 100
+    @trigger 'ready'
 
   onFailed: ->
+    return if @ready
     @failed = true
+    @deferreds[payload.id].reject(@constructor.REJECTION) for payload in @queue
     @trigger 'failed'
 
   send: (payload, done, fail) ->
@@ -75,7 +70,7 @@ class ProxyFrame extends EventEmitter
   onMessage: ({originalEvent: e}) ->
     message = JSON.parse e.data
 
-    # console.log 'Got message', message
+    return @onReady() if message.id is 'READY'
 
     if message.failure
       @deferreds[message.id].reject message.response

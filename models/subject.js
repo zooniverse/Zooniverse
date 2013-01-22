@@ -101,7 +101,7 @@
         });
         request.fail(function() {
           fetcher.fail.apply(fetcher, arguments);
-          return this.trigger('fetch-failed');
+          return _this.trigger('fetch-failed');
         });
       } else {
         fetcher.resolve(this.instances.slice(0, number));

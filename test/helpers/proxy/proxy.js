@@ -133,4 +133,11 @@
     });
   });
 
+  setTimeout(function() {
+    return parent.postMessage(JSON.stringify({
+      id: 'READY',
+      response: +(new Date)
+    }), '*');
+  });
+
 }).call(this);

@@ -11,21 +11,20 @@ class Api
   project: '.'
 
   headers: {}
-  proxy: null
-  ready: false
+  proxyFrame: null
 
-  constructor: ({host, path, @project}) ->
-    @proxy = new ProxyFrame {host, path}
+  constructor: ({@project, host, path, loadTimeout}) ->
+    @proxyFrame = new ProxyFrame {host, path, loadTimeout}
     @select()
 
   request: (type, url, data, done, fail) ->
     if typeof data is 'function'
       [fail, done, data] = [done, data, null]
 
-    @proxy.send {type, url, data, @headers}, done, fail
+    @proxyFrame.send {type, url, data, @headers}, done, fail
 
   get: ->
-    @request 'get', arguments...
+    window.req = @request 'get', arguments...
 
   getJSON: ->
     @request 'getJSON', arguments...

@@ -12,12 +12,13 @@
         return this.api = new Api({
           project: 'test',
           host: "" + location.protocol + "//" + location.host,
-          path: '/bad-path-for-user-tests'
+          path: '/bad-path-for-user-tests',
+          loadTimeout: 100
         });
       });
       return describe('checking the current user', function() {
-        it('triggers "sign-in" with no current user', function(done) {
-          User.one('sign-in', function() {
+        it('triggers "change" with no current user', function(done) {
+          User.one('change', function() {
             if (User.current == null) {
               return done();
             }
@@ -41,8 +42,8 @@
         });
       });
       describe('checking the current user when not signed in', function() {
-        it('triggers "sign-in" with no user', function(done) {
-          User.one('sign-in', function(e, user) {
+        it('triggers "change" with no user', function(done) {
+          User.one('change', function(e, user) {
             if (user === null) {
               return done();
             }
@@ -61,8 +62,8 @@
         });
       });
       describe('checking the current user when signed in', function() {
-        return it('triggers "sign-in" with the current user', function(done) {
-          User.one('sign-in', function(e, user) {
+        return it('triggers "change" with the current user', function(done) {
+          User.one('change', function(e, user) {
             if ((user != null) && user === User.current) {
               return done();
             }
@@ -74,8 +75,8 @@
       });
       describe('login', function() {
         describe('with a good username and password', function() {
-          return it('triggers "sign-in" with the current user', function(done) {
-            User.one('sign-in', function(e, user) {
+          return it('triggers "change" with the current user', function(done) {
+            User.one('change', function(e, user) {
               if ((user != null) && (User.current != null) && user === User.current) {
                 return done();
               }
@@ -87,8 +88,8 @@
           });
         });
         return describe('with a bad username or password', function() {
-          it('triggers "sign-in" with no user', function(done) {
-            User.one('sign-in', function(e, user) {
+          it('triggers "change" with no user', function(done) {
+            User.one('change', function(e, user) {
               if (user === null) {
                 return done();
               }
@@ -110,8 +111,8 @@
         });
       });
       describe('logout', function() {
-        return it('triggers "sign-in" with no current user', function(done) {
-          User.one('sign-in', function(e, user) {
+        return it('triggers "change" with no current user', function(done) {
+          User.one('change', function(e, user) {
             if (user === null) {
               return done();
             }
@@ -121,8 +122,8 @@
       });
       return describe('signup', function() {
         describe('when given insufficient data', function() {
-          it('triggers "sign-in" with no user', function(done) {
-            User.one('sign-in', function(e, user) {
+          it('triggers "change" with no user', function(done) {
+            User.one('change', function(e, user) {
               if (user === null) {
                 return done();
               }
@@ -143,8 +144,8 @@
           });
         });
         return describe('when given all required data', function() {
-          return it('triggers "sign-in" with the current user', function(done) {
-            User.one('sign-in', function(e, user) {
+          return it('triggers "change" with the current user', function(done) {
+            User.one('change', function(e, user) {
               if ((user != null) && User.current === user) {
                 return done();
               }

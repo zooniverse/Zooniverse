@@ -9,7 +9,7 @@ describe 'Api', ->
         host: "#{location.protocol}//#{location.host}"
         path: '/test/helpers/proxy'
 
-      expect(@api.proxy.el).to.match '.proxy-frame'
+      expect(@api.proxyFrame.el).to.match '.proxy-frame'
 
     it 'has an associated project', ->
       expect(@api.project).to.equal 'test'
@@ -38,7 +38,8 @@ describe 'Api', ->
       @badApi = new Api
         projecy: 'test'
         host: "#{location.protocol}//#{location.host}"
-        path: '/this-doesnt-exist'
+        path: '/bad-path-for-api-tests'
+        loadTimeout: 100
 
     it 'rejects a GET request immediately', (done) ->
       @badApi.get '/marco', {}, null, (response) ->

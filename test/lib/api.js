@@ -14,7 +14,7 @@
           host: "" + location.protocol + "//" + location.host,
           path: '/test/helpers/proxy'
         });
-        return expect(this.api.proxy.el).to.match('.proxy-frame');
+        return expect(this.api.proxyFrame.el).to.match('.proxy-frame');
       });
       it('has an associated project', function() {
         return expect(this.api.project).to.equal('test');
@@ -56,7 +56,8 @@
         return this.badApi = new Api({
           projecy: 'test',
           host: "" + location.protocol + "//" + location.host,
-          path: '/this-doesnt-exist'
+          path: '/bad-path-for-api-tests',
+          loadTimeout: 100
         });
       });
       it('rejects a GET request immediately', function(done) {

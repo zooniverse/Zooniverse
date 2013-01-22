@@ -81,3 +81,5 @@ $(window).on 'message', ({originalEvent: e}) ->
 
   request.fail (response) ->
     parent.postMessage JSON.stringify({id, response, failure: true}), recipient
+
+setTimeout -> parent.postMessage JSON.stringify(id: 'READY', response: +(new Date)), '*'

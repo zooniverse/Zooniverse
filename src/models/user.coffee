@@ -38,7 +38,7 @@ class User extends EventEmitter
     else
       delete Api.current.headers['Authorization']
 
-    @trigger 'sign-in', [@current]
+    @trigger 'change', [@current]
     @trigger 'sign-in-error', result.message unless result.success
 
   id: ''
