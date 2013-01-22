@@ -8,8 +8,14 @@
     "mocha": "~1.8.1",
     "mocha-phantomjs": "~1.1.3",
     "nib": "~0.9.1",
+    "serveup": "~0.0.5",
     "sinon": "~1.5.2",
     "sinon-chai": "~2.3.1",
     "stylus": "~0.32.0"
+  },
+  "scripts": {
+    "pretest": "serveup --port 7357 & echo $! > ./.serveup.pid",
+    "test": "mocha-phantomjs http://localhost:7357/test/runner.html",
+    "posttest": "kill `cat .serveup.pid` ; rm .serveup.pid"
   }
 }
