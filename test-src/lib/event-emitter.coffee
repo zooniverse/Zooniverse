@@ -55,3 +55,9 @@ describe 'EventEmitter', ->
       @instance.trigger 'foo', ['far']
       expect(@spy).to.have.been.calledOnce
       expect(@spy).to.have.been.calledWith 'bar'
+
+    it 'no longer functions once destroyed', ->
+      @instance.on 'foo', @spy
+      @instance.destroy()
+      @instance.trigger 'foo'
+      expect(@spy).not.to.have.been.called

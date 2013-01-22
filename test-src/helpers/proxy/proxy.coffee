@@ -45,6 +45,20 @@ $.mockjax
       success: false
       message: 'Username, password, and email are required'
 
+$.mockjax
+  url: '/projects/test/subjects'
+  response: ({data: {limit}}) ->
+    limit ?= 5
+
+    subjects = for i in [0...limit]
+      id: "#{i}_#{Math.random()}".split('.')[1]
+      zooniverse_id: "#{Math.random()}".split('.')[1]
+      coords: [0, 0]
+      location: standard: '//placehold.it/1x1.png'
+      metadata: {}
+
+    @responseText = JSON.stringify subjects
+
 
 # Ouroboros proxy page simulated below.
 

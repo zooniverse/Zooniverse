@@ -27,5 +27,9 @@ class EventEmitter
   for own methodName, method of @
     @::[methodName] = method
 
+  destroy: ->
+    @trigger 'destroying'
+    @off()
+
 window.zooniverse.EventEmitter = EventEmitter
 module?.exports = EventEmitter
