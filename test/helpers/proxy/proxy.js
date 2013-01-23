@@ -18,7 +18,10 @@
     id: 'ID',
     zooniverse_id: 'ZOONIVERSE_ID',
     api_key: 'API_KEY',
-    name: 'tester'
+    name: 'tester',
+    project: {
+      tutorial_done: false
+    }
   };
 
   $.mockjax({

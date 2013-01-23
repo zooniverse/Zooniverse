@@ -12,6 +12,8 @@ VALID_USER_RESPONSE =
   zooniverse_id: 'ZOONIVERSE_ID'
   api_key: 'API_KEY'
   name: 'tester'
+  project:
+    tutorial_done: false
 
 $.mockjax
   url: "/projects/test/current_user"

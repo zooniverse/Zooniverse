@@ -1,0 +1,31 @@
+<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+
+<div class="sign-in-form">
+  <form name="sign-in">
+    <input type="text" name="username" required="required" placeholder="<%= enUs.topBar.username %>" />
+    <input type="password" name="password" required="required" placeholder="<%= enUs.topBar.password %>" />
+    <button type="submit"><%= enUs.topBar.signIn %></button>
+    <div class="error-message"></div>
+  </form>
+
+  <div class="sign-up">
+    <%= enUs.topBar.noAccount %>
+    <button name="sign-up"><%= enUs.topBar.signUp %></button>
+  </div>
+</div>
+
+<div class="current-user">
+  <div class="messages">
+    <span class="message-count"></span>
+    <%= enUs.topBar.messages %>
+  </div>
+
+  <div class="welcome">
+    <%= enUs.topBar.welcome %>
+    <span class="current-user-name"></span>
+  </div>
+
+  <div class="sign-out">
+    <button name="sign-out">Sign out</button>
+  </div>
+</div>

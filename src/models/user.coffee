@@ -6,6 +6,8 @@ Api = zooniverse.Api || require '../lib/api'
 base64 = window.base64 || require '../vendor/base64'
 
 class User extends EventEmitter
+  @current: null
+
   @fetch: (data) =>
     fetcher = Api.current.getJSON "/projects/#{Api.current.project}/current_user", arguments...
     fetcher.always @onFetch
@@ -13,7 +15,9 @@ class User extends EventEmitter
 
   @login: ({username, password}) ->
     login = Api.current.getJSON "/projects/#{Api.current.project}/login", arguments...
-    login.always @onFetch
+    login.done @onFetch
+    login.fail @onFail
+
     login
 
   @logout: ->
@@ -27,6 +31,8 @@ class User extends EventEmitter
     signup
 
   @onFetch: (result) =>
+    original = @current
+
     if result.success and 'name' of result and 'api_key' of result
       @current = new @ result
     else
@@ -38,8 +44,11 @@ class User extends EventEmitter
     else
       delete Api.current.headers['Authorization']
 
-    @trigger 'change', [@current]
+    @trigger 'change', [@current] unless @current is original
     @trigger 'sign-in-error', result.message unless result.success
+
+  @onFail: =>
+    @trigger 'sign-in-failure'
 
   id: ''
   zooniverse_id: ''

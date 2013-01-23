@@ -23,6 +23,8 @@
 
     __extends(User, _super);
 
+    User.current = null;
+
     User.fetch = function(data) {
       var fetcher, _ref2;
       fetcher = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/current_user"].concat(__slice.call(arguments)));
@@ -34,7 +36,8 @@
       var login, password, username, _ref2;
       username = _arg.username, password = _arg.password;
       login = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/login"].concat(__slice.call(arguments)));
-      login.always(this.onFetch);
+      login.done(this.onFetch);
+      login.fail(this.onFail);
       return login;
     };
 
@@ -54,7 +57,8 @@
     };
 
     User.onFetch = function(result) {
-      var auth;
+      var auth, original;
+      original = User.current;
       if (result.success && 'name' in result && 'api_key' in result) {
         User.current = new User(result);
       } else {
@@ -66,10 +70,16 @@
       } else {
         delete Api.current.headers['Authorization'];
       }
-      User.trigger('change', [User.current]);
+      if (User.current !== original) {
+        User.trigger('change', [User.current]);
+      }
       if (!result.success) {
         return User.trigger('sign-in-error', result.message);
       }
+    };
+
+    User.onFail = function() {
+      return User.trigger('sign-in-failure');
     };
 
     User.prototype.id = '';
