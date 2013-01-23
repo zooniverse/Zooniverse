@@ -6,7 +6,7 @@ Api = zooniverse.Api || require '../lib/api'
 base64 = window.base64 || require '../vendor/base64'
 
 class User extends EventEmitter
-  @current: null
+  @current: false
 
   @fetch: (data) =>
     fetcher = Api.current.getJSON "/projects/#{Api.current.project}/current_user", arguments...

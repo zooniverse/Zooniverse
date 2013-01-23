@@ -23,7 +23,7 @@
 
     __extends(User, _super);
 
-    User.current = null;
+    User.current = false;
 
     User.fetch = function(data) {
       var fetcher, _ref2;

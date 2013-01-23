@@ -17,16 +17,16 @@ VALID_USER_RESPONSE =
 
 $.mockjax
   url: "/projects/test/current_user"
-  response: ({data: {testSignedIn}}) ->
-    @responseText = JSON.stringify if testSignedIn is true
+  response: (settings) ->
+    @responseText = JSON.stringify if settings.data?.testSignedIn is true
       VALID_USER_RESPONSE
     else
       success: false
 
 $.mockjax
   url: "/projects/test/login"
-  response: ({data: {username, password}}) ->
-    @responseText = JSON.stringify if username is 'GOOD' and password is 'GOOD'
+  response: (settings) ->
+    @responseText = JSON.stringify if settings.data?.username is 'GOOD' and settings.data?.password is 'GOOD'
       VALID_USER_RESPONSE
     else
       success: false
@@ -40,26 +40,27 @@ $.mockjax
 
 $.mockjax
   url: "/projects/test/signup"
-  response: ({data: {username, password, email}}) ->
-    @responseText = JSON.stringify if username and password and email
+  response: (settings) ->
+    @responseText = JSON.stringify if settings.data?.username and settings.data?.password and email
       VALID_USER_RESPONSE
     else
       success: false
       message: 'Username, password, and email are required'
 
+subjects = for i in [0...10]
+  id: "#{i}_" + "#{Math.random()}".split('.')[1]
+  zooniverse_id: "#{Math.random()}".split('.')[1]
+  coords: [0, 0]
+  location: standard: '//placehold.it/1x1.png'
+  metadata: {}
+
 $.mockjax
   url: '/projects/test/subjects'
-  response: ({data: {limit}}) ->
+  response: (settings) ->
+    limit = settings.data?.limit
     limit ?= 5
 
-    subjects = for i in [0...limit]
-      id: "#{i}_#{Math.random()}".split('.')[1]
-      zooniverse_id: "#{Math.random()}".split('.')[1]
-      coords: [0, 0]
-      location: standard: '//placehold.it/1x1.png'
-      metadata: {}
-
-    @responseText = JSON.stringify subjects
+    @responseText = JSON.stringify subjects.splice 0, limit
 
 
 # Ouroboros proxy page simulated below.

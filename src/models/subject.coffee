@@ -12,6 +12,8 @@ class Subject extends BaseModel
 
   @group: false
 
+  @offlineFile: "./offline/subjects.json"
+
   @path: ->
     groupString = if not @group
       ''
@@ -24,6 +26,7 @@ class Subject extends BaseModel
 
   @next: (done, fail) ->
     @current?.destroy()
+    @current = null
 
     nexter = new $.Deferred
     nexter.then done, fail
@@ -37,7 +40,7 @@ class Subject extends BaseModel
         if @current
           nexter.resolve @current
         else
-          @trigger 'no-more-subjects'
+          @trigger 'no-more'
           nexter.reject arguments...
 
       fetcher.fail =>
@@ -68,8 +71,16 @@ class Subject extends BaseModel
         @trigger 'fetched', [newSubjects]
 
       request.fail =>
-        fetcher.fail arguments...
-        @trigger 'fetch-failed'
+        getOffline = $.get @offlineFile
+
+        getOffline.done (rawSubjects) =>
+          newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
+          fetcher.resolve newSubjects
+          @trigger 'fetched', [newSubjects]
+
+        getOffline.fail =>
+          fetcher.fail arguments...
+          @trigger 'fetch-failed'
 
     else
       fetcher.resolve @instances[0...number]
@@ -100,7 +111,7 @@ class Subject extends BaseModel
 
   select: ->
     @constructor.current = @
-    @trigger 'selecting'
+    @trigger 'select'
 
 window.zooniverse.models.Subject = Subject
 module?.exports = Subject

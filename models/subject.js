@@ -28,6 +28,8 @@
 
     Subject.group = false;
 
+    Subject.offlineFile = "./offline/subjects.json";
+
     Subject.path = function() {
       var groupString;
       groupString = !this.group ? '' : this.group === true ? 'groups/' : "groups/" + this.group + "/";
@@ -40,6 +42,7 @@
       if ((_ref2 = this.current) != null) {
         _ref2.destroy();
       }
+      this.current = null;
       nexter = new $.Deferred;
       nexter.then(done, fail);
       if (this.count() === 0) {
@@ -52,7 +55,7 @@
           if (_this.current) {
             return nexter.resolve(_this.current);
           } else {
-            _this.trigger('no-more-subjects');
+            _this.trigger('no-more');
             return nexter.reject.apply(nexter, arguments);
           }
         });
@@ -100,8 +103,26 @@
           return _this.trigger('fetched', [newSubjects]);
         });
         request.fail(function() {
-          fetcher.fail.apply(fetcher, arguments);
-          return _this.trigger('fetch-failed');
+          var getOffline;
+          getOffline = $.get(_this.offlineFile);
+          getOffline.done(function(rawSubjects) {
+            var newSubjects, rawSubject;
+            newSubjects = (function() {
+              var _i, _len, _results;
+              _results = [];
+              for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
+                rawSubject = rawSubjects[_i];
+                _results.push(new this(rawSubject));
+              }
+              return _results;
+            }).call(_this);
+            fetcher.resolve(newSubjects);
+            return _this.trigger('fetched', [newSubjects]);
+          });
+          return getOffline.fail(function() {
+            fetcher.fail.apply(fetcher, arguments);
+            return _this.trigger('fetch-failed');
+          });
         });
       } else {
         fetcher.resolve(this.instances.slice(0, number));
@@ -162,7 +183,7 @@
 
     Subject.prototype.select = function() {
       this.constructor.current = this;
-      return this.trigger('selecting');
+      return this.trigger('select');
     };
 
     return Subject;
