@@ -2,8 +2,8 @@ Api = require './api'
 
 describe 'Api', ->
   it 'should have an incrementing id', ->
-    expect(Api.nextId()).toBe 'api-0'
     expect(Api.nextId()).toBe 'api-1'
+    expect(Api.nextId()).toBe 'api-2'
   
   it 'should append a proxy frame', ->
     Api.init()
