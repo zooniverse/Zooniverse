@@ -30,7 +30,28 @@ Api =
     Api.ready = true
     Api.process(id) for id, message of Api.messages when not message.sent
   
-  request: (type, url, data, done, fail) ->
+
+  requestJquery: (type, url, data, done, fail) ->
+    
+    if typeof data is 'function'
+      fail = done
+      done = data
+      data = null
+    
+    $.ajax
+      type    : type 
+      url     : url
+      data    : data 
+      success : done 
+      fail    : error
+
+  request:(type, url, data, done, fail)->
+    if window.location.protocol == "file:"
+      Api.requestJquery(type, url, data, done, fail)
+    else
+      Api.requestProxy(type, url, data, done, fail)
+
+  requestProxy: (type, url, data, done, fail) ->
     id = Api.nextId()
     
     if typeof data is 'function'
