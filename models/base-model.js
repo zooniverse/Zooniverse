@@ -22,11 +22,58 @@
 
     BaseModel.count = function() {
       var _ref2;
-      return ((_ref2 = this.instances) != null ? _ref2.length : void 0) || 0;
+      if ((_ref2 = this.instances) == null) {
+        this.instances = [];
+      }
+      return this.instances.length;
     };
 
     BaseModel.first = function() {
+      var _ref2;
+      if ((_ref2 = this.instances) == null) {
+        this.instances = [];
+      }
       return this.instances[0];
+    };
+
+    BaseModel.find = function(id) {
+      var instance, _i, _len, _ref2, _ref3;
+      if ((_ref2 = this.instances) == null) {
+        this.instances = [];
+      }
+      _ref3 = this.instances;
+      for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
+        instance = _ref3[_i];
+        if (instance.id === id) {
+          return instance;
+        }
+      }
+    };
+
+    BaseModel.search = function(query) {
+      var instance, miss, property, value, _i, _len, _ref2, _ref3, _results;
+      if ((_ref2 = this.instances) == null) {
+        this.instances = [];
+      }
+      _ref3 = this.instances;
+      _results = [];
+      for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
+        instance = _ref3[_i];
+        miss = false;
+        for (property in query) {
+          if (!__hasProp.call(query, property)) continue;
+          value = query[property];
+          if (instance[property] !== value) {
+            miss = true;
+            break;
+          }
+        }
+        if (miss) {
+          continue;
+        }
+        _results.push(instance);
+      }
+      return _results;
     };
 
     function BaseModel(params) {

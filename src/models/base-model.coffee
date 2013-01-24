@@ -7,12 +7,33 @@ class BaseModel extends EventEmitter
   @instances: null
 
   @count: ->
-    @instances?.length || 0
+    @instances ?= []
+    @instances.length
 
   @first: ->
+    @instances ?= []
     @instances[0]
 
+  @find: (id) ->
+    @instances ?= []
+    for instance in @instances
+      return instance if instance.id is id
+
+  @search: (query) ->
+    @instances ?= []
+    for instance in @instances
+      miss = false
+      for own property, value of query
+        if instance[property] isnt value
+          miss = true
+          break
+      continue if miss
+      instance
+
   constructor: (params = {}) ->
+    # if 'id' of params and !!@constructor.find params.id
+    #   throw new Error "Model #{params.id} already exists"
+
     @[property] = value for own property, value of params when property of @
     @constructor.instances ?= []
     @constructor.instances.push @
