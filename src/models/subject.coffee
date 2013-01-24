@@ -25,6 +25,8 @@ class Subject extends BaseModel
     "/projects/#{Api.current.project}/#{groupString}subjects"
 
   @next: (done, fail) ->
+    @trigger 'get-next'
+
     @current?.destroy()
     @current = null
 
@@ -49,6 +51,7 @@ class Subject extends BaseModel
     else
       @first().select()
       nexter.resolve @current
+
       @fetch() if @count() < @queueLength
 
     nexter.promise()
@@ -67,20 +70,21 @@ class Subject extends BaseModel
 
       request.done (rawSubjects) =>
         newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
+        @trigger 'fetch', [newSubjects]
         fetcher.resolve newSubjects
-        @trigger 'fetched', [newSubjects]
 
       request.fail =>
+        @trigger 'fetching-offline'
         getOffline = $.get @offlineFile
 
         getOffline.done (rawSubjects) =>
           newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
+          @trigger 'fetch', [newSubjects]
           fetcher.resolve newSubjects
-          @trigger 'fetched', [newSubjects]
 
         getOffline.fail =>
+          @trigger 'fetch-fail'
           fetcher.fail arguments...
-          @trigger 'fetch-failed'
 
     else
       fetcher.resolve @instances[0...number]
@@ -101,6 +105,7 @@ class Subject extends BaseModel
     @location ?= {}
     @coords ?= []
     @metadata ?= {}
+    @workflow_ids ?= []
 
     @preloadImages()
 

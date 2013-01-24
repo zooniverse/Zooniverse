@@ -1,6 +1,6 @@
 window.zooniverse ?= {}
 
-EventEmitter = zooniverse.EventEmitter || require './event-emitter'
+EventEmitter = window.zooniverse.EventEmitter || require './event-emitter'
 $ = window.jQuery
 
 messageId = -1
@@ -10,8 +10,8 @@ class ProxyFrame extends EventEmitter
 
   host: "https://#{if +location.port < 1024 then 'api' else 'dev'}.zooniverse.org"
   path: '/proxy'
-
   loadTimeout: 5000
+
   className: 'proxy-frame'
 
   ready: false
@@ -29,7 +29,7 @@ class ProxyFrame extends EventEmitter
     @el = $("<iframe src='#{@host}#{@path}' class='#{@className}' style='display: none;'></iframe>")
     @el.appendTo 'body'
 
-    setTimeout (=> @onFailed() unless @ready), @loadTimeout
+    setTimeout (=> @timeout() unless @ready), @loadTimeout
 
     $(window).on 'message', ({originalEvent: e}) =>
       @onMessage arguments... if e.source is @el.get(0).contentWindow
@@ -39,6 +39,10 @@ class ProxyFrame extends EventEmitter
     @ready = true
     setTimeout (=> @process payload for payload in @queue), 100
     @trigger 'ready'
+
+  timeout: =>
+    @trigger 'timeout', @loadTimeout
+    @onFailed()
 
   onFailed: ->
     return if @ready
@@ -78,6 +82,10 @@ class ProxyFrame extends EventEmitter
       @deferreds[message.id].resolve message.response
 
     @trigger 'response', [message]
+
+  destroy: ->
+    @el.remove()
+    super
 
 window.zooniverse.ProxyFrame = ProxyFrame
 module?.exports = ProxyFrame

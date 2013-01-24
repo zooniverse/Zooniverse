@@ -3,11 +3,14 @@ window.zooniverse.models ?= {}
 
 BaseModel = zooniverse.models.BaseModel || require './base-model'
 Api = zooniverse.Api || require '../lib/api'
+Recent = zooniverse.models.Recent || require '../models/recent'
 $ = window.jQuery
 
+RESOLVED_STATE = (new $.Deferred).resolve().state()
+
 class Classification extends BaseModel
-  @localClassifications = null
-  @sentThisSession = 0
+  @pending: JSON.parse(localStorage.getItem 'pending-classifications') || []
+  @sentThisSession: 0
 
   subject: null
   annotations: null
@@ -46,13 +49,33 @@ class Classification extends BaseModel
     post = Api.current.post url, asJSON, arguments...
 
     post.done =>
-      # TODO: Send all the pending classifications now.
+      pendingPosts = []
+
+      for classification in @constructor.pending then do (classification) =>
+        @trigger 'sending-pending', [classification]
+        latePost = Api.current.post url, classification
+        pendingPosts.push latePost
+
+        latePost.done =>
+          @trigger 'send-pending', [classification]
+          for c, i in @constructor.pending when c is classification
+            @constructor.pending.splice i, 1
+            break
+
+        latePost.fail =>
+          @trigger 'send-pending-fail', [classification]
+
+        $.when(pendingPosts...).always =>
+          # Clear out the pending list when they're all done.
+          for i in [pendingPosts.length - 1..0]
+            @constructor.pending.splice i, 1 if pendingPosts[i].state() is RESOLVED_STATE
+
+          localStorage.setItem 'pending-classifications', JSON.stringify @constructor.pending
 
     post.fail =>
-      @constructor.localClassifications ?= JSON.parse localStorage.getItem('pending-classifications') || '[]'
-      @constructor.localClassifications.push asJSON
-      localStorage.setItem 'pending-classifications', JSON.stringify @constructor.localClassifications
-      console?.warn "Post failed! #{@constructor.localClassifications.length} pending"
+      @constructor.pending.push asJSON
+      localStorage.setItem 'pending-classifications', JSON.stringify @constructor.pending
+      console?.warn "Post failed! #{@constructor.pending.length} pending"
       @trigger 'pending'
 
     @trigger 'send'

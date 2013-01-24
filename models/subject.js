@@ -39,6 +39,7 @@
     Subject.next = function(done, fail) {
       var fetcher, nexter, _ref2,
         _this = this;
+      this.trigger('get-next');
       if ((_ref2 = this.current) != null) {
         _ref2.destroy();
       }
@@ -99,11 +100,12 @@
             }
             return _results;
           }).call(_this);
-          fetcher.resolve(newSubjects);
-          return _this.trigger('fetched', [newSubjects]);
+          _this.trigger('fetch', [newSubjects]);
+          return fetcher.resolve(newSubjects);
         });
         request.fail(function() {
           var getOffline;
+          _this.trigger('fetching-offline');
           getOffline = $.get(_this.offlineFile);
           getOffline.done(function(rawSubjects) {
             var newSubjects, rawSubject;
@@ -116,12 +118,12 @@
               }
               return _results;
             }).call(_this);
-            fetcher.resolve(newSubjects);
-            return _this.trigger('fetched', [newSubjects]);
+            _this.trigger('fetch', [newSubjects]);
+            return fetcher.resolve(newSubjects);
           });
           return getOffline.fail(function() {
-            fetcher.fail.apply(fetcher, arguments);
-            return _this.trigger('fetch-failed');
+            _this.trigger('fetch-fail');
+            return fetcher.fail.apply(fetcher, arguments);
           });
         });
       } else {
@@ -145,7 +147,7 @@
     Subject.prototype.workflow_ids = null;
 
     function Subject() {
-      var _ref2, _ref3, _ref4;
+      var _ref2, _ref3, _ref4, _ref5;
       Subject.__super__.constructor.apply(this, arguments);
       if ((_ref2 = this.location) == null) {
         this.location = {};
@@ -155,6 +157,9 @@
       }
       if ((_ref4 = this.metadata) == null) {
         this.metadata = {};
+      }
+      if ((_ref5 = this.workflow_ids) == null) {
+        this.workflow_ids = [];
       }
       this.preloadImages();
     }

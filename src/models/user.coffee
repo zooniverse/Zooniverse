@@ -8,12 +8,14 @@ base64 = window.base64 || require '../vendor/base64'
 class User extends EventEmitter
   @current: false
 
-  @fetch: (data) =>
+  @fetch: =>
+    @trigger 'fetching', arguments
     fetcher = Api.current.getJSON "/projects/#{Api.current.project}/current_user", arguments...
     fetcher.always @onFetch
     fetcher
 
   @login: ({username, password}) ->
+    @trigger 'logging-in', arguments
     login = Api.current.getJSON "/projects/#{Api.current.project}/login", arguments...
     login.done @onFetch
     login.fail @onFail
@@ -21,11 +23,13 @@ class User extends EventEmitter
     login
 
   @logout: ->
+    @trigger 'logging-out', arguments
     logout = Api.current.getJSON "/projects/#{Api.current.project}/logout", arguments...
     logout.always @onFetch
     logout
 
   @signup: ({username, password, email}) ->
+    @trigger 'signing-up'
     signup = Api.current.getJSON "/projects/#{Api.current.project}/signup", arguments...
     signup.always @onFetch
     signup

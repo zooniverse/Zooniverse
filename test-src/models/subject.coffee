@@ -35,18 +35,18 @@ describe 'Subject', ->
         instance = new Subject
         instance.select()
 
-        Subject.one 'fetched', -> done()
+        Subject.one 'fetch', -> done()
         Subject.next()
         expect(instance in Subject.instances).to.be.false
 
       it 'can get the next subject', (done) ->
-        Subject.next -> done() if Subject.current?
+        Subject.next -> console.log('next', arguments);done() if Subject.current?
 
       it 'fetches more subjects to refill its queue', (done) ->
         new Subject
         new Subject
 
-        Subject.one 'fetched', ->
+        Subject.one 'fetch', ->
           done() if Subject.count() is Subject.queueLength
 
         Subject.next()

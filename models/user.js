@@ -25,8 +25,9 @@
 
     User.current = false;
 
-    User.fetch = function(data) {
+    User.fetch = function() {
       var fetcher, _ref2;
+      User.trigger('fetching', arguments);
       fetcher = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/current_user"].concat(__slice.call(arguments)));
       fetcher.always(User.onFetch);
       return fetcher;
@@ -35,6 +36,7 @@
     User.login = function(_arg) {
       var login, password, username, _ref2;
       username = _arg.username, password = _arg.password;
+      this.trigger('logging-in', arguments);
       login = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/login"].concat(__slice.call(arguments)));
       login.done(this.onFetch);
       login.fail(this.onFail);
@@ -43,6 +45,7 @@
 
     User.logout = function() {
       var logout, _ref2;
+      this.trigger('logging-out', arguments);
       logout = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/logout"].concat(__slice.call(arguments)));
       logout.always(this.onFetch);
       return logout;
@@ -51,6 +54,7 @@
     User.signup = function(_arg) {
       var email, password, signup, username, _ref2;
       username = _arg.username, password = _arg.password, email = _arg.email;
+      this.trigger('signing-up');
       signup = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/signup"].concat(__slice.call(arguments)));
       signup.always(this.onFetch);
       return signup;

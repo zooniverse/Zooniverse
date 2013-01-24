@@ -16,6 +16,15 @@
           loadTimeout: 100
         });
       });
+      beforeEach(function() {
+        var _ref;
+        if ((_ref = User.current) != null) {
+          if (typeof _ref.destroy === "function") {
+            _ref.destroy();
+          }
+        }
+        return User.current = false;
+      });
       return describe('checking the current user', function() {
         it('triggers "change" with no current user', function(done) {
           User.one('change', function() {
@@ -41,6 +50,15 @@
           path: '/test/helpers/proxy#for-user-tests'
         });
       });
+      beforeEach(function() {
+        var _ref;
+        if ((_ref = User.current) != null) {
+          if (typeof _ref.destroy === "function") {
+            _ref.destroy();
+          }
+        }
+        return User.current = false;
+      });
       describe('checking the current user when not signed in', function() {
         it('triggers "change" with no user', function(done) {
           User.one('change', function(e, user) {
@@ -48,17 +66,13 @@
               return done();
             }
           });
-          return User.fetch({
-            testSignedIn: false
-          });
+          return User.fetch();
         });
         return it('triggers "sign-in-error"', function(done) {
           User.one('sign-in-error', function() {
             return done();
           });
-          return User.fetch({
-            testSignedIn: false
-          });
+          return User.fetch();
         });
       });
       describe('checking the current user when signed in', function() {
@@ -82,9 +96,9 @@
               }
             });
             return User.login({
-              username: 'GOOD',
-              password: 'GOOD'
-            });
+              username: 'clyde',
+              password: 'clyde'
+            }, console.info, console.warn);
           });
         });
         return describe('with a bad username or password', function() {

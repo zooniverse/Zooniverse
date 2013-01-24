@@ -52,7 +52,7 @@
           var instance;
           instance = new Subject;
           instance.select();
-          Subject.one('fetched', function() {
+          Subject.one('fetch', function() {
             return done();
           });
           Subject.next();
@@ -60,6 +60,7 @@
         });
         it('can get the next subject', function(done) {
           return Subject.next(function() {
+            console.log('next', arguments);
             if (Subject.current != null) {
               return done();
             }
@@ -68,7 +69,7 @@
         return it('fetches more subjects to refill its queue', function(done) {
           new Subject;
           new Subject;
-          Subject.one('fetched', function() {
+          Subject.one('fetch', function() {
             if (Subject.count() === Subject.queueLength) {
               return done();
             }
