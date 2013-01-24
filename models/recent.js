@@ -82,11 +82,11 @@
 
     Recent.prototype.id = '';
 
+    Recent.prototype.subjects = null;
+
     Recent.prototype.project_id = '';
 
     Recent.prototype.workflow_id = '';
-
-    Recent.prototype.subjects = null;
 
     Recent.prototype.created_at = '';
 
@@ -96,6 +96,9 @@
       if ((_ref2 = this.subjects) == null) {
         this.subjects = [];
       }
+      this.project_id || (this.project_id = this.subjects[0].project_id);
+      this.workflow_id || (this.workflow_id = this.subjects[0].workflow_ids[0]);
+      this.created_at || (this.created_at = (new Date).toUTCString());
     }
 
     return Recent;

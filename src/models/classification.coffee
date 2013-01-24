@@ -4,6 +4,7 @@ window.zooniverse.models ?= {}
 BaseModel = zooniverse.models.BaseModel || require './base-model'
 Api = zooniverse.Api || require '../lib/api'
 Recent = zooniverse.models.Recent || require '../models/recent'
+Favorite = zooniverse.models.Favorite || require '../models/favorite'
 $ = window.jQuery
 
 RESOLVED_STATE = (new $.Deferred).resolve().state()
@@ -11,6 +12,32 @@ RESOLVED_STATE = (new $.Deferred).resolve().state()
 class Classification extends BaseModel
   @pending: JSON.parse(localStorage.getItem 'pending-classifications') || []
   @sentThisSession: 0
+
+  @sendPending: ->
+    @trigger 'sending-pending', [classification]
+
+    pendingPosts = []
+    for classification in @pending then do (classification) =>
+      latePost = Api.current.post classification.url, classification
+      pendingPosts.push latePost
+
+      latePost.done (response) =>
+        @trigger 'send-pending', [classification]
+        if classification.favorite
+          # TODO
+          favorite = new Favorite subjects: ({id} for id in classification.subject_ids)
+          favorite.send()
+
+      latePost.fail =>
+        @trigger 'send-pending-fail', [classification]
+
+      $.when(pendingPosts...).always =>
+        # Clear out the pending list when they're all done.
+        # Work backward so indices don't get messed up.
+        for i in [pendingPosts.length - 1..0]
+          @pending.splice i, 1 if pendingPosts[i].state() is RESOLVED_STATE
+
+        localStorage.setItem 'pending-classifications', JSON.stringify @pending
 
   subject: null
   annotations: null
@@ -29,7 +56,6 @@ class Classification extends BaseModel
   annotate: (annotation) ->
     @annotations.push annotation
 
-
   toJSON: ->
     output = classification:
       subject_ids: [@subject.id]
@@ -39,57 +65,34 @@ class Classification extends BaseModel
 
     output
 
+  url: ->
+    "/projects/#{Api.current.project}/workflows/#{@subject.workflow_ids[0]}/classifications"
+
   send: (done, fail) ->
-    unless @subject.metadata.tutorial or @subject.metadata.empty
-      @constructor.sentThisSession += 1
+    @constructor.sentThisSession += 1 unless @subject.metadata.tutorial
 
-    url = "/projects/#{Api.current.project}/workflows/#{@subject.workflow_ids[0]}/classifications"
-    asJSON = @toJSON()
-
-    post = Api.current.post url, asJSON, arguments...
+    post = Api.current.post @url(), @toJSON(), arguments...
 
     post.done =>
-      pendingPosts = []
-
-      for classification in @constructor.pending then do (classification) =>
-        @trigger 'sending-pending', [classification]
-        latePost = Api.current.post url, classification
-        pendingPosts.push latePost
-
-        latePost.done =>
-          @trigger 'send-pending', [classification]
-          for c, i in @constructor.pending when c is classification
-            @constructor.pending.splice i, 1
-            break
-
-        latePost.fail =>
-          @trigger 'send-pending-fail', [classification]
-
-        $.when(pendingPosts...).always =>
-          # Clear out the pending list when they're all done.
-          for i in [pendingPosts.length - 1..0]
-            @constructor.pending.splice i, 1 if pendingPosts[i].state() is RESOLVED_STATE
-
-          localStorage.setItem 'pending-classifications', JSON.stringify @constructor.pending
+      @makeRecent()
+      @constructor.sendPending()
 
     post.fail =>
-      @constructor.pending.push asJSON
-      localStorage.setItem 'pending-classifications', JSON.stringify @constructor.pending
-      console?.warn "Post failed! #{@constructor.pending.length} pending"
-      @trigger 'pending'
+      @makePending()
 
     @trigger 'send'
 
-    # TODO: Recents and favorites
+  makePending: ->
+    asJSON = @toJSON()
+    asJSON.url = @url()
+    @constructor.pending.push asJSON
 
-    # recent = Recent.create subjects: @subject
-    # recent.trigger 'send'
-    # recent.trigger 'is-new'
+    localStorage.setItem 'pending-classifications', JSON.stringify @constructor.pending
+    console.log "TRIGGER PENDING", @
+    @trigger 'pending'
 
-    # if @favorite
-    #   favorite = Favorite.create subjects: @subject
-    #   favorite.trigger 'send'
-    #   favorite.trigger 'is-new'
+  makeRecent: ->
+    new Recent subjects: [@subject]
 
 window.zooniverse.models.Classification = Classification
 module?.exports = Classification

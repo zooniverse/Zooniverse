@@ -42,14 +42,17 @@ class Recent extends BaseModel
   @clearOnUserChange()
 
   id: ''
+  subjects: null
   project_id: ''
   workflow_id: ''
-  subjects: null
   created_at: ''
 
   constructor: ->
     super
     @subjects ?= []
+    @project_id ||= @subjects[0].project_id
+    @workflow_id ||= @subjects[0].workflow_ids[0]
+    @created_at ||= (new Date).toUTCString()
 
 window.zooniverse.models.Recent = Recent
 module?.exports = Recent

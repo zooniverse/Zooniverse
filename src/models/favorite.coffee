@@ -22,6 +22,7 @@ class Favorite extends Recent
 
   delete: ->
     @trigger 'delete'
+    # TODO: Api.current.delete ...
     @destroy()
 
 window.zooniverse.models.Favorite = Favorite
