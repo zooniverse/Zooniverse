@@ -13,13 +13,13 @@
     _base.models = {};
   }
 
-  BaseModel = zooniverse.models.BaseModel || require('./base-model');
+  BaseModel = window.zooniverse.models.BaseModel || require('./base-model');
 
-  Api = zooniverse.Api || require('../lib/api');
+  Api = window.zooniverse.Api || require('../lib/api');
 
-  Recent = zooniverse.models.Recent || require('../models/recent');
+  Recent = window.zooniverse.models.Recent || require('../models/recent');
 
-  Favorite = zooniverse.models.Favorite || require('../models/favorite');
+  Favorite = window.zooniverse.models.Favorite || require('../models/favorite');
 
   $ = window.jQuery;
 

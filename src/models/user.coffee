@@ -1,9 +1,9 @@
 window.zooniverse ?= {}
 window.zooniverse.models ?= {}
 
-EventEmitter = zooniverse.EventEmitter || require '../lib/event-emitter'
-Api = zooniverse.Api || require '../lib/api'
-base64 = window.base64 || require '../vendor/base64'
+EventEmitter = window.zooniverse.EventEmitter || require '../lib/event-emitter'
+Api = window.zooniverse.Api || require '../lib/api'
+base64 = window.base64 || (require '../vendor/base64'; window.base64)
 
 class User extends EventEmitter
   @current: false

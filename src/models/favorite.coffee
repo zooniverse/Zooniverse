@@ -1,9 +1,9 @@
 window.zooniverse ?= {}
 window.zooniverse.models ?= {}
 
-Recent = zooniverse.models.Recent || require './recent'
-Api = zooniverse.Api || require '../lib/api'
-User = zooniverse.models.User || require './user'
+Recent = window.zooniverse.models.Recent || require './recent'
+Api = window.zooniverse.Api || require '../lib/api'
+User = window.zooniverse.models.User || require './user'
 $ = window.jQuery
 
 class Favorite extends Recent

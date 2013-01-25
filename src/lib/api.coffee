@@ -1,10 +1,8 @@
 window.zooniverse ?= {}
 
-EventEmitter = window.zooniverse.EventEmitter || require '../lib/event-emitter'
+EventEmitter = window.zooniverse.EventEmitter || require './event-emitter'
 ProxyFrame = window.zooniverse.ProxyFrame || require './proxy-frame'
 $ = window.jQuery
-
-id = -1
 
 class Api extends EventEmitter
   @current: null
@@ -15,6 +13,7 @@ class Api extends EventEmitter
   proxyFrame: null
 
   constructor: ({@project, host, path, loadTimeout} = {}) ->
+    super
     @proxyFrame = new ProxyFrame {host, path, loadTimeout}
     @select()
 
@@ -43,6 +42,10 @@ class Api extends EventEmitter
   select: ->
     @trigger 'select'
     @constructor.current = @
+
+  destroy: ->
+    @proxyFrame.destroy()
+    super
 
 window.zooniverse.Api = Api
 module?.exports = Api

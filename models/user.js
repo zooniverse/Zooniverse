@@ -13,11 +13,11 @@
     _base.models = {};
   }
 
-  EventEmitter = zooniverse.EventEmitter || require('../lib/event-emitter');
+  EventEmitter = window.zooniverse.EventEmitter || require('../lib/event-emitter');
 
-  Api = zooniverse.Api || require('../lib/api');
+  Api = window.zooniverse.Api || require('../lib/api');
 
-  base64 = window.base64 || require('../vendor/base64');
+  base64 = window.base64 || (require('../vendor/base64'), window.base64);
 
   User = (function(_super) {
 

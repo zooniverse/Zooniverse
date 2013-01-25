@@ -1,10 +1,10 @@
 window.zooniverse ?= {}
 window.zooniverse.models ?= {}
 
-BaseModel = zooniverse.models.BaseModel || require './base-model'
-Api = zooniverse.Api || require '../lib/api'
-Recent = zooniverse.models.Recent || require '../models/recent'
-Favorite = zooniverse.models.Favorite || require '../models/favorite'
+BaseModel = window.zooniverse.models.BaseModel || require './base-model'
+Api = window.zooniverse.Api || require '../lib/api'
+Recent = window.zooniverse.models.Recent || require '../models/recent'
+Favorite = window.zooniverse.models.Favorite || require '../models/favorite'
 $ = window.jQuery
 
 RESOLVED_STATE = (new $.Deferred).resolve().state()

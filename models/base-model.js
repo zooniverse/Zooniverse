@@ -12,7 +12,7 @@
     _base.models = {};
   }
 
-  EventEmitter = zooniverse.EventEmitter || require('../lib/event-emitter');
+  EventEmitter = window.zooniverse.EventEmitter || require('../lib/event-emitter');
 
   BaseModel = (function(_super) {
 

@@ -1,7 +1,7 @@
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
 
-EventEmitter = window.zooniverse.EventEmitter || require 'zooniverse/lib/event-emitter'
+EventEmitter = window.zooniverse.EventEmitter || require '../lib/event-emitter'
 $ = window.jQuery
 
 class BaseController extends EventEmitter
@@ -14,6 +14,7 @@ class BaseController extends EventEmitter
   elements: null
 
   constructor: (params = {}) ->
+    super
     @[property] = value for own property, value of params when property of @
 
     @el ?= document.createElement @tagName
@@ -48,6 +49,13 @@ class BaseController extends EventEmitter
       @el.on eventName, selector, (e) =>
         e.preventDefault() if autoPreventDefault
         method.call @, arguments...
+
+  destroy: ->
+    @[propertyName] = null for selector, propertyName of @elements if @elements?
+    @el.off()
+    @el.empty()
+    @el.remove()
+    super
 
 window.zooniverse.controllers.BaseController = BaseController
 module?.exports = BaseController

@@ -13,7 +13,7 @@
     _base.controllers = {};
   }
 
-  EventEmitter = window.zooniverse.EventEmitter || require('zooniverse/lib/event-emitter');
+  EventEmitter = window.zooniverse.EventEmitter || require('../lib/event-emitter');
 
   $ = window.jQuery;
 
@@ -38,6 +38,7 @@
       if (params == null) {
         params = {};
       }
+      BaseController.__super__.constructor.apply(this, arguments);
       for (property in params) {
         if (!__hasProp.call(params, property)) continue;
         value = params[property];
@@ -104,6 +105,21 @@
         }
         return _results;
       }
+    };
+
+    BaseController.prototype.destroy = function() {
+      var propertyName, selector, _ref2;
+      if (this.elements != null) {
+        _ref2 = this.elements;
+        for (selector in _ref2) {
+          propertyName = _ref2[selector];
+          this[propertyName] = null;
+        }
+      }
+      this.el.off();
+      this.el.empty();
+      this.el.remove();
+      return BaseController.__super__.destroy.apply(this, arguments);
     };
 
     return BaseController;

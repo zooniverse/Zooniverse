@@ -13,11 +13,11 @@
     _base.models = {};
   }
 
-  Recent = zooniverse.models.Recent || require('./recent');
+  Recent = window.zooniverse.models.Recent || require('./recent');
 
-  Api = zooniverse.Api || require('../lib/api');
+  Api = window.zooniverse.Api || require('../lib/api');
 
-  User = zooniverse.models.User || require('./user');
+  User = window.zooniverse.models.User || require('./user');
 
   $ = window.jQuery;
 

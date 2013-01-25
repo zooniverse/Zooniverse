@@ -1,7 +1,7 @@
 window.zooniverse ?= {}
 window.zooniverse.models ?= {}
 
-EventEmitter = zooniverse.EventEmitter || require '../lib/event-emitter'
+EventEmitter = window.zooniverse.EventEmitter || require '../lib/event-emitter'
 
 class BaseModel extends EventEmitter
   @idCounter = -1
@@ -38,7 +38,6 @@ class BaseModel extends EventEmitter
 
   constructor: (params = {}) ->
     super
-
     @[property] = value for own property, value of params when property of @
 
     @constructor.idCounter += 1
@@ -49,7 +48,6 @@ class BaseModel extends EventEmitter
 
   destroy: ->
     super
-
     for instance, i in @constructor.instances when instance is @
       @constructor.instances?.splice i, 1
       break

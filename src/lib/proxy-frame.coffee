@@ -21,6 +21,7 @@ class ProxyFrame extends EventEmitter
   queue: null
 
   constructor: (params = {}) ->
+    super
     @[property] = value for own property, value of params when property of @ and value?
 
     @deferreds ?= []
