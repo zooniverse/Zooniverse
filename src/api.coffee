@@ -22,36 +22,22 @@ Api =
     }, options
     
     Api.host = options.host
-    Api.proxy = new ProxyFrame Api.host, options.proxyPath
-    Api.proxy.bind 'load', Api.loaded
-    Api.proxy.bind 'response', Api.respond
+    if Api.checkMobile()
+      Api.loaded()
+    else
+      Api.proxy = new ProxyFrame Api.host, options.proxyPath
+      Api.proxy.bind 'load', Api.loaded
+      Api.proxy.bind 'response', Api.respond
   
   loaded: ->
     Api.ready = true
     Api.process(id) for id, message of Api.messages when not message.sent
   
 
-  requestJquery: (type, url, data, done, fail) ->
-    
-    if typeof data is 'function'
-      fail = done
-      done = data
-      data = null
-    
-    $.ajax
-      type    : type 
-      url     : url
-      data    : data 
-      success : done 
-      fail    : error
+  checkMobile:->
+    window.location.protocol == 'file:'
 
   request:(type, url, data, done, fail)->
-    if window.location.protocol == "file:"
-      Api.requestJquery(type, url, data, done, fail)
-    else
-      Api.requestProxy(type, url, data, done, fail)
-
-  requestProxy: (type, url, data, done, fail) ->
     id = Api.nextId()
     
     if typeof data is 'function'
@@ -78,7 +64,7 @@ Api =
     delete Api.messages[result.id]
   
   process: (id) ->
-    Api.proxy.send Api.messages[id]
+    Api.messages[id].send()
   
   nextId: ->
     _.uniqueId 'api-'
