@@ -118,5 +118,45 @@ class Subject extends BaseModel
     @constructor.current = @
     @trigger 'select'
 
+  talkHref: ->
+    domain = @domain || location.hostname.replace /^www\./, ''
+    "http://talk.#{domain}/#/subjects/#{@zooniverse_id}"
+
+  socialImage: ->
+    image = if @location.standard instanceof Array
+      @location.standard[Math.floor @location.standard.length / 2]
+    else
+      @location.standard
+
+    $("<a href='#{image}'></a>").get(0).href
+
+  socialTitle: ->
+    'Zooniverse classification'
+
+  socialMessage: ->
+    'Classifying on the Zooniverse!'
+
+  facebookHref: ->
+    """
+      https://www.facebook.com/sharer/sharer.php
+      ?s=100
+      &p[url]=#{encodeURIComponent @talkHref()}
+      &p[title]=#{encodeURIComponent @socialTitle()}
+      &p[summary]=#{encodeURIComponent @socialMessage()}
+      &p[images][0]=#{image}
+    """.replace '\n', '', 'g'
+
+  twitterHref: ->
+    status = "#{@socialMessage()} #{@talkHref()}"
+    "http://twitter.com/home?status=#{encodeURIComponent status}"
+
+  pinterestHref: ->
+    """
+      http://pinterest.com/pin/create/button/
+      ?url=#{encodeURIComponent @talkHref()}
+      &media=#{encodeURIComponent @socialImage()}
+      &description=#{encodeURIComponent @socialMessage()}
+    """.replace '\n', '', 'g'
+
 window.zooniverse.models.Subject = Subject
 module?.exports = Subject

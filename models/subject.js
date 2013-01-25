@@ -191,6 +191,40 @@
       return this.trigger('select');
     };
 
+    Subject.prototype.talkHref = function() {
+      var domain;
+      domain = this.domain || location.hostname.replace(/^www\./, '');
+      return "http://talk." + domain + "/#/subjects/" + this.zooniverse_id;
+    };
+
+    Subject.prototype.socialImage = function() {
+      var image;
+      image = this.location.standard instanceof Array ? this.location.standard[Math.floor(this.location.standard.length / 2)] : this.location.standard;
+      return $("<a href='" + image + "'></a>").get(0).href;
+    };
+
+    Subject.prototype.socialTitle = function() {
+      return 'Zooniverse classification';
+    };
+
+    Subject.prototype.socialMessage = function() {
+      return 'Classifying on the Zooniverse!';
+    };
+
+    Subject.prototype.facebookHref = function() {
+      return ("https://www.facebook.com/sharer/sharer.php\n?s=100\n&p[url]=" + (encodeURIComponent(this.talkHref())) + "\n&p[title]=" + (encodeURIComponent(this.socialTitle())) + "\n&p[summary]=" + (encodeURIComponent(this.socialMessage())) + "\n&p[images][0]=" + image).replace('\n', '', 'g');
+    };
+
+    Subject.prototype.twitterHref = function() {
+      var status;
+      status = "" + (this.socialMessage()) + " " + (this.talkHref());
+      return "http://twitter.com/home?status=" + (encodeURIComponent(status));
+    };
+
+    Subject.prototype.pinterestHref = function() {
+      return ("http://pinterest.com/pin/create/button/\n?url=" + (encodeURIComponent(this.talkHref())) + "\n&media=" + (encodeURIComponent(this.socialImage())) + "\n&description=" + (encodeURIComponent(this.socialMessage()))).replace('\n', '', 'g');
+    };
+
     return Subject;
 
   })(BaseModel);
