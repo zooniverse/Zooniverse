@@ -1,17 +1,5 @@
 $ = window.jQuery
 
-USERS = {}
-for name, i in ['blinky', 'pinky', 'inky', 'clyde']
-  USERS[name] =
-    success: true
-    id: name.toUpperCase()
-    zooniverse_id: "#{name.toUpperCase()}_ZID"
-    api_key: "#{name.toUpperCase()}_API_KEY"
-    name: name
-    password: name
-    project:
-      tutorial_done: false
-
 SUBJECTS = for i in [0...50]
   id: "SUBJECT_#{i}"
   zooniverse_id: "SUBJECT_#{i}_ZID"
@@ -26,6 +14,19 @@ RECENTS = for subject, i in SUBJECTS
   workflow_id: subject.workflow_ids[0]
   subjects: [subject]
   created_at: (new Date).toUTCString()
+
+USERS = {}
+for name, i in ['blinky', 'pinky', 'inky', 'clyde']
+  USERS[name] =
+    success: true
+    id: name.toUpperCase()
+    zooniverse_id: "#{name.toUpperCase()}_ZID"
+    api_key: "#{name.toUpperCase()}_API_KEY"
+    name: name
+    password: name
+    project:
+      classification_count: RECENTS.length
+      tutorial_done: false
 
 
 

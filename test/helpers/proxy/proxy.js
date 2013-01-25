@@ -4,28 +4,10 @@
 
   $ = window.jQuery;
 
-  USERS = {};
-
-  _ref = ['blinky', 'pinky', 'inky', 'clyde'];
-  for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
-    name = _ref[i];
-    USERS[name] = {
-      success: true,
-      id: name.toUpperCase(),
-      zooniverse_id: "" + (name.toUpperCase()) + "_ZID",
-      api_key: "" + (name.toUpperCase()) + "_API_KEY",
-      name: name,
-      password: name,
-      project: {
-        tutorial_done: false
-      }
-    };
-  }
-
   SUBJECTS = (function() {
-    var _j, _results;
+    var _i, _results;
     _results = [];
-    for (i = _j = 0; _j < 50; i = ++_j) {
+    for (i = _i = 0; _i < 50; i = ++_i) {
       _results.push({
         id: "SUBJECT_" + i,
         zooniverse_id: "SUBJECT_" + i + "_ZID",
@@ -41,9 +23,9 @@
   })();
 
   RECENTS = (function() {
-    var _j, _len1, _results;
+    var _i, _len, _results;
     _results = [];
-    for (i = _j = 0, _len1 = SUBJECTS.length; _j < _len1; i = ++_j) {
+    for (i = _i = 0, _len = SUBJECTS.length; _i < _len; i = ++_i) {
       subject = SUBJECTS[i];
       _results.push({
         id: "RECENT_" + i,
@@ -55,6 +37,25 @@
     }
     return _results;
   })();
+
+  USERS = {};
+
+  _ref = ['blinky', 'pinky', 'inky', 'clyde'];
+  for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+    name = _ref[i];
+    USERS[name] = {
+      success: true,
+      id: name.toUpperCase(),
+      zooniverse_id: "" + (name.toUpperCase()) + "_ZID",
+      api_key: "" + (name.toUpperCase()) + "_API_KEY",
+      name: name,
+      password: name,
+      project: {
+        classification_count: RECENTS.length,
+        tutorial_done: false
+      }
+    };
+  }
 
   $.mockjax({
     url: '/marco',

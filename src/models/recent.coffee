@@ -1,16 +1,21 @@
 window.zooniverse ?= {}
 window.zooniverse.models ?= {}
 
-BaseModel = zooniverse.models.BaseModel || require './base-model'
-Api = zooniverse.Api || require '../lib/api'
-User = zooniverse.models.User || require './user'
+BaseModel = window.zooniverse.models.BaseModel || require './base-model'
+Api = window.zooniverse.Api || require '../lib/api'
+User = window.zooniverse.models.User || require './user'
+Subject = require './subject'
 $ = window.jQuery
+
+class SubjectForRecent extends Subject
+  # Keep these separate from regular subjects.
+  # We don't want to re-classify them.
 
 class Recent extends BaseModel
   @type: 'recent'
 
   @path: ->
-    "/projects/#{Api.current.project}/users/#{User.current.id}/#{@type}s"
+    "/projects/#{Api.current.project}/users/#{User.current?.id}/#{@type}s"
 
   @fetch: (params, done, fail) ->
     @trigger 'fetching'
@@ -24,7 +29,9 @@ class Recent extends BaseModel
     request = Api.current.get @path(), params
 
     request.done (rawRecents) =>
-      newRecents = (new @ rawRecent for rawRecent in rawRecents)
+      # Recents are returned newest first, but create them oldest first.
+      # That way recents created on the fly will be in the right order.
+      newRecents = (new @ rawRecent for rawRecent in rawRecents.reverse())
       @trigger 'fetch', [newRecents]
       fetcher.resolve newRecents
 
@@ -41,7 +48,6 @@ class Recent extends BaseModel
 
   @clearOnUserChange()
 
-  id: ''
   subjects: null
   project_id: ''
   workflow_id: ''
@@ -53,6 +59,9 @@ class Recent extends BaseModel
     @project_id ||= @subjects[0].project_id
     @workflow_id ||= @subjects[0].workflow_ids[0]
     @created_at ||= (new Date).toUTCString()
+
+    for subject, i in @subjects
+      @subjects[i] = new SubjectForRecent subject
 
 window.zooniverse.models.Recent = Recent
 module?.exports = Recent

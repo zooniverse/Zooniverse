@@ -1,0 +1,7 @@
+<div class="loader"></div>
+
+<div class="items"></div>
+
+<nav class="controls">
+  <span class="numbered"></span>
+</nav>
