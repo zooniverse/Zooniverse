@@ -36,6 +36,9 @@
     Classification.sendPending = function() {
       var classification, pendingPosts, _i, _len, _ref2, _results,
         _this = this;
+      if (this.pending.length === 0) {
+        return;
+      }
       this.trigger('sending-pending', [classification]);
       pendingPosts = [];
       _ref2 = this.pending;
@@ -160,9 +163,17 @@
     };
 
     Classification.prototype.makeRecent = function() {
-      return new Recent({
+      var favorite, recent;
+      recent = new Recent({
         subjects: [this.subject]
       });
+      recent.trigger('from-classification');
+      if (this.favorite) {
+        favorite = new Favorite({
+          subjects: [this.subject]
+        });
+        return favorite.trigger('from-classification');
+      }
     };
 
     return Classification;

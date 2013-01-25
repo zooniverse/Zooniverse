@@ -14,6 +14,8 @@ class Classification extends BaseModel
   @sentThisSession: 0
 
   @sendPending: ->
+    return if @pending.length is 0
+
     @trigger 'sending-pending', [classification]
 
     pendingPosts = []
@@ -92,7 +94,12 @@ class Classification extends BaseModel
     @trigger 'pending'
 
   makeRecent: ->
-    new Recent subjects: [@subject]
+    recent = new Recent subjects: [@subject]
+    recent.trigger 'from-classification'
+
+    if @favorite
+      favorite = new Favorite subjects: [@subject]
+      favorite.trigger 'from-classification'
 
 window.zooniverse.models.Classification = Classification
 module?.exports = Classification
