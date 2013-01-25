@@ -4,6 +4,7 @@ window.zooniverse.models ?= {}
 EventEmitter = zooniverse.EventEmitter || require '../lib/event-emitter'
 
 class BaseModel extends EventEmitter
+  @idCounter = -1
   @instances: null
 
   @count: ->
@@ -30,11 +31,19 @@ class BaseModel extends EventEmitter
       continue if miss
       instance
 
+  @destroyAll: ->
+    @first().destroy until @count() is 0
+
+  id: null
+
   constructor: (params = {}) ->
-    # if 'id' of params and !!@constructor.find params.id
-    #   throw new Error "Model #{params.id} already exists"
+    super
 
     @[property] = value for own property, value of params when property of @
+
+    @constructor.idCounter += 1
+    @id = "C_#{@constructor.idCounter}" unless @id?
+
     @constructor.instances ?= []
     @constructor.instances.push @
 

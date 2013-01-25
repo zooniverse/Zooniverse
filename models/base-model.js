@@ -18,6 +18,8 @@
 
     __extends(BaseModel, _super);
 
+    BaseModel.idCounter = -1;
+
     BaseModel.instances = null;
 
     BaseModel.count = function() {
@@ -76,17 +78,33 @@
       return _results;
     };
 
+    BaseModel.destroyAll = function() {
+      var _results;
+      _results = [];
+      while (this.count() !== 0) {
+        _results.push(this.first().destroy);
+      }
+      return _results;
+    };
+
+    BaseModel.prototype.id = null;
+
     function BaseModel(params) {
       var property, value, _base1, _ref2;
       if (params == null) {
         params = {};
       }
+      BaseModel.__super__.constructor.apply(this, arguments);
       for (property in params) {
         if (!__hasProp.call(params, property)) continue;
         value = params[property];
         if (property in this) {
           this[property] = value;
         }
+      }
+      this.constructor.idCounter += 1;
+      if (this.id == null) {
+        this.id = "C_" + this.constructor.idCounter;
       }
       if ((_ref2 = (_base1 = this.constructor).instances) == null) {
         _base1.instances = [];
