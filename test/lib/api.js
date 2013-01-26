@@ -2,19 +2,24 @@
 (function() {
   var Api, ProxyFrame;
 
-  Api = zooniverse.Api;
+  Api = window.zooniverse.Api;
 
-  ProxyFrame = zooniverse.ProxyFrame;
+  ProxyFrame = window.zooniverse.ProxyFrame;
 
   describe('Api', function() {
     describe('with an available host', function() {
-      it('creates a new ProxyFrame', function() {
-        this.api = new Api({
+      before(function() {
+        return this.api = new Api({
           project: 'test',
           host: "" + location.protocol + "//" + location.host,
-          path: '/test/helpers/proxy'
+          path: '/test/helpers/proxy#for-api-tests'
         });
-        return expect(this.api.proxyFrame.el).to.match('.proxy-frame');
+      });
+      after(function() {
+        return this.api.destroy();
+      });
+      it('creates a new ProxyFrame', function() {
+        return expect(this.api.proxyFrame.el.parent()).to.match('body');
       });
       it('has an associated project', function() {
         return expect(this.api.project).to.equal('test');
@@ -53,39 +58,38 @@
     });
     return describe('with an unavailable host', function() {
       before(function() {
-        return this.badApi = new Api({
+        return this.api = new Api({
           projecy: 'test',
           host: "" + location.protocol + "//" + location.host,
           path: '/bad-path-for-api-tests',
           loadTimeout: 100
         });
       });
+      after(function() {
+        return this.api.destroy();
+      });
       it('rejects a GET request immediately', function(done) {
-        return this.badApi.get('/marco', {}, null, function(response) {
-          if (response === ProxyFrame.REJECTION) {
-            return done();
-          }
+        return this.api.get('/marco', {}, null, function(response) {
+          expect(response).to.equal(ProxyFrame.REJECTION);
+          return done();
         });
       });
       it('rejects a POST request immediately', function(done) {
-        return this.badApi.post('/marco', {}, null, function(response) {
-          if (response === ProxyFrame.REJECTION) {
-            return done();
-          }
+        return this.api.post('/marco', {}, null, function(response) {
+          expect(response).to.equal(ProxyFrame.REJECTION);
+          return done();
         });
       });
       it('rejects a PUT request immediately', function(done) {
-        return this.badApi.put('/marco', {}, null, function(response) {
-          if (response === ProxyFrame.REJECTION) {
-            return done();
-          }
+        return this.api.put('/marco', {}, null, function(response) {
+          expect(response).to.equal(ProxyFrame.REJECTION);
+          return done();
         });
       });
       return it('rejects a DELETE request immediately', function(done) {
-        return this.badApi["delete"]('/marco', {}, null, function(response) {
-          if (response === ProxyFrame.REJECTION) {
-            return done();
-          }
+        return this.api["delete"]('/marco', {}, null, function(response) {
+          expect(response).to.equal(ProxyFrame.REJECTION);
+          return done();
         });
       });
     });

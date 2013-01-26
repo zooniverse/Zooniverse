@@ -82,7 +82,7 @@
       var _results;
       _results = [];
       while (this.count() !== 0) {
-        _results.push(this.first().destroy);
+        _results.push(this.first().destroy());
       }
       return _results;
     };

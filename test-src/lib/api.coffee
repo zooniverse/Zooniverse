@@ -1,15 +1,19 @@
-Api = zooniverse.Api
-ProxyFrame = zooniverse.ProxyFrame
+Api = window.zooniverse.Api
+ProxyFrame = window.zooniverse.ProxyFrame
 
 describe 'Api', ->
   describe 'with an available host', ->
-    it 'creates a new ProxyFrame', ->
+    before ->
       @api = new Api
         project: 'test'
         host: "#{location.protocol}//#{location.host}"
-        path: '/test/helpers/proxy'
+        path: '/test/helpers/proxy#for-api-tests'
 
-      expect(@api.proxyFrame.el).to.match '.proxy-frame'
+    after ->
+      @api.destroy()
+
+    it 'creates a new ProxyFrame', ->
+      expect(@api.proxyFrame.el.parent()).to.match 'body'
 
     it 'has an associated project', ->
       expect(@api.project).to.equal 'test'
@@ -35,24 +39,31 @@ describe 'Api', ->
 
   describe 'with an unavailable host', ->
     before ->
-      @badApi = new Api
+      @api = new Api
         projecy: 'test'
         host: "#{location.protocol}//#{location.host}"
         path: '/bad-path-for-api-tests'
         loadTimeout: 100
 
+    after ->
+      @api.destroy()
+
     it 'rejects a GET request immediately', (done) ->
-      @badApi.get '/marco', {}, null, (response) ->
-        done() if response is ProxyFrame.REJECTION
+      @api.get '/marco', {}, null, (response) ->
+        expect(response).to.equal ProxyFrame.REJECTION
+        done()
 
     it 'rejects a POST request immediately', (done) ->
-      @badApi.post '/marco', {}, null, (response) ->
-        done() if response is ProxyFrame.REJECTION
+      @api.post '/marco', {}, null, (response) ->
+        expect(response).to.equal ProxyFrame.REJECTION
+        done()
 
     it 'rejects a PUT request immediately', (done) ->
-      @badApi.put '/marco', {}, null, (response) ->
-        done() if response is ProxyFrame.REJECTION
+      @api.put '/marco', {}, null, (response) ->
+        expect(response).to.equal ProxyFrame.REJECTION
+        done()
 
     it 'rejects a DELETE request immediately', (done) ->
-      @badApi.delete '/marco', {}, null, (response) ->
-        done() if response is ProxyFrame.REJECTION
+      @api.delete '/marco', {}, null, (response) ->
+        expect(response).to.equal ProxyFrame.REJECTION
+        done()

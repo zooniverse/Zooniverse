@@ -12,7 +12,7 @@ class Subject extends BaseModel
 
   @group: false
 
-  @offlineFile: "./offline/subjects.json"
+  @fallback: "./offline/subjects.json"
 
   @path: ->
     groupString = if not @group
@@ -74,15 +74,15 @@ class Subject extends BaseModel
         fetcher.resolve newSubjects
 
       request.fail =>
-        @trigger 'fetching-offline'
-        getOffline = $.get @offlineFile
+        @trigger 'fetching-fallback'
+        getFallback = $.get @fallback
 
-        getOffline.done (rawSubjects) =>
+        getFallback.done (rawSubjects) =>
           newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
           @trigger 'fetch', [newSubjects]
           fetcher.resolve newSubjects
 
-        getOffline.fail =>
+        getFallback.fail =>
           @trigger 'fetch-fail'
           fetcher.fail arguments...
 
@@ -117,6 +117,10 @@ class Subject extends BaseModel
   select: ->
     @constructor.current = @
     @trigger 'select'
+
+  destroy: ->
+    @constructor.current = null if @constructor.current is @
+    super
 
   talkHref: ->
     domain = @domain || location.hostname.replace /^www\./, ''

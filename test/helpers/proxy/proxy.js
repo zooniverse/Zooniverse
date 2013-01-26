@@ -69,6 +69,18 @@
     }
   });
 
+  $.mockjax({
+    url: '/projects/test/subjects',
+    response: function(settings) {
+      var limit, _ref;
+      limit = (_ref = settings.data) != null ? _ref.limit : void 0;
+      if (limit == null) {
+        limit = 5;
+      }
+      return this.responseText = window.database.get('subjects', limit);
+    }
+  });
+
   $(window).on('message', function(_arg) {
     var beforeSend, data, e, headers, id, recipient, request, type, url, _ref;
     e = _arg.originalEvent;

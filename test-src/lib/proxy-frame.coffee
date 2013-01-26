@@ -1,10 +1,10 @@
-ProxyFrame = zooniverse.ProxyFrame
+ProxyFrame = window.zooniverse.ProxyFrame
 
 describe 'ProxyFrame', ->
   it 'creates a new iframe', ->
     @proxyFrame = new ProxyFrame
       host: "#{location.protocol}//#{location.host}"
-      path: '/test/helpers/proxy'
+      path: '/test/helpers/proxy#for-proxy-frame-tests'
 
     expect(@proxyFrame.el.parent()).to.match 'body'
 
@@ -28,20 +28,30 @@ describe 'ProxyFrame', ->
 
   it 'can send a request and receives a response', (done) ->
     @proxyFrame.send url: '/marco', (response) ->
-      done() if response is 'polo'
+      expect(response).to.equal 'polo'
+      done()
 
   it 'removes its iframe when destroyed', ->
     @proxyFrame.destroy()
     expect(@proxyFrame.el.parent()).not.to.exist
 
   describe 'when the back end is unavailable', ->
-    it 'marks itself failed', (done) ->
-      @badProxyFrame = new ProxyFrame
+    before ->
+      @proxyFrame = new ProxyFrame
         host: "#{location.protocol}//#{location.host}"
-        path: '/this-doesnt-exist'
+        path: '/doesnt-exist#for-proxy-frame-tests'
         loadTimeout: 100
 
-      setTimeout (=> done() if @badProxyFrame.failed), 200
+    after ->
+      @proxyFrame.destroy()
+
+    it 'marks itself failed', (done) ->
+      if @proxyFrame.failed
+        done()
+      else
+        @proxyFrame.on 'fail', ->
+          done()
 
     it 'rejects attempted sends', (done) ->
-      @badProxyFrame.send url: '/marco', null, -> done()
+      @proxyFrame.send url: '/marco', null, ->
+        done()

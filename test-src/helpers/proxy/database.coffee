@@ -34,7 +34,7 @@ favorites = for i in [0...params.recents || 0]
 
 users = for name, i in ['blinky', 'pinky', 'inky', 'clyde']
   success: true
-  id: "USER_#{name}"
+  id: name
   zooniverse_id: "#{name.toUpperCase()}_ZID"
   api_key: "#{name.toUpperCase()}_API_KEY"
   name: name
@@ -55,13 +55,32 @@ window.database =
     @[model].push newRecord
     $.extend {}, newRecord
 
-  get: (model, id) ->
-    record = (item for item in @[model] when item.id is id)[0]
+  get: (model, query) ->
+    if typeof query is 'string'
+      query = id: query
+      byId = true
 
-    if record?
-      $.extend success: record?, record
+    if typeof query is 'number'
+      @[model].splice 0, query
     else
-      success: false
+      matches = for record in @[model]
+        miss = false
+        for param, value of query
+          unless record[param] is value
+            miss = true
+            break
+        continue if miss
+        record
+
+      if matches.length is 0
+        success: false
+      else
+        if byId
+          $.extend success: record?, record
+        else
+          matches
 
   delete: (model, id) ->
     return @[model].splice i, 1 for item, i in @[model] when item.id is id
+
+window.database.currentUser = window.database.get 'users', 'clyde'

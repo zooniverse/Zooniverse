@@ -3,16 +3,46 @@
   var Api, Subject,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  Api = zooniverse.Api;
+  Api = window.zooniverse.Api;
 
-  Subject = zooniverse.models.Subject;
+  Subject = window.zooniverse.models.Subject;
 
   describe('Subject', function() {
+    describe('with a failed API', function() {
+      before(function() {
+        return new Api({
+          project: 'test',
+          host: "" + location.protocol + "//" + location.host,
+          path: '/doesnt-exist#for-subject-tests',
+          loadTimeout: 100
+        });
+      });
+      after(function() {
+        Api.current.destroy();
+        return Subject.destroyAll();
+      });
+      return describe('fetch', function() {
+        Subject.fallback = './helpers/offline/subjects.json';
+        return it('falls back to a static subject list', function(done) {
+          Subject.one('fetch', function(e, subjects) {
+            expect(Subject.count()).not.to.equal(0);
+            return done();
+          });
+          return Subject.fetch();
+        });
+      });
+    });
     return describe('with a connected API', function() {
-      this.api = new Api({
-        project: 'test',
-        host: "" + location.protocol + "//" + location.host,
-        path: '/test/helpers/proxy#for-subject-tests'
+      before(function() {
+        return new Api({
+          project: 'test',
+          host: "" + location.protocol + "//" + location.host,
+          path: '/test/helpers/proxy#for-subject-tests'
+        });
+      });
+      after(function() {
+        Api.current.destroy();
+        return Subject.destroyAll();
       });
       describe('path', function() {
         afterEach(function() {
@@ -32,47 +62,37 @@
       });
       describe('fetch', function() {
         return it('can fetch more subjects', function(done) {
-          return Subject.fetch(function() {
-            if (Subject.count() === Subject.queueLength) {
-              return done();
-            }
+          Subject.one('fetch', function(e, subjects) {
+            expect(subjects.length).not.to.equal(0);
+            expect(Subject.count()).not.to.equal(0);
+            expect(subjects[0]).to.equal(Subject.first());
+            return done();
           });
+          return Subject.fetch();
         });
       });
       return describe('next', function() {
         beforeEach(function() {
-          var _results;
-          _results = [];
-          while (Subject.count() !== 0) {
-            _results.push(Subject.first().destroy());
-          }
-          return _results;
+          return Subject.destroyAll();
         });
-        it('destroys the current subject', function(done) {
-          var instance;
-          instance = new Subject;
-          instance.select();
-          Subject.one('fetch', function() {
+        it('destroys the current subject and selects the next', function(done) {
+          var first, second;
+          first = new Subject;
+          second = new Subject;
+          first.select();
+          Subject.one('select', function(e, subject) {
+            expect(__indexOf.call(Subject.instances, first) >= 0).to.be["false"];
+            expect(subject === second).to.be["true"];
+            expect(Subject.current).to.equal(second);
             return done();
           });
-          Subject.next();
-          return expect(__indexOf.call(Subject.instances, instance) >= 0).to.be["false"];
-        });
-        it('can get the next subject', function(done) {
-          return Subject.next(function() {
-            console.log('next', arguments);
-            if (Subject.current != null) {
-              return done();
-            }
-          });
+          return Subject.next();
         });
         return it('fetches more subjects to refill its queue', function(done) {
           new Subject;
-          new Subject;
-          Subject.one('fetch', function() {
-            if (Subject.count() === Subject.queueLength) {
-              return done();
-            }
+          Subject.one('fetch', function(e, subjects) {
+            expect(Subject.count()).to.equal(Subject.queueLength);
+            return done();
           });
           return Subject.next();
         });

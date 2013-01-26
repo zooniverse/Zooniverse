@@ -5,20 +5,17 @@ $ = window.jQuery
 logTriggers = !!~location.href.indexOf 'log=1'
 
 class EventEmitter
-  @proxy: (method) ->
-    $.proxy (if typeof method is 'function' then [method, @] else [@, method])...
-
   @on: (eventName, handler) ->
     @jQueryEventProxy ?= $({})
-    @jQueryEventProxy.on eventName, @proxy handler
+    @jQueryEventProxy.on eventName, handler
 
   @one: (eventName, handler) ->
     @jQueryEventProxy ?= $({})
-    @jQueryEventProxy.one eventName, @proxy handler
+    @jQueryEventProxy.one eventName, handler
 
   @off: (eventName, handler) ->
     @jQueryEventProxy ?= $({})
-    @jQueryEventProxy.off eventName, @proxy handler
+    @jQueryEventProxy.off eventName, handler
 
   @trigger: (eventName, args = []) ->
     if logTriggers

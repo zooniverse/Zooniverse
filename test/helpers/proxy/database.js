@@ -84,7 +84,7 @@
       name = _ref2[i];
       _results.push({
         success: true,
-        id: "USER_" + name,
+        id: name,
         zooniverse_id: "" + (name.toUpperCase()) + "_ZID",
         api_key: "" + (name.toUpperCase()) + "_API_KEY",
         name: name,
@@ -109,28 +109,51 @@
       this[model].push(newRecord);
       return $.extend({}, newRecord);
     },
-    get: function(model, id) {
-      var item, record;
-      record = ((function() {
-        var _j, _len1, _ref2, _results;
-        _ref2 = this[model];
-        _results = [];
-        for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
-          item = _ref2[_j];
-          if (item.id === id) {
-            _results.push(item);
+    get: function(model, query) {
+      var byId, matches, miss, param, record;
+      if (typeof query === 'string') {
+        query = {
+          id: query
+        };
+        byId = true;
+      }
+      if (typeof query === 'number') {
+        return this[model].splice(0, query);
+      } else {
+        matches = (function() {
+          var _j, _len1, _ref2, _results;
+          _ref2 = this[model];
+          _results = [];
+          for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
+            record = _ref2[_j];
+            miss = false;
+            for (param in query) {
+              value = query[param];
+              if (record[param] !== value) {
+                miss = true;
+                break;
+              }
+            }
+            if (miss) {
+              continue;
+            }
+            _results.push(record);
+          }
+          return _results;
+        }).call(this);
+        if (matches.length === 0) {
+          return {
+            success: false
+          };
+        } else {
+          if (byId) {
+            return $.extend({
+              success: record != null
+            }, record);
+          } else {
+            return matches;
           }
         }
-        return _results;
-      }).call(this))[0];
-      if (record != null) {
-        return $.extend({
-          success: record != null
-        }, record);
-      } else {
-        return {
-          success: false
-        };
       }
     },
     "delete": function(model, id) {
@@ -144,5 +167,7 @@
       }
     }
   };
+
+  window.database.currentUser = window.database.get('users', 'clyde');
 
 }).call(this);

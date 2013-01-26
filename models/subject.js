@@ -28,7 +28,7 @@
 
     Subject.group = false;
 
-    Subject.offlineFile = "./offline/subjects.json";
+    Subject.fallback = "./offline/subjects.json";
 
     Subject.path = function() {
       var groupString;
@@ -104,10 +104,10 @@
           return fetcher.resolve(newSubjects);
         });
         request.fail(function() {
-          var getOffline;
-          _this.trigger('fetching-offline');
-          getOffline = $.get(_this.offlineFile);
-          getOffline.done(function(rawSubjects) {
+          var getFallback;
+          _this.trigger('fetching-fallback');
+          getFallback = $.get(_this.fallback);
+          getFallback.done(function(rawSubjects) {
             var newSubjects, rawSubject;
             newSubjects = (function() {
               var _i, _len, _results;
@@ -121,7 +121,7 @@
             _this.trigger('fetch', [newSubjects]);
             return fetcher.resolve(newSubjects);
           });
-          return getOffline.fail(function() {
+          return getFallback.fail(function() {
             _this.trigger('fetch-fail');
             return fetcher.fail.apply(fetcher, arguments);
           });
@@ -189,6 +189,13 @@
     Subject.prototype.select = function() {
       this.constructor.current = this;
       return this.trigger('select');
+    };
+
+    Subject.prototype.destroy = function() {
+      if (this.constructor.current === this) {
+        this.constructor.current = null;
+      }
+      return Subject.__super__.destroy.apply(this, arguments);
     };
 
     Subject.prototype.talkHref = function() {

@@ -75,6 +75,9 @@
         delete Api.current.headers['Authorization'];
       }
       if (User.current !== original) {
+        if (original) {
+          original.destroy();
+        }
         User.trigger('change', [User.current]);
       }
       if (!result.success) {

@@ -45,15 +45,13 @@ $.mockjax
     database.currentUser = null
     @responseText = success: true
 
+$.mockjax
+  url: '/projects/test/subjects'
+  response: (settings) ->
+    limit = settings.data?.limit
+    limit ?= 5
 
-
-# $.mockjax
-#   url: '/projects/test/subjects'
-#   response: (settings) ->
-#     limit = settings.data?.limit
-#     limit ?= 5
-
-#     @responseText = JSON.stringify SUBJECTS.splice 0, limit
+    @responseText = window.database.get 'subjects', limit
 
 # $.mockjax
 #   type: 'POST'

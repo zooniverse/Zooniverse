@@ -49,7 +49,7 @@ class ProxyFrame extends EventEmitter
     return if @ready
     @failed = true
     @deferreds[payload.id].reject(@constructor.REJECTION) for payload in @queue
-    @trigger 'failed'
+    @trigger 'fail'
 
   send: (payload, done, fail) ->
     messageId += 1

@@ -2,13 +2,13 @@
 (function() {
   var ProxyFrame;
 
-  ProxyFrame = zooniverse.ProxyFrame;
+  ProxyFrame = window.zooniverse.ProxyFrame;
 
   describe('ProxyFrame', function() {
     it('creates a new iframe', function() {
       this.proxyFrame = new ProxyFrame({
         host: "" + location.protocol + "//" + location.host,
-        path: '/test/helpers/proxy'
+        path: '/test/helpers/proxy#for-proxy-frame-tests'
       });
       return expect(this.proxyFrame.el.parent()).to.match('body');
     });
@@ -38,9 +38,8 @@
       return this.proxyFrame.send({
         url: '/marco'
       }, function(response) {
-        if (response === 'polo') {
-          return done();
-        }
+        expect(response).to.equal('polo');
+        return done();
       });
     });
     it('removes its iframe when destroyed', function() {
@@ -48,21 +47,27 @@
       return expect(this.proxyFrame.el.parent()).not.to.exist;
     });
     return describe('when the back end is unavailable', function() {
-      it('marks itself failed', function(done) {
-        var _this = this;
-        this.badProxyFrame = new ProxyFrame({
+      before(function() {
+        return this.proxyFrame = new ProxyFrame({
           host: "" + location.protocol + "//" + location.host,
-          path: '/this-doesnt-exist',
+          path: '/doesnt-exist#for-proxy-frame-tests',
           loadTimeout: 100
         });
-        return setTimeout((function() {
-          if (_this.badProxyFrame.failed) {
+      });
+      after(function() {
+        return this.proxyFrame.destroy();
+      });
+      it('marks itself failed', function(done) {
+        if (this.proxyFrame.failed) {
+          return done();
+        } else {
+          return this.proxyFrame.on('fail', function() {
             return done();
-          }
-        }), 200);
+          });
+        }
       });
       return it('rejects attempted sends', function(done) {
-        return this.badProxyFrame.send({
+        return this.proxyFrame.send({
           url: '/marco'
         }, null, function() {
           return done();

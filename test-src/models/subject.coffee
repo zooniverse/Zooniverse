@@ -1,12 +1,39 @@
-Api = zooniverse.Api
-Subject = zooniverse.models.Subject
+Api = window.zooniverse.Api
+Subject = window.zooniverse.models.Subject
 
 describe 'Subject', ->
+  describe 'with a failed API', ->
+    before ->
+      new Api
+        project: 'test'
+        host: "#{location.protocol}//#{location.host}"
+        path: '/doesnt-exist#for-subject-tests'
+        loadTimeout: 100
+
+    after ->
+      Api.current.destroy()
+      Subject.destroyAll()
+
+    describe 'fetch', ->
+      Subject.fallback = './helpers/offline/subjects.json'
+
+      it 'falls back to a static subject list', (done) ->
+        Subject.one 'fetch', (e, subjects) ->
+          expect(Subject.count()).not.to.equal 0
+          done()
+
+        Subject.fetch()
+
   describe 'with a connected API', ->
-    @api = new Api
-      project: 'test'
-      host: "#{location.protocol}//#{location.host}"
-      path: '/test/helpers/proxy#for-subject-tests'
+    before ->
+      new Api
+        project: 'test'
+        host: "#{location.protocol}//#{location.host}"
+        path: '/test/helpers/proxy#for-subject-tests'
+
+    after ->
+      Api.current.destroy()
+      Subject.destroyAll()
 
     describe 'path', ->
       afterEach ->
@@ -25,28 +52,37 @@ describe 'Subject', ->
 
     describe 'fetch', ->
       it 'can fetch more subjects', (done) ->
-        Subject.fetch -> done() if Subject.count() is Subject.queueLength
+        Subject.one 'fetch', (e, subjects) ->
+          expect(subjects.length).not.to.equal 0
+          expect(Subject.count()).not.to.equal 0
+          expect(subjects[0]).to.equal Subject.first()
+          done()
+
+        Subject.fetch()
 
     describe 'next', ->
       beforeEach ->
-        Subject.first().destroy() until Subject.count() is 0
+        Subject.destroyAll()
 
-      it 'destroys the current subject', (done) ->
-        instance = new Subject
-        instance.select()
+      it 'destroys the current subject and selects the next', (done) ->
+        first = new Subject
+        second = new Subject
 
-        Subject.one 'fetch', -> done()
+        first.select()
+
+        Subject.one 'select', (e, subject) ->
+          expect(first in Subject.instances).to.be.false
+          expect(subject is second).to.be.true
+          expect(Subject.current).to.equal second
+          done()
+
         Subject.next()
-        expect(instance in Subject.instances).to.be.false
-
-      it 'can get the next subject', (done) ->
-        Subject.next -> console.log('next', arguments);done() if Subject.current?
 
       it 'fetches more subjects to refill its queue', (done) ->
         new Subject
-        new Subject
 
-        Subject.one 'fetch', ->
-          done() if Subject.count() is Subject.queueLength
+        Subject.one 'fetch', (e, subjects) ->
+          expect(Subject.count()).to.equal Subject.queueLength
+          done()
 
         Subject.next()

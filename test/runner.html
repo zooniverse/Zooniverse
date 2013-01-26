@@ -19,7 +19,7 @@
     <script src="../node_modules/chai-jquery/chai-jquery.js"></script>
 
     <script>
-      mocha.setup({
+      window.mocha.setup({
         ui: 'bdd',
         reporter: 'html',
         bail: false,
@@ -27,26 +27,23 @@
         ignoreLeaks: true
       });
 
-      window.expect = chai.expect;
+      window.expect = window.chai.expect;
+      window.chai.should();
     </script>
 
     <script src="../lib/event-emitter.js"></script>
-    <!--<script src="./lib/event-emitter.js"></script>-->
-
     <script src="../lib/proxy-frame.js"></script>
-    <!--<script src="./lib/proxy-frame.js"></script>-->
-
     <script src="../lib/api.js"></script>
-    <!--<script src="./lib/api.js"></script>-->
-
     <script src="../models/base-model.js"></script>
-    <!--<script src="./models/base-model.js"></script>-->
-
     <script src="../models/subject.js"></script>
-    <!--<script src="./models/subject.js"></script>-->
-
     <script src="../vendor/base64.js"></script>
     <script src="../models/user.js"></script>
+
+    <script src="./lib/event-emitter.js"></script>
+    <script src="./lib/proxy-frame.js"></script>
+    <script src="./lib/api.js"></script>
+    <script src="./models/base-model.js"></script>
+    <script src="./models/subject.js"></script>
     <script src="./models/user.js"></script>
 
     <script>

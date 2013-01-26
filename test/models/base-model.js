@@ -8,7 +8,7 @@
 
   describe('BaseModel', function() {
     beforeEach(function() {
-      this.ModelClass = (function(_super) {
+      return this.ModelClass = (function(_super) {
 
         __extends(ModelClass, _super);
 
@@ -16,19 +16,79 @@
           return ModelClass.__super__.constructor.apply(this, arguments);
         }
 
+        ModelClass.prototype.name = '';
+
         return ModelClass;
 
       })(BaseModel);
-      return window.MC = this.ModelClass;
     });
-    return it('keeps track of its instances', function() {
+    it('keeps track of its instances', function() {
       var instance;
-      expect(this.ModelClass.count()).to.equal(0);
       instance = new this.ModelClass;
       expect(this.ModelClass.instances[0]).to.equal(instance);
       expect(this.ModelClass.count()).to.equal(1);
       instance.destroy();
       return expect(this.ModelClass.count()).to.equal(0);
+    });
+    it('gives its instances a unique id', function() {
+      var foo;
+      foo = new this.ModelClass;
+      return expect(foo.id).to.match(/C_\d+/);
+    });
+    describe('count', function() {
+      return it('returns a count of instances', function() {
+        new this.ModelClass;
+        expect(this.ModelClass.count()).to.equal(1);
+        new this.ModelClass;
+        expect(this.ModelClass.count()).to.equal(2);
+        new this.ModelClass;
+        return expect(this.ModelClass.count()).to.equal(3);
+      });
+    });
+    describe('first', function() {
+      return it('returns the first instace ', function() {
+        var bar, foo;
+        foo = new this.ModelClass;
+        bar = new this.ModelClass;
+        expect(this.ModelClass.first()).to.equal(foo);
+        foo.destroy();
+        return expect(this.ModelClass.first()).to.equal(bar);
+      });
+    });
+    describe('find', function() {
+      return it('returns the instance with the given ID', function() {
+        var foo;
+        foo = new this.ModelClass({
+          id: 'foo'
+        });
+        return expect(this.ModelClass.find('foo')).to.equal(foo);
+      });
+    });
+    describe('search', function() {
+      return it('returns the instances that match the give property values', function() {
+        var bar, foo;
+        foo = new this.ModelClass({
+          name: 'foo'
+        });
+        bar = new this.ModelClass({
+          name: 'bar'
+        });
+        expect(this.ModelClass.search({
+          name: 'foo'
+        })).to.eql([foo]);
+        return expect(this.ModelClass.search({
+          name: 'bar'
+        })).to.eql([bar]);
+      });
+    });
+    return describe('destroyAll', function() {
+      return it('destroys all its instances', function() {
+        new this.ModelClass;
+        new this.ModelClass;
+        new this.ModelClass;
+        this.ModelClass.destroyAll();
+        return expect(this.ModelClass.count()).to.equal(0);
+      });
     });
   });
 

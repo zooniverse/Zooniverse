@@ -2,9 +2,9 @@
 (function() {
   var Api, User;
 
-  Api = zooniverse.Api;
+  Api = window.zooniverse.Api;
 
-  User = zooniverse.models.User;
+  User = window.zooniverse.models.User;
 
   describe('User', function() {
     describe('on a failed API', function() {
@@ -13,7 +13,7 @@
           project: 'test',
           host: "" + location.protocol + "//" + location.host,
           path: '/bad-path-for-user-tests',
-          loadTimeout: 100
+          loadTimeout: 0
         });
       });
       beforeEach(function() {
@@ -25,12 +25,11 @@
         }
         return User.current = false;
       });
-      return describe('checking the current user', function() {
+      return describe('fetch', function() {
         it('triggers "change" with no current user', function(done) {
-          User.one('change', function() {
-            if (User.current == null) {
-              return done();
-            }
+          User.one('change', function(e, user) {
+            expect(user).to.be["null"];
+            return done();
           });
           return User.fetch();
         });
@@ -50,24 +49,58 @@
           path: '/test/helpers/proxy#for-user-tests'
         });
       });
-      beforeEach(function() {
-        var _ref;
-        if ((_ref = User.current) != null) {
-          if (typeof _ref.destroy === "function") {
-            _ref.destroy();
-          }
-        }
-        return User.current = false;
-      });
-      describe('checking the current user when not signed in', function() {
-        it('triggers "change" with no user', function(done) {
+      describe('fetch (when signed in)', function() {
+        return it('triggers "change" with the current user', function(done) {
           User.one('change', function(e, user) {
-            if (user === null) {
-              return done();
-            }
+            expect(user.name).to.equal('clyde');
+            expect(User.current).to.equal(user);
+            return done();
           });
           return User.fetch();
         });
+      });
+      describe('signup', function() {
+        describe('when given insufficient data', function() {
+          return it('triggers "sign-in-error"', function(done) {
+            User.one('sign-in-error', function() {
+              return done();
+            });
+            return User.signup({
+              username: 'tester',
+              password: 'testing'
+            });
+          });
+        });
+        return describe('when given all required data', function() {
+          return it('triggers "change" with the new current user', function(done) {
+            var email, password, username;
+            username = 'tester';
+            password = 'testing';
+            email = 'test@test.test';
+            User.one('change', function(e, user) {
+              expect(user.name).to.equal(username);
+              expect(User.current).to.equal(user);
+              return done();
+            });
+            return User.signup({
+              username: username,
+              password: password,
+              email: email
+            });
+          });
+        });
+      });
+      describe('logout', function() {
+        return it('triggers "change" with no user and un-sets the current user', function(done) {
+          User.one('change', function(e, user) {
+            expect(user).to.be["null"];
+            expect(User.current).to.be["null"];
+            return done();
+          });
+          return User.logout();
+        });
+      });
+      describe('fetch (when not logged in)', function() {
         return it('triggers "sign-in-error"', function(done) {
           User.one('sign-in-error', function() {
             return done();
@@ -75,99 +108,32 @@
           return User.fetch();
         });
       });
-      describe('checking the current user when signed in', function() {
-        return it('triggers "change" with the current user', function(done) {
-          User.one('change', function(e, user) {
-            if ((user != null) && user === User.current) {
+      return describe('login', function() {
+        describe('with a bad username or password', function() {
+          return it('triggers "sign-in-error"', function(done) {
+            User.one('sign-in-error', function() {
               return done();
-            }
-          });
-          return User.fetch({
-            testSignedIn: true
+            });
+            return User.login({
+              username: 'nobody',
+              password: 'nothing'
+            });
           });
         });
-      });
-      describe('login', function() {
-        describe('with a good username and password', function() {
+        return describe('with a good username and password', function() {
           return it('triggers "change" with the current user', function(done) {
+            var password, username;
+            username = 'tester';
+            password = 'testing';
             User.one('change', function(e, user) {
+              expect(user.name).to.equal(username);
               if ((user != null) && (User.current != null) && user === User.current) {
                 return done();
               }
             });
             return User.login({
-              username: 'clyde',
-              password: 'clyde'
-            }, console.info, console.warn);
-          });
-        });
-        return describe('with a bad username or password', function() {
-          it('triggers "change" with no user', function(done) {
-            User.one('change', function(e, user) {
-              if (user === null) {
-                return done();
-              }
-            });
-            return User.login({
-              username: 'BAD',
-              password: 'BAD'
-            });
-          });
-          return it('triggers "sign-in-error"', function(done) {
-            User.one('sign-in-error', function() {
-              return done();
-            });
-            return User.login({
-              username: 'BAD',
-              password: 'BAD'
-            });
-          });
-        });
-      });
-      describe('logout', function() {
-        return it('triggers "change" with no current user', function(done) {
-          User.one('change', function(e, user) {
-            if (user === null) {
-              return done();
-            }
-          });
-          return User.logout();
-        });
-      });
-      return describe('signup', function() {
-        describe('when given insufficient data', function() {
-          it('triggers "change" with no user', function(done) {
-            User.one('change', function(e, user) {
-              if (user === null) {
-                return done();
-              }
-            });
-            return User.signup({
-              username: 'OKAY',
-              password: 'OKAY'
-            });
-          });
-          return it('triggers "sign-in-error"', function(done) {
-            User.one('sign-in-error', function() {
-              return done();
-            });
-            return User.signup({
-              username: 'OKAY',
-              password: 'OKAY'
-            });
-          });
-        });
-        return describe('when given all required data', function() {
-          return it('triggers "change" with the current user', function(done) {
-            User.one('change', function(e, user) {
-              if ((user != null) && User.current === user) {
-                return done();
-              }
-            });
-            return User.signup({
-              username: 'OKAY',
-              password: 'OKAY',
-              email: 'OKAY'
+              username: username,
+              password: password
             });
           });
         });

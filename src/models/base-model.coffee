@@ -32,7 +32,7 @@ class BaseModel extends EventEmitter
       instance
 
   @destroyAll: ->
-    @first().destroy until @count() is 0
+    @first().destroy() until @count() is 0
 
   id: null
 

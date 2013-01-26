@@ -1,0 +1,56 @@
+[
+  {
+    "id": "RED",
+    "zooniverse_id": "RED_ZOONIVERSE_ID",
+    "coords": [0, 0],
+    "location": {"standard": "//placehold.it/1x1/f00.png"},
+    "metadata": {"offline": true},
+    "project_id": "PROJECT_ID",
+    "workflow_ids": ["WORKFLOW_ID"]
+  },
+  {
+    "id": "YELLOW",
+    "zooniverse_id": "YELLOW_ZOONIVERSE_ID",
+    "coords": [0, 0],
+    "location": {"standard": "//placehold.it/1x1/ff0.png"},
+    "metadata": {"offline": true},
+    "project_id": "PROJECT_ID",
+    "workflow_ids": ["WORKFLOW_ID"]
+  },
+  {
+    "id": "GREEN",
+    "zooniverse_id": "GREEN_ZOONIVERSE_ID",
+    "coords": [0, 0],
+    "location": {"standard": "//placehold.it/1x1/0f0.png"},
+    "metadata": {"offline": true},
+    "project_id": "PROJECT_ID",
+    "workflow_ids": ["WORKFLOW_ID"]
+  },
+  {
+    "id": "CYAN",
+    "zooniverse_id": "CYAN_ZOONIVERSE_ID",
+    "coords": [0, 0],
+    "location": {"standard": "//placehold.it/1x1/0ff.png"},
+    "metadata": {"offline": true},
+    "project_id": "PROJECT_ID",
+    "workflow_ids": ["WORKFLOW_ID"]
+  },
+  {
+    "id": "BLUE",
+    "zooniverse_id": "BLUE_ZOONIVERSE_ID",
+    "coords": [0, 0],
+    "location": {"standard": "//placehold.it/1x1/00f.png"},
+    "metadata": {"offline": true},
+    "project_id": "PROJECT_ID",
+    "workflow_ids": ["WORKFLOW_ID"]
+  },
+  {
+    "id": "MAGENTA",
+    "zooniverse_id": "MAGENTA_ZOONIVERSE_ID",
+    "coords": [0, 0],
+    "location": {"standard": "//placehold.it/1x1/f0f.png"},
+    "metadata": {"offline": true},
+    "project_id": "PROJECT_ID",
+    "workflow_ids": ["WORKFLOW_ID"]
+  }
+]
