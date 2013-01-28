@@ -1,0 +1,20 @@
+<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+
+<button type="button" name="close-dialog">&times;</button>
+
+<header>(*) Sign in to your Zooniverse account</header>
+
+<label>
+  <input type="text" name="username" required="required" placeholder="<%= enUs.topBar.username %>" />
+</label>
+
+<label>
+  <input type="password" name="password" required="required" placeholder="<%= enUs.topBar.password %>" />
+</label>
+
+<div class="error-message"></div>
+
+<div class="action">
+  <a href="http://zooniverse.org/"><%= enUs.topBar.forgotPassword %></a>
+  <button type="submit"><%= enUs.topBar.signIn %></button>
+</div>

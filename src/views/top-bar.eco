@@ -1,25 +1,28 @@
 <% enUs = zooniverse?.enUs || require '../lib/en-us' %>
 
 <div class="sign-in-form">
-  <form name="sign-in"></form>
 
   <div class="sign-up">
-    <%= enUs.topBar.noAccount %>
     <button name="sign-up"><%= enUs.topBar.signUp %></button>
+    |
+    <button name="sign-in"><%= enUs.topBar.signIn %></button>
   </div>
 </div>
 
 <div class="current-user">
   <div class="messages">
-    [X] <span class="message-count">&mdash;</span>
+    <a href="http://talk.<%= location.hostname.replace /^www\./, '' %>/#/profile">
+      <span class="message-count">&mdash;</span>
+      <i class="icon-envelope">[[V]]</i>
+    </a>
   </div>
 
-  <div class="welcome">
+  <div class="info">
     <span class="current-user-name">&mdash;</span>
-  </div>
 
-  <div class="sign-out">
-    <button name="sign-out">Sign out</button>
+    <div class="sign-out">
+      <button name="sign-out">Sign out</button>
+    </div>
   </div>
 
   <div class="avatar">

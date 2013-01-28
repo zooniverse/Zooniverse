@@ -30,6 +30,10 @@
 
     __extends(LoginForm, _super);
 
+    LoginForm.prototype.tagName = 'form';
+
+    LoginForm.prototype.className = 'zooniverse-login-form';
+
     LoginForm.prototype.template = template;
 
     LoginForm.prototype.events = {
@@ -76,7 +80,21 @@
         return _this.showError(enUs.user.signInFailed);
       });
       return login.always(function() {
-        return _this.el.removeClass('logging-in');
+        _this.el.removeClass('logging-in');
+        return setTimeout(function() {
+          _this.usernameInput.attr({
+            disabled: User.current != null
+          });
+          _this.passwordInput.attr({
+            disabled: User.current != null
+          });
+          _this.signInButton.attr({
+            disabled: User.current != null
+          });
+          return _this.signOutButton.attr({
+            disabled: !(User.current != null)
+          });
+        });
       });
     };
 
@@ -92,19 +110,7 @@
       if ((user != null ? user.api_key : void 0) || '') {
         this.passwordInput.val;
       }
-      this.errorContainer.html('');
-      this.usernameInput.attr({
-        disabled: user != null
-      });
-      this.passwordInput.attr({
-        disabled: user != null
-      });
-      this.signInButton.attr({
-        disabled: user != null
-      });
-      return this.signOutButton.attr({
-        disabled: !(user != null)
-      });
+      return this.errorContainer.html('');
     };
 
     LoginForm.prototype.showError = function(message) {

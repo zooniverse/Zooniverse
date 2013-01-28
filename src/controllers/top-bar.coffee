@@ -3,7 +3,7 @@ window.zooniverse.controllers ?= {}
 window.zooniverse.views ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
-LoginForm = zooniverse.controllers.LoginForm || require './login-form'
+loginDialog = zooniverse.controllers.loginDialog || require './login-dialog'
 template = zooniverse.views.topBar || require '../views/top-bar'
 Api = zooniverse.api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
@@ -11,9 +11,10 @@ User = zooniverse.models.User || require '../models/user'
 class TopBar extends BaseController
   className: 'zooniverse-top-bar'
   template: template
-  messageTimeout: 2 * 60 * 1000
+  messageCheckTimeout: 2 * 60 * 1000
 
   events:
+    'click button[name="sign-in"]': 'onClickSignIn'
     'click button[name="sign-up"]': 'onClickSignUp'
     'click button[name="sign-out"]': 'onClickSignOut'
 
@@ -25,10 +26,10 @@ class TopBar extends BaseController
   constructor: ->
     super
 
-    new LoginForm
-      el: @el.find 'form[name="sign-in"]'
-
     User.on 'change', @onUserChange
+
+  onClickSignIn: ->
+    loginDialog.show()
 
   onClickSignUp: ->
     alert 'TODO: Sign up dialog'
@@ -38,16 +39,16 @@ class TopBar extends BaseController
 
   onUserChange: (e, user) =>
     @el.toggleClass 'signed-in', user?
+    @getMessages()
     @currentUserName.html user?.name || ''
     @avatarImage.attr src: user?.avatar
-    @getMessages()
 
   getMessages: =>
     if User.current?
       Api.current.get '/talk/messages', (messages) =>
         @el.toggleClass 'has-messages', messages.length isnt 0
         @messageCount.html messages.length
-        setTimeout @getMessages, @messageTimeout
+        setTimeout @getMessages, @messageCheckTimeout
 
     else
       @el.removeClass 'has-messages'

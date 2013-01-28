@@ -94,4 +94,4 @@ window.database =
   delete: (model, id) ->
     return @[model].splice i, 1 for item, i in @[model] when item.id is id
 
-window.database.currentUser = window.database.get 'users', 'clyde'
+# window.database.currentUser = window.database.get 'users', 'clyde'

@@ -9,6 +9,8 @@ User = zooniverse.models.User || require '../models/user'
 enUs = zooniverse.enUs || require '../lib/en-us'
 
 class LoginForm extends BaseController
+  tagName: 'form'
+  className: 'zooniverse-login-form'
   template: template
 
   events:
@@ -46,6 +48,12 @@ class LoginForm extends BaseController
     login.always =>
       @el.removeClass 'logging-in'
 
+      setTimeout =>
+        @usernameInput.attr disabled: User.current?
+        @passwordInput.attr disabled: User.current?
+        @signInButton.attr disabled: User.current?
+        @signOutButton.attr disabled: not User.current?
+
   onClickSignOut: ->
     @signOutButton.attr disabled: true
     User.logout()
@@ -54,11 +62,6 @@ class LoginForm extends BaseController
     @usernameInput.val user?.name || ''
     @passwordInput.val if user?.api_key || '' # Just for the dots.
     @errorContainer.html ''
-
-    @usernameInput.attr disabled: user?
-    @passwordInput.attr disabled: user?
-    @signInButton.attr disabled: user?
-    @signOutButton.attr disabled: not user?
 
   showError: (message) ->
     console.log "SHOW ERROR", message
