@@ -18,14 +18,14 @@ subjects = for i in [0...params.subjects || 50]
   metadata: {}
   workflow_ids: ['WORKFLOW_ID']
 
-recents = for i in [0...params.recents || 0]
+recents = for i in [0...params.recents || subjects.length]
   id: "RECENT_#{i}"
   subjects: [subjects[i]]
   project_id: 'PROJECT_ID'
   workflow_id: subjects[i].workflow_ids[0]
   created_at: (new Date).toUTCString()
 
-favorites = for i in [0...params.recents || 0]
+favorites = for i in [0...params.recents || 5]
   id: "FAVORITE_#{i}"
   subjects: [subjects[i]]
   project_id: 'PROJECT_ID'
@@ -60,16 +60,18 @@ window.database =
     @[model].push newRecord
     $.extend {}, newRecord
 
-  get: (model, query = 10, splice) ->
+  get: (model, query = 10, {splice, page} = {}) ->
+    page ?= 1
+
     if typeof query is 'string'
       query = id: query
       byId = true
 
     if typeof query is 'number'
       if splice
-        @[model].splice 0, query
+        @[model][(page - 1) * query...].splice 0, query
       else
-        @[model].slice 0, query
+        @[model][(page - 1) * query...].slice 0, query
 
     else
       matches = for record in @[model]

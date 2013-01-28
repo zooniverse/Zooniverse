@@ -52,7 +52,7 @@
   recents = (function() {
     var _j, _ref2, _results;
     _results = [];
-    for (i = _j = 0, _ref2 = params.recents || 0; 0 <= _ref2 ? _j < _ref2 : _j > _ref2; i = 0 <= _ref2 ? ++_j : --_j) {
+    for (i = _j = 0, _ref2 = params.recents || subjects.length; 0 <= _ref2 ? _j < _ref2 : _j > _ref2; i = 0 <= _ref2 ? ++_j : --_j) {
       _results.push({
         id: "RECENT_" + i,
         subjects: [subjects[i]],
@@ -67,7 +67,7 @@
   favorites = (function() {
     var _j, _ref2, _results;
     _results = [];
-    for (i = _j = 0, _ref2 = params.recents || 0; 0 <= _ref2 ? _j < _ref2 : _j > _ref2; i = 0 <= _ref2 ? ++_j : --_j) {
+    for (i = _j = 0, _ref2 = params.recents || 5; 0 <= _ref2 ? _j < _ref2 : _j > _ref2; i = 0 <= _ref2 ? ++_j : --_j) {
       _results.push({
         id: "FAVORITE_" + i,
         subjects: [subjects[i]],
@@ -123,10 +123,14 @@
       this[model].push(newRecord);
       return $.extend({}, newRecord);
     },
-    get: function(model, query, splice) {
-      var byId, matches, miss, param, record;
+    get: function(model, query, _arg) {
+      var byId, matches, miss, page, param, record, splice, _ref2;
       if (query == null) {
         query = 10;
+      }
+      _ref2 = _arg != null ? _arg : {}, splice = _ref2.splice, page = _ref2.page;
+      if (page == null) {
+        page = 1;
       }
       if (typeof query === 'string') {
         query = {
@@ -136,17 +140,17 @@
       }
       if (typeof query === 'number') {
         if (splice) {
-          return this[model].splice(0, query);
+          return this[model].slice((page - 1) * query).splice(0, query);
         } else {
-          return this[model].slice(0, query);
+          return this[model].slice((page - 1) * query).slice(0, query);
         }
       } else {
         matches = (function() {
-          var _j, _len1, _ref2, _results;
-          _ref2 = this[model];
+          var _j, _len1, _ref3, _results;
+          _ref3 = this[model];
           _results = [];
-          for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
-            record = _ref2[_j];
+          for (_j = 0, _len1 = _ref3.length; _j < _len1; _j++) {
+            record = _ref3[_j];
             miss = false;
             for (param in query) {
               value = query[param];

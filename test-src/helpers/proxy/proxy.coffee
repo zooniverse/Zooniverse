@@ -57,7 +57,7 @@ $.mockjax
     limit = settings.data?.limit
     limit ?= 5
 
-    @responseText = window.database.get 'subjects', limit, true
+    @responseText = window.database.get 'subjects', limit, splice: true
 
 # $.mockjax
 #   type: 'POST'
@@ -69,15 +69,15 @@ $.mockjax
 #       subject_ids: classification.subject_ids
 #       success: true
 
-# $.mockjax
-#   url: '/projects/test/users/*/recents'
-#   response: (settings) ->
-#     page = settings.data?.page || 1
-#     per_page = settings.data?.per_page || 10
+$.mockjax
+  url: '/projects/test/users/*/recents'
+  response: (settings) ->
+    page = settings.data?.page || 1
+    per_page = settings.data?.per_page || 10
 
-#     start = (page * per_page) - per_page
+    start = (page * per_page) - per_page
 
-#     @responseText = JSON.stringify RECENTS[start...start + per_page]
+    @responseText = JSON.stringify database.get 'recents', per_page, {page}
 
 
 

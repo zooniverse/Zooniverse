@@ -85,7 +85,22 @@
       if (limit == null) {
         limit = 5;
       }
-      return this.responseText = window.database.get('subjects', limit, true);
+      return this.responseText = window.database.get('subjects', limit, {
+        splice: true
+      });
+    }
+  });
+
+  $.mockjax({
+    url: '/projects/test/users/*/recents',
+    response: function(settings) {
+      var page, per_page, start, _ref, _ref1;
+      page = ((_ref = settings.data) != null ? _ref.page : void 0) || 1;
+      per_page = ((_ref1 = settings.data) != null ? _ref1.per_page : void 0) || 10;
+      start = (page * per_page) - per_page;
+      return this.responseText = JSON.stringify(database.get('recents', per_page, {
+        page: page
+      }));
     }
   });
 
