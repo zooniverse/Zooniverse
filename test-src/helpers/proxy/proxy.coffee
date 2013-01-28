@@ -33,6 +33,7 @@ $.mockjax
       user
     else
       success: false
+      message: 'Wrong username or password'
 
 $.mockjax
   url: "/projects/test/current_user"

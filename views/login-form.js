@@ -43,23 +43,23 @@ template = function(__obj) {
     
       enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="sign-in-form">\n  <form name="sign-in"></form>\n\n  <div class="sign-up">\n    ');
+      __out.push('\n\n<input type="text" name="username" required="required" placeholder="');
     
-      __out.push(__sanitize(enUs.topBar.noAccount));
+      __out.push(__sanitize(enUs.topBar.username));
     
-      __out.push('\n    <button name="sign-up">');
+      __out.push('" />\n<input type="password" name="password" required="required" placeholder="');
     
-      __out.push(__sanitize(enUs.topBar.signUp));
+      __out.push(__sanitize(enUs.topBar.password));
     
-      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="messages">\n    <span class="message-count"></span>\n    ');
+      __out.push('" />\n<button type="submit">');
     
-      __out.push(__sanitize(enUs.topBar.messages));
+      __out.push(__sanitize(enUs.topBar.signIn));
     
-      __out.push('\n  </div>\n\n  <div class="welcome">\n    ');
+      __out.push('</button>\n<button name="sign-out">');
     
-      __out.push(__sanitize(enUs.topBar.welcome));
+      __out.push(__sanitize(enUs.topBar.signOut));
     
-      __out.push('\n    <span class="current-user-name"></span>\n  </div>\n\n  <div class="sign-out">\n    <button name="sign-out">Sign out</button>\n  </div>\n</div>\n');
+      __out.push('</button>\n<div class="error-message"></div>\n');
     
     }).call(this);
     
@@ -67,5 +67,5 @@ template = function(__obj) {
   __obj.safe = __objSafe, __obj.escape = __escape;
   return __out.join('');
 };
-window.zooniverse.views['topBar'] = template;
+window.zooniverse.views['loginForm'] = template;
 if (typeof module !== 'undefined') module.exports = template;

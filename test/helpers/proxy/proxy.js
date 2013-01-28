@@ -45,7 +45,8 @@
       password = (_ref1 = settings.data) != null ? _ref1.password : void 0;
       user = database.get('users', username);
       return this.responseText = user.password === password ? user : {
-        success: false
+        success: false,
+        message: 'Wrong username or password'
       };
     }
   });
