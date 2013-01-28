@@ -28,11 +28,30 @@
         display: inline-block
         max-width: 33%
         padding: 30px
+        position: relative
         text-align: left
         transition: transform 0.25s ease-out
 
+  button
+    background: transparent
+    border: 0
+    color: inherit
+    cursor: pointer
+    font: inherit
+    margin: 0
+    padding: 0
+
+    &[name="close-dialog"]
+      font-size: 16px
+      height: 1em
+      position: absolute
+      right: 4px
+      top: 0
+      width: 1em
+
   header
     font-size: 16px
+    margin-bottom: 20px
 
   label
     display: block
@@ -48,6 +67,10 @@
     &:first-child
       width: 100%
 
+  .explanation
+    margin: 5px 13px
+    opacity: 0.75
+
   .error-message
     color: darken(#f00, 50%)
     font-weight: bold
@@ -56,3 +79,15 @@
   .action
     margin: 10px 0
     text-align: center
+
+    button
+      border: 1px solid #d4d4d4
+      border-radius: 3px
+      box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(#000, 0.125)
+      font-weight: bold
+      margin: 0 5px
+      padding: 3px 10px
+
+      &:active
+        border-color: rgba(#000, 0.25)
+        box-shadow: 0 100px rgba(#000, 0.125) inset

@@ -13,6 +13,7 @@ class Dialog extends BaseController
 
   events:
     'click button[name="close-dialog"]': 'hide'
+    'keydown': 'onKeyDown'
 
   elements:
     '.dialog': 'contentContainer'
@@ -25,8 +26,12 @@ class Dialog extends BaseController
 
     @el.appendTo document.body
 
+  onKeyDown: ({which}) ->
+    @hide() if which is 27 # ESC
+
   show: ->
     @el.removeClass 'hidden'
+    @contentContainer.find('input, textarea, select').first().focus()
 
   hide: ->
     @el.addClass 'hidden'

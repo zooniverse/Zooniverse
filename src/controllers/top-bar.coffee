@@ -4,6 +4,7 @@ window.zooniverse.views ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
 loginDialog = zooniverse.controllers.loginDialog || require './login-dialog'
+signupDialog = zooniverse.controllers.signupDialog || require './signup-dialog'
 template = zooniverse.views.topBar || require '../views/top-bar'
 Api = zooniverse.api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
@@ -32,7 +33,7 @@ class TopBar extends BaseController
     loginDialog.show()
 
   onClickSignUp: ->
-    alert 'TODO: Sign up dialog'
+    signupDialog.show()
 
   onClickSignOut: ->
     User.logout()

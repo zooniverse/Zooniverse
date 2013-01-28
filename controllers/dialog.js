@@ -31,7 +31,8 @@
     Dialog.prototype.template = template;
 
     Dialog.prototype.events = {
-      'click button[name="close-dialog"]': 'hide'
+      'click button[name="close-dialog"]': 'hide',
+      'keydown': 'onKeyDown'
     };
 
     Dialog.prototype.elements = {
@@ -45,8 +46,17 @@
       this.el.appendTo(document.body);
     }
 
+    Dialog.prototype.onKeyDown = function(_arg) {
+      var which;
+      which = _arg.which;
+      if (which === 27) {
+        return this.hide();
+      }
+    };
+
     Dialog.prototype.show = function() {
-      return this.el.removeClass('hidden');
+      this.el.removeClass('hidden');
+      return this.contentContainer.find('input, textarea, select').first().focus();
     };
 
     Dialog.prototype.hide = function() {

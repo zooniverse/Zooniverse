@@ -39,8 +39,39 @@ template = function(__obj) {
   }
   (function() {
     (function() {
+      var enUs;
     
-      __out.push('<header>(*) Sign up for a new account</header>\n');
+      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+    
+      __out.push('\n<button type="button" name="close-dialog">&times;</button>\n\n<header>(*) Sign up for a new account</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="');
+    
+      __out.push(__sanitize(enUs.topBar.username));
+    
+      __out.push('" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" placeholder="');
+    
+      __out.push(__sanitize(enUs.topBar.password));
+    
+      __out.push('" />\n</label>\n\n<label>\n  <input type="email" name="email" required="required" placeholder="');
+    
+      __out.push(__sanitize(enUs.topBar.email));
+    
+      __out.push('" />\n</label>\n\n<label>\n  <input type="text" name="real-name" placeholder="');
+    
+      __out.push(__sanitize(enUs.topBar.realName));
+    
+      __out.push('" />\n  <div class="explanation">');
+    
+      __out.push(enUs.topBar.whyRealName);
+    
+      __out.push('</div>\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="http://zooniverse.org/">');
+    
+      __out.push(__sanitize(enUs.topBar.forgotPassword));
+    
+      __out.push('</a>\n  <button type="submit">');
+    
+      __out.push(__sanitize(enUs.topBar.signUp));
+    
+      __out.push('</button>\n</div>\n');
     
     }).call(this);
     

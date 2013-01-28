@@ -14,7 +14,7 @@ class LoginForm extends BaseController
   template: template
 
   events:
-    'submit*': 'onSignInSubmit'
+    'submit*': 'onSubmit'
     'click* button[name="sign-up"]': 'onClickSignUp'
     'click* button[name="sign-out"]': 'onClickSignOut'
 
@@ -31,7 +31,7 @@ class LoginForm extends BaseController
     User.on 'change', =>
       @onUserChange arguments...
 
-  onSignInSubmit: ->
+  onSubmit: ->
     @el.addClass 'logging-in'
     @signInButton.attr disabled: true
 

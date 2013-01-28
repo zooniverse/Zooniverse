@@ -37,7 +37,7 @@
     LoginForm.prototype.template = template;
 
     LoginForm.prototype.events = {
-      'submit*': 'onSignInSubmit',
+      'submit*': 'onSubmit',
       'click* button[name="sign-up"]': 'onClickSignUp',
       'click* button[name="sign-out"]': 'onClickSignOut'
     };
@@ -58,7 +58,7 @@
       });
     }
 
-    LoginForm.prototype.onSignInSubmit = function() {
+    LoginForm.prototype.onSubmit = function() {
       var login,
         _this = this;
       this.el.addClass('logging-in');
