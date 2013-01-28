@@ -18,7 +18,7 @@
 
   User = window.zooniverse.models.User || require('./user');
 
-  Subject = require('./subject');
+  Subject = window.zooniverse.models.Subject || require('./subject');
 
   $ = window.jQuery;
 

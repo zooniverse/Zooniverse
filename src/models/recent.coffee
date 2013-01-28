@@ -4,7 +4,7 @@ window.zooniverse.models ?= {}
 BaseModel = window.zooniverse.models.BaseModel || require './base-model'
 Api = window.zooniverse.Api || require '../lib/api'
 User = window.zooniverse.models.User || require './user'
-Subject = require './subject'
+Subject = window.zooniverse.models.Subject || require './subject'
 $ = window.jQuery
 
 class SubjectForRecent extends Subject

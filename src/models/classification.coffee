@@ -45,15 +45,15 @@ class Classification extends BaseModel
   annotations: null
   favorite: false
 
-  started: null
-  agent: null
+  started_at: null
+  user_agent: null
 
   constructor: ->
     super
     @annotations ?= []
 
-    @started = (new Date).toUTCString()
-    @agent = window.navigator.userAgent
+    @started_at = (new Date).toUTCString()
+    @user_agent = window.navigator.userAgent
 
   annotate: (annotation) ->
     @annotations.push annotation
@@ -61,7 +61,7 @@ class Classification extends BaseModel
   toJSON: ->
     output = classification:
       subject_ids: [@subject.id]
-      annotations: @annotations.concat [{@started}, {@agent}]
+      annotations: @annotations.concat [{@started_at}, {@user_agent}]
 
     output.favorite = true if @favorite
 

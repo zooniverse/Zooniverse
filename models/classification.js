@@ -93,9 +93,9 @@
 
     Classification.prototype.favorite = false;
 
-    Classification.prototype.started = null;
+    Classification.prototype.started_at = null;
 
-    Classification.prototype.agent = null;
+    Classification.prototype.user_agent = null;
 
     function Classification() {
       var _ref2;
@@ -103,8 +103,8 @@
       if ((_ref2 = this.annotations) == null) {
         this.annotations = [];
       }
-      this.started = (new Date).toUTCString();
-      this.agent = window.navigator.userAgent;
+      this.started_at = (new Date).toUTCString();
+      this.user_agent = window.navigator.userAgent;
     }
 
     Classification.prototype.annotate = function(annotation) {
@@ -118,9 +118,9 @@
           subject_ids: [this.subject.id],
           annotations: this.annotations.concat([
             {
-              started: this.started
+              started_at: this.started_at
             }, {
-              agent: this.agent
+              user_agent: this.user_agent
             }
           ])
         }
