@@ -6,9 +6,9 @@ for pair in location.search[1...].split '&'
   continue unless value?
   params[key] = try JSON.parse value catch e then value
 
-randomImageUrl = ->
+randomImageUrl = (size = '1x1') ->
   hex = ('00000' + (Math.floor Math.random() * 0x1000000).toString 16)[-6...]
-  "//placehold.it/1x1/#{hex}.png"
+  "//placehold.it/#{size}/#{hex}.png"
 
 subjects = for i in [0...params.subjects || 50]
   id: "SUBJECT_#{i}"
@@ -39,14 +39,19 @@ users = for name, i in ['blinky', 'pinky', 'inky', 'clyde']
   api_key: "#{name.toUpperCase()}_API_KEY"
   name: name
   password: name
+  avatar: randomImageUrl '64x64'
   project:
     classification_count: recents.length
     tutorial_done: false
+
+messages = for i in [0...params.messages || 5]
+  {}
 
 window.database =
   subjects: subjects
   recents: recents
   users: users
+  messages: messages
 
   currentUser: null
 
@@ -55,13 +60,17 @@ window.database =
     @[model].push newRecord
     $.extend {}, newRecord
 
-  get: (model, query) ->
+  get: (model, query = 10, splice) ->
     if typeof query is 'string'
       query = id: query
       byId = true
 
     if typeof query is 'number'
-      @[model].splice 0, query
+      if splice
+        @[model].splice 0, query
+      else
+        @[model].slice 0, query
+
     else
       matches = for record in @[model]
         miss = false

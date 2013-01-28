@@ -51,15 +51,7 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.signUp));
     
-      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="messages">\n    <span class="message-count"></span>\n    ');
-    
-      __out.push(__sanitize(enUs.topBar.messages));
-    
-      __out.push('\n  </div>\n\n  <div class="welcome">\n    ');
-    
-      __out.push(__sanitize(enUs.topBar.welcome));
-    
-      __out.push('\n    <span class="current-user-name"></span>\n  </div>\n\n  <div class="sign-out">\n    <button name="sign-out">Sign out</button>\n  </div>\n</div>\n');
+      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="messages">\n    [X] <span class="message-count">&mdash;</span>\n  </div>\n\n  <div class="welcome">\n    <span class="current-user-name">&mdash;</span>\n  </div>\n\n  <div class="sign-out">\n    <button name="sign-out">Sign out</button>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
     
     }).call(this);
     

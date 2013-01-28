@@ -80,7 +80,12 @@
       });
     };
 
-    LoginForm.prototype.onClickSignOut = function() {};
+    LoginForm.prototype.onClickSignOut = function() {
+      this.signOutButton.attr({
+        disabled: true
+      });
+      return User.logout();
+    };
 
     LoginForm.prototype.onUserChange = function(e, user) {
       this.usernameInput.val((user != null ? user.name : void 0) || '');

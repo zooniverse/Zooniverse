@@ -35,16 +35,22 @@
 
     TopBar.prototype.template = template;
 
+    TopBar.prototype.messageTimeout = 2 * 60 * 1000;
+
     TopBar.prototype.events = {
       'click button[name="sign-up"]': 'onClickSignUp',
       'click button[name="sign-out"]': 'onClickSignOut'
     };
 
     TopBar.prototype.elements = {
-      '.current-user-name': 'currentUserName'
+      '.current-user-name': 'currentUserName',
+      '.message-count': 'messageCount',
+      '.avatar img': 'avatarImage'
     };
 
     function TopBar() {
+      this.getMessages = __bind(this.getMessages, this);
+
       this.onUserChange = __bind(this.onUserChange, this);
       TopBar.__super__.constructor.apply(this, arguments);
       new LoginForm({
@@ -63,7 +69,25 @@
 
     TopBar.prototype.onUserChange = function(e, user) {
       this.el.toggleClass('signed-in', user != null);
-      return this.currentUserName.html((user != null ? user.name : void 0) || '');
+      this.currentUserName.html((user != null ? user.name : void 0) || '');
+      this.avatarImage.attr({
+        src: user != null ? user.avatar : void 0
+      });
+      return this.getMessages();
+    };
+
+    TopBar.prototype.getMessages = function() {
+      var _this = this;
+      if (User.current != null) {
+        return Api.current.get('/talk/messages', function(messages) {
+          _this.el.toggleClass('has-messages', messages.length !== 0);
+          _this.messageCount.html(messages.length);
+          return setTimeout(_this.getMessages, _this.messageTimeout);
+        });
+      } else {
+        this.el.removeClass('has-messages');
+        return this.messageCount.html('0');
+      }
     };
 
     return TopBar;

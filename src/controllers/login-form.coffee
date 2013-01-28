@@ -25,7 +25,9 @@ class LoginForm extends BaseController
 
   constructor: ->
     super
-    User.on 'change', => @onUserChange arguments...
+
+    User.on 'change', =>
+      @onUserChange arguments...
 
   onSignInSubmit: ->
     @el.addClass 'logging-in'
@@ -45,6 +47,8 @@ class LoginForm extends BaseController
       @el.removeClass 'logging-in'
 
   onClickSignOut: ->
+    @signOutButton.attr disabled: true
+    User.logout()
 
   onUserChange: (e, user) ->
     @usernameInput.val user?.name || ''

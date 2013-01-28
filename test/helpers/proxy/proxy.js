@@ -61,6 +61,13 @@
   });
 
   $.mockjax({
+    url: "/talk/messages",
+    response: function(settings) {
+      return this.responseText = database.get('messages');
+    }
+  });
+
+  $.mockjax({
     url: "/projects/test/logout",
     response: function() {
       database.currentUser = null;
@@ -78,7 +85,7 @@
       if (limit == null) {
         limit = 5;
       }
-      return this.responseText = window.database.get('subjects', limit);
+      return this.responseText = window.database.get('subjects', limit, true);
     }
   });
 

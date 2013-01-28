@@ -41,6 +41,11 @@ $.mockjax
     @responseText = database.currentUser || success: false
 
 $.mockjax
+  url: "/talk/messages"
+  response: (settings) ->
+    @responseText = database.get 'messages'
+
+$.mockjax
   url: "/projects/test/logout"
   response: ->
     database.currentUser = null
@@ -52,7 +57,7 @@ $.mockjax
     limit = settings.data?.limit
     limit ?= 5
 
-    @responseText = window.database.get 'subjects', limit
+    @responseText = window.database.get 'subjects', limit, true
 
 # $.mockjax
 #   type: 'POST'

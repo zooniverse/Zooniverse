@@ -7,8 +7,6 @@ module.exports =
     forgotPassword: 'Forgot your password?'
     noAccount: 'Don\'t have an account?'
     signUp: 'Sign up'
-    welcome: 'Welcome'
-    messages: 'messages'
 
   user:
     badLogin: 'Incorrect username or password'
