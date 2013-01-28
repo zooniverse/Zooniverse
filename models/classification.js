@@ -111,6 +111,17 @@
       return this.annotations.push(annotation);
     };
 
+    Classification.prototype.removeAnnotation = function(annotation) {
+      var a, i, _i, _len, _ref2;
+      _ref2 = this.annotations;
+      for (i = _i = 0, _len = _ref2.length; _i < _len; i = ++_i) {
+        a = _ref2[i];
+        if (a === annotation) {
+          return this.annotations.splice(i, 1);
+        }
+      }
+    };
+
     Classification.prototype.toJSON = function() {
       var output;
       output = {

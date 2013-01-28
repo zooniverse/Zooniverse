@@ -58,6 +58,10 @@ class Classification extends BaseModel
   annotate: (annotation) ->
     @annotations.push annotation
 
+  removeAnnotation: (annotation) ->
+    for a, i in @annotations when a is annotation
+      return @annotations.splice i, 1
+
   toJSON: ->
     output = classification:
       subject_ids: [@subject.id]
