@@ -28,7 +28,7 @@ class ProxyFrame extends EventEmitter
     @queue ?= []
 
     @el = $("<iframe src='#{@host}#{@path}' class='#{@className}' style='display: none;'></iframe>")
-    @el.appendTo 'body'
+    @el.appendTo document.body
 
     setTimeout (=> @timeout() unless @ready), @loadTimeout
 
@@ -47,6 +47,7 @@ class ProxyFrame extends EventEmitter
 
   onFailed: ->
     return if @ready
+    $(document.body.parentNode).addClass 'offline'
     @failed = true
     @deferreds[payload.id].reject(@constructor.REJECTION) for payload in @queue
     @trigger 'fail'
