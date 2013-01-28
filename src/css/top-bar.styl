@@ -1,7 +1,7 @@
 .zooniverse-top-bar
   background: #1c1c1c
   color: #fff
-  font-size: 11px
+  font: bold 11px "Helvetica Neue", Arial, Helvetica, sans-serif
   height: 30px
   padding: 5px
   position: absolute
@@ -34,8 +34,22 @@
     padding: 0
     text-shadow: inherit
 
-  .sign-in-form
+  .no-user
     display: block
+    margin-top: 7px
+
+    .zooniverse,
+    .sign-in
+      display: inline-block
+      margin: 0 15px
+      vertical-align: middle
+
+    .zooniverse
+      font-size: 13px
+
+    .sign-in
+      font-size: 10px
+      text-transform: uppercase
 
   .current-user
     display: none
@@ -44,34 +58,38 @@
     .info,
     .avatar
       display: inline-block
-      vertical-align: top
+      margin: 0 15px
+      vertical-align: middle
 
     .messages
-      line-height: 30px
-      margin-right: 10px
+      margin-top: -3px
 
       .message-count
         color: inherit
 
     .info
-      margin-right: 5px
+      line-height: 1
+      margin-top: -3px
       text-align: right
 
       .current-user-name
         font-size: 13px
         font-weight: bold
+        line-height: 1
 
       button
         font-size: 8px
         text-transform: uppercase
 
     .avatar
+      margin: 0
+
       img
         height: 30px
         width: 30px
 
   &.signed-in
-    .sign-in-form
+    .no-user
       display: none
 
     .current-user

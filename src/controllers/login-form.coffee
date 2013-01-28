@@ -48,20 +48,20 @@ class LoginForm extends BaseController
     login.always =>
       @el.removeClass 'logging-in'
 
-      setTimeout =>
-        @usernameInput.attr disabled: User.current?
-        @passwordInput.attr disabled: User.current?
-        @signInButton.attr disabled: User.current?
-        @signOutButton.attr disabled: not User.current?
-
   onClickSignOut: ->
     @signOutButton.attr disabled: true
     User.logout()
 
   onUserChange: (e, user) ->
     @usernameInput.val user?.name || ''
-    @passwordInput.val if user?.api_key || '' # Just for the dots.
+    @passwordInput.val user?.api_key || '' # Just for the dots.
     @errorContainer.html ''
+
+    setTimeout =>
+      @usernameInput.attr disabled: User.current?
+      @passwordInput.attr disabled: User.current?
+      @signInButton.attr disabled: User.current?
+      @signOutButton.attr disabled: not User.current?
 
   showError: (message) ->
     console.log "SHOW ERROR", message

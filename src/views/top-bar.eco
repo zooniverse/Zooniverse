@@ -1,8 +1,11 @@
 <% enUs = zooniverse?.enUs || require '../lib/en-us' %>
 
-<div class="sign-in-form">
+<div class="no-user">
+  <div class="zooniverse">
+    (*) A Zooniverse project
+  </div>
 
-  <div class="sign-up">
+  <div class="sign-in">
     <button name="sign-up"><%= enUs.topBar.signUp %></button>
     |
     <button name="sign-in"><%= enUs.topBar.signIn %></button>
