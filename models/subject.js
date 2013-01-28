@@ -109,6 +109,9 @@
           getFallback = $.get(_this.fallback);
           getFallback.done(function(rawSubjects) {
             var newSubjects, rawSubject;
+            rawSubjects.sort(function() {
+              return Math.random() - 0.5;
+            });
             newSubjects = (function() {
               var _i, _len, _results;
               _results = [];

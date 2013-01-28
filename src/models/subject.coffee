@@ -78,6 +78,7 @@ class Subject extends BaseModel
         getFallback = $.get @fallback
 
         getFallback.done (rawSubjects) =>
+          rawSubjects.sort -> Math.random() - 0.5
           newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
           @trigger 'fetch', [newSubjects]
           fetcher.resolve newSubjects
