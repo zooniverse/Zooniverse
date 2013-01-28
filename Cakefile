@@ -16,7 +16,7 @@ toVarName = (file) ->
 
 option '-p', '--port [PORT]', 'Port on which to run the dev server'
 
-task 'watch', 'Watch changes during development', ->
+task 'watch', 'Watch CoffeeScript changes during development', ->
   console.log 'Watching for CoffeeScript in ./src'
   run 'coffee', ['--watch', '--output', '.', '--compile', './src/']
 
@@ -66,11 +66,16 @@ task 'watch-eco', 'Watch changes in eco templates', ->
   console.log "Watching for ECO template changes in #{SRC_DIR}"
   recompile()
 
+task 'watch-stylus', 'Recompile Stylus files when they change', ->
+  console.log 'Watching .styl files in ./src/css'
+  run 'stylus', ['--watch', './src/css', '--out', './css']
+
 task 'serve', 'Run a dev server', (options) ->
   port = options.port || process.env.PORT || DEFAULT_PORT
 
   invoke 'watch'
   invoke 'watch-eco'
+  invoke 'watch-stylus'
 
   console.log "Running a server at http://localhost:#{port}"
   run 'python', ['-m', 'SimpleHTTPServer', port]
