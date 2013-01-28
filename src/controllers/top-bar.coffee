@@ -46,9 +46,9 @@ class TopBar extends BaseController
 
   getMessages: =>
     if User.current?
-      Api.current.get '/talk/messages', (messages) =>
-        @el.toggleClass 'has-messages', messages.length isnt 0
-        @messageCount.html messages.length
+      Api.current.get '/talk/messages/count', (messages) =>
+        @el.toggleClass 'has-messages', messages isnt 0
+        @messageCount.html messages
         setTimeout @getMessages, @messageCheckTimeout
 
     else

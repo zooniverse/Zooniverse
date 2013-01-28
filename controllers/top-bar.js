@@ -83,9 +83,9 @@
     TopBar.prototype.getMessages = function() {
       var _this = this;
       if (User.current != null) {
-        return Api.current.get('/talk/messages', function(messages) {
-          _this.el.toggleClass('has-messages', messages.length !== 0);
-          _this.messageCount.html(messages.length);
+        return Api.current.get('/talk/messages/count', function(messages) {
+          _this.el.toggleClass('has-messages', messages !== 0);
+          _this.messageCount.html(messages);
           return setTimeout(_this.getMessages, _this.messageCheckTimeout);
         });
       } else {
