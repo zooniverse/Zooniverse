@@ -125,10 +125,10 @@
     };
 
     Paginator.prototype.getItemEl = function(item) {
-      var inner, itemEl;
+      var inner, itemEl, _ref3, _ref4;
       itemEl = this.itemsContainer.find("[data-item-id='" + item.id + "']");
       if (itemEl.length === 0) {
-        inner = this.itemTemplate != null ? this.itemTemplate(item) : "<div class='item'><a href=\"" + (item.subjects[0].talkHref()) + "\">" + item.subjects[0].zooniverse_id + "</a></div>";
+        inner = this.itemTemplate != null ? this.itemTemplate(item) : "<div class='item'><a href=\"" + (((_ref3 = item.subjects[0]) != null ? _ref3.talkHref() : void 0) || '#/SUBJECT-ERROR') + "\">" + (((_ref4 = item.subjects[0]) != null ? _ref4.zooniverse_id : void 0) || 'Error in subject') + "</a></div>";
         itemEl = $(inner);
         itemEl.attr({
           'data-item-id': item.id

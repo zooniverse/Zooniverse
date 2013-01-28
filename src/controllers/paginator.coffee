@@ -74,7 +74,7 @@ class Paginator extends BaseController
       inner = if @itemTemplate?
         @itemTemplate item
       else
-        """<div class='item'><a href="#{item.subjects[0].talkHref()}">#{item.subjects[0].zooniverse_id}</a></div>"""
+        """<div class='item'><a href="#{item.subjects[0]?.talkHref() || '#/SUBJECT-ERROR'}">#{item.subjects[0]?.zooniverse_id || 'Error in subject'}</a></div>"""
 
       itemEl = $(inner)
       itemEl.attr 'data-item-id': item.id
