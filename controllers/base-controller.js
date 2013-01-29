@@ -56,7 +56,9 @@
     }
 
     BaseController.prototype.renderTemplate = function() {
-      this.el.html(this.template(this));
+      if (this.template && !this.el.html()) {
+        this.el.html(this.template(this));
+      }
       if (this.className) {
         return this.el.addClass(this.className);
       }

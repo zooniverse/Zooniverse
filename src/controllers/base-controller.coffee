@@ -25,7 +25,7 @@ class BaseController extends EventEmitter
     @nameElements()
 
   renderTemplate: ->
-    @el.html @template @
+    @el.html @template @ if @template and not @el.html()
     @el.addClass @className if @className
 
   nameElements: ->
