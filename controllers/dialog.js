@@ -55,12 +55,24 @@
     };
 
     Dialog.prototype.show = function() {
-      this.el.removeClass('hidden');
+      var _this = this;
+      this.el.css({
+        display: ''
+      });
+      setTimeout(function() {
+        return _this.el.addClass('showing');
+      });
       return this.contentContainer.find('input, textarea, select').first().focus();
     };
 
     Dialog.prototype.hide = function() {
-      return this.el.addClass('hidden');
+      var _this = this;
+      this.el.removeClass('showing');
+      return setTimeout((function() {
+        return _this.el.css({
+          display: 'none'
+        });
+      }), 500);
     };
 
     return Dialog;

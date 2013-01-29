@@ -1,25 +1,24 @@
 .zooniverse-dialog
+  display: block;
   font-size: 10px
   height: 100%
   left: 0
   position: fixed
   top: 0
   width: 100%
-  display: block;
-
-  &.hidden
-    display: none
 
   .underlay
-    background: rgba(#000, 0.33)
+    background: rgba(#000, 0)
     display: table
     width: 100%
+    transition: background-color 0.5s ease-in-out
     height: 100%
 
     .container
       display: table-cell
       text-align: center
       vertical-align: middle
+      perspective: 1000px
 
       .dialog
         background: #f4f4f4
@@ -27,10 +26,20 @@
         box-shadow: 0 3px 5px rgba(#000, 0.5)
         display: inline-block
         max-width: 33%
+        opacity: 0
         padding: 30px
         position: relative
         text-align: left
-        transition: transform 0.25s ease-out
+        transform: translateY(-50%) rotateX(45deg)
+        transition: opacity 0.25s ease-in-out, transform 0.33s ease-in-out
+
+  &.showing
+    .underlay
+      background: rgba(#000, 0.5)
+
+      .container .dialog
+        opacity: 1
+        transform: translateY(0) rotateX(0)
 
   button
     background: transparent

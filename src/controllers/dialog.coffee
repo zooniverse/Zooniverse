@@ -30,11 +30,14 @@ class Dialog extends BaseController
     @hide() if which is 27 # ESC
 
   show: ->
-    @el.removeClass 'hidden'
+    @el.css display: ''
+    setTimeout => @el.addClass 'showing'
+
     @contentContainer.find('input, textarea, select').first().focus()
 
   hide: ->
-    @el.addClass 'hidden'
+    @el.removeClass 'showing'
+    setTimeout (=> @el.css display: 'none'), 500
 
 window.zooniverse.controllers.Dialog = Dialog
 module?.exports = Dialog
