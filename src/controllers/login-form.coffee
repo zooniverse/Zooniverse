@@ -1,6 +1,7 @@
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
 window.zooniverse.views ?= {}
+window.zooniverse.models ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
 template = zooniverse.views.loginForm || require '../views/login-form'

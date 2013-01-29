@@ -1,4 +1,4 @@
-<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+<% enUs = window.zooniverse?.enUs || require '../lib/en-us' %>
 
 <div class="no-user">
   <div class="zooniverse">

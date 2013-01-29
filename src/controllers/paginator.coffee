@@ -3,7 +3,7 @@ window.zooniverse.controllers ?= {}
 window.zooniverse.views ?= {}
 
 BaseController = window.zooniverse.controllers.BaseController || require './base-controller'
-template = window.zooniverse.views.topBar || require '../views/paginator'
+template = window.zooniverse.views.paginator || require '../views/paginator'
 User = window.zooniverse.models.User || require '../models/user'
 $ = window.jQuery
 

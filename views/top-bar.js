@@ -39,9 +39,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs;
+      var enUs, _ref;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
     
       __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    (*) A Zooniverse project\n  </div>\n\n  <div class="sign-in">\n    <button name="sign-up">');
     
