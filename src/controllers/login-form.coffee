@@ -41,13 +41,15 @@ class LoginForm extends BaseController
       password: @passwordInput.val()
 
     login.done ({success, message}) =>
-      @showError message unless success
+      unless success
+        @showError message
 
     login.fail =>
       @showError enUs.user.signInFailed
 
     login.always =>
       @el.removeClass 'logging-in'
+      setTimeout => @signInButton.attr disabled: User.current?
 
   onClickSignOut: ->
     @signOutButton.attr disabled: true
@@ -58,11 +60,10 @@ class LoginForm extends BaseController
     @passwordInput.val user?.api_key || '' # Just for the dots.
     @errorContainer.html ''
 
-    setTimeout =>
-      @usernameInput.attr disabled: User.current?
-      @passwordInput.attr disabled: User.current?
-      @signInButton.attr disabled: User.current?
-      @signOutButton.attr disabled: not User.current?
+    @usernameInput.attr disabled: User.current?
+    @passwordInput.attr disabled: User.current?
+    @signInButton.attr disabled: User.current?
+    @signOutButton.attr disabled: not User.current?
 
   showError: (message) ->
     console.log "SHOW ERROR", message

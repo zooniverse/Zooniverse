@@ -84,7 +84,12 @@
         return _this.showError(enUs.user.signInFailed);
       });
       return login.always(function() {
-        return _this.el.removeClass('logging-in');
+        _this.el.removeClass('logging-in');
+        return setTimeout(function() {
+          return _this.signInButton.attr({
+            disabled: User.current != null
+          });
+        });
       });
     };
 
@@ -96,23 +101,20 @@
     };
 
     LoginForm.prototype.onUserChange = function(e, user) {
-      var _this = this;
       this.usernameInput.val((user != null ? user.name : void 0) || '');
       this.passwordInput.val((user != null ? user.api_key : void 0) || '');
       this.errorContainer.html('');
-      return setTimeout(function() {
-        _this.usernameInput.attr({
-          disabled: User.current != null
-        });
-        _this.passwordInput.attr({
-          disabled: User.current != null
-        });
-        _this.signInButton.attr({
-          disabled: User.current != null
-        });
-        return _this.signOutButton.attr({
-          disabled: !(User.current != null)
-        });
+      this.usernameInput.attr({
+        disabled: User.current != null
+      });
+      this.passwordInput.attr({
+        disabled: User.current != null
+      });
+      this.signInButton.attr({
+        disabled: User.current != null
+      });
+      return this.signOutButton.attr({
+        disabled: !(User.current != null)
       });
     };
 
