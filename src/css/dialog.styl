@@ -1,3 +1,10 @@
+@keyframes zooniverse-progress
+  0%
+    background-position: 0 0
+
+  100%
+    background-position: 50px 0
+
 .zooniverse-dialog
   display: block;
   font-size: 10px
@@ -31,7 +38,7 @@
         padding: 30px
         position: relative
         text-align: left
-        transform: translateY(-50%) rotateX(45deg)
+        transform: translateY(-25%) rotateX(30deg) scale(0.75)
         transition: opacity 0.25s ease-in-out, transform 0.33s ease-in-out
 
   &.showing
@@ -40,7 +47,7 @@
 
       .container .dialog
         opacity: 1
-        transform: translateY(0) rotateX(0)
+        transform: translateY(0) rotateX(0) scale(1)
 
   button
     background: transparent
@@ -59,9 +66,38 @@
       top: 0
       width: 1em
 
+  a
+    color: inherit
+
   header
     font-size: 16px
     margin-bottom: 20px
+
+    .zooniverse-logo
+      background: url("./images/zooniverse-logo-black.png")
+      display: inline-block
+      height: 25px
+      margin-right: 5px
+      position: relative
+      top: -2px
+      vertical-align: middle
+      width: 25px
+
+  .loader
+    animation: 1s zooniverse-progress linear infinite
+    background: linear-gradient(left top, transparent 25%, #000 25%, #000 50%, transparent 50%, transparent 75%, #000 75%)
+    background-size: 25px 25px
+    bottom: 0
+    display: none
+    left: 0
+    opacity: 0.05
+    position: absolute
+    right: 0
+    top: 0
+    z-index: -1
+
+  .loading .loader
+    display: block
 
   label
     display: block
@@ -69,9 +105,10 @@
 
   input
     background: #f0f0f0
-    border: 1px solid #e1e1e1
+    border: 1px solid #ccc
     box-sizing: border-box
     box-shadow: 0 1px 0 #fff
+    font-size: 12px
     padding: 10px
 
     &:first-child
@@ -91,9 +128,11 @@
     text-align: center
 
     button
-      border: 1px solid #d4d4d4
+      background: #fff
+      border: 1px solid #bbb
       border-radius: 3px
-      box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(#000, 0.125)
+      box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(#000, 0.25)
+      font-size: 12px
       font-weight: bold
       margin: 0 5px
       padding: 3px 10px

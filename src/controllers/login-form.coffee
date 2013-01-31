@@ -33,7 +33,7 @@ class LoginForm extends BaseController
       @onUserChange arguments...
 
   onSubmit: ->
-    @el.addClass 'logging-in'
+    @el.addClass 'loading'
     @signInButton.attr disabled: true
 
     login = User.login
@@ -48,7 +48,7 @@ class LoginForm extends BaseController
       @showError enUs.user.signInFailed
 
     login.always =>
-      @el.removeClass 'logging-in'
+      @el.removeClass 'loading'
       setTimeout => @signInButton.attr disabled: User.current?
 
   onClickSignOut: ->

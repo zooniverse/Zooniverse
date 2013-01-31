@@ -65,7 +65,7 @@
     LoginForm.prototype.onSubmit = function() {
       var login,
         _this = this;
-      this.el.addClass('logging-in');
+      this.el.addClass('loading');
       this.signInButton.attr({
         disabled: true
       });
@@ -84,7 +84,7 @@
         return _this.showError(enUs.user.signInFailed);
       });
       return login.always(function() {
-        _this.el.removeClass('logging-in');
+        _this.el.removeClass('loading');
         return setTimeout(function() {
           return _this.signInButton.attr({
             disabled: User.current != null

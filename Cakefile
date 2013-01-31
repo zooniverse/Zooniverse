@@ -68,7 +68,7 @@ task 'watch-eco', 'Watch changes in eco templates', ->
 
 task 'watch-stylus', 'Recompile Stylus files when they change', ->
   console.log 'Watching .styl files in ./src/css'
-  run 'stylus', ['--watch', './src/css', '--out', './css']
+  run 'stylus', ['--watch', './src/css', '--out', './css', '--inline']
 
 task 'serve', 'Run a dev server', (options) ->
   port = options.port || process.env.PORT || DEFAULT_PORT

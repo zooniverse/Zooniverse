@@ -1,7 +1,13 @@
 <% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+
+<div class="loader"></div>
+
 <button type="button" name="close-dialog">&times;</button>
 
-<header>(*) Sign up for a new account</header>
+<header>
+  <span class="zooniverse-logo"></span>
+  Sign up for a new account
+</header>
 
 <label>
   <input type="text" name="username" required="required" placeholder="<%= enUs.topBar.username %>" />
@@ -23,6 +29,5 @@
 <div class="error-message"></div>
 
 <div class="action">
-  <a href="http://zooniverse.org/"><%= enUs.topBar.forgotPassword %></a>
   <button type="submit"><%= enUs.topBar.signUp %></button>
 </div>

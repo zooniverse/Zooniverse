@@ -2,7 +2,8 @@
 
 <div class="no-user">
   <div class="zooniverse">
-    (*) A Zooniverse project
+    <span class="zooniverse-logo"></span>
+    A Zooniverse project
   </div>
 
   <div class="sign-in">

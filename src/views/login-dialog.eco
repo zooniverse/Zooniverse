@@ -1,8 +1,13 @@
 <% enUs = zooniverse?.enUs || require '../lib/en-us' %>
 
+<div class="loader"></div>
+
 <button type="button" name="close-dialog">&times;</button>
 
-<header>(*) Sign in to your Zooniverse account</header>
+<header>
+  <span class="zooniverse-logo"></span>
+  Sign in to your Zooniverse account
+</header>
 
 <label>
   <input type="text" name="username" required="required" placeholder="<%= enUs.topBar.username %>" />

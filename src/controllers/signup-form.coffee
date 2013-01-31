@@ -22,7 +22,7 @@ class SignupForm extends BaseController
     '.error-message': 'errorContainer'
 
   onSubmit: ->
-    @el.addClass 'signing-up'
+    @el.addClass 'loading'
     @signUpButton.attr disabled: true
 
     signup = User.signup
@@ -38,7 +38,7 @@ class SignupForm extends BaseController
       @showError enUs.user.signInFailed
 
     signup.always =>
-      @el.removeClass 'signing-up'
+      @el.removeClass 'loading'
       @signUpButton.attr disabled: false
 
   showError: (message) ->

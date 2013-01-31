@@ -50,7 +50,7 @@
     SignupForm.prototype.onSubmit = function() {
       var signup,
         _this = this;
-      this.el.addClass('signing-up');
+      this.el.addClass('loading');
       this.signUpButton.attr({
         disabled: true
       });
@@ -71,7 +71,7 @@
         return _this.showError(enUs.user.signInFailed);
       });
       return signup.always(function() {
-        _this.el.removeClass('signing-up');
+        _this.el.removeClass('loading');
         return _this.signUpButton.attr({
           disabled: false
         });
