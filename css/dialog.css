@@ -1,6 +1,6 @@
 .zooniverse-dialog {
   display: block;
-  font-size: 10px;
+  font-size: 12px;
   height: 100%;
   left: 0;
   position: fixed;
@@ -34,6 +34,20 @@
   transform: translateY(-25%) rotateX(30deg) scale(0.75);
   transition: opacity 0.25s ease-in-out, transform 0.33s ease-in-out;
 }
+.zooniverse-dialog .underlay .container .dialog > form > button[name="close-dialog"] {
+  font-size: 16px;
+  height: 1em;
+  position: absolute;
+  right: 4px;
+  top: 0;
+  width: 1em;
+}
+.zooniverse-dialog.warning .underlay .container .dialog {
+  border: 5px solid #f90;
+}
+.zooniverse-dialog.error .underlay .container .dialog {
+  border: 5px solid #c30;
+}
 .zooniverse-dialog.showing .underlay {
   background: rgba(0,0,0,0.5);
 }
@@ -49,14 +63,6 @@
   font: inherit;
   margin: 0;
   padding: 0;
-}
-.zooniverse-dialog button[name="close-dialog"] {
-  font-size: 16px;
-  height: 1em;
-  position: absolute;
-  right: 4px;
-  top: 0;
-  width: 1em;
 }
 .zooniverse-dialog a {
   color: inherit;
@@ -107,6 +113,7 @@
   width: 100%;
 }
 .zooniverse-dialog .explanation {
+  font-size: 10px;
   margin: 5px 13px;
   opacity: 0.75;
 }
@@ -116,7 +123,7 @@
   text-align: center;
 }
 .zooniverse-dialog .action {
-  margin: 10px 0;
+  margin: 1em 0;
   text-align: center;
 }
 .zooniverse-dialog .action button {

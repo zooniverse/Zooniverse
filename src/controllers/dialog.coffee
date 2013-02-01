@@ -6,6 +6,9 @@ BaseController = zooniverse.controllers.BaseController || require './base-contro
 template = zooniverse.views.Dialog || require '../views/dialog'
 
 class Dialog extends BaseController
+  warning: false
+  error: false
+
   content: ''
 
   className: 'zooniverse-dialog'
@@ -20,8 +23,10 @@ class Dialog extends BaseController
 
   constructor: ->
     super
-    @hide()
 
+    @el.css display: 'none' # Start hidden
+    @el.addClass 'warning' if @warning
+    @el.addClass 'error' if @error
     @contentContainer.append @content
 
     @el.appendTo document.body
@@ -31,7 +36,7 @@ class Dialog extends BaseController
 
   show: ->
     @el.css display: ''
-    setTimeout => @el.addClass 'showing'
+    @el.addClass 'showing'
 
     @contentContainer.find('input, textarea, select').first().focus()
 

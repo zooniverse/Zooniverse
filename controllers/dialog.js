@@ -24,6 +24,10 @@
 
     __extends(Dialog, _super);
 
+    Dialog.prototype.warning = false;
+
+    Dialog.prototype.error = false;
+
     Dialog.prototype.content = '';
 
     Dialog.prototype.className = 'zooniverse-dialog';
@@ -41,7 +45,15 @@
 
     function Dialog() {
       Dialog.__super__.constructor.apply(this, arguments);
-      this.hide();
+      this.el.css({
+        display: 'none'
+      });
+      if (this.warning) {
+        this.el.addClass('warning');
+      }
+      if (this.error) {
+        this.el.addClass('error');
+      }
       this.contentContainer.append(this.content);
       this.el.appendTo(document.body);
     }
@@ -55,13 +67,10 @@
     };
 
     Dialog.prototype.show = function() {
-      var _this = this;
       this.el.css({
         display: ''
       });
-      setTimeout(function() {
-        return _this.el.addClass('showing');
-      });
+      this.el.addClass('showing');
       return this.contentContainer.find('input, textarea, select').first().focus();
     };
 
