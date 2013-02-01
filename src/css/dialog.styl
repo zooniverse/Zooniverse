@@ -7,7 +7,7 @@
 
 .zooniverse-dialog
   display: block;
-  font-size: 10px
+  font-size: 12px
   height: 100%
   left: 0
   position: fixed
@@ -41,13 +41,26 @@
         transform: translateY(-25%) rotateX(30deg) scale(0.75)
         transition: opacity 0.25s ease-in-out, transform 0.33s ease-in-out
 
-  &.showing
-    .underlay
-      background: rgba(#000, 0.5)
+        > form > button[name="close-dialog"]
+          font-size: 16px
+          height: 1em
+          position: absolute
+          right: 4px
+          top: 0
+          width: 1em
 
-      .container .dialog
-        opacity: 1
-        transform: translateY(0) rotateX(0) scale(1)
+  &.warning .underlay .container .dialog
+    border: 5px solid #f90
+
+  &.error .underlay .container .dialog
+    border: 5px solid #c30
+
+  &.showing .underlay
+    background: rgba(#000, 0.5)
+
+    .container .dialog
+      opacity: 1
+      transform: translateY(0) rotateX(0) scale(1)
 
   button
     background: transparent
@@ -57,14 +70,6 @@
     font: inherit
     margin: 0
     padding: 0
-
-    &[name="close-dialog"]
-      font-size: 16px
-      height: 1em
-      position: absolute
-      right: 4px
-      top: 0
-      width: 1em
 
   a
     color: inherit
@@ -115,6 +120,7 @@
       width: 100%
 
   .explanation
+    font-size: 10px;
     margin: 5px 13px
     opacity: 0.75
 
@@ -124,7 +130,7 @@
     text-align center
 
   .action
-    margin: 10px 0
+    margin: 1em 0
     text-align: center
 
     button
