@@ -24,7 +24,7 @@ class ProxyFrame extends EventEmitter
     super
     @[property] = value for own property, value of params when property of @ and value?
 
-    @deferreds ?= []
+    @deferreds ?= {}
     @queue ?= []
 
     @el = $("<iframe src='#{@host}#{@path}' class='#{@className}' style='display: none;'></iframe>")
@@ -58,7 +58,10 @@ class ProxyFrame extends EventEmitter
 
     deferred = new $.Deferred
     deferred.then done, fail
-
+    do (messageId, deferred) =>
+      deferred.always =>
+        delete @deferreds[messageId]
+    
     @deferreds[messageId] = deferred
 
     if @failed
