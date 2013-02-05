@@ -36,7 +36,7 @@ class Dialog extends BaseController
 
   show: ->
     @el.css display: ''
-    @el.addClass 'showing'
+    setTimeout => @el.addClass 'showing'
 
     @contentContainer.find('input, textarea, select').first().focus()
 

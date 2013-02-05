@@ -67,10 +67,13 @@
     };
 
     Dialog.prototype.show = function() {
+      var _this = this;
       this.el.css({
         display: ''
       });
-      this.el.addClass('showing');
+      setTimeout(function() {
+        return _this.el.addClass('showing');
+      });
       return this.contentContainer.find('input, textarea, select').first().focus();
     };
 
