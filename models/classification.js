@@ -133,12 +133,10 @@
             }, {
               user_agent: this.user_agent
             }
-          ])
+          ]),
+          favorite: this.favorite ? true : void 0
         }
       };
-      if (this.favorite) {
-        output.favorite = true;
-      }
       return output;
     };
 

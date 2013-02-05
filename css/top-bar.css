@@ -7,6 +7,7 @@
   right: 0;
   text-shadow: 0 1px 1px #000;
   top: 0;
+  z-index: 100;
 }
 .zooniverse-top-bar:before {
   border-color: #1c1c1c #1c1c1c transparent transparent;
