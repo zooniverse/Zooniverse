@@ -66,7 +66,8 @@ class Classification extends BaseModel
     output = classification:
       subject_ids: [@subject.id]
       annotations: @annotations.concat [{@started_at}, {@user_agent}]
-      favorite: true if @favorite
+
+    output.classification.favorite = true if @favorite
 
     output
 
