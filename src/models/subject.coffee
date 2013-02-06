@@ -99,6 +99,7 @@ class Subject extends BaseModel
   metadata: null
   project_id: ''
   workflow_ids: null
+  tutorial: null
 
   constructor: ->
     super

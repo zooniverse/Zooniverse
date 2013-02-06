@@ -149,6 +149,8 @@
 
     Subject.prototype.workflow_ids = null;
 
+    Subject.prototype.tutorial = null;
+
     function Subject() {
       var _ref2, _ref3, _ref4, _ref5;
       Subject.__super__.constructor.apply(this, arguments);
