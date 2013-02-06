@@ -8,7 +8,9 @@ messageId = -1
 class ProxyFrame extends EventEmitter
   @REJECTION = 'ProxyFrame not connected'
 
-  host: "https://#{if +location.port < 1024 then 'api' else 'dev'}.zooniverse.org"
+  demoUrl = !!~location.href.indexOf 'demo'
+  highPort = +location.port >= 1024
+  host: "https://#{if demoUrl or highPort then 'dev' else 'api'}.zooniverse.org"
   path: '/proxy'
   loadTimeout: 5000
 
