@@ -193,4 +193,6 @@
     }
   };
 
+  window.database.currentUser = window.database.get('users', 'clyde');
+
 }).call(this);
