@@ -46,6 +46,7 @@ class Classification extends BaseModel
   favorite: false
 
   started_at: null
+  finished_at: null
   user_agent: null
 
   constructor: ->
@@ -65,7 +66,7 @@ class Classification extends BaseModel
   toJSON: ->
     output = classification:
       subject_ids: [@subject.id]
-      annotations: @annotations.concat [{@started_at}, {@user_agent}]
+      annotations: @annotations.concat [{@started_at, @finished_at}, {@user_agent}]
 
     output.classification.favorite = true if @favorite
 
@@ -76,6 +77,7 @@ class Classification extends BaseModel
 
   send: (done, fail) ->
     @constructor.sentThisSession += 1 unless @subject.metadata.tutorial
+    @finished_at = (new Date).toUTCString()
 
     post = Api.current.post @url(), @toJSON(), arguments...
 
