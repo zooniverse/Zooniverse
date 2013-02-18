@@ -15,6 +15,8 @@ class Api extends EventEmitter
   constructor: ({@project, host, path, loadTimeout} = {}) ->
     super
     @proxyFrame = new ProxyFrame {host, path, loadTimeout}
+    @proxyFrame.on 'ready', => @trigger 'ready'
+    @proxyFrame.on 'fail', => @trigger 'fail'
     @select()
 
   request: (type, url, data, done, fail) ->
