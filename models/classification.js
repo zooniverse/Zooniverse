@@ -95,6 +95,8 @@
 
     Classification.prototype.started_at = null;
 
+    Classification.prototype.finished_at = null;
+
     Classification.prototype.user_agent = null;
 
     function Classification() {
@@ -129,7 +131,8 @@
           subject_ids: [this.subject.id],
           annotations: this.annotations.concat([
             {
-              started_at: this.started_at
+              started_at: this.started_at,
+              finished_at: this.finished_at
             }, {
               user_agent: this.user_agent
             }
@@ -152,6 +155,7 @@
       if (!this.subject.metadata.tutorial) {
         this.constructor.sentThisSession += 1;
       }
+      this.finished_at = (new Date).toUTCString();
       post = (_ref2 = Api.current).post.apply(_ref2, [this.url(), this.toJSON()].concat(__slice.call(arguments)));
       post.done(function() {
         _this.makeRecent();
