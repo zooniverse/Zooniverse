@@ -66,7 +66,6 @@ class LoginForm extends BaseController
     @signOutButton.attr disabled: not User.current?
 
   showError: (message) ->
-    console.log "SHOW ERROR", message
     @errorContainer.html message
 
 window.zooniverse.controllers.LoginForm = LoginForm

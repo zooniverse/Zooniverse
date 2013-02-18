@@ -169,7 +169,6 @@
       asJSON.url = this.url();
       this.constructor.pending.push(asJSON);
       localStorage.setItem('pending-classifications', JSON.stringify(this.constructor.pending));
-      console.log("TRIGGER PENDING", this);
       return this.trigger('pending');
     };
 

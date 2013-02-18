@@ -42,7 +42,6 @@ class SignupForm extends BaseController
       @signUpButton.attr disabled: false
 
   showError: (message) ->
-    console.log "SHOW ERROR", message
     @errorContainer.html message
 
 window.zooniverse.controllers.SignupForm = SignupForm

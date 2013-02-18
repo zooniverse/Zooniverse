@@ -96,7 +96,6 @@ class Classification extends BaseModel
     @constructor.pending.push asJSON
 
     localStorage.setItem 'pending-classifications', JSON.stringify @constructor.pending
-    console.log "TRIGGER PENDING", @
     @trigger 'pending'
 
   makeRecent: ->

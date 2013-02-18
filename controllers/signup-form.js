@@ -79,7 +79,6 @@
     };
 
     SignupForm.prototype.showError = function(message) {
-      console.log("SHOW ERROR", message);
       return this.errorContainer.html(message);
     };
 
