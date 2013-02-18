@@ -3,6 +3,8 @@ window.zooniverse ?= {}
 EventEmitter = window.zooniverse.EventEmitter || require './event-emitter'
 $ = window.jQuery
 
+html = $(document.body.parentNode)
+
 messageId = -1
 
 class ProxyFrame extends EventEmitter
@@ -12,10 +14,13 @@ class ProxyFrame extends EventEmitter
   highPort = +location.port >= 1024
   host: "https://#{if demoUrl or highPort then 'dev' else 'api'}.zooniverse.org"
   path: '/proxy'
-  loadTimeout: 5000
+  loadTimeout: 3000
+  retryTimeout: 5000
 
+  el: null
   className: 'proxy-frame'
 
+  attempt: 0
   ready: false
   failed: false
 
@@ -29,18 +34,25 @@ class ProxyFrame extends EventEmitter
     @deferreds ?= {}
     @queue ?= []
 
-    @el = $("<iframe src='#{@host}#{@path}' class='#{@className}' style='display: none;'></iframe>")
-    @el.appendTo document.body
-
-    setTimeout (=> @timeout() unless @ready), @loadTimeout
-
     $(window).on 'message', ({originalEvent: e}) =>
       @onMessage arguments... if e.source is @el.get(0).contentWindow
 
+    @connect()
+
+  connect: ->
+    testBad = if @attempt < 0 then '_BAD' else ''
+    @attempt += 1
+    @el?.remove()
+    @el = $("<iframe src='#{@host}#{@path}#{testBad}' class='#{@className}' data-attempt='#{@attempt}' style='display: none;'></iframe>")
+    @el.appendTo document.body
+    setTimeout (=> @timeout() unless @ready), @loadTimeout
+
   onReady: ->
-    return if @failed
+    @attempt = 0
     @ready = true
+    @failed = false
     setTimeout (=> @process payload for payload in @queue), 100
+    html.removeClass 'offline'
     @trigger 'ready'
 
   timeout: =>
@@ -49,10 +61,14 @@ class ProxyFrame extends EventEmitter
 
   onFailed: ->
     return if @ready
-    $(document.body.parentNode).addClass 'offline'
     @failed = true
+
     @deferreds[payload.id].reject(@constructor.REJECTION) for payload in @queue
+    @queue.splice 0
+
+    html.addClass 'offline'
     @trigger 'fail'
+    setTimeout (=> @connect()), @retryTimeout
 
   send: (payload, done, fail) ->
     messageId += 1
@@ -63,7 +79,7 @@ class ProxyFrame extends EventEmitter
     do (messageId, deferred) =>
       deferred.always =>
         delete @deferreds[messageId]
-    
+
     @deferreds[messageId] = deferred
 
     if @failed
