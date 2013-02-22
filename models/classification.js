@@ -110,7 +110,8 @@
     }
 
     Classification.prototype.annotate = function(annotation) {
-      return this.annotations.push(annotation);
+      this.annotations.push(annotation);
+      return annotation;
     };
 
     Classification.prototype.removeAnnotation = function(annotation) {

@@ -58,6 +58,7 @@ class Classification extends BaseModel
 
   annotate: (annotation) ->
     @annotations.push annotation
+    annotation
 
   removeAnnotation: (annotation) ->
     for a, i in @annotations when a is annotation
