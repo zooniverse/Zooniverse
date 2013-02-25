@@ -33,6 +33,7 @@
   border-top: 5px solid #050505;
   -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.5);
   box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  color: #000;
   display: inline-block;
   max-width: 33%;
   opacity: 0;
