@@ -25,7 +25,7 @@
 
   template = zooniverse.views.topBar || require('../views/top-bar');
 
-  Api = zooniverse.api || require('../lib/api');
+  Api = zooniverse.Api || require('../lib/api');
 
   User = zooniverse.models.User || require('../models/user');
 

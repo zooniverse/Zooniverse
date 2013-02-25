@@ -18,7 +18,7 @@
 
   BaseController = zooniverse.controllers.BaseController || require('./base-controller');
 
-  template = zooniverse.views.Dialog || require('../views/dialog');
+  template = zooniverse.views.dialog || require('../views/dialog');
 
   Dialog = (function(_super) {
 
