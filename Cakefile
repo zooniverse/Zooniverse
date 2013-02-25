@@ -2,9 +2,37 @@
 wrench = require 'wrench'
 fs = require 'fs'
 path = require 'path'
+CoffeeScript = require 'coffee-script'
 eco = require 'eco'
 
-DEFAULT_PORT = 8000
+# Only include essential modules in a build.
+# Manually resolve dependency order for now. :(
+buildModules = [
+  'src/lib/en-us.coffee'
+  'src/lib/event-emitter.coffee'
+  'src/lib/proxy-frame.coffee'
+  'src/lib/api.coffee'
+  'src/models/base-model.coffee'
+  'src/models/user.coffee'
+  'src/models/subject.coffee'
+  'src/models/recent.coffee'
+  'src/models/favorite.coffee'
+  'src/models/classification.coffee'
+  'src/views/dialog.eco'
+  'src/views/top-bar.eco'
+  'src/views/login-form.eco'
+  'src/views/login-dialog.eco'
+  'src/views/signup-dialog.eco'
+  'src/views/paginator.eco'
+  'src/controllers/base-controller.coffee'
+  'src/controllers/dialog.coffee'
+  'src/controllers/login-form.coffee'
+  'src/controllers/login-dialog.coffee'
+  'src/controllers/signup-form.coffee'
+  'src/controllers/signup-dialog.coffee'
+  'src/controllers/top-bar.coffee'
+  'src/controllers/paginator.coffee'
+]
 
 run = ->
   child = spawn arguments...
@@ -14,9 +42,15 @@ run = ->
 toVarName = (file) ->
   path.basename(file).replace(/\.\w+$/, '').replace /\-(\w)/, (_, char) -> char.toUpperCase()
 
-option '-p', '--port [PORT]', 'Port on which to run the dev server'
+wrapEcoTemplate = (file, content) -> """
+  window.zooniverse = window.zooniverse || {};
+  window.zooniverse.views = window.zooniverse.views || {};
+  template = #{content};
+  window.zooniverse.views['#{toVarName file}'] = template;
+  if (typeof module !== 'undefined') module.exports = template;\n
+"""
 
-task 'watch', 'Watch CoffeeScript changes during development', ->
+task 'watch-coffee', 'Watch CoffeeScript changes during development', ->
   console.log 'Watching for CoffeeScript in ./src'
   run 'coffee', ['--watch', '--output', '.', '--compile', './src/']
 
@@ -50,13 +84,7 @@ task 'watch-eco', 'Watch changes in eco templates', ->
       catch e
         Function::toString.call -> console?.error 'Bad ECO template!'
 
-      outContent = """
-        window.zooniverse = window.zooniverse || {};
-        window.zooniverse.views = window.zooniverse.views || {};
-        template = #{compiledContent};
-        window.zooniverse.views['#{toVarName inFile}'] = template;
-        if (typeof module !== 'undefined') module.exports = template;\n
-      """
+      outContent = wrapEcoTemplate inFile, compiledContent
 
       watchers.push fs.watch inFile, recompile
       templates.push path.relative process.cwd(), inFile
@@ -70,12 +98,46 @@ task 'watch-stylus', 'Recompile Stylus files when they change', ->
   console.log 'Watching .styl files in ./src/css'
   run 'stylus', ['--watch', './src/css', '--out', './css', '--inline']
 
-task 'serve', 'Run a dev server', (options) ->
-  port = options.port || process.env.PORT || DEFAULT_PORT
+task 'build', 'Build the whole library into a single file', ->
+  d = new Date
 
-  invoke 'watch'
+  timestamp = [
+    d.getFullYear()
+    d.getMonth() + 1
+    d.getDate()
+    d.getHours()
+    d.getMinutes()
+    d.getSeconds()
+  ].join '-'
+
+  outFile = "zooniverse-#{timestamp}.js"
+
+  console.log "Building the Zooniverse library into '#{outFile}'"
+
+  compiledModules = []
+
+  for module in buildModules
+    console.log "Including #{module}"
+    content = fs.readFileSync(module).toString()
+    extension = path.extname module
+    compiledModules.push switch extension
+      when '.coffee' then CoffeeScript.compile content, bare: true
+      when '.eco' then wrapEcoTemplate module, eco.precompile content
+      else throw new Error "Could not compile '#{module}'"
+
+  outContent = [
+    ';(function(window) {'
+    compiledModules...
+    CoffeeScript.compile 'module?.exports = window.zooniverse', bare: true
+    '}(window));\n'
+  ].join '\n'
+
+  fs.writeFileSync outFile, outContent
+
+task 'serve', 'Run a dev server', ->
+  invoke 'watch-coffee'
   invoke 'watch-eco'
   invoke 'watch-stylus'
 
   console.log "Running a server at http://localhost:#{port}"
-  run 'python', ['-m', 'SimpleHTTPServer', port]
+  run 'serveup', ['--port', process.env.PORT || 3253]
