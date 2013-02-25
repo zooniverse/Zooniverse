@@ -1,4 +1,6 @@
-module.exports =
+window.zooniverse ?= {}
+
+enUs =
   topBar:
     username: 'Username'
     password: 'Password'
@@ -14,3 +16,6 @@ module.exports =
   user:
     badLogin: 'Incorrect username or password'
     signInFailed: 'Sign in failed.'
+
+window.zooniverse.enUs = enUs
+module?.exports = enUs

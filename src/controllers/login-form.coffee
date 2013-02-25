@@ -5,7 +5,7 @@ window.zooniverse.models ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
 template = zooniverse.views.loginForm || require '../views/login-form'
-Api = zooniverse.api || require '../lib/api'
+Api = zooniverse.Api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
 enUs = zooniverse.enUs || require '../lib/en-us'
 
