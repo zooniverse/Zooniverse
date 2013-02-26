@@ -14,8 +14,8 @@ class ProxyFrame extends EventEmitter
   highPort = +location.port >= 1024
   host: "https://#{if demoUrl or highPort then 'dev' else 'api'}.zooniverse.org"
   path: '/proxy'
-  loadTimeout: 3000
-  retryTimeout: 5000
+  loadTimeout: 5 * 1000
+  retryTimeout: 2 * 60 * 1000
 
   el: null
   className: 'proxy-frame'
