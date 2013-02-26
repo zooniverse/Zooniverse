@@ -1,0 +1,20 @@
+<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+
+<img src="" />
+
+<div class="title"><%= enUs.footer.title %></div>
+
+<% if @categories?: %>
+  <div class="projects">
+    <% for category in @categories: %>
+      <div class="category">
+        <% for project in category.projects: %>
+          <div class="project">
+            <a href="<%= project.url %>"><%= project.name %></a>
+          </div>
+        <% end %>
+        <div class="project"></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

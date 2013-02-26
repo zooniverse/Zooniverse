@@ -17,5 +17,11 @@ enUs =
     badLogin: 'Incorrect username or password'
     signInFailed: 'Sign in failed.'
 
+  footer:
+    title: '''
+      The Zooniverse is a collection of web-based citizen science projects that use the efforts of volunteers
+      to help researchers deal with the flood of data that confronts them.
+    '''
+
 window.zooniverse.enUs = enUs
 module?.exports = enUs
