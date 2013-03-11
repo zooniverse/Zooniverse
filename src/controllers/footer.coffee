@@ -14,7 +14,7 @@ window.DEFINE_ZOONIVERSE_PROJECT_LIST = (categories) ->
 class Footer
   el: null
 
-  projectScript: ''
+  projectScript: 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.js'
 
   constructor: ->
     @el = $(document.createElement 'div')

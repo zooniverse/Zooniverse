@@ -29,7 +29,7 @@
 
     Footer.prototype.el = null;
 
-    Footer.prototype.projectScript = '';
+    Footer.prototype.projectScript = 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.js';
 
     function Footer() {
       this.onFetch = __bind(this.onFetch, this);

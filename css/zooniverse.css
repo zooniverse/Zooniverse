@@ -351,9 +351,29 @@
   padding-left: 200px;
 }
 .zooniverse-footer .title {
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 1em;
 }
-.zooniverse-footer .title .categories .category {
+.zooniverse-footer .projects {
+  font-size: 14px;
+  overflow: hidden;
+}
+.zooniverse-footer .projects .category {
   float: left;
   width: 25%;
+}
+.zooniverse-footer .projects .category .category-title {
+  text-transform: uppercase;
+}
+.zooniverse-footer .projects .category a {
+  color: inherit;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  text-decoration: none;
+}
+.zooniverse-footer .projects .category a:hover {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
 }
