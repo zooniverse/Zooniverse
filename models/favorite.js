@@ -55,7 +55,7 @@
     Favorite.prototype.send = function() {
       var _this = this;
       this.trigger('sending');
-      return Api.post("/projects/" + Api.current.project + "/favorites", this.toJSON(), function(response) {
+      return Api.current.post("/projects/" + Api.current.project + "/favorites", this.toJSON(), function(response) {
         return _this.id = response.id;
       });
     };
