@@ -17,7 +17,7 @@ class Favorite extends Recent
 
   send: ->
     @trigger 'sending'
-    Api.post "/projects/#{Api.current.project}/favorites", @toJSON(), (response) =>
+    Api.current.post "/projects/#{Api.current.project}/favorites", @toJSON(), (response) =>
       @id = response.id
 
   delete: ->
