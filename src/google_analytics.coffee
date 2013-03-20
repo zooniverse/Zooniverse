@@ -9,7 +9,7 @@ init = ({account, domain}, trackHashes = true) ->
   window._gaq ?= []
   window._gaq.push ['_setAccount', account]
   window._gaq.push ['_setDomainName', domain] if domain
-  window._gaq.push ['_trackPageview']
+  window._gaq.push ['_trackPageview', '/']
 
   $(window).on 'hashchange', track if trackHashes
 
@@ -17,6 +17,6 @@ init = ({account, domain}, trackHashes = true) ->
 
 track = (location) =>
   location = null unless typeof location is 'string'
-  window._gaq.push ['_trackPageview', location || window.location.href]
+  window._gaq.push ['_trackPageview', location || window.location.hash]
 
 module.exports = {init, track}
