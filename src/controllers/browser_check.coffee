@@ -28,7 +28,7 @@ class BrowserCheck
     mozilla: 14
     msie: 8
     webkit: 530 # TODO: Check mobile versions
-    opera: Infinity
+    opera: 12
 
   constructor: (params = {}) ->
     @[property] = value for own property, value of params
