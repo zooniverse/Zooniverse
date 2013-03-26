@@ -5,6 +5,7 @@
   height: 40px;
   position: absolute;
   right: 0;
+  text-align: center;
   text-shadow: 0 1px 1px #000;
   top: 0;
   z-index: 100;
@@ -37,12 +38,12 @@
 }
 .zooniverse-top-bar .no-user {
   display: block;
-  margin-top: 4px;
+  margin: 4px 6px 0;
 }
 .zooniverse-top-bar .no-user .zooniverse,
 .zooniverse-top-bar .no-user .sign-in {
   display: inline-block;
-  margin: 0 15px;
+  margin: 0 6px;
   vertical-align: middle;
 }
 .zooniverse-top-bar .no-user .zooniverse {
@@ -73,19 +74,23 @@
 .zooniverse-top-bar .current-user .info,
 .zooniverse-top-bar .current-user .avatar {
   display: inline-block;
-  margin: 0 15px;
+  margin: 0 6px;
   vertical-align: middle;
 }
 .zooniverse-top-bar .current-user .messages {
   margin-top: -3px;
+  opacity: 0.33;
+  filter: alpha(opacity=33);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
 }
 .zooniverse-top-bar .current-user .messages .message-count {
-  color: inherit;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKCAIAAAA2KZn2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIE1hY2ludG9zaCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4MDRCODBFMTM3QjcxMUUyOEUwN0Q5NUQ4MzY2MTYyNSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4MDRCODBFMjM3QjcxMUUyOEUwN0Q5NUQ4MzY2MTYyNSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE4QkM0NDUyMzc5MjExRTI4RTA3RDk1RDgzNjYxNjI1IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjgwNEI4MEUwMzdCNzExRTI4RTA3RDk1RDgzNjYxNjI1Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+WaRRGAAAAJRJREFUeNq8j7EKAyEQRO+Ch4hgYaONpf//QZZaaOOBICJaZINgEnJgSJGp1mGfM7uf50kpPY5j+06ttZzz7pzrvWOMpZRLxntfa0UIPbBhpZQ450KISyCEEGNkjI3nEwOVUqCAUgr4acK2tRYOIYRM8w2bH0MNrTXMxhg44bPCBTZiIQEGSH4NWWBL3baf9F/sLsAA83xF46M/SZ8AAAAASUVORK5CYII=") right center no-repeat;
+  display: inline-block;
+  padding-right: 24px;
 }
 .zooniverse-top-bar .current-user .info {
   line-height: 1;
   margin-top: -3px;
-  text-align: right;
 }
 .zooniverse-top-bar .current-user .info .current-user-name {
   font-size: 13px;
@@ -96,9 +101,6 @@
   font-size: 8px;
   text-transform: uppercase;
 }
-.zooniverse-top-bar .current-user .avatar {
-  margin: 0;
-}
 .zooniverse-top-bar .current-user .avatar img {
   height: 30px;
   width: 30px;
@@ -108,6 +110,11 @@
 }
 .zooniverse-top-bar.signed-in .current-user {
   display: block;
+}
+.zooniverse-top-bar.has-messages .current-user .messages {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
 }
 .zooniverse-top-bar .zooniverse-login-form button[name="sign-out"] {
   display: none;
