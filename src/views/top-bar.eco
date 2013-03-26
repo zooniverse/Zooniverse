@@ -15,9 +15,8 @@
 
 <div class="current-user">
   <div class="messages">
-    <a href="http://talk.<%= location.hostname.replace /^www\./, '' %>/#/profile">
+    <a href="http://talk.<%= location.hostname.replace /^www\./, '' %>/#/profile" class="message-link">
       <span class="message-count">&mdash;</span>
-      <i class="icon-envelope">[[V]]</i>
     </a>
   </div>
 

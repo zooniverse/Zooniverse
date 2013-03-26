@@ -5,6 +5,7 @@
   height: 40px
   position: absolute
   right: 0
+  text-align: center
   text-shadow: 0 1px 1px #000
   top: 0
   z-index 100
@@ -37,12 +38,12 @@
 
   .no-user
     display: block
-    margin-top: 4px
+    margin: 4px 6px 0
 
     .zooniverse,
     .sign-in
       display: inline-block
-      margin: 0 15px
+      margin: 0 6px
       vertical-align: middle
 
     .zooniverse
@@ -73,19 +74,21 @@
     .info,
     .avatar
       display: inline-block
-      margin: 0 15px
+      margin: 0 6px
       vertical-align: middle
 
     .messages
       margin-top: -3px
+      opacity: 0.33
 
       .message-count
-        color: inherit
+        background: url("./images/message-envelope.png") right center no-repeat
+        display: inline-block
+        padding-right: 24px
 
     .info
       line-height: 1
       margin-top: -3px
-      text-align: right
 
       .current-user-name
         font-size: 13px
@@ -97,8 +100,6 @@
         text-transform: uppercase
 
     .avatar
-      margin: 0
-
       img
         height: 30px
         width: 30px
@@ -109,6 +110,9 @@
 
     .current-user
       display: block
+
+  &.has-messages .current-user .messages
+    opacity: 1
 
   .zooniverse-login-form
     button[name="sign-out"]
