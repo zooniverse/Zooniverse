@@ -32,6 +32,7 @@ buildModules = [
   'src/controllers/signup-dialog.coffee'
   'src/controllers/top-bar.coffee'
   'src/controllers/paginator.coffee'
+  'src/util/active-hash-links.coffee'
 ]
 
 run = (fullCommand) ->
