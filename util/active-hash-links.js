@@ -20,7 +20,7 @@
 
   updateClasses = function() {
     anchors.removeClass(className);
-    anchors = $("a[href^='" + location.hash + "']");
+    anchors = $("a[href='" + location.hash + "']");
     return anchors.addClass(className);
   };
 
@@ -44,6 +44,8 @@
 
   window.zooniverse.util.activeHashLinks = activeHashLinks;
 
-  module.exports = activeHashLinks;
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = activeHashLinks;
+  }
 
 }).call(this);

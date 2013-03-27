@@ -13,7 +13,7 @@ anchors = $()
 updateClasses = ->
   anchors.removeClass className
 
-  anchors = $("a[href^='#{location.hash}']")
+  anchors = $("a[href='#{location.hash}']")
   anchors.addClass className
 
 init = (newClassName = className, newRoot = root) ->
