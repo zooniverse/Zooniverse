@@ -118,7 +118,7 @@ task 'build', 'Build the whole library into a single file', ->
     content = fs.readFileSync(module).toString()
     extension = path.extname module
     compiledModules.push switch extension
-      when '.coffee' then CoffeeScript.compile content, bare: true
+      when '.coffee' then CoffeeScript.compile content
       when '.eco' then ecoToModule module, content
       else throw new Error "Could not compile '#{module}'"
 

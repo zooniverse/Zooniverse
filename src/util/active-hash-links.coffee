@@ -25,4 +25,4 @@ init = (newClassName = className, newRoot = root) ->
 activeHashLinks = {updateClasses, init}
 
 window.zooniverse.util.activeHashLinks = activeHashLinks
-module.exports = activeHashLinks
+module?.exports = activeHashLinks
