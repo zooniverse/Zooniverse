@@ -1,0 +1,59 @@
+.zooniverse-profile .sign-in-form {
+  display: block;
+  margin: 40px auto;
+  text-align: center;
+  width: 50%;
+}
+.zooniverse-profile .sign-in-form header {
+  font-size: 20px;
+}
+.zooniverse-profile .sign-in-form label {
+  display: block;
+  margin: 20px;
+}
+.zooniverse-profile .sign-in-form label input {
+  background: #fff;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 1px #ccc inset, 0 2px 1px #fff;
+  box-shadow: 0 1px 1px #ccc inset, 0 2px 1px #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+}
+.zooniverse-profile .sign-in-form .error-message {
+  color: #800000;
+}
+.zooniverse-profile .sign-in-form .action {
+  margin: 20px;
+}
+.zooniverse-profile .sign-in-form .action button {
+  background: #fff;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(0,0,0,0.25);
+  box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(0,0,0,0.25);
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 5px;
+  padding: 3px 10px;
+}
+.zooniverse-profile .sign-in-form .no-account button {
+  text-decoration: underline;
+}
+.zooniverse-profile > nav,
+.zooniverse-profile .zooniverse-paginator {
+  display: none;
+}
+.zooniverse-profile.signed-in .zooniverse-login-form {
+  display: none;
+}
+.zooniverse-profile.signed-in > nav,
+.zooniverse-profile.signed-in .zooniverse-paginator.active {
+  display: block;
+}

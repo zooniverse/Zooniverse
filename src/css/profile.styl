@@ -1,0 +1,54 @@
+.zooniverse-profile
+  .sign-in-form
+    display: block
+    margin: 40px auto
+    text-align: center
+    width: 50%
+
+    header
+      font-size: 20px
+
+    label
+      display: block
+      margin: 20px
+
+      input
+        background: #fff
+        border: 1px solid #bbb
+        border-radius: 3px
+        box-shadow: 0 1px 1px #ccc inset, 0 2px 1px #fff
+        box-sizing: border-box
+        font-size: 16px
+        padding: 10px
+        width: 100%
+
+    .error-message
+      color: darken(#f00, 50%)
+
+    .action
+      margin: 20px
+
+      button
+        background: #fff
+        border: 1px solid #bbb
+        border-radius: 3px
+        box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(#000, 0.25)
+        font-size: 12px
+        font-weight: bold
+        margin: 0 5px
+        padding: 3px 10px
+
+    .no-account button
+      text-decoration: underline
+
+  & > nav,
+  .zooniverse-paginator
+    display: none
+
+  &.signed-in
+    .zooniverse-login-form
+      display: none
+
+    & > nav,
+    .zooniverse-paginator.active
+      display: block
