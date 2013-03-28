@@ -37,7 +37,7 @@ class Recent extends BaseModel
 
     request.fail =>
       @trigger 'fetch-fail'
-      fetcher.fail arguments...
+      fetcher.reject arguments...
 
     fetcher.promise()
 

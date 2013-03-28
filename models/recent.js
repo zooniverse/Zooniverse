@@ -76,7 +76,7 @@
       });
       request.fail(function() {
         _this.trigger('fetch-fail');
-        return fetcher.fail.apply(fetcher, arguments);
+        return fetcher.reject.apply(fetcher, arguments);
       });
       return fetcher.promise();
     };
