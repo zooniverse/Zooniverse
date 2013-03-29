@@ -73,9 +73,6 @@
         el: this.el.find('.favorites'),
         itemTemplate: this.favoriteTemplate
       });
-      this.el.append(this.loginForm.el);
-      this.el.append(this.recentsList.el);
-      this.el.append(this.favoritesList.el);
       User.on('change', function() {
         return _this.onUserChange.apply(_this, arguments);
       });

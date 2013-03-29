@@ -45,10 +45,6 @@ class Profile extends BaseController
       el: @el.find '.favorites'
       itemTemplate: @favoriteTemplate
 
-    @el.append @loginForm.el
-    @el.append @recentsList.el
-    @el.append @favoritesList.el
-
     User.on 'change', => @onUserChange arguments...
 
   onUserChange: (e, user) ->

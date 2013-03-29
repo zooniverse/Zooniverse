@@ -46,14 +46,77 @@
 .zooniverse-profile .sign-in-form .no-account button {
   text-decoration: underline;
 }
-.zooniverse-profile > nav,
+.zooniverse-profile > nav {
+  display: none;
+  overflow: hidden;
+}
+.zooniverse-profile > nav button {
+  background: #fff;
+  border-top: 1px solid rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,0.25) inset;
+  box-shadow: 0 -1px 2px rgba(0,0,0,0.25) inset;
+  color: #000;
+  float: left;
+  font-weight: bold;
+  padding: 0 10px;
+}
+.zooniverse-profile > nav button:first-child {
+  -webkit-border-radius: 2em 0 0 2em;
+  border-radius: 2em 0 0 2em;
+  padding-right: 5px;
+}
+.zooniverse-profile > nav button:last-child {
+  -webkit-border-radius: 0 2em 2em 0;
+  border-radius: 0 2em 2em 0;
+  padding-left: 5px;
+}
+.zooniverse-profile > nav button.active {
+  background: rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.25) inset;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25) inset;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
 .zooniverse-profile .zooniverse-paginator {
   display: none;
+}
+.zooniverse-profile .zooniverse-paginator .items {
+  margin: 1em 0;
+  overflow: hidden;
+}
+.zooniverse-profile .zooniverse-paginator .items .item {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  padding: 10px;
+  width: 25%;
+}
+.zooniverse-profile .zooniverse-paginator .items .item a {
+  display: block;
+}
+.zooniverse-profile .zooniverse-paginator .items .item a img {
+  background: #ccc;
+  display: block;
+  min-height: 20px;
+  width: 100%;
+}
+.zooniverse-profile .zooniverse-paginator .controls {
+  text-align: center;
+}
+.zooniverse-profile .empty-message {
+  display: none;
+  margin: 1em 0;
+  text-align: center;
 }
 .zooniverse-profile.signed-in .zooniverse-login-form {
   display: none;
 }
 .zooniverse-profile.signed-in > nav,
-.zooniverse-profile.signed-in .zooniverse-paginator.active {
+.zooniverse-profile.signed-in .zooniverse-paginator.active,
+.zooniverse-profile.signed-in .zooniverse-paginator.active.empty + .empty-message {
   display: block;
+}
+.zooniverse-profile.signed-in .zooniverse-paginator.empty {
+  display: none;
 }

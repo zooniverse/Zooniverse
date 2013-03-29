@@ -13,5 +13,7 @@
 </nav>
 
 <div class="recents page"></div>
+<div class="recents-empty empty-message">No recents</div>
 
 <div class="favorites page"></div>
+<div class="favorites-empty empty-message">No favorites</div>

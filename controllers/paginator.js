@@ -115,6 +115,7 @@
     Paginator.prototype.onFetch = function(items) {
       var item, itemEl, _i, _len, _results;
       this.itemsContainer.empty();
+      this.el.toggleClass('empty', items.length === 0);
       _results = [];
       for (_i = 0, _len = items.length; _i < _len; _i++) {
         item = items[_i];

@@ -41,9 +41,62 @@
     .no-account button
       text-decoration: underline
 
-  & > nav,
+  & > nav
+    display: none
+    overflow: hidden
+
+    button
+      background: #fff
+      border-top: 1px solid rgba(#000, 0.25)
+      box-shadow: 0 -1px 2px rgba(#000, 0.25) inset
+      color: #000
+      float: left
+      font-weight: bold
+      padding: 0 10px
+
+      &:first-child
+        border-radius: 2em 0 0 2em
+        padding-right: 5px
+
+      &:last-child
+        border-radius: 0 2em 2em 0
+        padding-left: 5px
+
+      &.active
+        background: rgba(#000, 0.25)
+        box-shadow: 0 1px 2px rgba(#000, 0.25) inset
+        color: #fff
+        text-shadow: 0 1px 1px rgba(#000, 0.5)
+
   .zooniverse-paginator
     display: none
+
+    .items
+      margin: 1em 0
+      overflow: hidden;
+
+      .item
+        box-sizing: border-box
+        float: left
+        padding: 10px
+        width: 25%
+
+        a
+          display: block
+
+          img
+            background: #ccc
+            display: block
+            min-height: 20px
+            width: 100%
+
+    .controls
+      text-align: center
+
+  .empty-message
+    display: none
+    margin: 1em 0
+    text-align: center
 
   &.signed-in
     .zooniverse-login-form
@@ -51,4 +104,8 @@
 
     & > nav,
     .zooniverse-paginator.active
+    .zooniverse-paginator.active.empty + .empty-message
       display: block
+
+    .zooniverse-paginator.empty
+      display: none

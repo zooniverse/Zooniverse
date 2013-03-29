@@ -63,6 +63,8 @@ class Paginator extends BaseController
   onFetch: (items) =>
     @itemsContainer.empty()
 
+    @el.toggleClass 'empty', items.length is 0
+
     for item in items
       itemEl = @getItemEl item
       itemEl.prependTo @itemsContainer
