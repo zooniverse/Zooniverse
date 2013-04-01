@@ -24,6 +24,8 @@ buildModules = [
   'src/views/login-dialog.eco'
   'src/views/signup-dialog.eco'
   'src/views/paginator.eco'
+  'src/views/profile.eco'
+  'src/views/profile-item.eco'
   'src/controllers/base-controller.coffee'
   'src/controllers/dialog.coffee'
   'src/controllers/login-form.coffee'
@@ -32,6 +34,7 @@ buildModules = [
   'src/controllers/signup-dialog.coffee'
   'src/controllers/top-bar.coffee'
   'src/controllers/paginator.coffee'
+  'src/controllers/profile.coffee'
   'src/util/active-hash-links.coffee'
 ]
 
