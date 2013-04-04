@@ -1,5 +1,6 @@
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
+window.zooniverse.views ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
 template = zooniverse.views.profile || require '../views/profile'
