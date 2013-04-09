@@ -39,15 +39,43 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var _ref, _ref1, _ref2;
+      var location, thumbSrc, _ref, _ref1;
     
       __out.push('<div class=\'item\'>\n  <a href="');
     
       __out.push(__sanitize(((_ref = this.subjects[0]) != null ? _ref.talkHref() : void 0) || '#/SUBJECT_ERROR'));
     
-      __out.push('">\n    <img src="');
+      __out.push('">\n    ');
     
-      __out.push(__sanitize(((_ref1 = this.subjects[0]) != null ? (_ref2 = _ref1.location) != null ? _ref2.thumb : void 0 : void 0) || ''));
+      location = (_ref1 = this.subjects[0]) != null ? _ref1.location : void 0;
+    
+      __out.push('\n    ');
+    
+      thumbSrc = null;
+    
+      __out.push('\n    ');
+    
+      if (thumbSrc == null) {
+        thumbSrc = location != null ? location.thumb : void 0;
+      }
+    
+      __out.push('\n    ');
+    
+      if ((location != null ? location.standard : void 0) instanceof Array) {
+        if (thumbSrc == null) {
+          thumbSrc = location != null ? location.standard[0] : void 0;
+        }
+      }
+    
+      __out.push('\n    ');
+    
+      if (thumbSrc == null) {
+        thumbSrc = location != null ? location.standard : void 0;
+      }
+    
+      __out.push('\n    <img src="');
+    
+      __out.push(__sanitize(thumbSrc || ''));
     
       __out.push('" />\n  </a>\n</div>\n');
     
