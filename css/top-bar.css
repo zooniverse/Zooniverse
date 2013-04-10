@@ -1,5 +1,5 @@
 .zooniverse-top-bar {
-  background: #1c1c1c;
+  background: #000;
   color: #fff;
   font: bold 11px "Helvetica Neue", Arial, Helvetica, sans-serif;
   height: 40px;
@@ -11,7 +11,7 @@
   z-index: 100;
 }
 .zooniverse-top-bar:before {
-  border-color: #1c1c1c #1c1c1c transparent transparent;
+  border-color: #000 #000 transparent transparent;
   border-style: solid;
   border-width: 20px 10px;
   content: "";
