@@ -1,47 +1,88 @@
+.zooniverse-profile .loader {
+  -webkit-animation: 1s zooniverse-progress linear infinite;
+  -moz-animation: 1s zooniverse-progress linear infinite;
+  -o-animation: 1s zooniverse-progress linear infinite;
+  -ms-animation: 1s zooniverse-progress linear infinite;
+  animation: 1s zooniverse-progress linear infinite;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0.25, transparent), color-stop(0.25, #808080), color-stop(0.5, #808080), color-stop(0.5, transparent), color-stop(0.75, transparent), color-stop(0.75, #808080));
+  background: -webkit-linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%);
+  background: -moz-linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%);
+  background: -o-linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%);
+  background: -ms-linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%);
+  background: linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%);
+  -webkit-background-size: 25px 25px;
+  -moz-background-size: 25px 25px;
+  background-size: 25px 25px;
+  bottom: 0;
+  display: none;
+  left: 0;
+  opacity: 0.25;
+  filter: alpha(opacity=25);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+.zooniverse-profile .loading .loader {
+  display: block;
+}
 .zooniverse-profile .sign-in-form {
   display: block;
-  margin: 40px auto;
+  margin: 0 auto;
+  position: relative;
   text-align: center;
   width: 50%;
 }
 .zooniverse-profile .sign-in-form header {
-  font-size: 20px;
+  font-size: 32px;
 }
 .zooniverse-profile .sign-in-form label {
   display: block;
-  margin: 20px;
+  margin: 20px 0;
 }
-.zooniverse-profile .sign-in-form label input {
+.zooniverse-profile .sign-in-form input {
   background: #fff;
-  border: 1px solid #bbb;
+  border: 0;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 1px 1px #ccc inset, 0 2px 1px #fff;
-  box-shadow: 0 1px 1px #ccc inset, 0 2px 1px #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-size: 16px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.5) inset, 0 1px 0 rgba(255,255,255,0.25);
+  box-shadow: 0 1px 1px rgba(0,0,0,0.5) inset, 0 1px 0 rgba(255,255,255,0.25);
+  font-size: 18px;
   padding: 10px;
   width: 100%;
 }
 .zooniverse-profile .sign-in-form .error-message {
-  color: #800000;
+  background: #bf0000;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  color: #fff;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 1em;
 }
 .zooniverse-profile .sign-in-form .action {
   margin: 20px;
 }
 .zooniverse-profile .sign-in-form .action button {
   background: #fff;
-  border: 1px solid #bbb;
+  border: 0;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(0,0,0,0.25);
-  box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(0,0,0,0.25);
-  font-size: 12px;
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  color: #000;
+  font-size: 18px;
   font-weight: bold;
-  margin: 0 5px;
-  padding: 3px 10px;
+  padding: 5px 1em;
+}
+.zooniverse-profile .sign-in-form .no-account {
+  font-weight: bold;
 }
 .zooniverse-profile .sign-in-form .no-account button {
   text-decoration: underline;
@@ -51,37 +92,23 @@
   overflow: hidden;
 }
 .zooniverse-profile > nav button {
-  background: #fff;
-  border-top: 1px solid rgba(0,0,0,0.25);
-  -webkit-box-shadow: 0 -1px 2px rgba(0,0,0,0.25) inset;
-  box-shadow: 0 -1px 2px rgba(0,0,0,0.25) inset;
-  color: #000;
-  float: left;
+  -webkit-border-radius: 2em;
+  border-radius: 2em;
   font-weight: bold;
-  padding: 0 10px;
-}
-.zooniverse-profile > nav button:first-child {
-  -webkit-border-radius: 2em 0 0 2em;
-  border-radius: 2em 0 0 2em;
-  padding-right: 5px;
-}
-.zooniverse-profile > nav button:last-child {
-  -webkit-border-radius: 0 2em 2em 0;
-  border-radius: 0 2em 2em 0;
-  padding-left: 5px;
+  padding: 0 1em;
 }
 .zooniverse-profile > nav button.active {
   background: rgba(0,0,0,0.25);
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.25) inset;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.25) inset;
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5) inset;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5) inset;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.75);
 }
 .zooniverse-profile .zooniverse-paginator {
   display: none;
+  position: relative;
 }
 .zooniverse-profile .zooniverse-paginator .items {
-  margin: 1em 0;
+  margin: 1em -10px;
   overflow: hidden;
 }
 .zooniverse-profile .zooniverse-paginator .items .item {
@@ -93,16 +120,38 @@
   width: 25%;
 }
 .zooniverse-profile .zooniverse-paginator .items .item a {
+  border: 2px solid transparent;
   display: block;
 }
 .zooniverse-profile .zooniverse-paginator .items .item a img {
-  background: #ccc;
+  background: rgba(128,128,128,0.25);
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.5);
   display: block;
-  min-height: 20px;
+  min-height: 50px;
   width: 100%;
+}
+.zooniverse-profile .zooniverse-paginator .items .item a:hover {
+  border-color: #fff;
 }
 .zooniverse-profile .zooniverse-paginator .controls {
   text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+.zooniverse-profile .zooniverse-paginator .controls button {
+  border: 1px solid transparent;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  height: 2em;
+  line-height: 1;
+  width: 2em;
+}
+.zooniverse-profile .zooniverse-paginator .controls button:hover {
+  border-color: rgba(255,255,255,0.5);
+}
+.zooniverse-profile .zooniverse-paginator .controls button.active {
+  border-color: #fff;
 }
 .zooniverse-profile .empty-message {
   display: none;
@@ -119,4 +168,49 @@
 }
 .zooniverse-profile.signed-in .zooniverse-paginator.empty {
   display: none;
+}
+@-moz-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@-webkit-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@-o-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@-ms-keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
+}
+@keyframes zooniverse-progress {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 0;
+  }
 }

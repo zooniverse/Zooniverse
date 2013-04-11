@@ -1,78 +1,101 @@
+@keyframes zooniverse-progress
+  0%
+    background-position: 0 0
+
+  100%
+    background-position: 50px 0
+
 .zooniverse-profile
+  .loader
+    animation: 1s zooniverse-progress linear infinite
+    background: linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%)
+    background-size: 25px 25px
+    bottom: 0
+    display: none
+    left: 0
+    opacity: 0.25
+    position: absolute
+    right: 0
+    top: 0
+    z-index: -1
+
+  .loading .loader
+    display: block
+
   .sign-in-form
     display: block
-    margin: 40px auto
+    margin: 0 auto
+    position: relative
     text-align: center
     width: 50%
 
     header
-      font-size: 20px
+      font-size: 32px
 
     label
       display: block
-      margin: 20px
+      margin: 20px 0
 
-      input
-        background: #fff
-        border: 1px solid #bbb
-        border-radius: 3px
-        box-shadow: 0 1px 1px #ccc inset, 0 2px 1px #fff
-        box-sizing: border-box
-        font-size: 16px
-        padding: 10px
-        width: 100%
+    input
+      background: #fff
+      border: 0
+      border-radius: 3px
+      box-sizing: border-box
+      box-shadow:
+        0 1px 1px rgba(#000, 0.5) inset,
+        0 1px 0 rgba(#fff, 0.25)
+      font-size: 18px
+      padding: 10px
+      width: 100%
 
     .error-message
-      color: darken(#f00, 50%)
+      background: darken(#f00, 25%)
+      border-radius: 3px
+      box-shadow: 0 3px 5px rgba(#000, 0.5)
+      color: #fff
+      font-weight: bold
+      display: inline-block
+      padding: 0 1em
 
     .action
       margin: 20px
 
       button
         background: #fff
-        border: 1px solid #bbb
+        border: 0
         border-radius: 3px
-        box-shadow: 0 1px 0 #fff inset, 0 1px 3px rgba(#000, 0.25)
-        font-size: 12px
+        box-shadow: 0 3px 5px rgba(#000, 0.5)
+        color: #000
+        font-size: 18px
         font-weight: bold
-        margin: 0 5px
-        padding: 3px 10px
+        padding: 5px 1em
 
-    .no-account button
-      text-decoration: underline
+    .no-account
+      font-weight: bold;
+
+      button
+        text-decoration: underline
 
   & > nav
     display: none
     overflow: hidden
 
     button
-      background: #fff
-      border-top: 1px solid rgba(#000, 0.25)
-      box-shadow: 0 -1px 2px rgba(#000, 0.25) inset
-      color: #000
-      float: left
+      border-radius: 2em
       font-weight: bold
-      padding: 0 10px
-
-      &:first-child
-        border-radius: 2em 0 0 2em
-        padding-right: 5px
-
-      &:last-child
-        border-radius: 0 2em 2em 0
-        padding-left: 5px
+      padding: 0 1em
 
       &.active
         background: rgba(#000, 0.25)
-        box-shadow: 0 1px 2px rgba(#000, 0.25) inset
-        color: #fff
-        text-shadow: 0 1px 1px rgba(#000, 0.5)
+        box-shadow: 0 1px 2px rgba(#000, 0.5) inset
+        text-shadow: 0 1px 1px rgba(#000, 0.75)
 
   .zooniverse-paginator
     display: none
+    position: relative
 
     .items
-      margin: 1em 0
+      margin: 1em -10px
       overflow: hidden;
 
       .item
@@ -82,16 +105,36 @@
         width: 25%
 
         a
+          border: 2px solid transparent
           display: block
 
           img
-            background: #ccc
+            background: rgba(#808080, 0.25)
+            box-shadow: 0 3px 5px rgba(#000, 0.5)
             display: block
-            min-height: 20px
+            min-height: 50px
             width: 100%
+
+          &:hover
+            border-color: #fff
 
     .controls
       text-align: center
+      font-size: 10px
+      font-weight: bold
+
+      button
+        border: 1px solid transparent
+        border-radius: 1em
+        height: 2em
+        line-height: 1
+        width: 2em
+
+        &:hover
+          border-color: rgba(#fff, 0.5)
+
+        &.active
+          border-color: #fff
 
   .empty-message
     display: none
