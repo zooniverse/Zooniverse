@@ -151,7 +151,7 @@
   border-color: rgba(255,255,255,0.5);
 }
 .zooniverse-profile .zooniverse-paginator .controls button.active {
-  border-color: #fff;
+  border-color: inherit;
 }
 .zooniverse-profile .empty-message {
   display: none;
