@@ -149,7 +149,7 @@ class Subject extends BaseModel
       &p[url]=#{encodeURIComponent @talkHref()}
       &p[title]=#{encodeURIComponent @socialTitle()}
       &p[summary]=#{encodeURIComponent @socialMessage()}
-      &p[images][0]=#{image}
+      &p[images][0]=#{@socialMessage()}
     """.replace '\n', '', 'g'
 
   twitterHref: ->
