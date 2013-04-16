@@ -7,16 +7,16 @@
 
 .zooniverse-profile
   .loader
-    animation: 1s zooniverse-progress linear infinite
+    animation: 2s zooniverse-progress linear infinite
     background: linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%)
     background-size: 25px 25px
-    bottom: 0
+    bottom: -10px
     display: none
-    left: 0
+    left: -10px
     opacity: 0.25
     position: absolute
-    right: 0
-    top: 0
+    right: -10px
+    top: -10px
     z-index: -1
 
   .loading .loader
@@ -116,7 +116,7 @@
             width: 100%
 
           &:hover
-            border-color: #fff
+            border-color: inherit
 
     .controls
       text-align: center
@@ -124,17 +124,15 @@
       font-weight: bold
 
       button
-        border: 1px solid transparent
         border-radius: 1em
         height: 2em
         line-height: 1
         width: 2em
 
-        &:hover
-          border-color: rgba(#fff, 0.5)
-
         &.active
-          border-color: inherit
+          background: rgba(#000, 0.25)
+          box-shadow: 0 1px 2px rgba(#000, 0.5) inset
+          text-shadow: 0 1px 1px rgba(#000, 0.75)
 
   .empty-message
     display: none

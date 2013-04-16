@@ -1,9 +1,9 @@
 .zooniverse-profile .loader {
-  -webkit-animation: 1s zooniverse-progress linear infinite;
-  -moz-animation: 1s zooniverse-progress linear infinite;
-  -o-animation: 1s zooniverse-progress linear infinite;
-  -ms-animation: 1s zooniverse-progress linear infinite;
-  animation: 1s zooniverse-progress linear infinite;
+  -webkit-animation: 2s zooniverse-progress linear infinite;
+  -moz-animation: 2s zooniverse-progress linear infinite;
+  -o-animation: 2s zooniverse-progress linear infinite;
+  -ms-animation: 2s zooniverse-progress linear infinite;
+  animation: 2s zooniverse-progress linear infinite;
   background: -webkit-gradient(linear, left top, right bottom, color-stop(0.25, transparent), color-stop(0.25, #808080), color-stop(0.5, #808080), color-stop(0.5, transparent), color-stop(0.75, transparent), color-stop(0.75, #808080));
   background: -webkit-linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%);
   background: -moz-linear-gradient(left top, transparent 25%, #808080 25%, #808080 50%, transparent 50%, transparent 75%, #808080 75%);
@@ -13,15 +13,15 @@
   -webkit-background-size: 25px 25px;
   -moz-background-size: 25px 25px;
   background-size: 25px 25px;
-  bottom: 0;
+  bottom: -10px;
   display: none;
-  left: 0;
+  left: -10px;
   opacity: 0.25;
   filter: alpha(opacity=25);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
   position: absolute;
-  right: 0;
-  top: 0;
+  right: -10px;
+  top: -10px;
   z-index: -1;
 }
 .zooniverse-profile .loading .loader {
@@ -132,7 +132,7 @@
   width: 100%;
 }
 .zooniverse-profile .zooniverse-paginator .items .item a:hover {
-  border-color: #fff;
+  border-color: inherit;
 }
 .zooniverse-profile .zooniverse-paginator .controls {
   text-align: center;
@@ -140,18 +140,17 @@
   font-weight: bold;
 }
 .zooniverse-profile .zooniverse-paginator .controls button {
-  border: 1px solid transparent;
   -webkit-border-radius: 1em;
   border-radius: 1em;
   height: 2em;
   line-height: 1;
   width: 2em;
 }
-.zooniverse-profile .zooniverse-paginator .controls button:hover {
-  border-color: rgba(255,255,255,0.5);
-}
 .zooniverse-profile .zooniverse-paginator .controls button.active {
-  border-color: inherit;
+  background: rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5) inset;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5) inset;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.75);
 }
 .zooniverse-profile .empty-message {
   display: none;

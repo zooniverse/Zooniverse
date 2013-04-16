@@ -36,12 +36,14 @@ class Profile extends BaseController
 
     @recentsList = new Paginator
       type: Recent
+      perPage: 12
       className: "#{Paginator::className} recents"
       el: @el.find '.recents'
       itemTemplate: @recentTemplate
 
     @favoritesList = new Paginator
       type: Favorite
+      perPage: 12
       className: "#{Paginator::className} favorites"
       el: @el.find '.favorites'
       itemTemplate: @favoriteTemplate

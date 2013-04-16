@@ -67,12 +67,14 @@
       });
       this.recentsList = new Paginator({
         type: Recent,
+        perPage: 12,
         className: "" + Paginator.prototype.className + " recents",
         el: this.el.find('.recents'),
         itemTemplate: this.recentTemplate
       });
       this.favoritesList = new Paginator({
         type: Favorite,
+        perPage: 12,
         className: "" + Paginator.prototype.className + " favorites",
         el: this.el.find('.favorites'),
         itemTemplate: this.favoriteTemplate
