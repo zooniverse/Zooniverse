@@ -19,11 +19,13 @@ class Favorite extends Recent
     @trigger 'sending'
     Api.current.post "/projects/#{Api.current.project}/favorites", @toJSON(), (response) =>
       @id = response.id
+      @trigger 'send'
 
   delete: ->
-    @trigger 'delete'
-    # TODO: Api.current.delete ...
-    @destroy()
+    @trigger 'deleting'
+    Api.current.delete "/projects/#{Api.current.project}/favorites/#{@id}", =>
+      @trigger 'delete'
+      @destroy()
 
 window.zooniverse.models.Favorite = Favorite
 module?.exports = Favorite

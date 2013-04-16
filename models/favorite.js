@@ -56,13 +56,18 @@
       var _this = this;
       this.trigger('sending');
       return Api.current.post("/projects/" + Api.current.project + "/favorites", this.toJSON(), function(response) {
-        return _this.id = response.id;
+        _this.id = response.id;
+        return _this.trigger('send');
       });
     };
 
     Favorite.prototype["delete"] = function() {
-      this.trigger('delete');
-      return this.destroy();
+      var _this = this;
+      this.trigger('deleting');
+      return Api.current["delete"]("/projects/" + Api.current.project + "/favorites/" + this.id, function() {
+        _this.trigger('delete');
+        return _this.destroy();
+      });
     };
 
     return Favorite;
