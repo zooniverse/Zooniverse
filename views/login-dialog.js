@@ -51,7 +51,7 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.password));
     
-      __out.push('" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="http://zooniverse.org/">');
+      __out.push('" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
     
       __out.push(__sanitize(enUs.topBar.forgotPassword));
     

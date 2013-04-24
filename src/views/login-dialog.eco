@@ -20,6 +20,6 @@
 <div class="error-message"></div>
 
 <div class="action">
-  <a href="http://zooniverse.org/"><%= enUs.topBar.forgotPassword %></a>
+  <a href="https://www.zooniverse.org/password/reset"><%= enUs.topBar.forgotPassword %></a>
   <button type="submit"><%= enUs.topBar.signIn %></button>
 </div>
