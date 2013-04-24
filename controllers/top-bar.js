@@ -51,10 +51,12 @@
       '.avatar img': 'avatarImage'
     };
 
-    function TopBar() {
+    function TopBar(title) {
+      this.title = title != null ? title : 'A Zooniverse project';
       this.getMessages = __bind(this.getMessages, this);
 
       this.onUserChange = __bind(this.onUserChange, this);
+
       TopBar.__super__.constructor.apply(this, arguments);
       User.on('change', this.onUserChange);
     }

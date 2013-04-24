@@ -24,9 +24,8 @@ class TopBar extends BaseController
     '.message-count': 'messageCount'
     '.avatar img': 'avatarImage'
 
-  constructor: ->
+  constructor: (@title = 'A Zooniverse project') ->
     super
-
     User.on 'change', @onUserChange
 
   onClickSignIn: ->

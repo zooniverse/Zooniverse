@@ -3,7 +3,7 @@
 <div class="no-user">
   <div class="zooniverse">
     <span class="zooniverse-logo"></span>
-    A Zooniverse project
+    <%= @title %>
   </div>
 
   <div class="sign-in">

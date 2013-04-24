@@ -43,7 +43,11 @@ template = function(__obj) {
     
       enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    <span class="zooniverse-logo"></span>\n    A Zooniverse project\n  </div>\n\n  <div class="sign-in">\n    <button name="sign-up">');
+      __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    <span class="zooniverse-logo"></span>\n    ');
+    
+      __out.push(__sanitize(this.title));
+    
+      __out.push('\n  </div>\n\n  <div class="sign-in">\n    <button name="sign-up">');
     
       __out.push(__sanitize(enUs.topBar.signUp));
     
