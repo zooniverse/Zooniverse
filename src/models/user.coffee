@@ -7,16 +7,19 @@ base64 = window.base64 || (require '../vendor/base64'; window.base64)
 
 class User extends EventEmitter
   @current: false
+  
+  @path: ->
+    if Api.current.project then "/projects/#{ Api.current.project }" else ''
 
   @fetch: =>
     @trigger 'fetching', arguments
-    fetcher = Api.current.getJSON "/projects/#{Api.current.project}/current_user", arguments...
+    fetcher = Api.current.getJSON "#{ @path() }/current_user", arguments...
     fetcher.always @onFetch
     fetcher
 
   @login: ({username, password}) ->
     @trigger 'logging-in', arguments
-    login = Api.current.getJSON "/projects/#{Api.current.project}/login", arguments...
+    login = Api.current.getJSON "#{ @path() }/login", arguments...
     login.done @onFetch
     login.fail @onFail
 
@@ -24,13 +27,13 @@ class User extends EventEmitter
 
   @logout: ->
     @trigger 'logging-out', arguments
-    logout = Api.current.getJSON "/projects/#{Api.current.project}/logout", arguments...
+    logout = Api.current.getJSON "#{ @path() }/logout", arguments...
     logout.always @onFetch
     logout
 
   @signup: ({username, password, email}) ->
     @trigger 'signing-up'
-    signup = Api.current.getJSON "/projects/#{Api.current.project}/signup", arguments...
+    signup = Api.current.getJSON "#{ @path() }/signup", arguments...
     signup.always @onFetch
     signup
 

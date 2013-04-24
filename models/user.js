@@ -25,10 +25,18 @@
 
     User.current = false;
 
+    User.path = function() {
+      if (Api.current.project) {
+        return "/projects/" + Api.current.project;
+      } else {
+        return '';
+      }
+    };
+
     User.fetch = function() {
       var fetcher, _ref2;
       User.trigger('fetching', arguments);
-      fetcher = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/current_user"].concat(__slice.call(arguments)));
+      fetcher = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (User.path()) + "/current_user"].concat(__slice.call(arguments)));
       fetcher.always(User.onFetch);
       return fetcher;
     };
@@ -37,7 +45,7 @@
       var login, password, username, _ref2;
       username = _arg.username, password = _arg.password;
       this.trigger('logging-in', arguments);
-      login = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/login"].concat(__slice.call(arguments)));
+      login = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (this.path()) + "/login"].concat(__slice.call(arguments)));
       login.done(this.onFetch);
       login.fail(this.onFail);
       return login;
@@ -46,7 +54,7 @@
     User.logout = function() {
       var logout, _ref2;
       this.trigger('logging-out', arguments);
-      logout = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/logout"].concat(__slice.call(arguments)));
+      logout = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (this.path()) + "/logout"].concat(__slice.call(arguments)));
       logout.always(this.onFetch);
       return logout;
     };
@@ -55,7 +63,7 @@
       var email, password, signup, username, _ref2;
       username = _arg.username, password = _arg.password, email = _arg.email;
       this.trigger('signing-up');
-      signup = (_ref2 = Api.current).getJSON.apply(_ref2, ["/projects/" + Api.current.project + "/signup"].concat(__slice.call(arguments)));
+      signup = (_ref2 = Api.current).getJSON.apply(_ref2, ["" + (this.path()) + "/signup"].concat(__slice.call(arguments)));
       signup.always(this.onFetch);
       return signup;
     };
