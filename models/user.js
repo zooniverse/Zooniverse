@@ -117,9 +117,7 @@
       for (property in params) {
         if (!__hasProp.call(params, property)) continue;
         value = params[property];
-        if (property in this) {
-          this[property] = value;
-        }
+        this[property] = value;
       }
     }
 

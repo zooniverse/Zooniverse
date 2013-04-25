@@ -69,7 +69,7 @@ class User extends EventEmitter
   project: null
 
   constructor: (params = {}) ->
-    @[property] = value for own property, value of params when property of @
+    @[property] = value for own property, value of params
 
 window.zooniverse.models.User = User
 module?.exports = User
