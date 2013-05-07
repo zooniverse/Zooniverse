@@ -4,11 +4,15 @@ window.zooniverse.controllers ?= {}
 EventEmitter = window.zooniverse.EventEmitter || require '../lib/event-emitter'
 $ = window.jQuery
 
+nextId = 0
+
 class BaseController extends EventEmitter
   el: null
   tagName: 'div'
   className: ''
   template: null
+
+  id: ''
 
   events: null
   elements: null
@@ -16,6 +20,9 @@ class BaseController extends EventEmitter
   constructor: (params = {}) ->
     super
     @[property] = value for own property, value of params when property of @
+
+    @id ||= "controller_#{nextId}"
+    nextId += 1
 
     @el ?= document.createElement @tagName
     @el = $(@el)
@@ -30,12 +37,13 @@ class BaseController extends EventEmitter
     unless @el.html()
       @el.html @template if typeof @template is 'string'
       @el.html @template @ if typeof @template is 'function'
+
   nameElements: ->
     if @elements? then for selector, name of @elements
       @[name] = @el.find(selector)
 
   delegateEvents: ->
-    @el.off()
+    @el.off ".#{@id}"
 
     if @events? then for eventString, method of @events then do (eventString, method) =>
       [eventName, selector...] = eventString.split /\s+/
@@ -48,7 +56,7 @@ class BaseController extends EventEmitter
       if typeof method is 'string'
         method = @[method]
 
-      @el.on eventName, selector, (e) =>
+      @el.on "#{eventName}.#{@id}", selector, (e) =>
         e.preventDefault() if autoPreventDefault
         method.call @, arguments...
 
