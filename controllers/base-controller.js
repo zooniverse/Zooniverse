@@ -56,11 +56,16 @@
     }
 
     BaseController.prototype.renderTemplate = function() {
-      if (this.template && !this.el.html()) {
-        this.el.html(this.template(this));
-      }
       if (this.className) {
-        return this.el.addClass(this.className);
+        this.el.addClass(this.className);
+      }
+      if (!this.el.html()) {
+        if (typeof this.template === 'string') {
+          this.el.html(this.template);
+        }
+        if (typeof this.template === 'function') {
+          return this.el.html(this.template(this));
+        }
       }
     };
 

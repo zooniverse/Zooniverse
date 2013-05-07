@@ -25,9 +25,11 @@ class BaseController extends EventEmitter
     @nameElements()
 
   renderTemplate: ->
-    @el.html @template @ if @template and not @el.html()
     @el.addClass @className if @className
 
+    unless @el.html()
+      @el.html @template if typeof @template is 'string'
+      @el.html @template @ if typeof @template is 'function'
   nameElements: ->
     if @elements? then for selector, name of @elements
       @[name] = @el.find(selector)
