@@ -93,6 +93,8 @@
 
     Classification.prototype.favorite = false;
 
+    Classification.prototype.generic = null;
+
     Classification.prototype.started_at = null;
 
     Classification.prototype.finished_at = null;
@@ -105,6 +107,7 @@
       if ((_ref2 = this.annotations) == null) {
         this.annotations = [];
       }
+      this.generic = {};
       this.started_at = (new Date).toUTCString();
       this.user_agent = window.navigator.userAgent;
     }
@@ -125,8 +128,17 @@
       }
     };
 
+    Classification.prototype.set = function(key, value) {
+      this.generic[key] = value;
+      return this.trigger('change', [key, value]);
+    };
+
+    Classification.prototype.get = function(key) {
+      return this.generic[key];
+    };
+
     Classification.prototype.toJSON = function() {
-      var output;
+      var annotation, key, output, value, _ref2;
       output = {
         classification: {
           subject_ids: [this.subject.id],
@@ -140,6 +152,13 @@
           ])
         }
       };
+      _ref2 = this.generic;
+      for (key in _ref2) {
+        value = _ref2[key];
+        annotation = {};
+        annotation[key] = value;
+        output.classification.annotations.push(annotation);
+      }
       if (this.favorite) {
         output.classification.favorite = true;
       }

@@ -45,6 +45,7 @@ class Classification extends BaseModel
   annotations: null
   favorite: false
 
+  generic: null
   started_at: null
   finished_at: null
   user_agent: null
@@ -53,6 +54,7 @@ class Classification extends BaseModel
     super
     @annotations ?= []
 
+    @generic = {}
     @started_at = (new Date).toUTCString()
     @user_agent = window.navigator.userAgent
 
@@ -64,10 +66,22 @@ class Classification extends BaseModel
     for a, i in @annotations when a is annotation
       return @annotations.splice i, 1
 
+  set: (key, value) ->
+    @generic[key] = value
+    @trigger 'change', [key, value]
+
+  get: (key) ->
+    @generic[key]
+
   toJSON: ->
     output = classification:
       subject_ids: [@subject.id]
       annotations: @annotations.concat [{@started_at, @finished_at}, {@user_agent}]
+
+    for key, value of @generic
+      annotation = {}
+      annotation[key] = value
+      output.classification.annotations.push annotation
 
     output.classification.favorite = true if @favorite
 
