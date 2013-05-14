@@ -98,6 +98,7 @@ class Subject extends BaseModel
   location: null
   metadata: null
   project_id: ''
+  group_id: ''
   workflow_ids: null
   tutorial: null
 

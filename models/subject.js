@@ -147,6 +147,8 @@
 
     Subject.prototype.project_id = '';
 
+    Subject.prototype.group_id = '';
+
     Subject.prototype.workflow_ids = null;
 
     Subject.prototype.tutorial = null;
