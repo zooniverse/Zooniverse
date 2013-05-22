@@ -7,7 +7,7 @@ base64 = window.base64 || (require '../vendor/base64'; window.base64)
 
 class User extends EventEmitter
   @current: false
-  
+
   @path: ->
     if Api.current.project then "/projects/#{ Api.current.project }" else ''
 
@@ -70,6 +70,16 @@ class User extends EventEmitter
 
   constructor: (params = {}) ->
     @[property] = value for own property, value of params
+
+  setPreference: (key, value, project = true, callback) ->
+    [project, callback] = [true, project] if typeof project is 'function'
+
+    projectSegment = if project
+      "/projects/#{Api.current.project}"
+    else
+      ""
+
+    Api.current.put "#{projectSegment}/users/preferences", {key, value}, callback
 
 window.zooniverse.models.User = User
 module?.exports = User

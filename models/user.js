@@ -121,6 +121,21 @@
       }
     }
 
+    User.prototype.setPreference = function(key, value, project, callback) {
+      var projectSegment, _ref2;
+      if (project == null) {
+        project = true;
+      }
+      if (typeof project === 'function') {
+        _ref2 = [true, project], project = _ref2[0], callback = _ref2[1];
+      }
+      projectSegment = project ? "/projects/" + Api.current.project : "";
+      return Api.current.put("" + projectSegment + "/users/preferences", {
+        key: key,
+        value: value
+      }, callback);
+    };
+
     return User;
 
   }).call(this, EventEmitter);
