@@ -42,6 +42,7 @@
   padding: 30px;
   position: relative;
   text-align: left;
+  text-shadow: none;
   -webkit-transform: translateY(-25%) rotateX(30deg) scale(0.75);
   -moz-transform: translateY(-25%) rotateX(30deg) scale(0.75);
   -o-transform: translateY(-25%) rotateX(30deg) scale(0.75);
