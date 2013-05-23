@@ -105,17 +105,17 @@
     Recent.prototype.created_at = '';
 
     function Recent() {
-      var i, subject, _i, _len, _ref2, _ref3;
+      var i, subject, _i, _len, _ref2, _ref3, _ref4;
       Recent.__super__.constructor.apply(this, arguments);
       if ((_ref2 = this.subjects) == null) {
         this.subjects = [];
       }
       this.project_id || (this.project_id = this.subjects[0].project_id);
-      this.workflow_id || (this.workflow_id = this.subjects[0].workflow_ids[0]);
+      this.workflow_id || (this.workflow_id = (_ref3 = this.subjects[0].workflow_ids) != null ? _ref3[0] : void 0);
       this.created_at || (this.created_at = (new Date).toUTCString());
-      _ref3 = this.subjects;
-      for (i = _i = 0, _len = _ref3.length; _i < _len; i = ++_i) {
-        subject = _ref3[i];
+      _ref4 = this.subjects;
+      for (i = _i = 0, _len = _ref4.length; _i < _len; i = ++_i) {
+        subject = _ref4[i];
         this.subjects[i] = new SubjectForRecent(subject);
       }
     }

@@ -57,7 +57,7 @@ class Recent extends BaseModel
     super
     @subjects ?= []
     @project_id ||= @subjects[0].project_id
-    @workflow_id ||= @subjects[0].workflow_ids[0]
+    @workflow_id ||= @subjects[0].workflow_ids?[0]
     @created_at ||= (new Date).toUTCString()
 
     for subject, i in @subjects
