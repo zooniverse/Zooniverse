@@ -78,7 +78,7 @@ class Paginator extends BaseController
       else
         """<div class='item'><a href="#{item.subjects[0]?.talkHref() || '#/SUBJECT-ERROR'}">#{item.subjects[0]?.zooniverse_id || 'Error in subject'}</a></div>"""
 
-      itemEl = $(inner)
+      itemEl = $($.trim inner)
       itemEl.attr 'data-item-id': item.id
 
     itemEl

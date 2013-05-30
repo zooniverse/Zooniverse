@@ -130,7 +130,7 @@
       itemEl = this.itemsContainer.find("[data-item-id='" + item.id + "']");
       if (itemEl.length === 0) {
         inner = this.itemTemplate != null ? this.itemTemplate(item) : "<div class='item'><a href=\"" + (((_ref3 = item.subjects[0]) != null ? _ref3.talkHref() : void 0) || '#/SUBJECT-ERROR') + "\">" + (((_ref4 = item.subjects[0]) != null ? _ref4.zooniverse_id : void 0) || 'Error in subject') + "</a></div>";
-        itemEl = $(inner);
+        itemEl = $($.trim(inner));
         itemEl.attr({
           'data-item-id': item.id
         });
