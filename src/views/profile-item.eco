@@ -1,3 +1,5 @@
+<% Favorite = require 'zooniverse/models/favorite' %>
+
 <div class='item'>
   <a href="<%= @subjects[0]?.talkHref() || '#/SUBJECT_ERROR' %>">
     <% location = @subjects[0]?.location %>

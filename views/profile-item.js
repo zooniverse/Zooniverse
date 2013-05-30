@@ -39,9 +39,11 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var location, thumbSrc, _ref, _ref1;
+      var Favorite, location, thumbSrc, _ref, _ref1;
     
-      __out.push('<div class=\'item\'>\n  <a href="');
+      Favorite = require('zooniverse/models/favorite');
+    
+      __out.push('\n\n<div class=\'item\'>\n  <a href="');
     
       __out.push(__sanitize(((_ref = this.subjects[0]) != null ? _ref.talkHref() : void 0) || '#/SUBJECT_ERROR'));
     
