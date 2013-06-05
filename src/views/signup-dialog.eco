@@ -26,6 +26,11 @@
   <div class="explanation"><%- enUs.topBar.whyRealName %></div>
 </label>
 
+<label>
+  <span></span>
+  <input type="checkbox" required="required" /> I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.
+</label>
+
 <div class="error-message"></div>
 
 <div class="action">

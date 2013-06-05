@@ -63,7 +63,7 @@ template = function(__obj) {
     
       __out.push(enUs.topBar.whyRealName);
     
-      __out.push('</div>\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
+      __out.push('</div>\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" required="required" /> I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
     
       __out.push(__sanitize(enUs.topBar.signUp));
     
