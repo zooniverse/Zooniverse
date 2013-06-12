@@ -26,7 +26,7 @@
     <span class="current-user-name">&mdash;</span>
 
     <div class="sign-out">
-      <button name="sign-out">Sign out</button>
+      <button name="sign-out"><%= enUs.topBar.signOut %></button>
     </div>
   </div>
 

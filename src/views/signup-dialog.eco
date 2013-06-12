@@ -6,7 +6,7 @@
 
 <header>
   <span class="zooniverse-logo"></span>
-  Sign up for a new account
+  <%- enUs.topBar.signUpTitle %>
 </header>
 
 <label>
@@ -28,7 +28,7 @@
 
 <label>
   <span></span>
-  <input type="checkbox" required="required" /> I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.
+  <input type="checkbox" required="required" /><%= enUs.topBar.privacyPolicy %>
 </label>
 
 <div class="error-message"></div>

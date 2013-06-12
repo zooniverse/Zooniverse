@@ -6,7 +6,7 @@
 
 <header>
   <span class="zooniverse-logo"></span>
-  Sign in to your Zooniverse account
+  <%- enUs.topBar.signInTitle %>
 </header>
 
 <label>
