@@ -43,7 +43,11 @@ template = function(__obj) {
     
       enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="loader"></div>\n\n<button type="button" name="close-dialog">&times;</button>\n\n<header>\n  <span class="zooniverse-logo"></span>\n  Sign in to your Zooniverse account\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="');
+      __out.push('\n\n<div class="loader"></div>\n\n<button type="button" name="close-dialog">&times;</button>\n\n<header>\n  <span class="zooniverse-logo"></span>\n  ');
+    
+      __out.push(enUs.topBar.signInTitle);
+    
+      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="');
     
       __out.push(__sanitize(enUs.topBar.username));
     

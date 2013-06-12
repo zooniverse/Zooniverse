@@ -307,7 +307,8 @@
 }
 .zooniverse-top-bar .current-user .messages,
 .zooniverse-top-bar .current-user .info,
-.zooniverse-top-bar .current-user .avatar {
+.zooniverse-top-bar .current-user .avatar,
+.zooniverse-top-bar .current-user .group {
   display: inline-block;
   margin: 0 6px;
   vertical-align: middle;
@@ -340,13 +341,23 @@
   height: 30px;
   width: 30px;
 }
+.zooniverse-top-bar .current-user .group {
+  background: url("./images/zooniverse-group-icon.png") right center no-repeat;
+  display: inline-block;
+  height: 20px;
+  opacity: 0.33;
+  filter: alpha(opacity=33);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
+  width: 24px;
+}
 .zooniverse-top-bar.signed-in .no-user {
   display: none;
 }
 .zooniverse-top-bar.signed-in .current-user {
   display: block;
 }
-.zooniverse-top-bar.has-messages .current-user .messages {
+.zooniverse-top-bar.has-messages .current-user .messages,
+.zooniverse-top-bar.has-group .current-user .group {
   opacity: 1;
   -ms-filter: none;
   filter: none;

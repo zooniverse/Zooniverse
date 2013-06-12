@@ -48,11 +48,14 @@
     TopBar.prototype.elements = {
       '.current-user-name': 'currentUserName',
       '.message-count': 'messageCount',
-      '.avatar img': 'avatarImage'
+      '.avatar img': 'avatarImage',
+      '.group': 'currentGroup'
     };
 
     function TopBar(title) {
       this.title = title != null ? title : 'A Zooniverse project';
+      this.processGroup = __bind(this.processGroup, this);
+
       this.getMessages = __bind(this.getMessages, this);
 
       this.onUserChange = __bind(this.onUserChange, this);
@@ -76,6 +79,7 @@
     TopBar.prototype.onUserChange = function(e, user) {
       this.el.toggleClass('signed-in', user != null);
       this.getMessages();
+      this.processGroup();
       this.currentUserName.html((user != null ? user.name : void 0) || '');
       return this.avatarImage.attr({
         src: user != null ? user.avatar : void 0
@@ -93,6 +97,27 @@
       } else {
         this.el.removeClass('has-messages');
         return this.messageCount.html('0');
+      }
+    };
+
+    TopBar.prototype.processGroup = function() {
+      var currentGroup, group, _i, _len, _ref3, _results;
+      if ((User.current != null) && User.current.hasOwnProperty('user_group_id')) {
+        this.el.addClass('has-group');
+        _ref3 = User.current.user_groups;
+        _results = [];
+        for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
+          group = _ref3[_i];
+          currentGroup = group;
+          if (group.id === !User.current.user_group_id) {
+            continue;
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
+      } else {
+        return this.el.removeClass('has-group');
       }
     };
 

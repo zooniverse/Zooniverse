@@ -55,11 +55,15 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.signIn));
     
-      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="messages">\n    <a href="http://talk.');
+      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="group"></div>\n\n  <div class="messages">\n    <a href="http://talk.');
     
       __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
     
-      __out.push('/#/profile" class="message-link">\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="info">\n    <span class="current-user-name">&mdash;</span>\n\n    <div class="sign-out">\n      <button name="sign-out">Sign out</button>\n    </div>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
+      __out.push('/#/profile" class="message-link">\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="info">\n    <span class="current-user-name">&mdash;</span>\n\n    <div class="sign-out">\n      <button name="sign-out">');
+    
+      __out.push(__sanitize(enUs.topBar.signOut));
+    
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
     
     }).call(this);
     
