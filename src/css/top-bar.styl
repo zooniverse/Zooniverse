@@ -73,7 +73,8 @@
 
     .messages,
     .info,
-    .avatar
+    .avatar,
+    .group
       display: inline-block
       margin: 0 6px
       vertical-align: middle
@@ -105,6 +106,13 @@
         height: 30px
         width: 30px
 
+    .group
+      background: url("./images/zooniverse-group-icon.png") right center no-repeat
+      display: inline-block
+      height: 20px
+      opacity: 0.33
+      width: 24px
+
   &.signed-in
     .no-user
       display: none
@@ -112,7 +120,8 @@
     .current-user
       display: block
 
-  &.has-messages .current-user .messages
+  &.has-messages .current-user .messages,
+  &.has-group .current-user .group
     opacity: 1
 
   .zooniverse-login-form

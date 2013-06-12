@@ -23,6 +23,7 @@ class TopBar extends BaseController
     '.current-user-name': 'currentUserName'
     '.message-count': 'messageCount'
     '.avatar img': 'avatarImage'
+    '.group': 'currentGroup'
 
   constructor: (@title = 'A Zooniverse project') ->
     super
@@ -40,6 +41,7 @@ class TopBar extends BaseController
   onUserChange: (e, user) =>
     @el.toggleClass 'signed-in', user?
     @getMessages()
+    @processGroup()
     @currentUserName.html user?.name || ''
     @avatarImage.attr src: user?.avatar
 
@@ -53,6 +55,17 @@ class TopBar extends BaseController
     else
       @el.removeClass 'has-messages'
       @messageCount.html '0'
+
+  processGroup: =>
+    if User.current? and User.current.hasOwnProperty 'user_group_id'
+      @el.addClass 'has-group'
+
+      for group in User.current.user_groups
+        currentGroup = group
+        continue if group.id is not User.current.user_group_id
+
+    else
+      @el.removeClass 'has-group'
 
 window.zooniverse.controllers.TopBar = TopBar
 module?.exports = TopBar

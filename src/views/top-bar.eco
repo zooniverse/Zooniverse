@@ -14,6 +14,8 @@
 </div>
 
 <div class="current-user">
+  <div class="group"></div>
+
   <div class="messages">
     <a href="http://talk.<%= location.hostname.replace /^www\./, '' %>/#/profile" class="message-link">
       <span class="message-count">&mdash;</span>
