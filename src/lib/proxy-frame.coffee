@@ -7,12 +7,15 @@ html = $(document.body.parentNode)
 
 messageId = -1
 
+demoBucket = !!~location.href.indexOf 'zooniverse-demo'
+highPort = +location.port >= 1024
+flaggedHost = location.search.match(/api=([^&]+)/)?[1]
+flaggedHost = "//#{flaggedHost}" if flaggedHost? and not !!~flaggedHost.indexOf '//'
+
 class ProxyFrame extends EventEmitter
   @REJECTION = 'ProxyFrame not connected'
 
-  demoUrl = !!~location.href.indexOf 'demo'
-  highPort = +location.port >= 1024
-  host: "https://#{if demoUrl or highPort then 'dev' else 'api'}.zooniverse.org"
+  host: flaggedHost || "https://#{if demoBucket or highPort then 'dev' else 'api'}.zooniverse.org"
   path: '/proxy'
   loadTimeout: 5 * 1000
   retryTimeout: 2 * 60 * 1000
