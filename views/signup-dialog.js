@@ -69,7 +69,7 @@ template = function(__obj) {
     
       __out.push('</div>\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" required="required" />');
     
-      __out.push(__sanitize(enUs.topBar.privacyPolicy));
+      __out.push(enUs.topBar.privacyPolicy);
     
       __out.push('\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
     
