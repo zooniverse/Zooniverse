@@ -1,5 +1,5 @@
 {
-  "name": "Zooniverse",
+  "name": "zooniverse",
   "private": true,
   "description": "Zooniverse front end library - core",
   "version": "0.0.1",
