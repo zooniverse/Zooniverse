@@ -34,7 +34,7 @@ class ProxyFrame
   
   send: (message) =>
     payload = message.payload
-    payload['headers'] = ProxyFrame.headers
+    payload['headers'] = $.extend { }, ProxyFrame.headers, { 'X-Zooniverse-Hash': window.location.pathname + window.location.hash }
     @postMessage payload
   
   receive: ({ originalEvent: e }) =>
