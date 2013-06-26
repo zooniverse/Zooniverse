@@ -108,15 +108,25 @@
           _this.trigger('fetching-fallback');
           getFallback = $.get(_this.fallback);
           getFallback.done(function(rawSubjects) {
-            var newSubjects, rawSubject;
+            var newSubjects, rawGroupSubjects, rawSubject, _i, _len;
+            if (_this.group) {
+              rawGroupSubjects = [];
+              for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
+                rawSubject = rawSubjects[_i];
+                if (rawSubject.group_id === _this.group) {
+                  rawGroupSubjects.push(rawSubject);
+                }
+              }
+              rawSubjects = rawGroupSubjects;
+            }
             rawSubjects.sort(function() {
               return Math.random() - 0.5;
             });
             newSubjects = (function() {
-              var _i, _len, _results;
+              var _j, _len1, _results;
               _results = [];
-              for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
-                rawSubject = rawSubjects[_i];
+              for (_j = 0, _len1 = rawSubjects.length; _j < _len1; _j++) {
+                rawSubject = rawSubjects[_j];
                 _results.push(new this(rawSubject));
               }
               return _results;

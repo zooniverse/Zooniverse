@@ -78,6 +78,12 @@ class Subject extends BaseModel
         getFallback = $.get @fallback
 
         getFallback.done (rawSubjects) =>
+
+          if @group
+            rawGroupSubjects = []
+            rawGroupSubjects.push(rawSubject) for rawSubject in rawSubjects when (rawSubject.group_id is @group)
+            rawSubjects = rawGroupSubjects
+
           rawSubjects.sort -> Math.random() - 0.5
           newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
           @trigger 'fetch', [newSubjects]
