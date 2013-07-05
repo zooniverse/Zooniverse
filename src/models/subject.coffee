@@ -121,6 +121,7 @@ class Subject extends BaseModel
   preloadImages: ->
     for type, imageSources of @location
       imageSources = [imageSources] unless imageSources instanceof Array
+      continue unless @isImage imageSources
       (new Image).src = src for src in imageSources
 
   select: ->
@@ -131,6 +132,12 @@ class Subject extends BaseModel
     @constructor.current = null if @constructor.current is @
     super
 
+  isImage: (subjectLocation) ->
+    for src in subjectLocation
+      return false unless (src.split('.').pop() in ['gif', 'jpg', 'png'])
+
+    return true
+    
   talkHref: ->
     domain = @domain || location.hostname.replace /^www\./, ''
     "http://talk.#{domain}/#/subjects/#{@zooniverse_id}"

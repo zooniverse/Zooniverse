@@ -190,6 +190,9 @@
         if (!(imageSources instanceof Array)) {
           imageSources = [imageSources];
         }
+        if (!this.isImage(imageSources)) {
+          continue;
+        }
         _results.push((function() {
           var _i, _len, _results1;
           _results1 = [];
@@ -213,6 +216,17 @@
         this.constructor.current = null;
       }
       return Subject.__super__.destroy.apply(this, arguments);
+    };
+
+    Subject.prototype.isImage = function(subjectLocation) {
+      var src, _i, _len, _ref2;
+      for (_i = 0, _len = subjectLocation.length; _i < _len; _i++) {
+        src = subjectLocation[_i];
+        if (!((_ref2 = src.split('.').pop()) === 'gif' || _ref2 === 'jpg' || _ref2 === 'png')) {
+          return false;
+        }
+      }
+      return true;
     };
 
     Subject.prototype.talkHref = function() {
