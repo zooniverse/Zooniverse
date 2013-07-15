@@ -73,11 +73,9 @@ class User extends EventEmitter
 
   setPreference: (key, value, global = false, callback) ->
     return unless User.current?
-
     [global, callback] = [false, global] if typeof global is 'function'
 
     User.current.preferences ?= {}
-
     if global
       User.current.preferences[key] = value
     else
@@ -85,8 +83,21 @@ class User extends EventEmitter
       User.current.preferences[Api.current.project][key] = value
 
     key = "#{Api.current.project}.#{key}" unless global
-
     Api.current.put "/users/preferences", {key, value}, callback
+
+  deletePreference: (key, global = false, callback) ->
+    return unless User.current?
+    [global, callback] = [false, global] if typeof global is 'function'
+
+    User.current.preferences ?= {}
+    if global
+      delete User.current.preferences[key]
+    else
+      User.current.preferences[Api.current.project] ?= {}
+      delete User.current.preferences[Api.current.project][key]
+
+    key = "#{Api.current.project}.#{key}" unless global
+    Api.current.delete "/users/preferences", {key}, callback
 
 window.zooniverse.models.User = User
 module?.exports = User

@@ -152,6 +152,36 @@
       }, callback);
     };
 
+    User.prototype.deletePreference = function(key, global, callback) {
+      var _base1, _base2, _name, _ref2, _ref3, _ref4;
+      if (global == null) {
+        global = false;
+      }
+      if (User.current == null) {
+        return;
+      }
+      if (typeof global === 'function') {
+        _ref2 = [false, global], global = _ref2[0], callback = _ref2[1];
+      }
+      if ((_ref3 = (_base1 = User.current).preferences) == null) {
+        _base1.preferences = {};
+      }
+      if (global) {
+        delete User.current.preferences[key];
+      } else {
+        if ((_ref4 = (_base2 = User.current.preferences)[_name = Api.current.project]) == null) {
+          _base2[_name] = {};
+        }
+        delete User.current.preferences[Api.current.project][key];
+      }
+      if (!global) {
+        key = "" + Api.current.project + "." + key;
+      }
+      return Api.current["delete"]("/users/preferences", {
+        key: key
+      }, callback);
+    };
+
     return User;
 
   }).call(this, EventEmitter);
