@@ -71,15 +71,22 @@ class User extends EventEmitter
   constructor: (params = {}) ->
     @[property] = value for own property, value of params
 
-  setPreference: (key, value, project = true, callback) ->
-    [project, callback] = [true, project] if typeof project is 'function'
+  setPreference: (key, value, global = false, callback) ->
+    return unless User.current?
 
-    projectSegment = if project
-      "/projects/#{Api.current.project}"
+    [global, callback] = [false, global] if typeof global is 'function'
+
+    User.current.preferences ?= {}
+
+    if global
+      User.current.preferences[key] = value
     else
-      ""
+      User.current.preferences[Api.current.project] ?= {}
+      User.current.preferences[Api.current.project][key] = value
 
-    Api.current.put "#{projectSegment}/users/preferences", {key, value}, callback
+    key = "#{Api.current.project}.#{key}" unless global
+
+    Api.current.put "/users/preferences", {key, value}, callback
 
 window.zooniverse.models.User = User
 module?.exports = User

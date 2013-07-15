@@ -121,16 +121,32 @@
       }
     }
 
-    User.prototype.setPreference = function(key, value, project, callback) {
-      var projectSegment, _ref2;
-      if (project == null) {
-        project = true;
+    User.prototype.setPreference = function(key, value, global, callback) {
+      var _base1, _base2, _name, _ref2, _ref3, _ref4;
+      if (global == null) {
+        global = false;
       }
-      if (typeof project === 'function') {
-        _ref2 = [true, project], project = _ref2[0], callback = _ref2[1];
+      if (User.current == null) {
+        return;
       }
-      projectSegment = project ? "/projects/" + Api.current.project : "";
-      return Api.current.put("" + projectSegment + "/users/preferences", {
+      if (typeof global === 'function') {
+        _ref2 = [false, global], global = _ref2[0], callback = _ref2[1];
+      }
+      if ((_ref3 = (_base1 = User.current).preferences) == null) {
+        _base1.preferences = {};
+      }
+      if (global) {
+        User.current.preferences[key] = value;
+      } else {
+        if ((_ref4 = (_base2 = User.current.preferences)[_name = Api.current.project]) == null) {
+          _base2[_name] = {};
+        }
+        User.current.preferences[Api.current.project][key] = value;
+      }
+      if (!global) {
+        key = "" + Api.current.project + "." + key;
+      }
+      return Api.current.put("/users/preferences", {
         key: key,
         value: value
       }, callback);
