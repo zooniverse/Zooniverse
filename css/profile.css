@@ -17,8 +17,8 @@
   display: none;
   left: -10px;
   opacity: 0.25;
-  filter: alpha(opacity=25);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+  filter: alpha(opacity=25);
   position: absolute;
   right: -10px;
   top: -10px;
