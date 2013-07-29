@@ -91,6 +91,11 @@
   padding: 0;
 }
 .zooniverse-dialog a {
+  border: 0;
+  color: inherit;
+  text-decoration: underline;
+}
+.zooniverse-dialog a:hover {
   color: inherit;
 }
 .zooniverse-dialog header {
