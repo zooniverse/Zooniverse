@@ -8,6 +8,7 @@ eco = require 'eco'
 # Only include essential modules in a build.
 # Manually resolve dependency order for now. :(
 buildModules = [
+  'vendor/base64.js'
   'src/lib/en-us.coffee'
   'src/lib/event-emitter.coffee'
   'src/lib/proxy-frame.coffee'
@@ -26,6 +27,7 @@ buildModules = [
   'src/views/paginator.eco'
   'src/views/profile.eco'
   'src/views/profile-item.eco'
+  'src/views/footer.eco'
   'src/controllers/base-controller.coffee'
   'src/controllers/dialog.coffee'
   'src/controllers/login-form.coffee'
@@ -35,6 +37,7 @@ buildModules = [
   'src/controllers/top-bar.coffee'
   'src/controllers/paginator.coffee'
   'src/controllers/profile.coffee'
+  'src/controllers/footer.coffee'
   'src/util/active-hash-links.coffee'
 ]
 
@@ -123,6 +126,7 @@ task 'build', 'Build the whole library into a single file', ->
     compiledModules.push switch extension
       when '.coffee' then CoffeeScript.compile content
       when '.eco' then ecoToModule module, content
+      when '.js' then content
       else throw new Error "Could not compile '#{module}'"
 
   outContent = [

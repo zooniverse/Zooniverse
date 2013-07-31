@@ -1,4 +1,4 @@
-var base64 = {
+window.base64 = {
   _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
   
   encode: function (input) {
