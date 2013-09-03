@@ -37,8 +37,8 @@
   display: inline-block;
   max-width: 33%;
   opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   padding: 30px;
   position: relative;
   text-align: left;
@@ -131,8 +131,8 @@
   display: none;
   left: 0;
   opacity: 0.05;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
   filter: alpha(opacity=5);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
   position: absolute;
   right: 0;
   top: 0;
@@ -163,8 +163,8 @@
   font-size: 10px;
   margin: 5px 13px;
   opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
   filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
 }
 .zooniverse-dialog .error-message {
   color: #800000;
@@ -321,8 +321,8 @@
 .zooniverse-top-bar .current-user .messages {
   margin-top: -3px;
   opacity: 0.33;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
   filter: alpha(opacity=33);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
 }
 .zooniverse-top-bar .current-user .messages .message-count {
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAALVBMVEW+vr7Nzc3Q0NDR0dHW1tbb29vg4ODk5OTn5+fo6Ojt7e3v7+/29vb6+vr///8OFDOYAAAAOElEQVQIHWPY+w4CbjOU9YFZL9IZykvmAZkv3csZysuD1r17pVoOYpULnzEEkiBWKUM4lAWkCLIAEVwyE0jlImMAAAAASUVORK5CYII=") right center no-repeat;
@@ -351,8 +351,8 @@
   display: inline-block;
   height: 20px;
   opacity: 0.33;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
   filter: alpha(opacity=33);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
   width: 24px;
 }
 .zooniverse-top-bar.signed-in .no-user {
