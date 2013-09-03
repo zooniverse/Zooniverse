@@ -39,38 +39,46 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var category, enUs, project, projects, _i, _j, _len, _len1, _ref, _ref1;
+      var category, enUs, project, projects, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1;
     
       enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="title">');
+      __out.push('\n');
     
-      __out.push(__sanitize(enUs.footer.title));
+      zooniverseLogoSvg = require('./zooniverse-logo-svg');
     
-      __out.push('</div>\n\n');
+      __out.push('\n\n<a href="https://www.zooniverse.org/" class="logo">\n  ');
+    
+      __out.push(zooniverseLogoSvg());
+    
+      __out.push('\n</a>\n\n<div class="content">\n  <div class="heading">');
+    
+      __out.push(__sanitize(enUs.footer.heading));
+    
+      __out.push('</div>\n\n  ');
     
       if (this.categories != null) {
-        __out.push('\n  <div class="projects">\n    ');
+        __out.push('\n    <div class="projects">\n      ');
         _ref = this.categories;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           _ref1 = _ref[_i], category = _ref1.category, projects = _ref1.projects;
-          __out.push('\n      <div class="category">\n        <div class="category-title">');
+          __out.push('\n        <div class="category">\n          <div class="category-title">');
           __out.push(__sanitize(category));
-          __out.push('</div>\n        ');
+          __out.push('</div>\n          ');
           for (_j = 0, _len1 = projects.length; _j < _len1; _j++) {
             project = projects[_j];
-            __out.push('\n          <div class="project">\n            <a href="');
+            __out.push('\n            <div class="project">\n              <a href="');
             __out.push(__sanitize(project.url));
             __out.push('">');
             __out.push(__sanitize(project.name));
-            __out.push('</a>\n          </div>\n        ');
+            __out.push('</a>\n            </div>\n          ');
           }
-          __out.push('\n        <div class="project"></div>\n      </div>\n    ');
+          __out.push('\n          <div class="project"></div>\n        </div>\n      ');
         }
-        __out.push('\n  </div>\n');
+        __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n');
+      __out.push('\n</div>');
     
     }).call(this);
     

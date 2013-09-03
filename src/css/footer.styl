@@ -1,31 +1,45 @@
 .zooniverse-footer
-  background: url("./images/zooniverse-logo-gray.png") no-repeat
-  font-size: 14px
-  min-height: 200px
-  padding-left: 200px
+  overflow: hidden
+  text-align: left
 
-  .title
+  a
+    color: inherit
+    opacity: 0.75
+    text-decoration: none
+
+    &:hover
+      opacity: 1
+
+  .logo
+    float: left
+    opacity: 0.5
+    width: 25%
+
+    &:hover
+      opacity: 0.67
+
+    svg
+      max-height: 200px
+      width: 85%
+
+  .content
+    float: left
+    width: 75%
+
+  .heading
     font-size: 18px
     margin-bottom: 1em
 
   .projects
-    font-size: 12px
+    font-size: 14px
     overflow: hidden
 
-    .category
-      float: left
-      width: 25%
+  .category
+    float: left
+    width: 25%
 
-      .category-title
-        font-size: 10px
-        font-weight: bold
-        letter-spacing: 1px
-        text-transform: uppercase
-
-      a
-        color: inherit
-        opacity: 0.67
-        text-decoration: none
-
-        &:hover
-          opacity: 1
+  .category-title
+    font-size: 10px
+    font-weight: bold
+    letter-spacing: 1px
+    text-transform: uppercase

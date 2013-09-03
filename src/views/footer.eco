@@ -1,19 +1,26 @@
 <% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+<% zooniverseLogoSvg = require './zooniverse-logo-svg' %>
 
-<div class="title"><%= enUs.footer.title %></div>
+<a href="https://www.zooniverse.org/" class="logo">
+  <%- zooniverseLogoSvg() %>
+</a>
 
-<% if @categories?: %>
-  <div class="projects">
-    <% for {category, projects} in @categories: %>
-      <div class="category">
-        <div class="category-title"><%= category %></div>
-        <% for project in projects: %>
-          <div class="project">
-            <a href="<%= project.url %>"><%= project.name %></a>
-          </div>
-        <% end %>
-        <div class="project"></div>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+<div class="content">
+  <div class="heading"><%= enUs.footer.heading %></div>
+
+  <% if @categories?: %>
+    <div class="projects">
+      <% for {category, projects} in @categories: %>
+        <div class="category">
+          <div class="category-title"><%= category %></div>
+          <% for project in projects: %>
+            <div class="project">
+              <a href="<%= project.url %>"><%= project.name %></a>
+            </div>
+          <% end %>
+          <div class="project"></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

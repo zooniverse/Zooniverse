@@ -1,36 +1,54 @@
 .zooniverse-footer {
-  background: url("data:image/png;base64,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") no-repeat;
-  font-size: 14px;
-  min-height: 200px;
-  padding-left: 200px;
+  overflow: hidden;
+  text-align: left;
 }
-.zooniverse-footer .title {
+.zooniverse-footer a {
+  color: inherit;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  text-decoration: none;
+}
+.zooniverse-footer a:hover {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+}
+.zooniverse-footer .logo {
+  float: left;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  width: 25%;
+}
+.zooniverse-footer .logo:hover {
+  opacity: 0.67;
+  filter: alpha(opacity=67);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=67)";
+}
+.zooniverse-footer .logo svg {
+  max-height: 200px;
+  width: 85%;
+}
+.zooniverse-footer .content {
+  float: left;
+  width: 75%;
+}
+.zooniverse-footer .heading {
   font-size: 18px;
   margin-bottom: 1em;
 }
 .zooniverse-footer .projects {
-  font-size: 12px;
+  font-size: 14px;
   overflow: hidden;
 }
-.zooniverse-footer .projects .category {
+.zooniverse-footer .category {
   float: left;
   width: 25%;
 }
-.zooniverse-footer .projects .category .category-title {
+.zooniverse-footer .category-title {
   font-size: 10px;
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;
-}
-.zooniverse-footer .projects .category a {
-  color: inherit;
-  opacity: 0.67;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=67)";
-  filter: alpha(opacity=67);
-  text-decoration: none;
-}
-.zooniverse-footer .projects .category a:hover {
-  opacity: 1;
-  -ms-filter: none;
-  filter: none;
 }
