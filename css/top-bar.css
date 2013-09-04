@@ -107,12 +107,7 @@
   width: 30px;
 }
 .zooniverse-top-bar .current-user .group select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: transparent;
-  border: 0;
-  color: inherit;
+  max-width: 100px;
 }
 .zooniverse-top-bar .current-user .group select:disabled {
   opacity: 0.33;

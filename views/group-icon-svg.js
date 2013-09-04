@@ -45,7 +45,7 @@ template = function(__obj) {
     
       __out.push('\n');
     
-      personPath = 'M 0 -50 A 25 35 0 0 1 20 10 A 67 67 0 0 1 50 50 L 0 50 L -50 50 A 67 67 0 0 1 -20 10 A 25 35 0 0 1 0 -50 Z';
+      personPath = 'M 0 -50 A 25 35 0 0 1 20 10 A 67 67 0 0 1 50 45 L 0 50 L -50 45 A 67 67 0 0 1 -20 10 A 25 35 0 0 1 0 -50 Z';
     
       __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" class="');
     
@@ -67,7 +67,7 @@ template = function(__obj) {
     
       __out.push(__sanitize(this.fill || 'currentColor'));
     
-      __out.push('" stroke="transparent" stroke-width="0" transform="translate(50, 50)">\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.75) translate(-75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.75) translate(75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" />\n  </g>\n</svg>\n');
+      __out.push('" stroke="transparent" stroke-width="0" transform="translate(50, 50)">\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(-75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" />\n  </g>\n</svg>\n');
     
     }).call(this);
     

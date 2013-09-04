@@ -1,6 +1,6 @@
 .zooniverse-dialog {
   display: block;
-  font-size: 12px;
+  font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
   height: 100%;
   left: 0;
   position: fixed;
@@ -345,12 +345,7 @@
   width: 30px;
 }
 .zooniverse-top-bar .current-user .group select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: transparent;
-  border: 0;
-  color: inherit;
+  max-width: 100px;
 }
 .zooniverse-top-bar .current-user .group select:disabled {
   opacity: 0.33;
