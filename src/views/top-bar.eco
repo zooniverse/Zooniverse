@@ -4,7 +4,7 @@
 <div class="no-user">
   <div class="zooniverse">
     <%- zooniverseLogoSvg() %>
-    <%= @title %>
+    <%= @heading %>
   </div>
 
   <div class="sign-in">

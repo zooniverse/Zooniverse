@@ -53,7 +53,7 @@ template = function(__obj) {
     
       __out.push('\n    ');
     
-      __out.push(__sanitize(this.title));
+      __out.push(__sanitize(this.heading));
     
       __out.push('\n  </div>\n\n  <div class="sign-in">\n    <button name="sign-up">');
     

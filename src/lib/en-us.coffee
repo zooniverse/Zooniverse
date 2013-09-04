@@ -2,6 +2,7 @@ window.zooniverse ?= {}
 
 enUs =
   topBar:
+    heading: 'A Zooniverse project'
     username: 'Username'
     password: 'Password'
     email: 'Email address'
