@@ -1,6 +1,7 @@
 <% enUs = window.zooniverse?.enUs || require '../lib/en-us' %>
 <% zooniverseLogoSvg = require './zooniverse-logo-svg' %>
 <% groupIconSvg = require './group-icon-svg' %>
+<% mailIconSvg = require './mail-icon-svg' %>
 
 <div class="no-user">
   <div class="zooniverse">
@@ -35,6 +36,7 @@
 
   <div class="messages">
     <a href="http://talk.<%= location.hostname.replace /^www\./, '' %>/#/profile" class="message-link">
+      <%- mailIconSvg() %>
       <span class="message-count">&mdash;</span>
     </a>
   </div>

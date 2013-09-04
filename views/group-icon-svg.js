@@ -39,35 +39,25 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var className, personPath;
+      var className;
     
       className = this.className || 'zooniverse-group-icon';
     
-      __out.push('\n');
-    
-      personPath = 'M 0 -50 A 25 35 0 0 1 20 10 A 67 67 0 0 1 50 45 L 0 50 L -50 45 A 67 67 0 0 1 -20 10 A 25 35 0 0 1 0 -50 Z';
-    
-      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" class="');
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 100" class="');
     
       __out.push(__sanitize(className));
     
       __out.push('" width="2em" height="1em">\n  ');
     
       if (document.getElementById('zooniverse-groups-icon-person') == null) {
-        __out.push('\n    <defs>\n      <path id="zooniverse-groups-icon-person" d="');
-        __out.push(__sanitize(personPath));
-        __out.push('" />\n    </defs>\n  ');
+        __out.push('\n    <defs>\n      <path id="zooniverse-groups-icon-person" d="M 0 -50 A 25 35 0 0 1 20 10 A 67 67 0 0 1 50 45 L 0 50 L -50 45 A 67 67 0 0 1 -20 10 A 25 35 0 0 1 0 -50 Z" />\n    </defs>\n  ');
       }
     
       __out.push('\n\n  <g class="');
     
       __out.push(__sanitize(className));
     
-      __out.push('" fill="');
-    
-      __out.push(__sanitize(this.fill || 'currentColor'));
-    
-      __out.push('" stroke="transparent" stroke-width="0" transform="translate(50, 50)">\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(-75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" />\n  </g>\n</svg>\n');
+      __out.push('" fill="currentColor" stroke="transparent" stroke-width="0" transform="translate(100, 50)">\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(-80, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.67) translate(80, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" />\n  </g>\n</svg>\n');
     
     }).call(this);
     

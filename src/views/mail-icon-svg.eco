@@ -1,0 +1,8 @@
+<% className = @className || 'zooniverse-mail-icon' %>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 100" class="<%= className %>" width="1.5em" height="1em">
+  <g class="<%= className %>" fill="currentColor" stroke="transparent" stroke-width="0">
+    <path d="M 0 0 L 75 65 L 150 0 Z" />
+    <path d="M 0 0 L 75 75 L 150 0 L 150 100 L 0 100 Z" opacity="0.85" />
+  </g>
+</svg>

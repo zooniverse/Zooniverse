@@ -322,8 +322,10 @@
   filter: alpha(opacity=33);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
 }
+.zooniverse-top-bar .current-user .messages .zooniverse-mail-icon {
+  height: 0.75em;
+}
 .zooniverse-top-bar .current-user .messages .message-count {
-  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAKBAMAAABLZROSAAAALVBMVEW+vr7Nzc3Q0NDR0dHW1tbb29vg4ODk5OTn5+fo6Ojt7e3v7+/29vb6+vr///8OFDOYAAAAOElEQVQIHWPY+w4CbjOU9YFZL9IZykvmAZkv3csZysuD1r17pVoOYpULnzEEkiBWKUM4lAWkCLIAEVwyE0jlImMAAAAASUVORK5CYII=") right center no-repeat;
   display: inline-block;
   padding-right: 24px;
 }

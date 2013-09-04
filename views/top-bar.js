@@ -39,7 +39,7 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, groupIconSvg, zooniverseLogoSvg, _ref;
+      var enUs, groupIconSvg, mailIconSvg, zooniverseLogoSvg, _ref;
     
       enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
     
@@ -50,6 +50,10 @@ template = function(__obj) {
       __out.push('\n');
     
       groupIconSvg = require('./group-icon-svg');
+    
+      __out.push('\n');
+    
+      mailIconSvg = require('./mail-icon-svg');
     
       __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    ');
     
@@ -79,7 +83,11 @@ template = function(__obj) {
     
       __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
     
-      __out.push('/#/profile" class="message-link">\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
+      __out.push('/#/profile" class="message-link">\n      ');
+    
+      __out.push(mailIconSvg());
+    
+      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
     
     }).call(this);
     
