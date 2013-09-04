@@ -106,16 +106,16 @@
 
     TopBar.prototype.processGroup = function() {
       var id, name, option, _i, _len, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
-      this.el.toggleClass('no-groups', !((_ref3 = User.current) != null ? (_ref4 = _ref3.user_groups) != null ? _ref4.length : void 0 : void 0) > 0);
+      this.el.toggleClass('has-groups', ((_ref3 = User.current) != null ? (_ref4 = _ref3.user_groups) != null ? _ref4.length : void 0 : void 0) > 0);
       this.groupSelect.empty();
-      this.groupSelect.append("<option>(No group)</option>");
+      this.groupSelect.append("<option value=''>(No group)</option>");
       _ref6 = ((_ref5 = User.current) != null ? _ref5.user_groups : void 0) || [];
       for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
         _ref7 = _ref6[_i], id = _ref7.id, name = _ref7.name;
         option = "<option value='" + id + "'>" + name + "</option>";
         this.groupSelect.append(option);
       }
-      return this.groupSelect.val(((_ref8 = User.current) != null ? _ref8.user_group_id : void 0) || 'NO_GROUP');
+      return this.groupSelect.val(((_ref8 = User.current) != null ? _ref8.user_group_id : void 0) || '');
     };
 
     TopBar.prototype.onChangeGroup = function(e) {

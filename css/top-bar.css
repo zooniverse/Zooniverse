@@ -2,24 +2,30 @@
   background: #000;
   color: #fff;
   font: bold 11px "Helvetica Neue", Arial, Helvetica, sans-serif;
-  height: 40px;
+  line-height: 1;
+  padding-right: 5px;
   position: absolute;
   right: 0;
   text-align: center;
-  text-shadow: 0 1px 1px #000;
+  text-shadow: none;
   top: 0;
   z-index: 100;
 }
-.zooniverse-top-bar:before {
-  border-color: #000 #000 transparent transparent;
-  border-style: solid;
-  border-width: 20px 10px;
-  content: "";
-  height: 0;
+.zooniverse-top-bar > .corner {
+  bottom: 0;
   position: absolute;
   right: 100%;
   top: 0;
-  width: 0;
+  width: 20px;
+}
+.zooniverse-top-bar > .corner svg {
+  height: 100%;
+  width: 100%;
+}
+.zooniverse-top-bar > .corner path {
+  fill: #000;
+  stroke: transparent;
+  stroke-width: 0;
 }
 .zooniverse-top-bar a {
   border: 0;
@@ -37,84 +43,69 @@
   text-shadow: inherit;
   text-transform: inherit;
 }
-.zooniverse-top-bar .no-user {
-  display: block;
-  margin: 4px 6px 0;
-}
-.zooniverse-top-bar .no-user .zooniverse,
-.zooniverse-top-bar .no-user .sign-in {
+.zooniverse-top-bar .piece {
   display: inline-block;
-  margin: 0 6px;
+  margin: 5px;
   vertical-align: middle;
 }
-.zooniverse-top-bar .no-user .zooniverse {
+.zooniverse-top-bar .no-user {
+  display: block;
+}
+.zooniverse-top-bar .zooniverse-info {
   font-size: 13px;
 }
-.zooniverse-top-bar .no-user .zooniverse .zooniverse-logo {
-  display: inline-block;
+.zooniverse-top-bar .zooniverse-logo {
   height: 25px;
-  margin-right: 5px;
-  position: relative;
-  top: -2px;
+  margin: -2px 5px 0 0;
   vertical-align: middle;
   width: 25px;
 }
-.zooniverse-top-bar .no-user .sign-in {
+.zooniverse-top-bar .sign-in {
   font-size: 10px;
   text-transform: uppercase;
 }
-.zooniverse-top-bar .no-user .sign-in button {
-  padding: 10px 0;
+.zooniverse-top-bar .sign-in .separator {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 .zooniverse-top-bar .current-user {
   display: none;
-  margin-top: 5px;
 }
-.zooniverse-top-bar .current-user .messages,
-.zooniverse-top-bar .current-user .info,
-.zooniverse-top-bar .current-user .avatar,
-.zooniverse-top-bar .current-user .group {
-  display: inline-block;
-  margin: 0 6px;
-  vertical-align: middle;
+.zooniverse-top-bar .user-info {
+  margin-left: 10px;
 }
-.zooniverse-top-bar .current-user .messages {
-  margin-top: -3px;
-  opacity: 0.33;
-  filter: alpha(opacity=33);
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
-}
-.zooniverse-top-bar .current-user .messages .zooniverse-mail-icon {
+.zooniverse-top-bar .zooniverse-mail-icon {
   height: 0.75em;
 }
-.zooniverse-top-bar .current-user .messages .message-count {
-  display: inline-block;
-  padding-right: 24px;
-}
-.zooniverse-top-bar .current-user .info {
-  line-height: 1;
-  margin-top: -3px;
-}
-.zooniverse-top-bar .current-user .info .current-user-name {
+.zooniverse-top-bar .current-user-name {
   font-size: 13px;
   font-weight: bold;
-  line-height: 1;
 }
-.zooniverse-top-bar .current-user .info button {
+.zooniverse-top-bar .sign-out {
   font-size: 8px;
   text-transform: uppercase;
 }
-.zooniverse-top-bar .current-user .avatar img {
-  height: 30px;
-  width: 30px;
+.zooniverse-top-bar .groups {
+  display: none;
 }
-.zooniverse-top-bar .current-user .group select {
+.zooniverse-top-bar .groups select {
   max-width: 100px;
 }
-.zooniverse-top-bar .current-user .group select:disabled {
+.zooniverse-top-bar .groups select:disabled {
   opacity: 0.33;
   filter: alpha(opacity=33);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
+}
+.zooniverse-top-bar .messages {
+  display: none;
+}
+.zooniverse-top-bar .avatar {
+  margin: 0;
+}
+.zooniverse-top-bar .avatar img {
+  height: 30px;
+  width: 30px;
 }
 .zooniverse-top-bar.signed-in .no-user {
   display: none;
@@ -122,14 +113,9 @@
 .zooniverse-top-bar.signed-in .current-user {
   display: block;
 }
-.zooniverse-top-bar.has-messages .current-user .messages {
-  opacity: 1;
-  -ms-filter: none;
-  filter: none;
+.zooniverse-top-bar.has-messages .messages {
+  display: inline-block;
 }
-.zooniverse-top-bar.no-groups .current-user .group {
-  display: none;
-}
-.zooniverse-top-bar .zooniverse-login-form button[name="sign-out"] {
-  display: none;
+.zooniverse-top-bar.has-groups .groups {
+  display: inline-block;
 }

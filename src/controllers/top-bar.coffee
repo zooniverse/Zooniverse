@@ -61,16 +61,16 @@ class TopBar extends BaseController
       @messageCount.html '0'
 
   processGroup: ->
-    @el.toggleClass 'no-groups', not User.current?.user_groups?.length > 0
+    @el.toggleClass 'has-groups', User.current?.user_groups?.length > 0
 
     @groupSelect.empty()
-    @groupSelect.append "<option>(No group)</option>"
+    @groupSelect.append "<option value=''>(No group)</option>"
 
     for {id, name} in User.current?.user_groups || []
       option = "<option value='#{id}'>#{name}</option>"
       @groupSelect.append option
 
-    @groupSelect.val User.current?.user_group_id || 'NO_GROUP'
+    @groupSelect.val User.current?.user_group_id || ''
 
   onChangeGroup: (e) =>
     @groupSelect.attr 'disabled', true

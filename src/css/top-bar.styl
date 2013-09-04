@@ -2,24 +2,30 @@
   background: #000
   color: #fff
   font: bold 11px "Helvetica Neue", Arial, Helvetica, sans-serif
-  height: 40px
+  line-height: 1
+  padding-right: 5px
   position: absolute
   right: 0
   text-align: center
-  text-shadow: 0 1px 1px #000
+  text-shadow: none
   top: 0
   z-index 100
 
-  &:before
-    border-color: #000 #000 transparent transparent
-    border-style: solid
-    border-width: 20px 10px
-    content: ""
-    height: 0
-    position: absolute
+  > .corner
+    bottom: 0
+    position absolute
     right: 100%
     top: 0
-    width: 0
+    width: 20px
+
+    svg
+      height: 100%
+      width: 100%
+
+    path
+      fill: #000
+      stroke: transparent
+      stroke-width: 0
 
   a
     border: 0
@@ -37,82 +43,68 @@
     text-shadow: inherit
     text-transform: inherit
 
+  .piece
+    display: inline-block
+    margin: 5px
+    vertical-align: middle
+
   .no-user
     display: block
-    margin: 4px 6px 0
 
-    .zooniverse,
-    .sign-in
-      display: inline-block
-      margin: 0 6px
-      vertical-align: middle
+  .zooniverse-info
+    font-size: 13px
 
-    .zooniverse
-      font-size: 13px
+  .zooniverse-logo
+    height: 25px
+    margin: -2px 5px 0 0
+    vertical-align: middle
+    width: 25px
 
-      .zooniverse-logo
-        display: inline-block
-        height: 25px
-        margin-right: 5px
-        position: relative
-        top: -2px
-        vertical-align: middle
-        width: 25px
+  .sign-in
+    font-size: 10px
+    text-transform: uppercase
 
-    .sign-in
-      font-size: 10px
-      text-transform: uppercase
-
-      button
-        padding: 10px 0
+    .separator
+      opacity: 0.5
 
   .current-user
     display: none
-    margin-top: 5px
 
-    .messages,
-    .info,
-    .avatar,
-    .group
-      display: inline-block
-      margin: 0 6px
-      vertical-align: middle
+  .user-info
+    margin-left: 10px
 
-    .messages
-      margin-top: -3px
-      opacity: 0.33
+  .zooniverse-mail-icon
+    height: 0.75em
 
-      .zooniverse-mail-icon
-        height: 0.75em
+  .current-user-name
+    font-size: 13px
+    font-weight: bold
 
-      .message-count
-        display: inline-block
-        padding-right: 24px
+  .sign-out
+    font-size: 8px
+    text-transform: uppercase
 
-    .info
-      line-height: 1
-      margin-top: -3px
+  .groups
+    display: none
 
-      .current-user-name
-        font-size: 13px
-        font-weight: bold
-        line-height: 1
+    select
+      max-width: 100px
 
-      button
-        font-size: 8px
-        text-transform: uppercase
+      &:disabled
+        opacity: 0.33
 
-    .avatar
-      img
-        height: 30px
-        width: 30px
+  .messages
+    display: none
 
-    .group
-      select
-        max-width: 100px
+  .avatar
+    margin: 0
 
-        &:disabled
-          opacity: 0.33
+    img
+      height: 30px
+      width: 30px
+
+      // &[src*="default_forum_avatar"]
+      //   display: none
 
   &.signed-in
     .no-user
@@ -121,12 +113,8 @@
     .current-user
       display: block
 
-  &.has-messages .current-user .messages
-    opacity: 1
+  &.has-messages .messages
+    display: inline-block
 
-  &.no-groups .current-user .group
-    display: none
-
-  .zooniverse-login-form
-    button[name="sign-out"]
-      display: none
+  &.has-groups .groups
+    display: inline-block

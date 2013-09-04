@@ -55,7 +55,7 @@ template = function(__obj) {
     
       mailIconSvg = require('./mail-icon-svg');
     
-      __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    ');
+      __out.push('\n\n<div class="corner">\n  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">\n    <path d="M 0 0 L 100 0 L 100 100 Z" />\n  </svg>\n</div>\n\n<div class="no-user">\n  <div class="zooniverse-info piece">\n    ');
     
       __out.push(zooniverseLogoSvg());
     
@@ -63,7 +63,7 @@ template = function(__obj) {
     
       __out.push(__sanitize(this.heading));
     
-      __out.push('\n  </div>\n\n  <div class="sign-in">\n    <button name="sign-up">');
+      __out.push('\n  </div>\n\n  <div class="sign-in piece">\n    <button name="sign-up">');
     
       __out.push(__sanitize(enUs.topBar.signUp));
     
@@ -71,15 +71,15 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.signIn));
     
-      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="info">\n    <span class="current-user-name">&mdash;</span>\n\n    <div class="sign-out">\n      <button name="sign-out">');
+      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="user-info piece">\n    <div class="current-user-name">&mdash;</div>\n\n    <div class="sign-out">\n      <button name="sign-out">');
     
       __out.push(__sanitize(enUs.topBar.signOut));
     
-      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="group">\n    <label>\n      ');
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <label>\n      ');
     
       __out.push(groupIconSvg());
     
-      __out.push('\n      <select name="group">\n        <option>&mdash;</option>\n      </select>\n    </label>\n  </div>\n\n  <div class="messages">\n    <a href="http://talk.');
+      __out.push('\n      <select name="group">\n        <option>&mdash;</option>\n      </select>\n    </label>\n  </div>\n\n  <div class="messages piece">\n    <a href="http://talk.');
     
       __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
     
@@ -87,7 +87,7 @@ template = function(__obj) {
     
       __out.push(mailIconSvg());
     
-      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
+      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar piece">\n    <img src="" />\n  </div>\n</div>\n');
     
     }).call(this);
     
