@@ -39,8 +39,15 @@ template = function(__obj) {
   }
   (function() {
     (function() {
+      var className;
     
-      __out.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\n  <g class="');
+      className = this.className || 'zooniverse-logo';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="');
+    
+      __out.push(__sanitize(className));
+    
+      __out.push('" width="1em" height="1em">\n  <g class="');
     
       __out.push(__sanitize(this.className || 'zooniverse-logo'));
     

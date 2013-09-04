@@ -39,11 +39,19 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, _ref;
+      var enUs, zooniverseLogoSvg, _ref;
     
       enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
     
-      __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    <span class="zooniverse-logo"></span>\n    ');
+      __out.push('\n');
+    
+      zooniverseLogoSvg = require('./zooniverse-logo-svg');
+    
+      __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    ');
+    
+      __out.push(zooniverseLogoSvg());
+    
+      __out.push('\n    ');
     
       __out.push(__sanitize(this.title));
     

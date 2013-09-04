@@ -1,11 +1,12 @@
 <% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+<% zooniverseLogoSvg = require './zooniverse-logo-svg' %>
 
 <div class="loader"></div>
 
 <button type="button" name="close-dialog">&times;</button>
 
 <header>
-  <span class="zooniverse-logo"></span>
+  <%- zooniverseLogoSvg() %>
   <%- enUs.topBar.signUpTitle %>
 </header>
 

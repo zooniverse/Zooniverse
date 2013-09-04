@@ -1,8 +1,9 @@
 <% enUs = window.zooniverse?.enUs || require '../lib/en-us' %>
+<% zooniverseLogoSvg = require './zooniverse-logo-svg' %>
 
 <div class="no-user">
   <div class="zooniverse">
-    <span class="zooniverse-logo"></span>
+    <%- zooniverseLogoSvg() %>
     <%= @title %>
   </div>
 
