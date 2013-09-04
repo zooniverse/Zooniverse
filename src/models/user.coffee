@@ -71,6 +71,19 @@ class User extends EventEmitter
   constructor: (params = {}) ->
     @[property] = value for own property, value of params
 
+  setGroup: (groupId, callback) ->
+    return unless User.current?
+
+    path = if groupId?
+      "/user_groups/#{groupId}/participate"
+    else
+      "/user_groups/TODO_HOW_DO_I_LEAVE_A_GROUP/participate"
+
+    get = Api.current?.getJSON path, =>
+      callback? arguments...
+
+    get
+
   setPreference: (key, value, global = false, callback) ->
     return unless User.current?
     [global, callback] = [false, global] if typeof global is 'function'

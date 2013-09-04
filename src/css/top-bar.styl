@@ -106,11 +106,14 @@
         width: 30px
 
     .group
-      background: url("./images/zooniverse-group-icon.png") right center no-repeat
-      display: inline-block
-      height: 20px
-      opacity: 0.33
-      width: 24px
+      select
+        appearance: none
+        background: transparent
+        border: 0
+        color: inherit
+
+        &:disabled
+          opacity: 0.33
 
   &.signed-in
     .no-user
@@ -119,9 +122,11 @@
     .current-user
       display: block
 
-  &.has-messages .current-user .messages,
-  &.has-group .current-user .group
+  &.has-messages .current-user .messages
     opacity: 1
+
+  &.no-groups .current-user .group
+    display: none
 
   .zooniverse-login-form
     button[name="sign-out"]

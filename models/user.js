@@ -121,6 +121,19 @@
       }
     }
 
+    User.prototype.setGroup = function(groupId, callback) {
+      var get, path, _ref2,
+        _this = this;
+      if (User.current == null) {
+        return;
+      }
+      path = groupId != null ? "/user_groups/" + groupId + "/participate" : "/user_groups/TODO_HOW_DO_I_LEAVE_A_GROUP/participate";
+      get = (_ref2 = Api.current) != null ? _ref2.getJSON(path, function() {
+        return typeof callback === "function" ? callback.apply(null, arguments) : void 0;
+      }) : void 0;
+      return get;
+    };
+
     User.prototype.setPreference = function(key, value, global, callback) {
       var _base1, _base2, _name, _ref2, _ref3, _ref4;
       if (global == null) {

@@ -1,5 +1,6 @@
 <% enUs = window.zooniverse?.enUs || require '../lib/en-us' %>
 <% zooniverseLogoSvg = require './zooniverse-logo-svg' %>
+<% groupIconSvg = require './group-icon-svg' %>
 
 <div class="no-user">
   <div class="zooniverse">
@@ -9,26 +10,33 @@
 
   <div class="sign-in">
     <button name="sign-up"><%= enUs.topBar.signUp %></button>
-    |
+    <span class="separator">|</span>
     <button name="sign-in"><%= enUs.topBar.signIn %></button>
   </div>
 </div>
 
 <div class="current-user">
-  <div class="group"></div>
-
-  <div class="messages">
-    <a href="http://talk.<%= location.hostname.replace /^www\./, '' %>/#/profile" class="message-link">
-      <span class="message-count">&mdash;</span>
-    </a>
-  </div>
-
   <div class="info">
     <span class="current-user-name">&mdash;</span>
 
     <div class="sign-out">
       <button name="sign-out"><%= enUs.topBar.signOut %></button>
     </div>
+  </div>
+
+  <div class="group">
+    <label>
+      <%- groupIconSvg() %>
+      <select name="group">
+        <option>&mdash;</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="messages">
+    <a href="http://talk.<%= location.hostname.replace /^www\./, '' %>/#/profile" class="message-link">
+      <span class="message-count">&mdash;</span>
+    </a>
   </div>
 
   <div class="avatar">

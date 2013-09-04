@@ -39,13 +39,17 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, zooniverseLogoSvg, _ref;
+      var enUs, groupIconSvg, zooniverseLogoSvg, _ref;
     
       enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
     
       __out.push('\n');
     
       zooniverseLogoSvg = require('./zooniverse-logo-svg');
+    
+      __out.push('\n');
+    
+      groupIconSvg = require('./group-icon-svg');
     
       __out.push('\n\n<div class="no-user">\n  <div class="zooniverse">\n    ');
     
@@ -59,19 +63,23 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.signUp));
     
-      __out.push('</button>\n    |\n    <button name="sign-in">');
+      __out.push('</button>\n    <span class="separator">|</span>\n    <button name="sign-in">');
     
       __out.push(__sanitize(enUs.topBar.signIn));
     
-      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="group"></div>\n\n  <div class="messages">\n    <a href="http://talk.');
-    
-      __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
-    
-      __out.push('/#/profile" class="message-link">\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="info">\n    <span class="current-user-name">&mdash;</span>\n\n    <div class="sign-out">\n      <button name="sign-out">');
+      __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="info">\n    <span class="current-user-name">&mdash;</span>\n\n    <div class="sign-out">\n      <button name="sign-out">');
     
       __out.push(__sanitize(enUs.topBar.signOut));
     
-      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="group">\n    <label>\n      ');
+    
+      __out.push(groupIconSvg());
+    
+      __out.push('\n      <select name="group">\n        <option>&mdash;</option>\n      </select>\n    </label>\n  </div>\n\n  <div class="messages">\n    <a href="http://talk.');
+    
+      __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
+    
+      __out.push('/#/profile" class="message-link">\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar">\n    <img src="" />\n  </div>\n</div>\n');
     
     }).call(this);
     

@@ -39,15 +39,27 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var className;
+      var className, personPath;
     
-      className = this.className || 'zooniverse-logo';
+      className = this.className || 'zooniverse-group-icon';
     
-      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="');
+      __out.push('\n');
+    
+      personPath = 'M 0 -50 A 25 35 0 0 1 20 10 A 67 67 0 0 1 50 50 L 0 50 L -50 50 A 67 67 0 0 1 -20 10 A 25 35 0 0 1 0 -50 Z';
+    
+      __out.push('\n\n<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" class="');
     
       __out.push(__sanitize(className));
     
-      __out.push('" width="1em" height="1em">\n  <g class="');
+      __out.push('" width="2em" height="1em">\n  ');
+    
+      if (document.getElementById('zooniverse-groups-icon-person') == null) {
+        __out.push('\n    <defs>\n      <path id="zooniverse-groups-icon-person" d="');
+        __out.push(__sanitize(personPath));
+        __out.push('" />\n    </defs>\n  ');
+      }
+    
+      __out.push('\n\n  <g class="');
     
       __out.push(__sanitize(className));
     
@@ -55,7 +67,7 @@ template = function(__obj) {
     
       __out.push(__sanitize(this.fill || 'currentColor'));
     
-      __out.push('" stroke="transparent" stroke-width="0" transform="translate(50, 50)">\n    <path d="M 0 -45 A 45 45 0 0 1 0 45 A 45 45 0 0 1 0 -45 Z M 0 -30 A 30 30 0 0 0 0 30 A 30 30 0 0 0 0 -30 Z" />\n    <path d="M 0 -12.5 A 12.5 12.5 0 0 1 0 12.5 A 12.5 12.5 0 0 1 0 -12.5 Z" />\n    <path d="M 0 -75 L 5 0 L 0 75 L -5 0 Z" transform="rotate(50)" />\n  </g>\n</svg>\n');
+      __out.push('" stroke="transparent" stroke-width="0" transform="translate(50, 50)">\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.75) translate(-75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" transform="scale(0.75) translate(75, 0)" opacity="0.75" />\n    <use xlink:href="#zooniverse-groups-icon-person" />\n  </g>\n</svg>\n');
     
     }).call(this);
     
@@ -63,5 +75,5 @@ template = function(__obj) {
   __obj.safe = __objSafe, __obj.escape = __escape;
   return __out.join('');
 };
-window.zooniverse.views['zooniverseLogo-svg'] = template;
+window.zooniverse.views['groupIcon-svg'] = template;
 if (typeof module !== 'undefined') module.exports = template;

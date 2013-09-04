@@ -23,6 +23,7 @@ class TopBar extends BaseController
 
   elements:
     '.current-user-name': 'currentUserName'
+    'select[name="group"]': 'groupSelect'
     '.message-count': 'messageCount'
     '.avatar img': 'avatarImage'
     '.group': 'currentGroup'
@@ -30,6 +31,7 @@ class TopBar extends BaseController
   constructor: ->
     super
     User.on 'change', @onUserChange
+    @groupSelect.on 'change', @onChangeGroup
 
   onClickSignIn: ->
     loginDialog.show()
@@ -58,16 +60,23 @@ class TopBar extends BaseController
       @el.removeClass 'has-messages'
       @messageCount.html '0'
 
-  processGroup: =>
-    if User.current? and User.current.hasOwnProperty 'user_group_id'
-      @el.addClass 'has-group'
+  processGroup: ->
+    @el.toggleClass 'no-groups', not User.current?.user_groups?.length > 0
 
-      for group in User.current.user_groups
-        currentGroup = group
-        continue if group.id is not User.current.user_group_id
+    @groupSelect.empty()
+    @groupSelect.append "<option>(No group)</option>"
 
-    else
-      @el.removeClass 'has-group'
+    for {id, name} in User.current?.user_groups || []
+      option = "<option value='#{id}'>#{name}</option>"
+      @groupSelect.append option
+
+    @groupSelect.val User.current?.user_group_id || 'NO_GROUP'
+
+  onChangeGroup: (e) =>
+    @groupSelect.attr 'disabled', true
+
+    setGroup = User.current.setGroup @groupSelect.val(), =>
+      @groupSelect.attr 'disabled', false
 
 window.zooniverse.controllers.TopBar = TopBar
 module?.exports = TopBar

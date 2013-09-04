@@ -51,19 +51,21 @@
 
     TopBar.prototype.elements = {
       '.current-user-name': 'currentUserName',
+      'select[name="group"]': 'groupSelect',
       '.message-count': 'messageCount',
       '.avatar img': 'avatarImage',
       '.group': 'currentGroup'
     };
 
     function TopBar() {
-      this.processGroup = __bind(this.processGroup, this);
+      this.onChangeGroup = __bind(this.onChangeGroup, this);
 
       this.getMessages = __bind(this.getMessages, this);
 
       this.onUserChange = __bind(this.onUserChange, this);
       TopBar.__super__.constructor.apply(this, arguments);
       User.on('change', this.onUserChange);
+      this.groupSelect.on('change', this.onChangeGroup);
     }
 
     TopBar.prototype.onClickSignIn = function() {
@@ -103,24 +105,26 @@
     };
 
     TopBar.prototype.processGroup = function() {
-      var currentGroup, group, _i, _len, _ref3, _results;
-      if ((User.current != null) && User.current.hasOwnProperty('user_group_id')) {
-        this.el.addClass('has-group');
-        _ref3 = User.current.user_groups;
-        _results = [];
-        for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
-          group = _ref3[_i];
-          currentGroup = group;
-          if (group.id === !User.current.user_group_id) {
-            continue;
-          } else {
-            _results.push(void 0);
-          }
-        }
-        return _results;
-      } else {
-        return this.el.removeClass('has-group');
+      var id, name, option, _i, _len, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+      this.el.toggleClass('no-groups', !((_ref3 = User.current) != null ? (_ref4 = _ref3.user_groups) != null ? _ref4.length : void 0 : void 0) > 0);
+      this.groupSelect.empty();
+      this.groupSelect.append("<option>(No group)</option>");
+      _ref6 = ((_ref5 = User.current) != null ? _ref5.user_groups : void 0) || [];
+      for (_i = 0, _len = _ref6.length; _i < _len; _i++) {
+        _ref7 = _ref6[_i], id = _ref7.id, name = _ref7.name;
+        option = "<option value='" + id + "'>" + name + "</option>";
+        this.groupSelect.append(option);
       }
+      return this.groupSelect.val(((_ref8 = User.current) != null ? _ref8.user_group_id : void 0) || 'NO_GROUP');
+    };
+
+    TopBar.prototype.onChangeGroup = function(e) {
+      var setGroup,
+        _this = this;
+      this.groupSelect.attr('disabled', true);
+      return setGroup = User.current.setGroup(this.groupSelect.val(), function() {
+        return _this.groupSelect.attr('disabled', false);
+      });
     };
 
     return TopBar;
