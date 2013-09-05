@@ -45,15 +45,15 @@ template = function(__obj) {
     
       __out.push('\n');
     
-      zooniverseLogoSvg = require('./zooniverse-logo-svg');
+      zooniverseLogoSvg = window.zooniverse.views.zooniverseLogoSvg || require('./zooniverse-logo-svg');
     
       __out.push('\n');
     
-      groupIconSvg = require('./group-icon-svg');
+      groupIconSvg = window.zooniverse.views.groupIconSvg || require('./group-icon-svg');
     
       __out.push('\n');
     
-      mailIconSvg = require('./mail-icon-svg');
+      mailIconSvg = window.zooniverse.views.mailIconSvg || require('./mail-icon-svg');
     
       __out.push('\n\n<div class="corner">\n  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">\n    <path d="M 0 0 L 100 0 L 100 100 Z" />\n  </svg>\n</div>\n\n<div class="no-user">\n  <div class="zooniverse-info piece">\n    ');
     

@@ -1,4 +1,4 @@
-<% enUs = require '../lib/en-us' %>
+<% enUs = window.zooniverse?.enUs || require '../lib/en-us' %>
 
 <div class="user-groups">
   <% for {id, name} in @user_groups || []: %>

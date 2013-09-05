@@ -41,7 +41,7 @@ template = function(__obj) {
     (function() {
       var enUs, id, name, _i, _len, _ref, _ref1;
     
-      enUs = require('../lib/en-us');
+      enUs = window.zooniverse.enUs || require('../lib/en-us');
     
       __out.push('\n\n<div class="user-groups">\n  ');
     

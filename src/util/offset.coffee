@@ -13,4 +13,7 @@ offset = (el, from) ->
 
   {left, top}
 
-module.exports = offset
+window.zooniverse ?= {}
+window.zooniverse.util ?= {}
+window.zooniverse.util.offset = offset
+module?.exports = offset

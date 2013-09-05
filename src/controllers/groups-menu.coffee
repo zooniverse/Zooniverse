@@ -1,8 +1,8 @@
-Controller = require './base-controller'
-User = require '../models/user'
-template = require '../views/groups-menu'
+Controller = window.zooniverse?.BaseController || require './base-controller'
+User = window.zooniverse?.models?.User || require '../models/user'
+template = window.zooniverse?.views?.groupsMenu || require '../views/groups-menu'
 $ = window.jQuery
-Dropdown = require './dropdown'
+Dropdown = window.zooniverse?.controllers?.Dropdown || require './dropdown'
 
 class GroupsMenu extends Controller
   className: 'zooniverse-groups-menu'
@@ -34,4 +34,7 @@ class GroupsMenu extends Controller
     User.current?.setGroup target.val() || 'TODO_HOW_DO_I_STOP_CLASSIFYING_AS_PART_OF_A_GROUP'
     Dropdown.closeAll()
 
-module.exports = GroupsMenu
+window.zooniverse ?= {}
+window.zooniverse.controllers ?= {}
+window.zooniverse.controllers.GroupsMenu
+module?.exports = GroupsMenu

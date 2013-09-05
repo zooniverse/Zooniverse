@@ -1,5 +1,5 @@
-toggleClass = require '../util/toggle-class'
-offset = require '../util/offset'
+toggleClass = zooniverse.util?.toggleClass || require '../util/toggle-class'
+offset = zooniverse.util?.offset || require '../util/offset'
 
 class Dropdown
   @buttonClass: 'zooniverse-dropdown-button'
@@ -101,4 +101,7 @@ class Dropdown
     @button.parentNode?.removeChild @button
     @menu.parentNode?.removeChild @menu
 
-module.exports = Dropdown
+window.zooniverse ?= {}
+window.zooniverse.controllers ?= {}
+window.zooniverse.controllers.Dropdown = Dropdown
+module?.exports = Dropdown

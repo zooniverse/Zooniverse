@@ -1,6 +1,7 @@
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
 window.zooniverse.views ?= {}
+window.zooniverse.models ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
 enUs = zooniverse.enUs || require '../lib/en-us'

@@ -14,4 +14,7 @@ toggleClass = (element, className, condition) ->
   element.className = classList.join ' '
   null
 
-module.exports = toggleClass
+window.zooniverse ?= {}
+window.zooniverse.util ?= {}
+window.zooniverse.util.toggleClass = toggleClass
+module?.exports = toggleClass

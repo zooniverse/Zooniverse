@@ -1,7 +1,7 @@
 <% enUs = window.zooniverse?.enUs || require '../lib/en-us' %>
-<% zooniverseLogoSvg = require './zooniverse-logo-svg' %>
-<% groupIconSvg = require './group-icon-svg' %>
-<% mailIconSvg = require './mail-icon-svg' %>
+<% zooniverseLogoSvg = window.zooniverse.?views?.zooniverseLogoSvg || require './zooniverse-logo-svg' %>
+<% groupIconSvg = window.zooniverse.?views?.groupIconSvg || require './group-icon-svg' %>
+<% mailIconSvg = window.zooniverse.?views?.mailIconSvg || require './mail-icon-svg' %>
 
 <div class="corner">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
