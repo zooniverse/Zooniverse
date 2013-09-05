@@ -1,3 +1,16 @@
+#ZOONIVERSE_RESET_BUTTON,
+.zooniverse-top-bar button,
+.zooniverse-groups-menu button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  text-shadow: inherit;
+  text-transform: inherit;
+}
 .zooniverse-top-bar {
   background: #000;
   color: #fff;
@@ -31,17 +44,6 @@
   border: 0;
   color: inherit;
   text-decoration: none;
-}
-.zooniverse-top-bar button {
-  background: transparent;
-  border: 0;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-  margin: 0;
-  padding: 0;
-  text-shadow: inherit;
-  text-transform: inherit;
 }
 .zooniverse-top-bar .piece {
   display: inline-block;
@@ -118,4 +120,58 @@
 }
 .zooniverse-top-bar.has-groups .groups {
   display: inline-block;
+}
+.zooniverse-top-bar.group-participant button[name="groups"] {
+  color: #0f0;
+}
+.zooniverse-dropdown-menu.from-top-bar {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: #000;
+  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  font: 12px "Helvetica Neue", sans-serif;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -o-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+  -webkit-transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out, -moz-transform 0.25s ease-in-out;
+  -o-transition: opacity 0.25s ease-in-out, -o-transform 0.25s ease-in-out;
+  -ms-transition: opacity 0.25s ease-in-out, -ms-transform 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+  z-index: 101;
+}
+.zooniverse-dropdown-menu.from-top-bar.open {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -o-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
+.zooniverse-groups-menu {
+  text-align: center;
+}
+.zooniverse-groups-menu button {
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  padding: 3px 15px;
+  width: 100%;
+}
+.zooniverse-groups-menu button:hover {
+  background: rgba(255,255,255,0.25);
+}
+.zooniverse-groups-menu button.active {
+  background: rgba(0,255,0,0.5);
+}
+.zooniverse-groups-menu button.stop {
+  font-size: 10px;
 }

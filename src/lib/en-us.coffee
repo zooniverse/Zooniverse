@@ -19,6 +19,9 @@ enUs =
       I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.
     '''
 
+  groupsMenu:
+    stop: 'Stop classifying as part of a group'
+
   user:
     badLogin: 'Incorrect username or password'
     signInFailed: 'Sign in failed.'

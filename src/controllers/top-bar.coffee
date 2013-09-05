@@ -7,6 +7,8 @@ enUs = zooniverse.enUs || require '../lib/en-us'
 loginDialog = zooniverse.controllers.loginDialog || require './login-dialog'
 signupDialog = zooniverse.controllers.signupDialog || require './signup-dialog'
 template = zooniverse.views.topBar || require '../views/top-bar'
+Dropdown = zooniverse.controllers.Dropdown || require './dropdown'
+GroupsMenu = zooniverse.controllers.GroupsMenu || require './groups-menu'
 Api = zooniverse.Api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
 
@@ -23,15 +25,24 @@ class TopBar extends BaseController
 
   elements:
     '.current-user-name': 'currentUserName'
-    'select[name="group"]': 'groupSelect'
+    'button[name="groups"]': 'groupsMenuButton'
     '.message-count': 'messageCount'
     '.avatar img': 'avatarImage'
     '.group': 'currentGroup'
 
   constructor: ->
     super
+
+    @groupsMenu = new GroupsMenu
+    @groupsDropdown = new Dropdown
+      button: @groupsMenuButton.get 0
+      buttonPinning: [1, 1]
+      menu: @groupsMenu.el.get 0
+      menuClass: 'from-top-bar'
+      menuPinning: [1, 0]
+
     User.on 'change', @onUserChange
-    @groupSelect.on 'change', @onChangeGroup
+    User.on 'change-group', @onUserChangeGroup
 
   onClickSignIn: ->
     loginDialog.show()
@@ -44,8 +55,9 @@ class TopBar extends BaseController
 
   onUserChange: (e, user) =>
     @el.toggleClass 'signed-in', user?
+    @el.toggleClass 'has-groups', user?.user_groups?.length > 0
+    @onUserChangeGroup e, user?, user?.user_group_id?
     @getMessages()
-    @processGroup()
     @currentUserName.html user?.name || ''
     @avatarImage.attr src: user?.avatar
 
@@ -60,23 +72,8 @@ class TopBar extends BaseController
       @el.removeClass 'has-messages'
       @messageCount.html '0'
 
-  processGroup: ->
-    @el.toggleClass 'has-groups', User.current?.user_groups?.length > 0
-
-    @groupSelect.empty()
-    @groupSelect.append "<option value=''>(No group)</option>"
-
-    for {id, name} in User.current?.user_groups || []
-      option = "<option value='#{id}'>#{name}</option>"
-      @groupSelect.append option
-
-    @groupSelect.val User.current?.user_group_id || ''
-
-  onChangeGroup: (e) =>
-    @groupSelect.attr 'disabled', true
-
-    setGroup = User.current.setGroup @groupSelect.val(), =>
-      @groupSelect.attr 'disabled', false
+  onUserChangeGroup: (e, user, group) =>
+    @el.toggleClass 'group-participant', group?
 
 window.zooniverse.controllers.TopBar = TopBar
 module?.exports = TopBar

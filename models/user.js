@@ -128,8 +128,12 @@
         return;
       }
       path = groupId != null ? "/user_groups/" + groupId + "/participate" : "/user_groups/TODO_HOW_DO_I_LEAVE_A_GROUP/participate";
-      get = (_ref2 = Api.current) != null ? _ref2.getJSON(path, function() {
-        return typeof callback === "function" ? callback.apply(null, arguments) : void 0;
+      get = (_ref2 = Api.current) != null ? _ref2.getJSON(path, function(group) {
+        _this.trigger('change-group', group);
+        if (typeof callback === "function") {
+          callback.apply(null, arguments);
+        }
+        return typeof console !== "undefined" && console !== null ? console.log('Changed group', group) : void 0;
       }) : void 0;
       return get;
     };

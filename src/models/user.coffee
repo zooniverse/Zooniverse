@@ -79,9 +79,10 @@ class User extends EventEmitter
     else
       "/user_groups/TODO_HOW_DO_I_LEAVE_A_GROUP/participate"
 
-    get = Api.current?.getJSON path, =>
+    get = Api.current?.getJSON path, (group) =>
+      @trigger 'change-group', group
       callback? arguments...
-
+      console?.log 'Changed group', group
     get
 
   setPreference: (key, value, global = false, callback) ->

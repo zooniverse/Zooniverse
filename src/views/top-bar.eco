@@ -32,12 +32,9 @@
   </div>
 
   <div class="groups piece">
-    <label>
-      <%- groupIconSvg() %>
-      <select name="group">
-        <option>&mdash;</option>
-      </select>
-    </label>
+    <div class="groups-menu-toggle">
+      <button name="groups"><%- groupIconSvg() %></button>
+    </div>
   </div>
 
   <div class="messages piece">

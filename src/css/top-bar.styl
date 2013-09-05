@@ -1,3 +1,14 @@
+#ZOONIVERSE_RESET_BUTTON
+  background: transparent
+  border: 0
+  color: inherit
+  cursor: pointer
+  font: inherit
+  margin: 0
+  padding: 0
+  text-shadow: inherit
+  text-transform: inherit
+
 .zooniverse-top-bar
   background: #000
   color: #fff
@@ -33,15 +44,7 @@
     text-decoration: none
 
   button
-    background: transparent
-    border: 0
-    color: inherit
-    cursor: pointer
-    font: inherit
-    margin: 0
-    padding: 0
-    text-shadow: inherit
-    text-transform: inherit
+    @extends #ZOONIVERSE_RESET_BUTTON
 
   .piece
     display: inline-block
@@ -118,3 +121,42 @@
 
   &.has-groups .groups
     display: inline-block
+
+  &.group-participant button[name="groups"]
+    color: #0f0
+
+.zooniverse-dropdown-menu.from-top-bar
+  backface-visibility: hidden // This prevents flicker for some reason.
+  background: #000
+  box-shadow: 0 2px 5px rgba(#000, 0.5)
+  font: 12px "Helvetica Neue", sans-serif
+  opacity: 0
+  transform: translateY(-10px)
+  transition:
+    opacity 0.25s ease-in-out,
+    transform 0.25s ease-in-out
+  z-index: 101
+
+  &.open
+    opacity: 1
+    transform: translateY(0)
+
+.zooniverse-groups-menu
+  text-align: center
+
+  button
+    @extends #ZOONIVERSE_RESET_BUTTON
+
+    border-bottom: 1px solid rgba(#fff, 0.25)
+    padding: 3px 15px
+    width: 100%
+
+    &:hover
+      background: rgba(#fff, 0.25)
+
+    &.active
+      background: rgba(#0f0, 0.5)
+
+    &.stop
+      font-size: 10px
+      // font-weight: bold

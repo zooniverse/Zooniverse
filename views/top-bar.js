@@ -75,11 +75,11 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.signOut));
     
-      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <label>\n      ');
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <div class="groups-menu-toggle">\n      <button name="groups">');
     
       __out.push(groupIconSvg());
     
-      __out.push('\n      <select name="group">\n        <option>&mdash;</option>\n      </select>\n    </label>\n  </div>\n\n  <div class="messages piece">\n    <a href="http://talk.');
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="messages piece">\n    <a href="http://talk.');
     
       __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
     
