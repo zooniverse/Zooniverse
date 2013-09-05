@@ -7,7 +7,7 @@
     </div>
   <% end %>
 
-  <div class="no-group user-group">
+  <!--div class="no-group user-group">
       <button name="user-group" value="" class="stop"><%- enUs.groupsMenu.stop %></button>
-  </div>
+  </div-->
 </div>

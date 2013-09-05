@@ -59,11 +59,11 @@ template = function(__obj) {
         __out.push('</button>\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <div class="no-group user-group">\n      <button name="user-group" value="" class="stop">');
+      __out.push('\n\n  <!--div class="no-group user-group">\n      <button name="user-group" value="" class="stop">');
     
       __out.push(enUs.groupsMenu.stop);
     
-      __out.push('</button>\n  </div>\n</div>\n');
+      __out.push('</button>\n  </div-->\n</div>\n');
     
     }).call(this);
     

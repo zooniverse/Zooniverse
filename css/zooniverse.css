@@ -368,8 +368,10 @@
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
   background: #000;
-  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  border: 1px solid #999;
+  -webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+  color: #fff;
   font: 12px "Helvetica Neue", sans-serif;
   opacity: 0;
   filter: alpha(opacity=0);
