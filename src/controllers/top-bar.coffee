@@ -56,7 +56,7 @@ class TopBar extends BaseController
   onUserChange: (e, user) =>
     @el.toggleClass 'signed-in', user?
     @el.toggleClass 'has-groups', user?.user_groups?.length > 0
-    @onUserChangeGroup e, user?, user?.user_group_id?
+    @onUserChangeGroup e, user?, user?.user_group_id
     @getMessages()
     @currentUserName.html user?.name || ''
     @avatarImage.attr src: user?.avatar

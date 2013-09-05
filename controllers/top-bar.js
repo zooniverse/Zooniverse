@@ -96,7 +96,7 @@
       var _ref3;
       this.el.toggleClass('signed-in', user != null);
       this.el.toggleClass('has-groups', (user != null ? (_ref3 = user.user_groups) != null ? _ref3.length : void 0 : void 0) > 0);
-      this.onUserChangeGroup(e, user != null, (user != null ? user.user_group_id : void 0) != null);
+      this.onUserChangeGroup(e, user != null, user != null ? user.user_group_id : void 0);
       this.getMessages();
       this.currentUserName.html((user != null ? user.name : void 0) || '');
       return this.avatarImage.attr({
