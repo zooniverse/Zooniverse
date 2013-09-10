@@ -344,6 +344,7 @@
   margin: 0;
 }
 .zooniverse-top-bar .avatar img {
+  border: 0;
   height: 30px;
   width: 30px;
 }
