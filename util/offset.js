@@ -2,14 +2,6 @@
 (function() {
   var offset, _base, _ref, _ref1;
 
-  if ((_ref = window.zooniverse) == null) {
-    window.zooniverse = {};
-  }
-
-  if ((_ref1 = (_base = window.zooniverse).util) == null) {
-    _base.util = {};
-  }
-
   offset = function(el, from) {
     var currentElement, left, top;
     left = 0;
@@ -31,6 +23,14 @@
       top: top
     };
   };
+
+  if ((_ref = window.zooniverse) == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_ref1 = (_base = window.zooniverse).util) == null) {
+    _base.util = {};
+  }
 
   window.zooniverse.util.offset = offset;
 

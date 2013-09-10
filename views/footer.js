@@ -39,13 +39,13 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var category, enUs, project, projects, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1;
+      var category, enUs, project, projects, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
     
       enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
     
       __out.push('\n');
     
-      zooniverseLogoSvg = require('./zooniverse-logo-svg');
+      zooniverseLogoSvg = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.views) != null ? _ref1.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
     
       __out.push('\n\n<a href="https://www.zooniverse.org/" class="logo">\n  ');
     
@@ -59,9 +59,9 @@ template = function(__obj) {
     
       if (this.categories != null) {
         __out.push('\n    <div class="projects">\n      ');
-        _ref = this.categories;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          _ref1 = _ref[_i], category = _ref1.category, projects = _ref1.projects;
+        _ref2 = this.categories;
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          _ref3 = _ref2[_i], category = _ref3.category, projects = _ref3.projects;
           __out.push('\n        <div class="category">\n          <div class="category-title">');
           __out.push(__sanitize(category));
           __out.push('</div>\n          ');

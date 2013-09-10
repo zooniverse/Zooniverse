@@ -3,14 +3,6 @@
   var toggleClass, _base, _ref, _ref1,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  if ((_ref = window.zooniverse) == null) {
-    window.zooniverse = {};
-  }
-
-  if ((_ref1 = (_base = window.zooniverse).util) == null) {
-    _base.util = {};
-  }
-
   toggleClass = function(element, className, condition) {
     var classList, contained;
     classList = element.className.split(/\s+/);
@@ -28,6 +20,14 @@
     element.className = classList.join(' ');
     return null;
   };
+
+  if ((_ref = window.zooniverse) == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_ref1 = (_base = window.zooniverse).util) == null) {
+    _base.util = {};
+  }
 
   window.zooniverse.util.toggleClass = toggleClass;
 
