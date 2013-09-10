@@ -5,8 +5,8 @@
 .zooniverse-footer a {
   color: inherit;
   opacity: 0.75;
-  filter: alpha(opacity=75);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
   text-decoration: none;
 }
 .zooniverse-footer a:hover {
@@ -17,14 +17,14 @@
 .zooniverse-footer .logo {
   float: left;
   opacity: 0.5;
-  filter: alpha(opacity=50);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
   width: 25%;
 }
 .zooniverse-footer .logo:hover {
   opacity: 0.67;
-  filter: alpha(opacity=67);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=67)";
+  filter: alpha(opacity=67);
 }
 .zooniverse-footer .logo .zooniverse-logo {
   height: 100%;

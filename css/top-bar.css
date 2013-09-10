@@ -68,8 +68,8 @@
 }
 .zooniverse-top-bar .sign-in .separator {
   opacity: 0.5;
-  filter: alpha(opacity=50);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
 }
 .zooniverse-top-bar .current-user {
   display: none;
@@ -96,8 +96,8 @@
 }
 .zooniverse-top-bar .groups select:disabled {
   opacity: 0.33;
-  filter: alpha(opacity=33);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
+  filter: alpha(opacity=33);
 }
 .zooniverse-top-bar .messages {
   display: none;
@@ -136,8 +136,8 @@
   color: #fff;
   font: 12px "Helvetica Neue", sans-serif;
   opacity: 0;
-  filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
   -webkit-transform: translateY(-10px);
   -moz-transform: translateY(-10px);
   -o-transform: translateY(-10px);

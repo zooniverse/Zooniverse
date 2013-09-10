@@ -37,8 +37,8 @@
   display: inline-block;
   max-width: 33%;
   opacity: 0;
-  filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
   padding: 30px;
   position: relative;
   text-align: left;
@@ -130,8 +130,8 @@
   display: none;
   left: 0;
   opacity: 0.05;
-  filter: alpha(opacity=5);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
+  filter: alpha(opacity=5);
   position: absolute;
   right: 0;
   top: 0;
@@ -162,8 +162,8 @@
   font-size: 10px;
   margin: 5px 13px;
   opacity: 0.75;
-  filter: alpha(opacity=75);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
 }
 .zooniverse-dialog .error-message {
   color: #800000;
@@ -306,8 +306,8 @@
 }
 .zooniverse-top-bar .sign-in .separator {
   opacity: 0.5;
-  filter: alpha(opacity=50);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
 }
 .zooniverse-top-bar .current-user {
   display: none;
@@ -334,8 +334,8 @@
 }
 .zooniverse-top-bar .groups select:disabled {
   opacity: 0.33;
-  filter: alpha(opacity=33);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=33)";
+  filter: alpha(opacity=33);
 }
 .zooniverse-top-bar .messages {
   display: none;
@@ -374,8 +374,8 @@
   color: #fff;
   font: 12px "Helvetica Neue", sans-serif;
   opacity: 0;
-  filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
   -webkit-transform: translateY(-10px);
   -moz-transform: translateY(-10px);
   -o-transform: translateY(-10px);
@@ -422,8 +422,8 @@
 .zooniverse-footer a {
   color: inherit;
   opacity: 0.75;
-  filter: alpha(opacity=75);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
   text-decoration: none;
 }
 .zooniverse-footer a:hover {
@@ -434,14 +434,14 @@
 .zooniverse-footer .logo {
   float: left;
   opacity: 0.5;
-  filter: alpha(opacity=50);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
   width: 25%;
 }
 .zooniverse-footer .logo:hover {
   opacity: 0.67;
-  filter: alpha(opacity=67);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=67)";
+  filter: alpha(opacity=67);
 }
 .zooniverse-footer .logo .zooniverse-logo {
   height: 100%;
