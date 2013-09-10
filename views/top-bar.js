@@ -39,21 +39,21 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, groupIconSvg, mailIconSvg, zooniverseLogoSvg, _ref;
+      var enUs, groupIconSvg, mailIconSvg, zooniverseLogoSvg, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6;
     
       enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
     
       __out.push('\n');
     
-      zooniverseLogoSvg = window.zooniverse.views.zooniverseLogoSvg || require('./zooniverse-logo-svg');
+      zooniverseLogoSvg = ((_ref1 = window.zooniverse) != null ? (_ref2 = _ref1.views) != null ? _ref2.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
     
       __out.push('\n');
     
-      groupIconSvg = window.zooniverse.views.groupIconSvg || require('./group-icon-svg');
+      groupIconSvg = ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.views) != null ? _ref4.groupIconSvg : void 0 : void 0) || require('./group-icon-svg');
     
       __out.push('\n');
     
-      mailIconSvg = window.zooniverse.views.mailIconSvg || require('./mail-icon-svg');
+      mailIconSvg = ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.views) != null ? _ref6.mailIconSvg : void 0 : void 0) || require('./mail-icon-svg');
     
       __out.push('\n\n<div class="corner">\n  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">\n    <path d="M 0 0 L 100 0 L 100 100 Z" />\n  </svg>\n</div>\n\n<div class="no-user">\n  <div class="zooniverse-info piece">\n    ');
     

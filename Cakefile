@@ -51,10 +51,15 @@ ecoToModule = (file, content) ->
   moduleName = path.basename(file).replace(/\.\w+$/, '').replace /\-(\w)/, (_, char) -> char.toUpperCase()
   content ?= fs.readFileSync(file).toString()
 
+  try
+    template = eco.precompile content
+  catch e
+    console.log '', file, 'FAILED TO COMPILE'
+
   """
     window.zooniverse = window.zooniverse || {};
     window.zooniverse.views = window.zooniverse.views || {};
-    template = #{eco.precompile content};
+    template = #{template};
     window.zooniverse.views['#{moduleName}'] = template;
     if (typeof module !== 'undefined') module.exports = template;\n
   """
