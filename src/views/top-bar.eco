@@ -31,6 +31,12 @@
     </div>
   </div>
 
+  <div class="languages piece">
+    <div class="languages-menu-toggle">
+      <button name="languages"><%- groupIconSvg() %></button>
+    </div>
+  </div>
+
   <div class="groups piece">
     <div class="groups-menu-toggle">
       <button name="groups"><%- groupIconSvg() %></button>

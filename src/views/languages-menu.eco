@@ -1,0 +1,7 @@
+<div class="languages">
+  <% for code, language of @availableLanguages: %>
+    <div class="languages">
+      <button name="language" value="<%= code %>" <% if code is @preferredLanguage: %>class="active"<% end %>><%= language %></button>
+    </div>
+  <% end %>
+</div>

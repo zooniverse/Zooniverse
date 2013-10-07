@@ -10,6 +10,7 @@ signupDialog = zooniverse.controllers.signupDialog || require './signup-dialog'
 template = zooniverse.views.topBar || require '../views/top-bar'
 Dropdown = zooniverse.controllers.Dropdown || require './dropdown'
 GroupsMenu = zooniverse.controllers.GroupsMenu || require './groups-menu'
+LanguagesMenu = zooniverse.controllers.LanguagesMenu || require './languages-menu'
 Api = zooniverse.Api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
 
@@ -27,6 +28,7 @@ class TopBar extends BaseController
   elements:
     '.current-user-name': 'currentUserName'
     'button[name="groups"]': 'groupsMenuButton'
+    'button[name="languages"]': 'languagesMenuButton'
     '.message-count': 'messageCount'
     '.avatar img': 'avatarImage'
     '.group': 'currentGroup'
@@ -41,6 +43,16 @@ class TopBar extends BaseController
       menu: @groupsMenu.el.get 0
       menuClass: 'from-top-bar'
       menuPinning: [1, 0]
+
+    @languagesMenu = new LanguagesMenu()
+    @languagesDropdown = new Dropdown
+      button: @languagesMenuButton.get 0
+      buttonPinning: [0, 0]
+      menu: @languagesMenu.el.get 0
+      menuClass: 'from-top-bar'
+      menuPinning: [1, 0]
+
+    @languagesMenu.on 'language-fetched', @onLanguageFetch
 
     User.on 'change', @onUserChange
     User.on 'change-group', @onUserChangeGroup
@@ -75,6 +87,9 @@ class TopBar extends BaseController
 
   onUserChangeGroup: (e, user, group) =>
     @el.toggleClass 'group-participant', group?
+
+  onLanguageFetch: (e, languageStrings) =>
+    @trigger 'language-fetched', languageStrings
 
 window.zooniverse.controllers.TopBar = TopBar
 module?.exports = TopBar
