@@ -75,6 +75,10 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.signOut));
     
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="languages piece">\n    <div class="languages-menu-toggle">\n      <button name="languages">');
+    
+      __out.push(groupIconSvg());
+    
       __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <div class="groups-menu-toggle">\n      <button name="groups">');
     
       __out.push(groupIconSvg());
