@@ -238,7 +238,8 @@
 }
 #ZOONIVERSE_RESET_BUTTON,
 .zooniverse-top-bar button,
-.zooniverse-groups-menu button {
+.zooniverse-groups-menu button,
+.zooniverse-languages-menu button {
   background: transparent;
   border: 0;
   color: inherit;
@@ -399,21 +400,26 @@
   -ms-transform: translateY(0);
   transform: translateY(0);
 }
-.zooniverse-groups-menu {
+.zooniverse-groups-menu,
+.zooniverse-languages-menu {
   text-align: center;
 }
-.zooniverse-groups-menu button {
+.zooniverse-groups-menu button,
+.zooniverse-languages-menu button {
   border-bottom: 1px solid rgba(255,255,255,0.25);
   padding: 3px 15px;
   width: 100%;
 }
-.zooniverse-groups-menu button:hover {
+.zooniverse-groups-menu button:hover,
+.zooniverse-languages-menu button:hover {
   background: rgba(255,255,255,0.25);
 }
-.zooniverse-groups-menu button.active {
+.zooniverse-groups-menu button.active,
+.zooniverse-languages-menu button.active {
   background: rgba(0,255,0,0.5);
 }
-.zooniverse-groups-menu button.stop {
+.zooniverse-groups-menu button.stop,
+.zooniverse-languages-menu button.stop {
   font-size: 10px;
 }
 .zooniverse-footer {
