@@ -5,9 +5,6 @@ $ = window.jQuery
 HTML = $(document.body.parentNode)
 DEFAULT_LANGUAGE_CODE = 'en'
 
-preferredLanguageKey = if Api.current? then "#{ Api.current.project }-preferredLanguage" else "preferredLanguage"
-languageStringsKey =  if Api.current? then "#{ Api.current.project }-languageStrings" else "languageStrings"
-
 class LanguageManager extends EventEmitter
   @current: null
 
@@ -17,8 +14,11 @@ class LanguageManager extends EventEmitter
   constructor: ->
     super
 
+    @preferredLanguageKey = if Api.current? then "#{ Api.current.project }-preferredLanguage" else "preferredLanguage"
+    @languageStringsKey =  if Api.current? then "#{ Api.current.project }-languageStrings" else "languageStrings"
+
     unless @preferredLanguage = (try location.search.match(/lang=([\$|\w]+)/)[1])
-      @preferredLanguage ||= localStorage[preferredLanguageKey] if localStorage[preferredLanguageKey]?
+      @preferredLanguage ||= localStorage[@preferredLanguageKey] if localStorage[@preferredLanguageKey]?
       @preferredLanguage ||= DEFAULT_LANGUAGE_CODE
 
     HTML.attr 'data-language', @preferredLanguage
@@ -36,8 +36,8 @@ class LanguageManager extends EventEmitter
     request = $.getJSON "./translations/#{ languageCode }.json"
     request.done (data) =>
       @preferredLanguage = languageCode
-      localStorage[preferredLanguageKey] = @preferredLanguage
-      localStorage[languageStringsKey] = JSON.stringify data
+      localStorage[@preferredLanguageKey] = @preferredLanguage
+      localStorage[@languageStringsKey] = JSON.stringify data
 
       @trigger 'language-fetched', data
       callback? arguments...
