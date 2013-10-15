@@ -68,7 +68,6 @@
     };
 
     function TopBar() {
-      this.onLanguageFetch = __bind(this.onLanguageFetch, this);
       this.onUserChangeGroup = __bind(this.onUserChangeGroup, this);
       this.getMessages = __bind(this.getMessages, this);
       this.onUserChange = __bind(this.onUserChange, this);
@@ -89,7 +88,6 @@
         menuClass: 'from-top-bar',
         menuPinning: [1, 0]
       });
-      this.languagesMenu.on('language-fetched', this.onLanguageFetch);
       User.on('change', this.onUserChange);
       User.on('change-group', this.onUserChangeGroup);
     }
@@ -134,10 +132,6 @@
 
     TopBar.prototype.onUserChangeGroup = function(e, user, group) {
       return this.el.toggleClass('group-participant', group != null);
-    };
-
-    TopBar.prototype.onLanguageFetch = function(e, languageStrings) {
-      return this.trigger('language-fetched', languageStrings);
     };
 
     return TopBar;
