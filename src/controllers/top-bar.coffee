@@ -52,8 +52,6 @@ class TopBar extends BaseController
       menuClass: 'from-top-bar'
       menuPinning: [1, 0]
 
-    @languagesMenu.on 'language-fetched', @onLanguageFetch
-
     User.on 'change', @onUserChange
     User.on 'change-group', @onUserChangeGroup
 
@@ -87,9 +85,6 @@ class TopBar extends BaseController
 
   onUserChangeGroup: (e, user, group) =>
     @el.toggleClass 'group-participant', group?
-
-  onLanguageFetch: (e, languageStrings) =>
-    @trigger 'language-fetched', languageStrings
 
 window.zooniverse.controllers.TopBar = TopBar
 module?.exports = TopBar

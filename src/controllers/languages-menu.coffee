@@ -1,9 +1,9 @@
 Controller = window.zooniverse?.controllers?.BaseController || require './base-controller'
 Dropdown = window.zooniverse?.controllers?.Dropdown || require './dropdown'
+LanguageManager = window.zooniverse?.lib?.Language || require '../lib/language-manager'
 template = window.zooniverse?.views?.languagesMenu || require '../views/languages-menu'
 
 $ = window.jQuery
-HTML = $(document.body.parentNode)
 
 class LanguagesMenu extends Controller
   className: 'zooniverse-languages-menu'
@@ -13,15 +13,8 @@ class LanguagesMenu extends Controller
     'click button[name="language"]': 'onClickLanguageButton'
 
   constructor: ->
-    unless DEFINE_ZOONIVERSE_LANGUAGES
-      return
-
-    @availableLanguages = DEFINE_ZOONIVERSE_LANGUAGES
-
-    @preferredLanguage = try location.search.match(/lang=([\$|\w]+)/)[1]
-    @preferredLanguage ||= localStorage.preferredLanguage
-    @preferredLanguage ||= 'en'
-    HTML.attr 'data-language', @preferredLanguage
+    @availableLanguages = LanguageManager.current?.getAvailableLanguages()
+    @preferredLanguage = LanguageManager.current?.getPreferredLanguage()
 
     super
 
@@ -29,15 +22,10 @@ class LanguagesMenu extends Controller
 
   onClickLanguageButton: (e) =>
     target = $(e.currentTarget)
-
-    request = $.getJSON "./translations/#{ target.val() }.json"
-    request.done (data) =>
+    LanguageManager.current?.setLanguage target.val(), =>
       buttons = @el.find 'button[name="language"]'
       buttons.removeClass 'active'
       target.addClass 'active'
-
-      @trigger 'language-fetched', data
-
 
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}

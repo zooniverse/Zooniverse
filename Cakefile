@@ -13,6 +13,7 @@ buildModules = [
   'src/lib/event-emitter.coffee'
   'src/lib/proxy-frame.coffee'
   'src/lib/api.coffee'
+  'src/lib/language-manager.coffee'
   'src/models/base-model.coffee'
   'src/models/user.coffee'
   'src/models/subject.coffee'
