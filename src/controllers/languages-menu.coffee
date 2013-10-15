@@ -18,14 +18,22 @@ class LanguagesMenu extends Controller
 
     super
 
-    @el.find('button[value="' + @preferredLanguage + '"]').click()
+    LanguageManager.on 'language-fetched', (e, languageCode) =>
+      @setLanguageButton languageCode
 
   onClickLanguageButton: (e) =>
     target = $(e.currentTarget)
     LanguageManager.current?.setLanguage target.val(), =>
+      @setLanguageButton target.val()
+
+  setLanguageButton: (languageCode) ->
+    target = @el.find('button[value="' + languageCode + '"]')
+
+    if target.length
       buttons = @el.find 'button[name="language"]'
       buttons.removeClass 'active'
       target.addClass 'active'
+
 
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}

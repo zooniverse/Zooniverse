@@ -12,17 +12,18 @@ class LanguageManager extends EventEmitter
 
   constructor: ->
     super
-    
-    @preferredLanguage ||= try location.search.match(/lang=([\$|\w]+)/)[1]
-    @preferredLanguage ||= localStorage.preferredLanguage if localStorage.preferredLanguage?
-    @preferredLanguage ||= DEFAULT_LANGUAGE_CODE
+
+    unless @preferredLanguage = (try location.search.match(/lang=([\$|\w]+)/)[1])
+      @preferredLanguage ||= localStorage.preferredLanguage if localStorage.preferredLanguage?
+      @preferredLanguage ||= DEFAULT_LANGUAGE_CODE
 
     HTML.attr 'data-language', @preferredLanguage
 
     @select()
+    @setLanguage @preferredLanguage
 
   getAvailableLanguages: ->
-    return window.DEFINE_ZOONIVERSE_LANGUAGES || {'en': 'English', 'es_cl': 'Spanish'}
+    return window.DEFINE_ZOONIVERSE_LANGUAGES || {'en': 'English'}
 
   getPreferredLanguage: ->
     return @preferredLanguage
@@ -32,9 +33,14 @@ class LanguageManager extends EventEmitter
     request.done (data) =>
       @preferredLanguage = languageCode
       localStorage.preferredLanguage = @preferredLanguage
-      localStorage.langaugeStrings = data
+      localStorage.langaugeStrings = JSON.stringify data
 
       @trigger 'language-fetched', data
+      callback? arguments...
+
+    # When specified language isn't available, for whatever reason.
+    request.fail =>
+      @trigger 'language-fetch-fail'
       callback? arguments...
 
   select: ->
