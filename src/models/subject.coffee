@@ -107,6 +107,7 @@ class Subject extends BaseModel
   group_id: ''
   workflow_ids: null
   tutorial: null
+  preload: true
 
   constructor: ->
     super
@@ -116,9 +117,9 @@ class Subject extends BaseModel
     @metadata ?= {}
     @workflow_ids ?= []
 
-    @preloadImages()
-
   preloadImages: ->
+    return unless @preload
+    console.log 'preloadImages'
     for type, imageSources of @location
       imageSources = [imageSources] unless imageSources instanceof Array
       continue unless @isImage imageSources

@@ -13,12 +13,17 @@ buildModules = [
   'src/lib/event-emitter.coffee'
   'src/lib/proxy-frame.coffee'
   'src/lib/api.coffee'
+  'src/util/toggle-class.coffee'
+  'src/util/offset.coffee'
   'src/models/base-model.coffee'
   'src/models/user.coffee'
   'src/models/subject.coffee'
   'src/models/recent.coffee'
   'src/models/favorite.coffee'
   'src/models/classification.coffee'
+  'src/views/zooniverse-logo-svg.eco'
+  'src/views/group-icon-svg.eco'
+  'src/views/mail-icon-svg.eco'
   'src/views/dialog.eco'
   'src/views/top-bar.eco'
   'src/views/login-form.eco'
@@ -28,12 +33,15 @@ buildModules = [
   'src/views/profile.eco'
   'src/views/profile-item.eco'
   'src/views/footer.eco'
+  'src/views/groups-menu.eco'
   'src/controllers/base-controller.coffee'
   'src/controllers/dialog.coffee'
   'src/controllers/login-form.coffee'
   'src/controllers/login-dialog.coffee'
   'src/controllers/signup-form.coffee'
   'src/controllers/signup-dialog.coffee'
+  'src/controllers/dropdown.coffee'
+  'src/controllers/groups-menu.coffee'
   'src/controllers/top-bar.coffee'
   'src/controllers/paginator.coffee'
   'src/controllers/profile.coffee'
@@ -48,7 +56,7 @@ run = (fullCommand) ->
   child.stderr.on 'data', process.stderr.write.bind process.stderr
 
 ecoToModule = (file, content) ->
-  moduleName = path.basename(file).replace(/\.\w+$/, '').replace /\-(\w)/, (_, char) -> char.toUpperCase()
+  moduleName = path.basename(file).replace(/\.\w+$/, '').replace /\-(\w)/g, (_, char) -> char.toUpperCase()
   content ?= fs.readFileSync(file).toString()
 
   try

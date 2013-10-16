@@ -1,4 +1,4 @@
-Controller = window.zooniverse?.BaseController || require './base-controller'
+Controller = window.zooniverse?.controllers?.BaseController || require './base-controller'
 User = window.zooniverse?.models?.User || require '../models/user'
 template = window.zooniverse?.views?.groupsMenu || require '../views/groups-menu'
 $ = window.jQuery
@@ -36,5 +36,5 @@ class GroupsMenu extends Controller
 
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
-window.zooniverse.controllers.GroupsMenu
+window.zooniverse.controllers.GroupsMenu = GroupsMenu
 module?.exports = GroupsMenu

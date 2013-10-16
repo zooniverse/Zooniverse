@@ -1,5 +1,5 @@
 <% enUs = zooniverse?.enUs || require '../lib/en-us' %>
-<% zooniverseLogoSvg = require './zooniverse-logo-svg' %>
+<% zooniverseLogoSvg = zooniverse?.views?.zooniverseLogoSvg || require './zooniverse-logo-svg' %>
 
 <div class="loader"></div>
 
