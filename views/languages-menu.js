@@ -39,7 +39,25 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      __out.push('<form class="sign-in-form">\n  <div class="loader"></div>\n\n  <header>Sign in to see your profile</header>\n  <label><input type="text" name="username" placeholder="Username" required="required" /></label>\n  <label><input type="password" name="password" placeholder="Password" required="required" /></label>\n  <div class="error-message"></div>\n  <div class="action"><button type="submit">Sign in</button></div>\n  <p class="no-account">Don\'t have a Zooniverse profile? <button name="sign-up">Create one now!</button></p>\n</form>\n\n<nav>\n  <button name="turn-page" value="recents">Recents</button>\n  <button name="turn-page" value="favorites">Favorites</button>\n</nav>\n\n<div class="recents page"></div>\n<div class="recents-empty empty-message">No recents</div>\n\n<div class="favorites page"></div>\n<div class="favorites-empty empty-message">No favorites</div>\n');
+      var code, language, _ref;
+    
+      __out.push('<div class="languages">\n  ');
+    
+      _ref = this.availableLanguages;
+      for (code in _ref) {
+        language = _ref[code];
+        __out.push('\n    <div class="languages">\n      <button name="language" value="');
+        __out.push(__sanitize(code));
+        __out.push('" ');
+        if (code === this.preferredLanguage) {
+          __out.push('class="active"');
+        }
+        __out.push('>');
+        __out.push(__sanitize(language));
+        __out.push('</button>\n    </div>\n  ');
+      }
+    
+      __out.push('\n</div>\n');
     
     }).call(this);
     
@@ -47,5 +65,5 @@ template = function(__obj) {
   __obj.safe = __objSafe, __obj.escape = __escape;
   return __out.join('');
 };
-window.zooniverse.views['profile'] = template;
+window.zooniverse.views['languagesMenu'] = template;
 if (typeof module !== 'undefined') module.exports = template;
