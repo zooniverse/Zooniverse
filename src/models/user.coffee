@@ -82,7 +82,7 @@ class User extends EventEmitter
     get = Api.current?.getJSON path, (group) =>
       @trigger 'change-group', group
       callback? arguments...
-      console?.log 'Changed group', group
+
     get
 
   setPreference: (key, value, global = false, callback) ->

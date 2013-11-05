@@ -185,7 +185,6 @@
       if (!this.preload) {
         return;
       }
-      console.log('preloadImages');
       _ref = this.location;
       _results = [];
       for (type in _ref) {

@@ -119,7 +119,6 @@ class Subject extends BaseModel
 
   preloadImages: ->
     return unless @preload
-    console.log 'preloadImages'
     for type, imageSources of @location
       imageSources = [imageSources] unless imageSources instanceof Array
       continue unless @isImage imageSources
