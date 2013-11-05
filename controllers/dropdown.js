@@ -19,13 +19,18 @@
 
     Dropdown.elements = [];
 
-    Dropdown.closeAll = function() {
-      var instance, _i, _len, _ref2, _results;
+    Dropdown.closeAll = function(_arg) {
+      var except, instance, _i, _len, _ref2, _results;
+      except = (_arg != null ? _arg : {}).except;
       _ref2 = this.instances;
       _results = [];
       for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
         instance = _ref2[_i];
-        _results.push(instance.close());
+        if (instance !== except) {
+          _results.push(instance.close());
+        } else {
+          _results.push(void 0);
+        }
       }
       return _results;
     };
@@ -118,6 +123,9 @@
 
     Dropdown.prototype.open = function() {
       var _this = this;
+      this.constructor.closeAll({
+        except: this
+      });
       toggleClass(this.button, this.openClass, true);
       this.menu.style.display = '';
       this.positionMenu();

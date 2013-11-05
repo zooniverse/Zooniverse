@@ -8,8 +8,9 @@ class Dropdown
   @instances: []
   @elements: []
 
-  @closeAll: ->
-    instance.close() for instance in @instances
+  @closeAll: ({except} = {}) ->
+    for instance in @instances
+      instance.close() unless instance is except
 
   addEventListener 'click', (e) =>
     shouldClose = true
@@ -70,6 +71,7 @@ class Dropdown
     if @_open then @close() else @open()
 
   open: ->
+    @constructor.closeAll except: @
     toggleClass @button, @openClass, true
     @menu.style.display = ''
     @positionMenu()
