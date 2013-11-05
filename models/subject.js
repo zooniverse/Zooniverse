@@ -162,6 +162,8 @@
 
     Subject.prototype.tutorial = null;
 
+    Subject.prototype.preload = true;
+
     function Subject() {
       Subject.__super__.constructor.apply(this, arguments);
       if (this.location == null) {
@@ -176,11 +178,14 @@
       if (this.workflow_ids == null) {
         this.workflow_ids = [];
       }
-      this.preloadImages();
     }
 
     Subject.prototype.preloadImages = function() {
       var imageSources, src, type, _ref, _results;
+      if (!this.preload) {
+        return;
+      }
+      console.log('preloadImages');
       _ref = this.location;
       _results = [];
       for (type in _ref) {
