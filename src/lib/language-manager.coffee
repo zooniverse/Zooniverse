@@ -1,55 +1,56 @@
-Api = window.zooniverse?.Api || require './api'
 EventEmitter = window.zooniverse?.EventEmitter || require './event-emitter'
-
 $ = window.jQuery
-HTML = $(document.body.parentNode)
+
 DEFAULT_LANGUAGE_CODE = 'en'
 
 class LanguageManager extends EventEmitter
   @current: null
 
-  availableLanguages: {}
-  preferredLanguage: null
+  translations: null # {CODE: label: LANGUAGE, strings: {STRINGS}/JSON_URL'}
 
-  constructor: ->
-    super
+  constructor: ({@translations, code, strings} = {}) ->
+    @translations ?= window.AVAILABLE_TRANSLATIONS || {}
 
-    @preferredLanguageKey = if Api.current? then "#{ Api.current.project }-preferredLanguage" else "preferredLanguage"
-    @languageStringsKey =  if Api.current? then "#{ Api.current.project }-languageStrings" else "languageStrings"
+    localCode = try localStorage.getItem 'zooniverse-language-code'
+    localStrings = JSON.parse try localStorage.getItem 'zooniverse-language-strings'
 
-    unless @preferredLanguage = (try location.search.match(/lang=([\$|\w]+)/)[1])
-      @preferredLanguage ||= localStorage[@preferredLanguageKey] if localStorage[@preferredLanguageKey]?
-      @preferredLanguage ||= DEFAULT_LANGUAGE_CODE
+    if localCode? and localStrings?
+      setTimeout =>
+        @trigger 'change-language', [localCode, localStrings]
 
-    HTML.attr 'data-language', @preferredLanguage
+    code ||= try location.search.match(/lang=([\$|\w]+)/)[1]
+    code ||= localCode
+    code ||= navigator.language?.split('-')[0]
+    code ||= navigator.userLanguage?.split('-')[0]
+    code ||= DEFAULT_LANGUAGE_CODE
 
-    @select()
-    @setLanguage @preferredLanguage
+    @strings ||= localStrings
+    @strings ||= {}
 
-  getAvailableLanguages: ->
-    return window.DEFINE_ZOONIVERSE_LANGUAGES || {'en': 'English'}
-
-  getPreferredLanguage: ->
-    return @preferredLanguage
-
-  setLanguage: (languageCode, callback) ->
-    request = $.getJSON "./translations/#{ languageCode }.json"
-    request.done (data) =>
-      @preferredLanguage = languageCode
-      localStorage[@preferredLanguageKey] = @preferredLanguage
-      localStorage[@languageStringsKey] = JSON.stringify data
-
-      @trigger 'language-fetched', data
-      callback? arguments...
-
-    # When specified language isn't available, for whatever reason.
-    request.fail =>
-      @trigger 'language-fetch-fail'
-      callback? arguments...
-
-  select: ->
     @constructor.current = @
-    @trigger 'select'
+
+    setTimeout =>
+      @setLanguage code
+
+  setLanguage: (code, callback) ->
+    if code of @translations
+      if typeof @translations[code]?.strings is 'string'
+        request = $.getJSON @translations[code].strings
+
+        request.done (data) =>
+          @translations[code].strings = data
+          @setLanguage code, callback
+
+        request.fail =>
+          @trigger 'language-fetch-fail'
+          callback? arguments...
+
+      else
+        localStorage.setItem 'zooniverse-language-code', code
+        localStorage.setItem 'zooniverse-language-strings', JSON.stringify @translations[code].strings
+
+        @trigger 'change-language', [code, @translations[code].strings]
+        callback? @currentStrings
 
 window.zooniverse ?= {}
 window.zooniverse.lib ?= {}

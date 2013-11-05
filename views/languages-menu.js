@@ -39,21 +39,23 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var code, language, _ref;
+      var LanguageManager, code, label, _ref, _ref1, _ref2;
     
-      __out.push('<div class="languages">\n  ');
+      LanguageManager = require('../lib/language-manager');
     
-      _ref = this.availableLanguages;
-      for (code in _ref) {
-        language = _ref[code];
-        __out.push('\n    <div class="languages">\n      <button name="language" value="');
+      __out.push('\n\n<div class="languages">\n  ');
+    
+      _ref1 = (_ref = LanguageManager.current) != null ? _ref.translations : void 0;
+      for (code in _ref1) {
+        label = _ref1[code].label;
+        __out.push('\n    <div class="language">\n      <button name="language" value="');
         __out.push(__sanitize(code));
         __out.push('" ');
-        if (code === this.preferredLanguage) {
+        if (code === ((_ref2 = LanguageManager.current) != null ? _ref2.currentCode : void 0)) {
           __out.push('class="active"');
         }
         __out.push('>');
-        __out.push(__sanitize(language));
+        __out.push(__sanitize(label));
         __out.push('</button>\n    </div>\n  ');
       }
     

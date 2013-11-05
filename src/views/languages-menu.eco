@@ -1,7 +1,9 @@
+<% LanguageManager = require '../lib/language-manager' %>
+
 <div class="languages">
-  <% for code, language of @availableLanguages: %>
-    <div class="languages">
-      <button name="language" value="<%= code %>" <% if code is @preferredLanguage: %>class="active"<% end %>><%= language %></button>
+  <% for code, {label} of LanguageManager.current?.translations: %>
+    <div class="language">
+      <button name="language" value="<%= code %>" <% if code is LanguageManager.current?.currentCode: %>class="active"<% end %>><%= label %></button>
     </div>
   <% end %>
 </div>

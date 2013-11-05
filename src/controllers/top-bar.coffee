@@ -1,6 +1,7 @@
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
 window.zooniverse.views ?= {}
+window.zooniverse.lib ?= {}
 window.zooniverse.models ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
@@ -10,6 +11,7 @@ signupDialog = zooniverse.controllers.signupDialog || require './signup-dialog'
 template = zooniverse.views.topBar || require '../views/top-bar'
 Dropdown = zooniverse.controllers.Dropdown || require './dropdown'
 GroupsMenu = zooniverse.controllers.GroupsMenu || require './groups-menu'
+LanguageManager = zooniverse.lib.LanguageManager || require '../lib/language-manager'
 LanguagesMenu = zooniverse.controllers.LanguagesMenu || require './languages-menu'
 Api = zooniverse.Api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
@@ -44,13 +46,16 @@ class TopBar extends BaseController
       menuClass: 'from-top-bar'
       menuPinning: [1, 0]
 
-    @languagesMenu = new LanguagesMenu()
-    @languagesDropdown = new Dropdown
-      button: @languagesMenuButton.get 0
-      buttonPinning: [1, 1]
-      menu: @languagesMenu.el.get 0
-      menuClass: 'from-top-bar'
-      menuPinning: [1, 0]
+    if LanguageManager.current?
+      @languagesMenu = new LanguagesMenu()
+      @languagesDropdown = new Dropdown
+        button: @languagesMenuButton.get 0
+        buttonPinning: [1, 1]
+        menu: @languagesMenu.el.get 0
+        menuClass: 'from-top-bar'
+        menuPinning: [1, 0]
+    else
+      @languagesMenuButton.css 'display', 'none'
 
     User.on 'change', @onUserChange
     User.on 'change-group', @onUserChangeGroup

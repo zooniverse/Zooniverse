@@ -3,8 +3,6 @@ Dropdown = window.zooniverse?.controllers?.Dropdown || require './dropdown'
 LanguageManager = window.zooniverse?.lib?.Language || require '../lib/language-manager'
 template = window.zooniverse?.views?.languagesMenu || require '../views/languages-menu'
 
-$ = window.jQuery
-
 class LanguagesMenu extends Controller
   className: 'zooniverse-languages-menu'
   template: template
@@ -13,27 +11,21 @@ class LanguagesMenu extends Controller
     'click button[name="language"]': 'onClickLanguageButton'
 
   constructor: ->
-    @availableLanguages = LanguageManager.current?.getAvailableLanguages()
-    @preferredLanguage = LanguageManager.current?.getPreferredLanguage()
-
     super
-
-    LanguageManager.on 'language-fetched', (e, languageCode) =>
-      @setLanguageButton languageCode
+    LanguageManager.current?.on 'change-language', (e, code) =>
+      @setLanguageButton code
 
   onClickLanguageButton: (e) =>
-    target = $(e.currentTarget)
-    LanguageManager.current?.setLanguage target.val(), =>
-      @setLanguageButton target.val()
+    LanguageManager.current?.setLanguage e.currentTarget.value
+    Dropdown.closeAll()
 
-  setLanguageButton: (languageCode) ->
-    target = @el.find('button[value="' + languageCode + '"]')
+  setLanguageButton: (code) ->
+    target = @el.find('button[value="' + code + '"]')
 
-    if target.length
+    unless target.length is 0
       buttons = @el.find 'button[name="language"]'
       buttons.removeClass 'active'
       target.addClass 'active'
-
 
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
