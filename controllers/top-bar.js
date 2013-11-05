@@ -83,7 +83,7 @@
       this.languagesMenu = new LanguagesMenu();
       this.languagesDropdown = new Dropdown({
         button: this.languagesMenuButton.get(0),
-        buttonPinning: [0, 0],
+        buttonPinning: [1, 1],
         menu: this.languagesMenu.el.get(0),
         menuClass: 'from-top-bar',
         menuPinning: [1, 0]

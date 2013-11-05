@@ -47,7 +47,7 @@ class TopBar extends BaseController
     @languagesMenu = new LanguagesMenu()
     @languagesDropdown = new Dropdown
       button: @languagesMenuButton.get 0
-      buttonPinning: [0, 0]
+      buttonPinning: [1, 1]
       menu: @languagesMenu.el.get 0
       menuClass: 'from-top-bar'
       menuPinning: [1, 0]
