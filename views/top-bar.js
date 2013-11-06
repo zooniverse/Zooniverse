@@ -79,10 +79,6 @@ template = function(__obj) {
     
       __out.push(__sanitize(enUs.topBar.signOut));
     
-      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="languages piece">\n    <div class="languages-menu-toggle">\n      <button name="languages">');
-    
-      __out.push(languageIconSvg());
-    
       __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <div class="groups-menu-toggle">\n      <button name="groups">');
     
       __out.push(groupIconSvg());
@@ -95,7 +91,11 @@ template = function(__obj) {
     
       __out.push(mailIconSvg());
     
-      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar piece">\n    <a href="https://www.zooniverse.org/projects/current"><img src="" /></a>\n  </div>\n</div>\n');
+      __out.push('\n      <span class="message-count">&mdash;</span>\n    </a>\n  </div>\n\n  <div class="avatar piece">\n    <a href="https://www.zooniverse.org/projects/current"><img src="" /></a>\n  </div>\n</div>\n\n<div class="languages piece">\n  <div class="languages-menu-toggle">\n    <button name="languages">');
+    
+      __out.push(languageIconSvg());
+    
+      __out.push('</button>\n  </div>\n</div>\n');
     
     }).call(this);
     

@@ -23,7 +23,7 @@ class LanguageManager extends EventEmitter
     @constructor.current = @
 
     setTimeout =>
-      @setLanguage code
+      @setLanguage @code
 
   setLanguage: (@code, done, fail) ->
     if typeof @translations[@code]?.strings is 'string'

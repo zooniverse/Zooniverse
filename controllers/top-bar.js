@@ -86,6 +86,7 @@
         menuClass: 'from-top-bar',
         menuPinning: [1, 0]
       });
+      this.el.toggleClass('has-languages', LanguageManager.current != null);
       if (LanguageManager.current != null) {
         this.languagesMenu = new LanguagesMenu();
         this.languagesDropdown = new Dropdown({
@@ -95,8 +96,6 @@
           menuClass: 'from-top-bar',
           menuPinning: [1, 0]
         });
-      } else {
-        this.languagesMenuButton.css('display', 'none');
       }
       User.on('change', this.onUserChange);
       User.on('change-group', this.onUserChangeGroup);

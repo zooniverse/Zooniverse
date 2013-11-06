@@ -46,6 +46,8 @@ class TopBar extends BaseController
       menuClass: 'from-top-bar'
       menuPinning: [1, 0]
 
+    @el.toggleClass 'has-languages', LanguageManager.current?
+
     if LanguageManager.current?
       @languagesMenu = new LanguagesMenu()
       @languagesDropdown = new Dropdown
@@ -54,8 +56,6 @@ class TopBar extends BaseController
         menu: @languagesMenu.el.get 0
         menuClass: 'from-top-bar'
         menuPinning: [1, 0]
-    else
-      @languagesMenuButton.css 'display', 'none'
 
     User.on 'change', @onUserChange
     User.on 'change-group', @onUserChangeGroup

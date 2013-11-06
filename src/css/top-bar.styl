@@ -52,7 +52,7 @@
     vertical-align: middle
 
   .no-user
-    display: block
+    display: inline-block
 
   .zooniverse-info
     font-size: 13px
@@ -107,21 +107,27 @@
       height: 30px
       width: 30px
 
+  .languages
+    display: none
+
   &.signed-in
     .no-user
       display: none
 
     .current-user
-      display: block
-
-  &.has-messages .messages
-    display: inline-block
+      display: inline-block
 
   &.has-groups .groups
     display: inline-block
 
   &.group-participant button[name="groups"]
     color: #0f0
+
+  &.has-messages .messages
+    display: inline-block
+
+  &.has-languages .languages
+    display: inline-block
 
 .zooniverse-dropdown-menu.from-top-bar
   backface-visibility: hidden // This prevents flicker for some reason.
@@ -141,7 +147,7 @@
     opacity: 1
     transform: translateY(0)
 
-.zooniverse-groups-menu, 
+.zooniverse-groups-menu,
 .zooniverse-languages-menu
   text-align: center
 

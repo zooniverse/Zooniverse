@@ -33,12 +33,6 @@
     </div>
   </div>
 
-  <div class="languages piece">
-    <div class="languages-menu-toggle">
-      <button name="languages"><%- languageIconSvg() %></button>
-    </div>
-  </div>
-
   <div class="groups piece">
     <div class="groups-menu-toggle">
       <button name="groups"><%- groupIconSvg() %></button>
@@ -54,5 +48,11 @@
 
   <div class="avatar piece">
     <a href="https://www.zooniverse.org/projects/current"><img src="" /></a>
+  </div>
+</div>
+
+<div class="languages piece">
+  <div class="languages-menu-toggle">
+    <button name="languages"><%- languageIconSvg() %></button>
   </div>
 </div>
