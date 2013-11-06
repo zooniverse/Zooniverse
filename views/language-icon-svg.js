@@ -47,7 +47,7 @@ template = function(__obj) {
     
       __out.push(__sanitize(className));
     
-      __out.push('" width="1.25em" height="1.25em">\n  <!--TODO: This icon is still not so great.-->\n  <g transform="translate(50, 50)" fill="transparent" stroke="currentColor" stroke-width="8">\n    <circle r="45"></circle>\n    <ellipse rx="43" ry="23"></ellipse>\n    <ellipse rx="23" ry="43"></ellipse>\n    <path d="M -43 0 L 43 0 M 0 -43 L 0 43"></path>\n  </g>\n</svg>\n');
+      __out.push('" width="1.25em" height="1.25em">\n  <!--TODO: This icon is still not so great.-->\n  <g transform="translate(50, 50)" fill="transparent" stroke="currentColor" stroke-width="8">\n    <path d="M -43 0 H 43 M 0 -43 V 43"></path>\n    <path d="M 0 -45 Q -45 0 0 45 M 0 -45 Q 45 0 0 45"></path>\n    <path d="M -40 -25 Q 0 -15 40 -25 M -40 25 Q 0 15 40 25"></path>\n    <circle r="45"></circle>\n  </g>\n</svg>\n');
     
     }).call(this);
     
