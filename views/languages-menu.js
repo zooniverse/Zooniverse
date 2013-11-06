@@ -51,7 +51,7 @@ template = function(__obj) {
         __out.push('\n    <div class="language">\n      <button name="language" value="');
         __out.push(__sanitize(code));
         __out.push('" ');
-        if (code === ((_ref2 = LanguageManager.current) != null ? _ref2.currentCode : void 0)) {
+        if (code === ((_ref2 = LanguageManager.current) != null ? _ref2.code : void 0)) {
           __out.push('class="active"');
         }
         __out.push('>');

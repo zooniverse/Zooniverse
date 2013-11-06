@@ -3,7 +3,7 @@
 <div class="languages">
   <% for code, {label} of LanguageManager.current?.translations: %>
     <div class="language">
-      <button name="language" value="<%= code %>" <% if code is LanguageManager.current?.currentCode: %>class="active"<% end %>><%= label %></button>
+      <button name="language" value="<%= code %>" <% if code is LanguageManager.current?.code: %>class="active"<% end %>><%= label %></button>
     </div>
   <% end %>
 </div>
