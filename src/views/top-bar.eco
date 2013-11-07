@@ -4,7 +4,6 @@
 <% languageIconSvg = window.zooniverse?.views?.languageIconSvg || require './language-icon-svg' %>
 <% mailIconSvg = window.zooniverse?.views?.mailIconSvg || require './mail-icon-svg' %>
 
-
 <div class="corner">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
     <path d="M 0 0 L 100 0 L 100 100 Z" />
