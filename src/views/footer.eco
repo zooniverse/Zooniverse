@@ -1,4 +1,4 @@
-<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+<% translate = zooniverse?.translate || require '../lib/translate' %>
 <% zooniverseLogoSvg = window.zooniverse?.views?.zooniverseLogoSvg || require './zooniverse-logo-svg' %>
 
 <a href="https://www.zooniverse.org/" class="logo">
@@ -6,7 +6,7 @@
 </a>
 
 <div class="content">
-  <div class="heading"><%= enUs.footer.heading %></div>
+  <div class="heading"><%- translate 'footerHeading' %></div>
 
   <% if @categories?: %>
     <div class="projects">

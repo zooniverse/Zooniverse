@@ -39,9 +39,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var category, enUs, project, projects, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
+      var category, project, projects, translate, zooniverseLogoSvg, _i, _j, _len, _len1, _ref, _ref1, _ref2, _ref3;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      translate = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
@@ -53,7 +53,7 @@ template = function(__obj) {
     
       __out.push('\n</a>\n\n<div class="content">\n  <div class="heading">');
     
-      __out.push(__sanitize(enUs.footer.heading));
+      __out.push(translate('footerHeading'));
     
       __out.push('</div>\n\n  ');
     
