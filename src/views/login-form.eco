@@ -1,5 +1,5 @@
-<input type="text" name="username" required="required" placeholder="Username" />
-<input type="password" name="password" required="required" placeholder="Password" />
+<input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />
+<input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />
 <button type="submit"><%= enUs.topBar.signIn %></button>
 <button name="sign-out"><%= enUs.topBar.signOut %></button>
 <div class="error-message"></div>

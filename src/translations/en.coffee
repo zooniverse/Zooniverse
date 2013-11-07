@@ -5,7 +5,7 @@ en =
   signUp: 'Sign up'
   signIn: 'Sign in'
   signOut: 'Sign out'
-  username: 'User name'
+  username: 'Username'
   password: 'Password'
   email: 'Email'
   realName: 'Real name'

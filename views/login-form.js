@@ -39,7 +39,7 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      __out.push('<input type="text" name="username" required="required" placeholder="Username" />\n<input type="password" name="password" required="required" placeholder="Password" />\n<button type="submit">');
+      __out.push('<input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n<input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n<button type="submit">');
     
       __out.push(__sanitize(enUs.topBar.signIn));
     

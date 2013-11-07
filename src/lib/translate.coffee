@@ -1,27 +1,30 @@
 LanguageManager = window.zoonivers?.LanguageManager || require './language-manager'
 
-strings =
-  en: window.zooniverse?.translations?.en || require '../translations/en'
-  es: window.zooniverse?.translations?.es || require '../translations/es'
-
-KEY_ATTRIBUTE = 'data-zooniverse-translation-key'
-
-refresh = (element, key) ->
-  key ?= element.getAttribute KEY_ATTRIBUTE
-  string = strings[LanguageManager.current?.code]?[key]
-  string ||= strings[LanguageManager::code]?[key] # Fall back to the default language.
-  string ||= key # Fall back to the key.
-  element.innerHTML = string
-
 translate = ([tag]..., key) ->
   tag ?= 'span'
   element = document.createElement tag
-  element.setAttribute KEY_ATTRIBUTE, key
-  refresh element, key
+  element.setAttribute translate.attr, key
+  translate.refresh element
   element.outerHTML
 
-LanguageManager.on 'change-language', (e, instance, code, strings) ->
-  refresh element for element in document.querySelectorAll "[#{KEY_ATTRIBUTE}]"
+translate.attr = 'data-zooniverse-translate'
+
+translate.strings =
+  en: window.zooniverse?.translations?.en || require '../translations/en'
+  es: window.zooniverse?.translations?.es || require '../translations/es'
+
+translate.refresh = (element, key) ->
+  for {name, value} in element.attributes
+    continue unless name[...translate.attr.length] is translate.attr
+    continue unless value
+    property = name[translate.attr.length + 1...] || 'innerHTML'
+    string = translate.strings[LanguageManager.current?.code]?[value]
+    string ||= translate.strings[LanguageManager::code]?[value] # Fall back to the default language.
+    string ||= value # Fall back to the key.
+    element[property] = string
+
+LanguageManager.on 'change-language', ->
+  translate.refresh element for element in document.querySelectorAll "[#{translate.attr}]"
 
 window.zooniverse ?= {}
 window.zooniverse.translate = translate
