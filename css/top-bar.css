@@ -52,7 +52,7 @@
   vertical-align: middle;
 }
 .zooniverse-top-bar .no-user {
-  display: block;
+  display: inline-block;
 }
 .zooniverse-top-bar .zooniverse-info {
   font-size: 13px;
@@ -111,13 +111,13 @@
   height: 30px;
   width: 30px;
 }
+.zooniverse-top-bar .languages {
+  display: none;
+}
 .zooniverse-top-bar.signed-in .no-user {
   display: none;
 }
 .zooniverse-top-bar.signed-in .current-user {
-  display: block;
-}
-.zooniverse-top-bar.has-messages .messages {
   display: inline-block;
 }
 .zooniverse-top-bar.has-groups .groups {
@@ -125,6 +125,12 @@
 }
 .zooniverse-top-bar.group-participant button[name="groups"] {
   color: #0f0;
+}
+.zooniverse-top-bar.has-messages .messages {
+  display: inline-block;
+}
+.zooniverse-top-bar.has-languages .languages {
+  display: inline-block;
 }
 .zooniverse-dropdown-menu.from-top-bar {
   -webkit-backface-visibility: hidden;
