@@ -1,4 +1,4 @@
-<% enUs = window.zooniverse?.enUs || require '../lib/en-us' %>
+<% translate = window.zooniverse?.translate || require '../lib/translate' %>
 <% zooniverseLogoSvg = window.zooniverse?.views?.zooniverseLogoSvg || require './zooniverse-logo-svg' %>
 <% groupIconSvg = window.zooniverse?.views?.groupIconSvg || require './group-icon-svg' %>
 <% languageIconSvg = window.zooniverse?.views?.languageIconSvg || require './language-icon-svg' %>
@@ -13,13 +13,13 @@
 <div class="no-user">
   <div class="zooniverse-info piece">
     <%- zooniverseLogoSvg() %>
-    <%= @heading %>
+    <%- translate 'topBarHeading' %>
   </div>
 
   <div class="sign-in piece">
-    <button name="sign-up"><%= enUs.topBar.signUp %></button>
+    <button name="sign-up"><%- translate 'signUp' %></button>
     <span class="separator">|</span>
-    <button name="sign-in"><%= enUs.topBar.signIn %></button>
+    <button name="sign-in"><%- translate 'signIn' %></button>
   </div>
 </div>
 
@@ -28,7 +28,7 @@
     <div class="current-user-name">&mdash;</div>
 
     <div class="sign-out">
-      <button name="sign-out"><%= enUs.topBar.signOut %></button>
+      <button name="sign-out"><%- translate 'signOut' %></button>
     </div>
   </div>
 

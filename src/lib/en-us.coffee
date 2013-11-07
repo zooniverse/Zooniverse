@@ -1,5 +1,3 @@
-window.zooniverse ?= {}
-
 enUs =
   topBar:
     heading: 'A Zooniverse project'
@@ -32,5 +30,6 @@ enUs =
       to help researchers deal with the flood of data that confronts them.
     '''
 
+window.zooniverse ?= {}
 window.zooniverse.enUs = enUs
 module?.exports = enUs

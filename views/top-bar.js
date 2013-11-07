@@ -39,9 +39,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, groupIconSvg, languageIconSvg, mailIconSvg, zooniverseLogoSvg, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+      var groupIconSvg, languageIconSvg, mailIconSvg, translate, zooniverseLogoSvg, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
     
-      enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
+      translate = ((_ref = window.zooniverse) != null ? _ref.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
@@ -59,25 +59,25 @@ template = function(__obj) {
     
       mailIconSvg = ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.views) != null ? _ref8.mailIconSvg : void 0 : void 0) || require('./mail-icon-svg');
     
-      __out.push('\n\n\n<div class="corner">\n  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">\n    <path d="M 0 0 L 100 0 L 100 100 Z" />\n  </svg>\n</div>\n\n<div class="no-user">\n  <div class="zooniverse-info piece">\n    ');
+      __out.push('\n\n<div class="corner">\n  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">\n    <path d="M 0 0 L 100 0 L 100 100 Z" />\n  </svg>\n</div>\n\n<div class="no-user">\n  <div class="zooniverse-info piece">\n    ');
     
       __out.push(zooniverseLogoSvg());
     
       __out.push('\n    ');
     
-      __out.push(__sanitize(this.heading));
+      __out.push(translate('topBarHeading'));
     
       __out.push('\n  </div>\n\n  <div class="sign-in piece">\n    <button name="sign-up">');
     
-      __out.push(__sanitize(enUs.topBar.signUp));
+      __out.push(translate('signUp'));
     
       __out.push('</button>\n    <span class="separator">|</span>\n    <button name="sign-in">');
     
-      __out.push(__sanitize(enUs.topBar.signIn));
+      __out.push(translate('signIn'));
     
       __out.push('</button>\n  </div>\n</div>\n\n<div class="current-user">\n  <div class="user-info piece">\n    <div class="current-user-name">&mdash;</div>\n\n    <div class="sign-out">\n      <button name="sign-out">');
     
-      __out.push(__sanitize(enUs.topBar.signOut));
+      __out.push(translate('signOut'));
     
       __out.push('</button>\n    </div>\n  </div>\n\n  <div class="groups piece">\n    <div class="groups-menu-toggle">\n      <button name="groups">');
     

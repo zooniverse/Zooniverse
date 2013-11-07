@@ -5,7 +5,6 @@ window.zooniverse.lib ?= {}
 window.zooniverse.models ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
-enUs = zooniverse.enUs || require '../lib/en-us'
 loginDialog = zooniverse.controllers.loginDialog || require './login-dialog'
 signupDialog = zooniverse.controllers.signupDialog || require './signup-dialog'
 template = zooniverse.views.topBar || require '../views/top-bar'
@@ -19,7 +18,6 @@ User = zooniverse.models.User || require '../models/user'
 class TopBar extends BaseController
   className: 'zooniverse-top-bar'
   template: template
-  heading: enUs.topBar.heading
   messageCheckTimeout: 2 * 60 * 1000
 
   events:

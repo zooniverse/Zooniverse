@@ -1,12 +1,11 @@
 EventEmitter = window.zooniverse?.EventEmitter || require './event-emitter'
 $ = window.jQuery
 
-DEFAULT_LANGUAGE_CODE = 'en'
-
 class LanguageManager extends EventEmitter
   @current: null
 
   translations: null # {"CODE": {label: "LANGUAGE", strings: {STRINGS: {...}} or "JSON_URL"}
+  code: 'en'
 
   constructor: ({@translations, @code} = {}) ->
     @translations ?= {}
@@ -18,7 +17,7 @@ class LanguageManager extends EventEmitter
     @code ?= localStorage.getItem 'zooniverse-language-code'
     @code ?= navigator.language?.split('-')[0]
     @code ?= navigator.userLanguage?.split('-')[0]
-    @code ?= DEFAULT_LANGUAGE_CODE
+    @code ?= @constructor::code
 
     @constructor.current = @
 
