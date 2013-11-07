@@ -39,7 +39,6 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-    
       __out.push('<div class="loader"></div>\n\n<div class="items"></div>\n\n<nav class="controls">\n  <span class="numbered"></span>\n</nav>\n');
     
     }).call(this);

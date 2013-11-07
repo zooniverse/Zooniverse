@@ -59,5 +59,5 @@ template = function(__obj) {
   __obj.safe = __objSafe, __obj.escape = __escape;
   return __out.join('');
 };
-window.zooniverse.views['zooniverseLogo-svg'] = template;
+window.zooniverse.views['zooniverseLogoSvg'] = template;
 if (typeof module !== 'undefined') module.exports = template;

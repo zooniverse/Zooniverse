@@ -39,7 +39,6 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-    
       __out.push('<div class="underlay">\n  <div class="container">\n    <div class="dialog"></div>\n  </div>\n</div>\n');
     
     }).call(this);
