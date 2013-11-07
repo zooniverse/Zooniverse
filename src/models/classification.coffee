@@ -1,10 +1,8 @@
-window.zooniverse ?= {}
-window.zooniverse.models ?= {}
-
-BaseModel = window.zooniverse.models.BaseModel || require './base-model'
-Api = window.zooniverse.Api || require '../lib/api'
-Recent = window.zooniverse.models.Recent || require '../models/recent'
-Favorite = window.zooniverse.models.Favorite || require '../models/favorite'
+BaseModel = window.zooniverse?.models?.BaseModel || require './base-model'
+Api = window.zooniverse?.Api || require '../lib/api'
+Recent = window.zooniverse?.models?.Recent || require '../models/recent'
+Favorite = window.zooniverse?.models?.Favorite || require '../models/favorite'
+LanguageManager = window.zooniverse?.LanguageManager || require '../lib/language-manager'
 $ = window.jQuery
 
 RESOLVED_STATE = (new $.Deferred).resolve().state()
@@ -74,9 +72,10 @@ class Classification extends BaseModel
     @generic[key]
 
   toJSON: ->
+    lang = LanguageManager.current?.code
     output = classification:
       subject_ids: [@subject.id]
-      annotations: @annotations.concat [{@started_at, @finished_at}, {@user_agent}]
+      annotations: @annotations.concat [{@started_at, @finished_at}, {@user_agent}, {lang}]
 
     for key, value of @generic
       annotation = {}
@@ -121,5 +120,7 @@ class Classification extends BaseModel
       favorite = new Favorite subjects: [@subject]
       favorite.trigger 'from-classification'
 
+window.zooniverse ?= {}
+window.zooniverse.models ?= {}
 window.zooniverse.models.Classification = Classification
 module?.exports = Classification
