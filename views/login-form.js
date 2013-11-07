@@ -39,19 +39,7 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs;
-    
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
-    
-      __out.push('\n\n<input type="text" name="username" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.username));
-    
-      __out.push('" />\n<input type="password" name="password" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.password));
-    
-      __out.push('" />\n<button type="submit">');
+      __out.push('<input type="text" name="username" required="required" placeholder="Username" />\n<input type="password" name="password" required="required" placeholder="Password" />\n<button type="submit">');
     
       __out.push(__sanitize(enUs.topBar.signIn));
     

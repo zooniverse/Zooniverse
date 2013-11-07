@@ -1,7 +1,5 @@
-<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
-
-<input type="text" name="username" required="required" placeholder="<%= enUs.topBar.username %>" />
-<input type="password" name="password" required="required" placeholder="<%= enUs.topBar.password %>" />
+<input type="text" name="username" required="required" placeholder="Username" />
+<input type="password" name="password" required="required" placeholder="Password" />
 <button type="submit"><%= enUs.topBar.signIn %></button>
 <button name="sign-out"><%= enUs.topBar.signOut %></button>
 <div class="error-message"></div>

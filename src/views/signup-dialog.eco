@@ -1,4 +1,4 @@
-<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+<% translate = zooniverse?.translate || require '../lib/translate' %>
 <% zooniverseLogoSvg = zooniverse?.views?.zooniverseLogoSvg || require './zooniverse-logo-svg' %>
 
 <div class="loader"></div>
@@ -7,33 +7,33 @@
 
 <header>
   <%- zooniverseLogoSvg() %>
-  <%- enUs.topBar.signUpTitle %>
+  <%- translate 'signUpHeading' %>
 </header>
 
 <label>
-  <input type="text" name="username" required="required" placeholder="<%= enUs.topBar.username %>" />
+  <input type="text" name="username" required="required" placeholder="Username" />
 </label>
 
 <label>
-  <input type="password" name="password" required="required" placeholder="<%= enUs.topBar.password %>" />
+  <input type="password" name="password" required="required" placeholder="Password" />
 </label>
 
 <label>
-  <input type="email" name="email" required="required" placeholder="<%= enUs.topBar.email %>" />
+  <input type="email" name="email" required="required" placeholder="Email" />
 </label>
 
 <label>
-  <input type="text" name="real-name" placeholder="<%= enUs.topBar.realName %>" />
-  <div class="explanation"><%- enUs.topBar.whyRealName %></div>
+  <input type="text" name="real-name" placeholder="Real name" />
+  <div class="explanation"><%- translate 'whyRealName' %></div>
 </label>
 
 <label>
   <span></span>
-  <input type="checkbox" required="required" /><%- enUs.topBar.privacyPolicy %>
+  <input type="checkbox" required="required" /><%- translate 'privacyPolicy' %>
 </label>
 
 <div class="error-message"></div>
 
 <div class="action">
-  <button type="submit"><%= enUs.topBar.signUp %></button>
+  <button type="submit"><%- translate 'signUp' %></button>
 </div>

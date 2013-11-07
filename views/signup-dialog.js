@@ -39,9 +39,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, zooniverseLogoSvg, _ref;
+      var translate, zooniverseLogoSvg, _ref;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      translate = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
@@ -53,35 +53,19 @@ template = function(__obj) {
     
       __out.push('\n  ');
     
-      __out.push(enUs.topBar.signUpTitle);
+      __out.push(translate('signUpHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="');
+      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="Username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" placeholder="Password" />\n</label>\n\n<label>\n  <input type="email" name="email" required="required" placeholder="Email" />\n</label>\n\n<label>\n  <input type="text" name="real-name" placeholder="Real name" />\n  <div class="explanation">');
     
-      __out.push(__sanitize(enUs.topBar.username));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.password));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="email" name="email" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.email));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="text" name="real-name" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.realName));
-    
-      __out.push('" />\n  <div class="explanation">');
-    
-      __out.push(enUs.topBar.whyRealName);
+      __out.push(translate('whyRealName'));
     
       __out.push('</div>\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" required="required" />');
     
-      __out.push(enUs.topBar.privacyPolicy);
+      __out.push(translate('privacyPolicy'));
     
       __out.push('\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
     
-      __out.push(__sanitize(enUs.topBar.signUp));
+      __out.push(translate('signUp'));
     
       __out.push('</button>\n</div>\n');
     

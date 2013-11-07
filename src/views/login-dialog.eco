@@ -1,4 +1,4 @@
-<% enUs = zooniverse?.enUs || require '../lib/en-us' %>
+<% translate = zooniverse?.translate || require '../lib/translate' %>
 <% zooniverseLogoSvg = zooniverse?.views?.zooniverseLogoSvg || require './zooniverse-logo-svg' %>
 
 <div class="loader"></div>
@@ -7,20 +7,20 @@
 
 <header>
   <%- zooniverseLogoSvg() %>
-  <%- enUs.topBar.signInTitle %>
+  <%- translate 'signInHeading' %>
 </header>
 
 <label>
-  <input type="text" name="username" required="required" placeholder="<%= enUs.topBar.username %>" />
+  <input type="text" name="username" required="required" placeholder="Username" />
 </label>
 
 <label>
-  <input type="password" name="password" required="required" placeholder="<%= enUs.topBar.password %>" />
+  <input type="password" name="password" required="required" placeholder="Password" />
 </label>
 
 <div class="error-message"></div>
 
 <div class="action">
-  <a href="https://www.zooniverse.org/password/reset"><%= enUs.topBar.forgotPassword %></a>
-  <button type="submit"><%= enUs.topBar.signIn %></button>
+  <a href="https://www.zooniverse.org/password/reset"><%- translate 'forgotPassword' %></a>
+  <button type="submit"><%- translate 'signIn' %></button>
 </div>

@@ -4,7 +4,7 @@ window.zooniverse.models ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
 User = zooniverse.models.User || require '../models/user'
-enUs = zooniverse.enUs || require '../lib/en-us'
+translate = zooniverse.translate || require '../lib/translate'
 
 class SignupForm extends BaseController
   tagName: 'form'
@@ -35,7 +35,7 @@ class SignupForm extends BaseController
       @showError message unless success
 
     signup.fail =>
-      @showError enUs.user.signInFailed
+      @showError translate 'signInFailed'
 
     signup.always =>
       @el.removeClass 'loading'

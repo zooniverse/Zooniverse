@@ -39,15 +39,13 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, id, name, _i, _len, _ref, _ref1, _ref2;
+      var id, name, _i, _len, _ref, _ref1;
     
-      enUs = ((_ref = window.zooniverse) != null ? _ref.enUs : void 0) || require('../lib/en-us');
+      __out.push('<div class="user-groups">\n  ');
     
-      __out.push('\n\n<div class="user-groups">\n  ');
-    
-      _ref1 = this.user_groups || [];
-      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-        _ref2 = _ref1[_i], id = _ref2.id, name = _ref2.name;
+      _ref = this.user_groups || [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        _ref1 = _ref[_i], id = _ref1.id, name = _ref1.name;
         __out.push('\n    <div class="user-group">\n      <button name="user-group" value="');
         __out.push(__sanitize(id));
         __out.push('" ');
@@ -59,11 +57,7 @@ template = function(__obj) {
         __out.push('</button>\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <!--div class="no-group user-group">\n      <button name="user-group" value="" class="stop">');
-    
-      __out.push(enUs.groupsMenu.stop);
-    
-      __out.push('</button>\n  </div-->\n</div>\n');
+      __out.push('\n</div>\n');
     
     }).call(this);
     

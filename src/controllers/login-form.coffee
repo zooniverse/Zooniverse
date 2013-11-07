@@ -7,7 +7,7 @@ BaseController = zooniverse.controllers.BaseController || require './base-contro
 template = zooniverse.views.loginForm || require '../views/login-form'
 Api = zooniverse.Api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
-enUs = zooniverse.enUs || require '../lib/en-us'
+translate = zooniverse.translate || require '../lib/translate'
 
 class LoginForm extends BaseController
   tagName: 'form'
@@ -45,7 +45,7 @@ class LoginForm extends BaseController
         @showError message
 
     login.fail =>
-      @showError enUs.user.signInFailed
+      @showError translate 'signInFailed'
 
     login.always =>
       @el.removeClass 'loading'

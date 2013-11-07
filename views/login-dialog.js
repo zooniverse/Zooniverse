@@ -39,9 +39,9 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var enUs, zooniverseLogoSvg, _ref;
+      var translate, zooniverseLogoSvg, _ref;
     
-      enUs = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.enUs : void 0) || require('../lib/en-us');
+      translate = (typeof zooniverse !== "undefined" && zooniverse !== null ? zooniverse.translate : void 0) || require('../lib/translate');
     
       __out.push('\n');
     
@@ -53,23 +53,15 @@ template = function(__obj) {
     
       __out.push('\n  ');
     
-      __out.push(enUs.topBar.signInTitle);
+      __out.push(translate('signInHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="');
+      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" placeholder="Username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" placeholder="Password" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
     
-      __out.push(__sanitize(enUs.topBar.username));
-    
-      __out.push('" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" placeholder="');
-    
-      __out.push(__sanitize(enUs.topBar.password));
-    
-      __out.push('" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
-    
-      __out.push(__sanitize(enUs.topBar.forgotPassword));
+      __out.push(translate('forgotPassword'));
     
       __out.push('</a>\n  <button type="submit">');
     
-      __out.push(__sanitize(enUs.topBar.signIn));
+      __out.push(translate('signIn'));
     
       __out.push('</button>\n</div>\n');
     
