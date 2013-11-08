@@ -24,7 +24,7 @@ Run `hem server --port 8080` and open **http://localhost:8080/** to make sure ev
 Now let's install the Zooniverse library:
 
 ```
-npm install --save "git+ssh://git@github.com:zooniverse/Zooniverse.git#no-deps"
+npm install --save zooniverse
 ```
 
 Edit **public/index.html** and remove the weird little "start" script that's there. Let's also **move the other script tags into the body** element so we don't have to wait for it to load every time we do something.
