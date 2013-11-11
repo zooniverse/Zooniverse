@@ -12,13 +12,13 @@ describe 'EventEmitter', ->
       @ExtendedClass.trigger 'foo', ['bar']
       expect(@spy).to.have.been.calledWith 'bar'
 
-    it 'it can remove events', ->
+    it 'can remove events', ->
       @ExtendedClass.on 'foo', @spy
       @ExtendedClass.off 'foo', @spy
       @ExtendedClass.trigger 'foo'
       expect(@spy).not.to.have.been.called
 
-    it 'it can bind an event once', ->
+    it 'can bind an event once', ->
       @ExtendedClass.one 'foo', (e, args...) => @spy args...
       @ExtendedClass.trigger 'foo', 'bar'
       @ExtendedClass.trigger 'foo', 'boo'
@@ -42,13 +42,13 @@ describe 'EventEmitter', ->
       @instance.trigger 'foo', ['bar']
       expect(@spy).to.have.been.calledWith @instance, 'bar'
 
-    it 'it can remove events', ->
+    it 'can remove events', ->
       @instance.on 'foo', @spy
       @instance.off 'foo', @spy
       @instance.trigger 'foo', ['bar']
       expect(@spy).not.to.have.been.calledWith 'bar'
 
-    it 'it can bind an event once', ->
+    it 'can bind an event once', ->
       @instance.one 'foo', (e, args...) => @spy args...
       @instance.trigger 'foo', ['bar']
       @instance.trigger 'foo', ['boo']

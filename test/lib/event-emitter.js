@@ -36,13 +36,13 @@
         this.ExtendedClass.trigger('foo', ['bar']);
         return expect(this.spy).to.have.been.calledWith('bar');
       });
-      it('it can remove events', function() {
+      it('can remove events', function() {
         this.ExtendedClass.on('foo', this.spy);
         this.ExtendedClass.off('foo', this.spy);
         this.ExtendedClass.trigger('foo');
         return expect(this.spy).not.to.have.been.called;
       });
-      return it('it can bind an event once', function() {
+      return it('can bind an event once', function() {
         var _this = this;
         this.ExtendedClass.one('foo', function() {
           var args, e;
@@ -93,13 +93,13 @@
         this.instance.trigger('foo', ['bar']);
         return expect(this.spy).to.have.been.calledWith(this.instance, 'bar');
       });
-      it('it can remove events', function() {
+      it('can remove events', function() {
         this.instance.on('foo', this.spy);
         this.instance.off('foo', this.spy);
         this.instance.trigger('foo', ['bar']);
         return expect(this.spy).not.to.have.been.calledWith('bar');
       });
-      it('it can bind an event once', function() {
+      it('can bind an event once', function() {
         var _this = this;
         this.instance.one('foo', function() {
           var args, e;
