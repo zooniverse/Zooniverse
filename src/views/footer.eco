@@ -26,6 +26,6 @@
 
   <div class="general">
     <!--div class="category"><a href="#">Zooniverse Daily</a></div-->
-    <div class="category"><a href="https://www.zooniverse.org/privacy">Privacy policy</a></div>
+    <div class="category"><a href="https://www.zooniverse.org/privacy"><%- translate 'privacyPolicy' %></a></div>
   </div>
 </div>

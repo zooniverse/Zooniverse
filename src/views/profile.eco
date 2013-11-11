@@ -1,21 +1,23 @@
+<% translate = window.zooniverse?.translate || require '../lib/translate' %>
+
 <form class="sign-in-form">
   <div class="loader"></div>
 
-  <header>Sign in to see your profile</header>
+  <header><%- translate 'signInForProfile' %></header>
   <label><input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" /></label>
   <label><input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" /></label>
   <div class="error-message"></div>
-  <div class="action"><button type="submit">Sign in</button></div>
-  <p class="no-account">Don't have a Zooniverse profile? <button name="sign-up">Create one now!</button></p>
+  <div class="action"><button type="submit"><%- translate 'signIn' %></button></div>
+  <p class="no-account"><%- translate 'noAccount' %> <button name="sign-up"><%- translate 'signUp' %></button></p>
 </form>
 
 <nav>
-  <button name="turn-page" value="recents">Recents</button>
-  <button name="turn-page" value="favorites">Favorites</button>
+  <button name="turn-page" value="recents"><%- translate 'recents' %></button>
+  <button name="turn-page" value="favorites"><%- translate 'favorites' %></button>
 </nav>
 
 <div class="recents page"></div>
-<div class="recents-empty empty-message">No recents</div>
+<div class="recents-empty empty-message"><%- translate 'recents' %> (<%- translate 'none' %>)</div>
 
 <div class="favorites page"></div>
-<div class="favorites-empty empty-message">No favorites</div>
+<div class="favorites-empty empty-message"><%- translate 'favorites' %> (<%- translate 'none' %>)</div>

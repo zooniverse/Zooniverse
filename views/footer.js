@@ -78,7 +78,11 @@ template = function(__obj) {
         __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <div class="general">\n    <!--div class="category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="category"><a href="https://www.zooniverse.org/privacy">Privacy policy</a></div>\n  </div>\n</div>\n');
+      __out.push('\n\n  <div class="general">\n    <!--div class="category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="category"><a href="https://www.zooniverse.org/privacy">');
+    
+      __out.push(translate('privacyPolicy'));
+    
+      __out.push('</a></div>\n  </div>\n</div>\n');
     
     }).call(this);
     
