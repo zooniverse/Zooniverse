@@ -39,6 +39,7 @@ class Classification extends BaseModel
 
         localStorage.setItem 'pending-classifications', JSON.stringify @pending
 
+  subjects: []
   subject: null
   annotations: null
   favorite: false
@@ -56,6 +57,12 @@ class Classification extends BaseModel
     @started_at = (new Date).toUTCString()
     @user_agent = window.navigator.userAgent
 
+  normalizeSubjects: ->
+    if @subjects.length > 0
+      @subject or= @subjects[0]
+    else
+      @subjects = [@subject]
+
   annotate: (annotation) ->
     @annotations.push annotation
     annotation
@@ -63,6 +70,10 @@ class Classification extends BaseModel
   removeAnnotation: (annotation) ->
     for a, i in @annotations when a is annotation
       return @annotations.splice i, 1
+
+  isTutorial: ->
+    @normalizeSubjects()
+    true in (subject.metadata?.tutorial for subject in @subjects)
 
   set: (key, value) ->
     @generic[key] = value
@@ -73,8 +84,11 @@ class Classification extends BaseModel
 
   toJSON: ->
     lang = LanguageManager.current?.code
+    @normalizeSubjects()
+    subject_ids = (subject.id for subject in @subjects)
+
     output = classification:
-      subject_ids: [@subject.id]
+      subject_ids: subject_ids
       annotations: @annotations.concat [{@started_at, @finished_at}, {@user_agent}, {lang}]
 
     for key, value of @generic
@@ -87,10 +101,11 @@ class Classification extends BaseModel
     output
 
   url: ->
-    "/projects/#{Api.current.project}/workflows/#{@subject.workflow_ids[0]}/classifications"
+    @normalizeSubjects()
+    "/projects/#{Api.current.project}/workflows/#{@subjects[0].workflow_ids[0]}/classifications"
 
   send: (done, fail) ->
-    @constructor.sentThisSession += 1 unless @subject.metadata.tutorial
+    @constructor.sentThisSession += 1 unless @isTutorial()
     @finished_at = (new Date).toUTCString()
 
     post = Api.current.post @url(), @toJSON(), arguments...
@@ -113,12 +128,14 @@ class Classification extends BaseModel
     @trigger 'pending'
 
   makeRecent: ->
-    recent = new Recent subjects: [@subject]
-    recent.trigger 'from-classification'
+    @normalizeSubjects()
+    for subject in @subjects
+      recent = new Recent subjects: [subject]
+      recent.trigger 'from-classification'
 
-    if @favorite
-      favorite = new Favorite subjects: [@subject]
-      favorite.trigger 'from-classification'
+      if @favorite
+        favorite = new Favorite subjects: [subject]
+        favorite.trigger 'from-classification'
 
 window.zooniverse ?= {}
 window.zooniverse.models ?= {}

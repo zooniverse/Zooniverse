@@ -3,6 +3,7 @@
   var $, Api, BaseModel, Classification, Favorite, LanguageManager, RESOLVED_STATE, Recent, _base, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = [].slice;
 
   BaseModel = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.models) != null ? _ref1.BaseModel : void 0 : void 0) || require('./base-model');
@@ -80,6 +81,8 @@
       return _results;
     };
 
+    Classification.prototype.subjects = [];
+
     Classification.prototype.subject = null;
 
     Classification.prototype.annotations = null;
@@ -104,6 +107,14 @@
       this.user_agent = window.navigator.userAgent;
     }
 
+    Classification.prototype.normalizeSubjects = function() {
+      if (this.subjects.length > 0) {
+        return this.subject || (this.subject = this.subjects[0]);
+      } else {
+        return this.subjects = [this.subject];
+      }
+    };
+
     Classification.prototype.annotate = function(annotation) {
       this.annotations.push(annotation);
       return annotation;
@@ -120,6 +131,21 @@
       }
     };
 
+    Classification.prototype.isTutorial = function() {
+      var subject;
+      this.normalizeSubjects();
+      return __indexOf.call((function() {
+        var _i, _len, _ref8, _ref9, _results;
+        _ref8 = this.subjects;
+        _results = [];
+        for (_i = 0, _len = _ref8.length; _i < _len; _i++) {
+          subject = _ref8[_i];
+          _results.push((_ref9 = subject.metadata) != null ? _ref9.tutorial : void 0);
+        }
+        return _results;
+      }).call(this), true) >= 0;
+    };
+
     Classification.prototype.set = function(key, value) {
       this.generic[key] = value;
       return this.trigger('change', [key, value]);
@@ -130,11 +156,22 @@
     };
 
     Classification.prototype.toJSON = function() {
-      var annotation, key, lang, output, value, _ref8, _ref9;
+      var annotation, key, lang, output, subject, subject_ids, value, _ref8, _ref9;
       lang = (_ref8 = LanguageManager.current) != null ? _ref8.code : void 0;
+      this.normalizeSubjects();
+      subject_ids = (function() {
+        var _i, _len, _ref9, _results;
+        _ref9 = this.subjects;
+        _results = [];
+        for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
+          subject = _ref9[_i];
+          _results.push(subject.id);
+        }
+        return _results;
+      }).call(this);
       output = {
         classification: {
-          subject_ids: [this.subject.id],
+          subject_ids: subject_ids,
           annotations: this.annotations.concat([
             {
               started_at: this.started_at,
@@ -161,13 +198,14 @@
     };
 
     Classification.prototype.url = function() {
-      return "/projects/" + Api.current.project + "/workflows/" + this.subject.workflow_ids[0] + "/classifications";
+      this.normalizeSubjects();
+      return "/projects/" + Api.current.project + "/workflows/" + this.subjects[0].workflow_ids[0] + "/classifications";
     };
 
     Classification.prototype.send = function(done, fail) {
       var post, _ref8,
         _this = this;
-      if (!this.subject.metadata.tutorial) {
+      if (!this.isTutorial()) {
         this.constructor.sentThisSession += 1;
       }
       this.finished_at = (new Date).toUTCString();
@@ -192,17 +230,26 @@
     };
 
     Classification.prototype.makeRecent = function() {
-      var favorite, recent;
-      recent = new Recent({
-        subjects: [this.subject]
-      });
-      recent.trigger('from-classification');
-      if (this.favorite) {
-        favorite = new Favorite({
-          subjects: [this.subject]
+      var favorite, recent, subject, _i, _len, _ref8, _results;
+      this.normalizeSubjects();
+      _ref8 = this.subjects;
+      _results = [];
+      for (_i = 0, _len = _ref8.length; _i < _len; _i++) {
+        subject = _ref8[_i];
+        recent = new Recent({
+          subjects: [subject]
         });
-        return favorite.trigger('from-classification');
+        recent.trigger('from-classification');
+        if (this.favorite) {
+          favorite = new Favorite({
+            subjects: [subject]
+          });
+          _results.push(favorite.trigger('from-classification'));
+        } else {
+          _results.push(void 0);
+        }
       }
+      return _results;
     };
 
     return Classification;
