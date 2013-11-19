@@ -39,13 +39,17 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      __out.push('<input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n<input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n<button type="submit">');
+      var translate, _ref;
     
-      __out.push(__sanitize(enUs.topBar.signIn));
+      translate = ((_ref = window.zooniverse) != null ? _ref.translate : void 0) || require('../lib/translate');
+    
+      __out.push('\n<input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n<input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n<button type="submit">');
+    
+      __out.push(translate('signIn'));
     
       __out.push('</button>\n<button name="sign-out">');
     
-      __out.push(__sanitize(enUs.topBar.signOut));
+      __out.push(translate('signOut'));
     
       __out.push('</button>\n<div class="error-message"></div>\n');
     
