@@ -41,7 +41,7 @@ template = function(__obj) {
     (function() {
       var LanguageManager, code, label, _ref, _ref1, _ref2;
     
-      LanguageManager = require('../lib/language-manager');
+      LanguageManager = window.zooniverse.LanguageManager || require('../lib/language-manager');
     
       __out.push('\n\n<div class="languages">\n  ');
     
