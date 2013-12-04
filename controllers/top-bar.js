@@ -37,7 +37,7 @@
 
   GroupsMenu = zooniverse.controllers.GroupsMenu || require('./groups-menu');
 
-  LanguageManager = zooniverse.lib.LanguageManager || require('../lib/language-manager');
+  LanguageManager = zooniverse.LanguageManager || require('../lib/language-manager');
 
   LanguagesMenu = zooniverse.controllers.LanguagesMenu || require('./languages-menu');
 

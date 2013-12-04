@@ -1,4 +1,4 @@
-LanguageManager = window.zoonivers?.LanguageManager || require './language-manager'
+LanguageManager = window.zooniverse?.LanguageManager || require './language-manager'
 
 translate = ([tag]..., key) ->
   tag ?= 'span'
