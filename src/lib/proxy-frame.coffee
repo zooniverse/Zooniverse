@@ -7,7 +7,7 @@ html = $(document.body.parentNode)
 
 messageId = -1
 
-demo = !!~location.hostname.indexOf 'zooniverse-demo'
+demo = !!~location.hostname.indexOf 'demo'
 beta = !!~location.pathname.indexOf 'beta'
 highPort = +location.port >= 1024
 flaggedHost = location.search.match(/api=([^&]+)/)?[1]
