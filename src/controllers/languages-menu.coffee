@@ -1,6 +1,6 @@
 Controller = window.zooniverse?.controllers?.BaseController || require './base-controller'
 Dropdown = window.zooniverse?.controllers?.Dropdown || require './dropdown'
-LanguageManager = window.zooniverse?.lib?.Language || require '../lib/language-manager'
+LanguageManager = window.zooniverse?.LanguageManager || require '../lib/language-manager'
 template = window.zooniverse?.views?.languagesMenu || require '../views/languages-menu'
 
 class LanguagesMenu extends Controller
@@ -29,5 +29,5 @@ class LanguagesMenu extends Controller
 
 window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
-window.zooniverse.controllers.LanguagesMenu
+window.zooniverse.controllers.LanguagesMenu = LanguagesMenu
 module?.exports = LanguagesMenu
