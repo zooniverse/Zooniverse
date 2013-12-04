@@ -1,4 +1,4 @@
-<% LanguageManager = require '../lib/language-manager' %>
+<% LanguageManager = window.zooniverse.LanguageManager || require '../lib/language-manager' %>
 
 <div class="languages">
   <% for code, {label} of LanguageManager.current?.translations: %>
