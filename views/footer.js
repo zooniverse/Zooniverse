@@ -47,38 +47,38 @@ template = function(__obj) {
     
       zooniverseLogoSvg = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.views) != null ? _ref1.zooniverseLogoSvg : void 0 : void 0) || require('./zooniverse-logo-svg');
     
-      __out.push('\n\n<a href="https://www.zooniverse.org/" class="logo">\n  ');
+      __out.push('\n\n<a href="https://www.zooniverse.org/" class="zooniverse-logo-container">\n  ');
     
       __out.push(zooniverseLogoSvg());
     
-      __out.push('\n</a>\n\n<div class="content">\n  <div class="heading">');
+      __out.push('\n</a>\n\n<div class="zooniverse-footer-content">\n  <div class="zooniverse-footer-heading">');
     
       __out.push(translate('footerHeading'));
     
       __out.push('</div>\n\n  ');
     
       if (this.categories != null) {
-        __out.push('\n    <div class="projects">\n      ');
+        __out.push('\n    <div class="zooniverse-footer-projects">\n      ');
         _ref2 = this.categories;
         for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
           _ref3 = _ref2[_i], category = _ref3.category, projects = _ref3.projects;
-          __out.push('\n        <div class="category">\n          <div class="category-title">');
+          __out.push('\n        <div class="zooniverse-footer-category">\n          <div class="zooniverse-footer-category-title">');
           __out.push(__sanitize(category));
           __out.push('</div>\n          ');
           for (_j = 0, _len1 = projects.length; _j < _len1; _j++) {
             project = projects[_j];
-            __out.push('\n            <div class="project">\n              <a href="');
+            __out.push('\n            <div class="zooniverse-footer-project">\n              <a href="');
             __out.push(__sanitize(project.url));
             __out.push('">');
             __out.push(__sanitize(project.name));
             __out.push('</a>\n            </div>\n          ');
           }
-          __out.push('\n          <div class="project"></div>\n        </div>\n      ');
+          __out.push('\n          <div class="zooniverse-footer-project"></div>\n        </div>\n      ');
         }
         __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <div class="general">\n    <!--div class="category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="category"><a href="https://www.zooniverse.org/privacy">');
+      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <!--div class="zooniverse-footer-category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="zooniverse-footer-category"><a href="https://www.zooniverse.org/privacy">');
     
       __out.push(translate('privacyPolicy'));
     

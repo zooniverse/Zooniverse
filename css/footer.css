@@ -14,47 +14,47 @@
   -ms-filter: none;
   filter: none;
 }
-.zooniverse-footer .logo {
+.zooniverse-footer .zooniverse-logo-container {
   float: left;
   opacity: 0.5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
   width: 25%;
 }
-.zooniverse-footer .logo:hover {
+.zooniverse-footer .zooniverse-logo-container:hover {
   opacity: 0.67;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=67)";
   filter: alpha(opacity=67);
 }
-.zooniverse-footer .logo .zooniverse-logo {
+.zooniverse-footer .zooniverse-logo-container .zooniverse-logo {
   height: 100%;
   max-height: 200px;
   width: 85%;
 }
-.zooniverse-footer .content {
+.zooniverse-footer .zooniverse-footer-content {
   float: left;
   width: 75%;
 }
-.zooniverse-footer .heading {
+.zooniverse-footer .zooniverse-footer-heading {
   font-size: 18px;
   margin-bottom: 1em;
 }
-.zooniverse-footer .projects {
+.zooniverse-footer .zooniverse-footer-projects {
   font-size: 14px;
   overflow: hidden;
 }
-.zooniverse-footer .general {
+.zooniverse-footer .zooniverse-footer-general {
   font-size: 12px;
   letter-spacing: 1px;
   margin-top: 1em;
   overflow: hidden;
   text-transform: uppercase;
 }
-.zooniverse-footer .category {
+.zooniverse-footer .zooniverse-footer-category {
   float: left;
   width: 25%;
 }
-.zooniverse-footer .category-title {
+.zooniverse-footer .zooniverse-footer-category-title {
   font-size: 10px;
   font-weight: bold;
   letter-spacing: 1px;
