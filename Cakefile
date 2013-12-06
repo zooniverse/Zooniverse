@@ -19,6 +19,7 @@ buildModules = [
   'src/util/offset.coffee'
   'src/lib/language-manager.coffee'
   'src/lib/translate.coffee'
+  'src/lib/google-analytics.coffee'
   'src/models/base-model.coffee'
   'src/models/user.coffee'
   'src/models/subject.coffee'
