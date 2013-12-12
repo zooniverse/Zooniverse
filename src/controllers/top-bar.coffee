@@ -46,9 +46,11 @@ class TopBar extends BaseController
     User.on 'change-group', @onUserChangeGroup
 
   onClickSignIn: ->
+    signupDialog.hide()
     loginDialog.show()
 
   onClickSignUp: ->
+    loginDialog.hide()
     signupDialog.show()
 
   onClickSignOut: ->
