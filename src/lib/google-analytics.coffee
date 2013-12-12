@@ -51,5 +51,5 @@ class GoogleAnalytics extends EventEmitter
     window._gaq.push command
     @trigger 'custom', [arguments...]
 
-window.zooniverse.GoogleAnalytics = GoogleAnalytics
-module.exports = GoogleAnalytics
+window.zooniverse?.GoogleAnalytics = GoogleAnalytics
+module?.exports = GoogleAnalytics
