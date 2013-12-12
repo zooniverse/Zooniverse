@@ -11,11 +11,13 @@
 </header>
 
 <label>
-  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />
+  <span class="text-label"><%- translate 'username' %></span><br />
+  <input type="text" name="username" required="required" />
 </label>
 
 <label>
-  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />
+  <span class="text-label"><%- translate 'password' %></span><br />
+  <input type="password" name="password" required="required" />
 </label>
 
 <div class="error-message"></div>

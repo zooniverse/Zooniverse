@@ -55,7 +55,15 @@ template = function(__obj) {
     
       __out.push(translate('signInHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
+      __out.push('\n</header>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('username'));
+    
+      __out.push('</span><br />\n  <input type="text" name="username" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('password'));
+    
+      __out.push('</span><br />\n  <input type="password" name="password" required="required" />\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <a href="https://www.zooniverse.org/password/reset">');
     
       __out.push(translate('forgotPassword'));
     

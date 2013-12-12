@@ -11,19 +11,23 @@
 </header>
 
 <label>
-  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />
+  <span class="text-label"><%- translate 'username' %></span><br />
+  <input type="text" name="username" required="required" />
 </label>
 
 <label>
-  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />
+  <span class="text-label"><%- translate 'password' %></span><br />
+  <input type="password" name="password" required="required" />
 </label>
 
 <label>
-  <input type="email" name="email" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="email" />
+  <span class="text-label"><%- translate 'email' %></span><br />
+  <input type="email" name="email" required="required" />
 </label>
 
 <label>
-  <input type="text" name="real-name" data-zooniverse-translate="" data-zooniverse-translate-placeholder="realName" />
+  <span class="text-label"><%- translate 'realName' %></span><br />
+  <input type="text" name="real-name" />
   <div class="explanation"><%- translate 'whyRealName' %></div>
 </label>
 

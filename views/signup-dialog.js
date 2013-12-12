@@ -55,7 +55,23 @@ template = function(__obj) {
     
       __out.push(translate('signUpHeading'));
     
-      __out.push('\n</header>\n\n<label>\n  <input type="text" name="username" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="username" />\n</label>\n\n<label>\n  <input type="password" name="password" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="password" />\n</label>\n\n<label>\n  <input type="email" name="email" required="required" data-zooniverse-translate="" data-zooniverse-translate-placeholder="email" />\n</label>\n\n<label>\n  <input type="text" name="real-name" data-zooniverse-translate="" data-zooniverse-translate-placeholder="realName" />\n  <div class="explanation">');
+      __out.push('\n</header>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('username'));
+    
+      __out.push('</span><br />\n  <input type="text" name="username" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('password'));
+    
+      __out.push('</span><br />\n  <input type="password" name="password" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('email'));
+    
+      __out.push('</span><br />\n  <input type="email" name="email" required="required" />\n</label>\n\n<label>\n  <span class="text-label">');
+    
+      __out.push(translate('realName'));
+    
+      __out.push('</span><br />\n  <input type="text" name="real-name" />\n  <div class="explanation">');
     
       __out.push(translate('whyRealName'));
     

@@ -155,7 +155,9 @@
   font-size: 12px;
   padding: 10px;
 }
-.zooniverse-dialog input:first-child {
+.zooniverse-dialog input[type="text"],
+.zooniverse-dialog input[type="email"],
+.zooniverse-dialog input[type="password"] {
   width: 100%;
 }
 .zooniverse-dialog .explanation {
