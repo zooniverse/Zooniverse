@@ -15,7 +15,7 @@
     realName: 'Real name',
     whyRealName: 'This will be used when we thank contributors, for example, in talks or on posters.<br />If you don\'t want to be mentioned publicly, leave this blank.',
     noAccount: 'Don\'t have an account?',
-    privacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.',
+    agreeToPrivacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.',
     forgotPassword: 'Forgot your password?',
     badLogin: 'Incorrect username or password',
     signInFailed: 'Sign in failed.',

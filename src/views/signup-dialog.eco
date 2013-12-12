@@ -29,7 +29,7 @@
 
 <label>
   <span></span>
-  <input type="checkbox" required="required" /><%- translate 'privacyPolicy' %>
+  <input type="checkbox" required="required" /><%- translate 'agreeToPrivacyPolicy' %>
 </label>
 
 <div class="error-message"></div>

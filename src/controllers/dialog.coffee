@@ -4,6 +4,7 @@ window.zooniverse.views ?= {}
 
 BaseController = zooniverse.controllers.BaseController || require './base-controller'
 template = zooniverse.views.dialog || require '../views/dialog'
+translate = zooniverse.translate || require '../lib/translate'
 
 class Dialog extends BaseController
   warning: false
@@ -35,6 +36,7 @@ class Dialog extends BaseController
     @hide() if which is 27 # ESC
 
   show: ->
+    translate.refresh element for element in @el.get(0).querySelectorAll "[#{translate.attr}]"
     @el.css display: ''
     setTimeout => @el.addClass 'showing'
 
