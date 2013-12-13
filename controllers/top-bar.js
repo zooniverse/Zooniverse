@@ -98,10 +98,12 @@
     }
 
     TopBar.prototype.onClickSignIn = function() {
+      signupDialog.hide();
       return loginDialog.show();
     };
 
     TopBar.prototype.onClickSignUp = function() {
+      loginDialog.hide();
       return signupDialog.show();
     };
 
