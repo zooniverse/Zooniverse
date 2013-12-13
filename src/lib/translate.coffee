@@ -23,7 +23,6 @@ translate.refresh = (element, key) ->
     string = translate.strings[LanguageManager.current?.code]?[value]
     string ||= translate.strings[LanguageManager::code]?[value] # Fall back to the default language.
     string ||= value # Fall back to the key.
-    console?.log "Translating #{property}, #{value}"
     if element.hasAttribute property
       element.setAttribute property, string
     else
