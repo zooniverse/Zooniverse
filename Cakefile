@@ -12,6 +12,7 @@ buildModules = [
   'src/translations/en.coffee'
   'src/translations/es.coffee'
   'src/translations/fr.coffee'
+  'src/translations/pl.coffee'
   'src/lib/event-emitter.coffee'
   'src/lib/proxy-frame.coffee'
   'src/lib/api.coffee'
