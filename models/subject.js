@@ -116,7 +116,7 @@
                   rawGroupSubjects.push(rawSubject);
                 }
               }
-              rawSubjects = rawGroupSubjects;
+              rawSubjects = rawGroupSubjects.slice(0, limit);
             }
             rawSubjects.sort(function() {
               return Math.random() - 0.5;

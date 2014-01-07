@@ -82,7 +82,7 @@ class Subject extends BaseModel
           if @group
             rawGroupSubjects = []
             rawGroupSubjects.push(rawSubject) for rawSubject in rawSubjects when (rawSubject.group_id is @group)
-            rawSubjects = rawGroupSubjects
+            rawSubjects = rawGroupSubjects.slice 0, limit
 
           rawSubjects.sort -> Math.random() - 0.5
           newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
