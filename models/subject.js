@@ -89,16 +89,15 @@
           limit: limit
         });
         request.done(function(rawSubjects) {
-          var newSubjects, rawSubject;
-          newSubjects = (function() {
-            var _i, _len, _results;
-            _results = [];
-            for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
-              rawSubject = rawSubjects[_i];
-              _results.push(new this(rawSubject));
+          var newSubjects, rawSubject, _i, _len;
+          newSubjects = [];
+          for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
+            rawSubject = rawSubjects[_i];
+            if (_this.count() >= _this.queueLength) {
+              break;
             }
-            return _results;
-          }).call(_this);
+            newSubjects.push(new _this(rawSubject));
+          }
           _this.trigger('fetch', [newSubjects]);
           return fetcher.resolve(newSubjects);
         });
@@ -127,7 +126,7 @@
               if (_this.count() >= _this.queueLength) {
                 break;
               }
-              newSubjects.push(new rawSubject);
+              newSubjects.push(new _this(rawSubject));
             }
             _this.trigger('fetch', [newSubjects]);
             return fetcher.resolve(newSubjects);

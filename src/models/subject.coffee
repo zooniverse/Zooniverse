@@ -69,7 +69,11 @@ class Subject extends BaseModel
       request = Api.current.get @path(), {limit}
 
       request.done (rawSubjects) =>
-        newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
+        newSubjects = []
+        for rawSubject in rawSubjects
+          break if @count() >= @queueLength
+          newSubjects.push new @ rawSubject
+        
         @trigger 'fetch', [newSubjects]
         fetcher.resolve newSubjects
 
@@ -88,7 +92,7 @@ class Subject extends BaseModel
           newSubjects = []
           for rawSubject in rawSubjects
             break if @count() >= @queueLength
-            newSubjects.push new(rawSubject)
+            newSubjects.push new @ rawSubject
 
           @trigger 'fetch', [newSubjects]
           fetcher.resolve newSubjects
