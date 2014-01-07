@@ -82,10 +82,14 @@ class Subject extends BaseModel
           if @group
             rawGroupSubjects = []
             rawGroupSubjects.push(rawSubject) for rawSubject in rawSubjects when (rawSubject.group_id is @group)
-            rawSubjects = rawGroupSubjects.slice 0, limit
+            rawSubjects = rawGroupSubjects
 
           rawSubjects.sort -> Math.random() - 0.5
-          newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
+          newSubjects = []
+          for rawSubject in rawSubjects
+            break if @count() >= @queueLength
+            newSubjects.push new(rawSubject)
+
           @trigger 'fetch', [newSubjects]
           fetcher.resolve newSubjects
 

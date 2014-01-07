@@ -107,7 +107,7 @@
           _this.trigger('fetching-fallback');
           getFallback = $.get(_this.fallback);
           getFallback.done(function(rawSubjects) {
-            var newSubjects, rawGroupSubjects, rawSubject, _i, _len;
+            var newSubjects, rawGroupSubjects, rawSubject, _i, _j, _len, _len1;
             if (_this.group) {
               rawGroupSubjects = [];
               for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
@@ -116,20 +116,19 @@
                   rawGroupSubjects.push(rawSubject);
                 }
               }
-              rawSubjects = rawGroupSubjects.slice(0, limit);
+              rawSubjects = rawGroupSubjects;
             }
             rawSubjects.sort(function() {
               return Math.random() - 0.5;
             });
-            newSubjects = (function() {
-              var _j, _len1, _results;
-              _results = [];
-              for (_j = 0, _len1 = rawSubjects.length; _j < _len1; _j++) {
-                rawSubject = rawSubjects[_j];
-                _results.push(new this(rawSubject));
+            newSubjects = [];
+            for (_j = 0, _len1 = rawSubjects.length; _j < _len1; _j++) {
+              rawSubject = rawSubjects[_j];
+              if (_this.count() >= _this.queueLength) {
+                break;
               }
-              return _results;
-            }).call(_this);
+              newSubjects.push(new rawSubject);
+            }
             _this.trigger('fetch', [newSubjects]);
             return fetcher.resolve(newSubjects);
           });
