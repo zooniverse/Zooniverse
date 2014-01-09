@@ -17,7 +17,6 @@ buildModules = [
   'src/lib/proxy-frame.coffee'
   'src/lib/api.coffee'
   'src/util/toggle-class.coffee'
-  'src/util/offset.coffee'
   'src/lib/language-manager.coffee'
   'src/lib/translate.coffee'
   'src/lib/google-analytics.coffee'

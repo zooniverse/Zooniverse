@@ -1,5 +1,4 @@
 toggleClass = zooniverse.util?.toggleClass || require '../util/toggle-class'
-offset = zooniverse.util?.offset || require '../util/offset'
 
 class Dropdown
   @buttonClass: 'zooniverse-dropdown-button'
@@ -12,7 +11,7 @@ class Dropdown
     for instance in @instances
       instance.close() unless instance is except
 
-  addEventListener 'click', (e) =>
+  addEventListener 'mousedown', (e) =>
     shouldClose = true
 
     node = e.target.correspondingUseElement || e.target
@@ -80,9 +79,9 @@ class Dropdown
     addEventListener 'resize', @onResize, false
 
   positionMenu: ->
-    buttonOffset = offset @button
-    @menu.style.left = (buttonOffset.left + (@button.clientWidth * @buttonPinning[0])) - (@menu.clientWidth * @menuPinning[0]) + 'px'
-    @menu.style.top = (buttonOffset.top + (@button.clientHeight * @buttonPinning[1])) - (@menu.clientHeight * @menuPinning[1]) + 'px'
+    buttonOffset = @button.getBoundingClientRect()
+    @menu.style.left = ((buttonOffset.left + pageXOffset) + (@button.offsetWidth * @buttonPinning[0])) - (@menu.offsetWidth * @menuPinning[0]) + 'px'
+    @menu.style.top = ((buttonOffset.top + pageYOffset) + (@button.offsetHeight * @buttonPinning[1])) - (@menu.offsetHeight * @menuPinning[1]) + 'px'
 
   onResize: =>
     @positionMenu()
