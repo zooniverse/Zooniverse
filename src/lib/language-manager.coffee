@@ -29,23 +29,23 @@ class LanguageManager extends EventEmitter
 
   setLanguage: (@code, done, fail) ->
     if typeof @translations[@code]?.strings is 'string'
-      localStrings = JSON.parse localStorage.getItem "zooniverse-language-strings-#{@code}"
+      pathToStrings = @translations[@code]?.strings
 
+      localStrings = JSON.parse localStorage.getItem "zooniverse-language-strings-#{@code}"
       if localStrings?
         @translations[@code].strings = localStrings
         @setLanguage @code, done, fail
 
-      else
-        request = $.getJSON @translations[@code].strings
+      request = $.getJSON pathToStrings
 
-        request.done (data) =>
-          localStorage.setItem "zooniverse-language-strings-#{@code}", JSON.stringify data
-          @translations[@code].strings = data
-          @setLanguage @code, done, fail
+      request.done (data) =>
+        localStorage.setItem "zooniverse-language-strings-#{@code}", JSON.stringify data
+        @translations[@code].strings = data
+        @setLanguage @code, done, fail
 
-        request.fail =>
-          @trigger 'language-fetch-fail'
-          fail? arguments...
+      request.fail =>
+        @trigger 'language-fetch-fail'
+        fail? arguments...
 
     else
       localStorage.setItem 'zooniverse-language-code', @code
