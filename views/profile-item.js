@@ -39,17 +39,17 @@ template = function(__obj) {
   }
   (function() {
     (function() {
-      var Favorite, location, thumbSrc, _ref, _ref1;
+      var Favorite, location, thumbSrc, _ref, _ref1, _ref2, _ref3;
     
-      Favorite = require('zooniverse/models/favorite');
+      Favorite = ((_ref = window.zooniverse) != null ? (_ref1 = _ref.models) != null ? _ref1.Favorite : void 0 : void 0) || require('zooniverse/models/favorite');
     
       __out.push('\n\n<div class=\'item\'>\n  <a href="');
     
-      __out.push(__sanitize(((_ref = this.subjects[0]) != null ? _ref.talkHref() : void 0) || '#/SUBJECT_ERROR'));
+      __out.push(__sanitize(((_ref2 = this.subjects[0]) != null ? _ref2.talkHref() : void 0) || '#/SUBJECT_ERROR'));
     
       __out.push('">\n    ');
     
-      location = (_ref1 = this.subjects[0]) != null ? _ref1.location : void 0;
+      location = (_ref3 = this.subjects[0]) != null ? _ref3.location : void 0;
     
       __out.push('\n    ');
     

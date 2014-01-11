@@ -83,11 +83,11 @@ template = function(__obj) {
     
       __out.push(groupIconSvg());
     
-      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="messages piece">\n    <a href="http://talk.');
+      __out.push('</button>\n    </div>\n  </div>\n\n  <div class="messages piece">\n    <a href="');
     
-      __out.push(__sanitize(location.hostname.replace(/^www\./, '')));
+      __out.push(this.talkProfileHref);
     
-      __out.push('/#/profile" class="message-link">\n      ');
+      __out.push('" class="message-link">\n      ');
     
       __out.push(mailIconSvg());
     
