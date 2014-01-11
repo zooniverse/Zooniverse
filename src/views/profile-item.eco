@@ -1,4 +1,4 @@
-<% Favorite = require 'zooniverse/models/favorite' %>
+<% Favorite = window.zooniverse?.models?.Favorite || require 'zooniverse/models/favorite' %>
 
 <div class='item'>
   <a href="<%= @subjects[0]?.talkHref() || '#/SUBJECT_ERROR' %>">
