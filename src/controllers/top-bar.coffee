@@ -15,10 +15,13 @@ LanguagesMenu = zooniverse.controllers.LanguagesMenu || require './languages-men
 Api = zooniverse.Api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
 
+defaultTalkProfileHref = "http://talk.#{ location.hostname.replace /^www\./, '' }/#/profile"
+
 class TopBar extends BaseController
   className: 'zooniverse-top-bar'
   template: template
   messageCheckTimeout: 2 * 60 * 1000
+  talkProfileHref: defaultTalkProfileHref
 
   events:
     'click button[name="sign-in"]': 'onClickSignIn'
