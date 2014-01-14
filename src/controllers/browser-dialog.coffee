@@ -9,7 +9,7 @@ browserOrder = ['opera', 'chrome', 'safari', 'firefox', 'msie']
 defaultSupport =
   chrome: 22
   firefox: 15
-  msie: 8
+  msie: 9
   opera: 12.12
   safari: 5
 
