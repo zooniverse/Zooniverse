@@ -8,6 +8,8 @@ template = zooniverse.views.loginForm || require '../views/login-form'
 Api = zooniverse.Api || require '../lib/api'
 User = zooniverse.models.User || require '../models/user'
 translate = zooniverse.translate || require '../lib/translate'
+signupDialog = zooniverse.controllers.signupDialog || require './signup-dialog'
+
 
 class LoginForm extends BaseController
   tagName: 'form'
@@ -50,6 +52,9 @@ class LoginForm extends BaseController
     login.always =>
       @el.removeClass 'loading'
       setTimeout => @signInButton.attr disabled: User.current?
+
+  onClickSignUp: ->
+    signupDialog.show()
 
   onClickSignOut: ->
     @signOutButton.attr disabled: true
