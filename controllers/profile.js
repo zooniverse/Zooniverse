@@ -103,7 +103,7 @@
     Profile.prototype.onTurnPage = function(e) {
       var target, targetType;
       this.pageTurners.removeClass('active');
-      target = $(e.target);
+      target = $(e.currentTarget);
       target.addClass('active');
       targetType = target.val();
       this.recentsList.el.add(this.favoritesList.el).removeClass('active');

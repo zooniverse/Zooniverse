@@ -65,7 +65,7 @@ class Profile extends BaseController
 
   onTurnPage: (e) ->
     @pageTurners.removeClass 'active'
-    target = $(e.target)
+    target = $(e.currentTarget)
     target.addClass 'active'
     targetType = target.val()
     @recentsList.el.add(@favoritesList.el).removeClass 'active'
