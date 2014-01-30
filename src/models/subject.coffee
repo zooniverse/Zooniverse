@@ -100,6 +100,7 @@ class Subject extends BaseModel
 
   id: ''
   zooniverse_id: ''
+  classification_count: null
   coords: null
   location: null
   metadata: null

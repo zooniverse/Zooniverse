@@ -148,6 +148,8 @@
 
     Subject.prototype.zooniverse_id = '';
 
+    Subject.prototype.classification_count = null;
+
     Subject.prototype.coords = null;
 
     Subject.prototype.location = null;
