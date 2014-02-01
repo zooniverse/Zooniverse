@@ -10,7 +10,6 @@ User = zooniverse.models.User || require '../models/user'
 translate = zooniverse.translate || require '../lib/translate'
 signupDialog = zooniverse.controllers.signupDialog || require './signup-dialog'
 
-
 class LoginForm extends BaseController
   tagName: 'form'
   className: 'zooniverse-login-form'
