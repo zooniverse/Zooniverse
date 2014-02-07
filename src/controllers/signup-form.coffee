@@ -6,6 +6,8 @@ BaseController = zooniverse.controllers.BaseController || require './base-contro
 User = zooniverse.models.User || require '../models/user'
 translate = zooniverse.translate || require '../lib/translate'
 
+BETA_PREFERENCE_KEY = 'beta_opt_in'
+
 class SignupForm extends BaseController
   tagName: 'form'
   className: 'zooniverse-signup-form'
@@ -18,6 +20,7 @@ class SignupForm extends BaseController
     'input[name="password"]': 'passwordInput'
     'input[name="email"]': 'emailInput'
     'input[name="real-name"]': 'realNameInput'
+    'input[name="beta-preference"]': 'betaPreferenceInput'
     'button[type="submit"]': 'signUpButton'
     '.error-message': 'errorContainer'
 
@@ -33,6 +36,7 @@ class SignupForm extends BaseController
 
     signup.done ({success, message}) =>
       @showError message unless success
+      User.current?.setPreference BETA_PREFERENCE_KEY, @betaPreferenceInput.prop('checked'), true
 
     signup.fail =>
       @showError translate 'signInFailed'

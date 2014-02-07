@@ -79,6 +79,10 @@ template = function(__obj) {
     
       __out.push(translate('agreeToPrivacyPolicy'));
     
+      __out.push('\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" name="beta-preference" />');
+    
+      __out.push(translate('betaPreference'));
+    
       __out.push('\n</label>\n\n<div class="error-message"></div>\n\n<div class="action">\n  <button type="submit">');
     
       __out.push(translate('signUp'));
