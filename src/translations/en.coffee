@@ -12,6 +12,7 @@ en =
   whyRealName: 'This will be used when we thank contributors, for example, in talks or on posters. If you don\'t want to be mentioned publicly, leave this blank.'
   noAccount: 'Don\'t have an account?',
   agreeToPrivacyPolicy: 'I agree to the <a href="https://www.zooniverse.org/privacy" target="_blank">privacy policy</a>.'
+  betaPreference: 'I would like to receive notices with opportunities to test and provide feedback on unreleased Zooniverse projects.'
   forgotPassword: 'Forgot your password?'
   badLogin: 'Incorrect username or password'
   signInFailed: 'Sign in failed.'
