@@ -75,11 +75,11 @@ template = function(__obj) {
     
       __out.push(translate('whyRealName'));
     
-      __out.push('</div>\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" required="required" />');
+      __out.push('</div>\n</label>\n\n<label class="checkbox">\n  <span></span>\n  <input type="checkbox" required="required" />\n  ');
     
       __out.push(translate('agreeToPrivacyPolicy'));
     
-      __out.push('\n</label>\n\n<label>\n  <span></span>\n  <input type="checkbox" name="beta-preference" />');
+      __out.push('\n</label>\n\n<label class="checkbox">\n  <span></span>\n  <input type="checkbox" name="beta-preference" />\n  ');
     
       __out.push(translate('betaPreference'));
     

@@ -37,8 +37,8 @@
   display: inline-block;
   max-width: 33%;
   opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   padding: 30px;
   position: relative;
   text-align: left;
@@ -130,8 +130,8 @@
   display: none;
   left: 0;
   opacity: 0.05;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
   filter: alpha(opacity=5);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=5)";
   position: absolute;
   right: 0;
   top: 0;
@@ -143,6 +143,10 @@
 .zooniverse-dialog label {
   display: block;
   margin: 10px 0;
+}
+.zooniverse-dialog label.checkbox {
+  line-height: 1.5em;
+  margin-left: 20px;
 }
 .zooniverse-dialog input {
   background: #f0f0f0;
@@ -160,12 +164,16 @@
 .zooniverse-dialog input[type="password"] {
   width: 100%;
 }
+.zooniverse-dialog input[type="checkbox"] {
+  margin-left: -20px;
+}
 .zooniverse-dialog .explanation {
   font-size: 10px;
+  line-height: 1.3em;
   margin: 5px 13px;
   opacity: 0.75;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
   filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
 }
 .zooniverse-dialog .error-message {
   color: #800000;

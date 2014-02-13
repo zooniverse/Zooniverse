@@ -31,12 +31,12 @@
   <div class="explanation"><%- translate 'whyRealName' %></div>
 </label>
 
-<label>
+<label class="checkbox">
   <span></span>
   <input type="checkbox" required="required" /><%- translate 'agreeToPrivacyPolicy' %>
 </label>
 
-<label>
+<label class="checkbox">
   <span></span>
   <input type="checkbox" name="beta-preference" /><%- translate 'betaPreference' %>
 </label>
