@@ -101,11 +101,12 @@
     };
 
     Profile.prototype.onTurnPage = function(e) {
-      var target, targetType;
+      return this.turnPage($(e.currentTarget).val());
+    };
+
+    Profile.prototype.turnPage = function(targetType) {
       this.pageTurners.removeClass('active');
-      target = $(e.currentTarget);
-      target.addClass('active');
-      targetType = target.val();
+      this.pageTurners.filter("[value=\"" + targetType + "\"]").first().addClass('active');
       this.recentsList.el.add(this.favoritesList.el).removeClass('active');
       return this["" + targetType + "List"].el.addClass('active');
     };

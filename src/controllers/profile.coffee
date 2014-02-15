@@ -64,10 +64,11 @@ class Profile extends BaseController
     target.parents('[data-item-id]').first().remove()
 
   onTurnPage: (e) ->
+    @turnPage $(e.currentTarget).val()
+
+  turnPage: (targetType) ->
     @pageTurners.removeClass 'active'
-    target = $(e.currentTarget)
-    target.addClass 'active'
-    targetType = target.val()
+    @pageTurners.filter("[value=\"#{ targetType }\"]").first().addClass 'active'
     @recentsList.el.add(@favoritesList.el).removeClass 'active'
     @["#{targetType}List"].el.addClass 'active'
 
