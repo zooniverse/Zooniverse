@@ -10,8 +10,8 @@ pl =
   email: 'Adres e-mail'
   realName: 'Prawdziwe imię'
   whyRealName: 'Korzystamy z tych danych, kiedy dziękujemy ochotnikom za ich wkład, na przykład podczas rozmów czy na plakatach. <br/> Jeżeli nie chcesz, abyśmy wymieniali Cię publicznie z imienia i nazwiska, zostaw to pole puste.'
-  noAccount: 'Nie masz jeszcze konta?',
-  privacyPolicy: 'Zgadzam się z <a href="https://www.zooniverse.org/privacy" target="_blank">polityką prywatności</a>.'
+  noAccount: 'Nie masz jeszcze konta?'
+  agreeToPrivacyPolicy: 'Zgadzam się z <a href="https://www.zooniverse.org/privacy" target="_blank">polityką prywatności</a>.'
   forgotPassword: 'Nie pamiętasz hasła?'
   badLogin: 'Niepoprawna nazwa użytkownika lub hasło'
   signInFailed: 'Nie udało się zalogować'

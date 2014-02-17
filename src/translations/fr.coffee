@@ -1,7 +1,7 @@
 fr =
   topBarHeading: 'Un projet Zooniverse'
-  signUpHeading: 'Créer un compte Zooniverse',
-  signInHeading: 'Connectez-vous à votre compte Zooniverse',
+  signUpHeading: 'Créer un compte Zooniverse'
+  signInHeading: 'Connectez-vous à votre compte Zooniverse'
   signUp: 'S\'inscrire'
   signIn: 'Connexion'
   signOut: 'Déconnexion'
@@ -10,8 +10,9 @@ fr =
   email: 'Email'
   realName: 'Prénom Nom'
   whyRealName: 'Votre nom pourra être utiliser lors du remerciement des contributeurs, par exemple lors de présentation orales ou sur des posters.<br />Si vous ne souhaitez pas qu\'il soit mentionner publiquement, laissez cette case vide.'
-  noAccount: 'Vous n\'avez pas encore de compte?',
-  privacyPolicy: 'J\'accepte les <a href="https://www.zooniverse.org/privacy" target="_blank">conditions d\'utilisation </a>.'
+  noAccount: 'Vous n\'avez pas encore de compte?'
+  agreeToPrivacyPolicy: 'J\'accepte les <a href="https://www.zooniverse.org/privacy" target="_blank">conditions d\'utilisation </a>.'
+  betaPreference: 'J\'aimerais être tenu au courant des projets en cours de développement par Zooniverse, afin de participer aux tests et donner mon avis.'
   forgotPassword: 'Mot de passe oublié?'
   badLogin: 'Utilisateur ou mot de passe incorrect'
   signInFailed: 'Échec de la connexion.'
