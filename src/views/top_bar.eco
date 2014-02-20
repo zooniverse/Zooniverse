@@ -14,8 +14,8 @@
     <div class='login'>
       <div class="inputs">
         <div class="textboxs">
-          <input name="username" placeholder="<%- I18n.t('zooniverse.login.username').toLower() %>" type="text" />
-          <input name="password" placeholder="<%- I18n.t('zooniverse.login.password').toLower() %>" type="password" />
+          <input name="username" placeholder="<%- I18n.t('zooniverse.login.username').toLowerCase() %>" type="text" />
+          <input name="password" placeholder="<%- I18n.t('zooniverse.login.password').toLowerCase() %>" type="password" />
         </div>
         <div class="reset">
           <p class="password-recovery"><a href="https://www.zooniverse.org/password/reset"><%- I18n.t 'zooniverse.login.forgot_password' %></a></p>
