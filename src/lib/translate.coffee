@@ -16,6 +16,7 @@ translate.strings =
   pl: window.zooniverse?.translations?.pl || require '../translations/pl'
   ru: window.zooniverse?.translations?.ru || require '../translations/ru'
   zh_tw: window.zooniverse?.translations?.zh_tw || require '../translations/zh-tw'
+  de: window.zooniverse?.translations?.de || require '../translations/de'
 
 translate.refresh = (element, key) ->
   for {name, value} in element.attributes
