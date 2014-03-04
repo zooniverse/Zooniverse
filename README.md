@@ -6,7 +6,7 @@ The basic idea of a project is for the back end (Ouroboros) to send **subjects**
 Getting set up
 ==============
 
-The library is available in a provate GitHub repo, zooniverse/Zooniverse. There are a couple branches; this document describes the **no-deps** branch, which is pretty similar to master, but has minimal dependencies and a couple more generic models.
+The library is available in a private GitHub repo, zooniverse/Zooniverse. There are a couple branches; this document describes the **no-deps** branch, which is pretty similar to master, but has minimal dependencies and a couple more generic models.
 
 We've been building apps in CoffeeScript, using Spine (spine/spine) as an MVC library and Hem (spine/hem) as a dev server/builder.
 
@@ -143,3 +143,8 @@ npm install
 cake serve
 mocha-phantomjs http://localhost:8000/test/runner.html
 ```
+
+i18n
+====
+
+Each new language adds about 1.4kb gzipped. So we need to be careful about how many languages we add.
