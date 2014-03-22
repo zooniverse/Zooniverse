@@ -156,15 +156,17 @@
     };
 
     Classification.prototype.toJSON = function() {
-      var annotation, key, lang, output, subject, subject_ids, value, _ref8, _ref9;
-      lang = (_ref8 = LanguageManager.current) != null ? _ref8.code : void 0;
+      var annotation, key, output, subject, subject_ids, value, _ref8;
+      if (LanguageManager.current != null) {
+        this.set('lang', LanguageManager.current.code);
+      }
       this.normalizeSubjects();
       subject_ids = (function() {
-        var _i, _len, _ref9, _results;
-        _ref9 = this.subjects;
+        var _i, _len, _ref8, _results;
+        _ref8 = this.subjects;
         _results = [];
-        for (_i = 0, _len = _ref9.length; _i < _len; _i++) {
-          subject = _ref9[_i];
+        for (_i = 0, _len = _ref8.length; _i < _len; _i++) {
+          subject = _ref8[_i];
           _results.push(subject.id);
         }
         return _results;
@@ -178,15 +180,13 @@
               finished_at: this.finished_at
             }, {
               user_agent: this.user_agent
-            }, {
-              lang: lang
             }
           ])
         }
       };
-      _ref9 = this.generic;
-      for (key in _ref9) {
-        value = _ref9[key];
+      _ref8 = this.generic;
+      for (key in _ref8) {
+        value = _ref8[key];
         annotation = {};
         annotation[key] = value;
         output.classification.annotations.push(annotation);
