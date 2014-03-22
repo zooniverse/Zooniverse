@@ -83,13 +83,14 @@ class Classification extends BaseModel
     @generic[key]
 
   toJSON: ->
-    lang = LanguageManager.current?.code
+    @set 'lang', LanguageManager.current.code if LanguageManager.current?
+
     @normalizeSubjects()
     subject_ids = (subject.id for subject in @subjects)
 
     output = classification:
       subject_ids: subject_ids
-      annotations: @annotations.concat [{@started_at, @finished_at}, {@user_agent}, {lang}]
+      annotations: @annotations.concat [{@started_at, @finished_at}, {@user_agent}]
 
     for key, value of @generic
       annotation = {}
