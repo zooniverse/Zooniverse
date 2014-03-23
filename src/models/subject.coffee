@@ -7,6 +7,7 @@ $ = window.jQuery
 
 class Subject extends BaseModel
   @current: null
+  @seenThisSession: []
 
   @queueMin: 2
   @queueMax: 10
@@ -70,7 +71,13 @@ class Subject extends BaseModel
       request = Api.current.get @path(), {limit}
 
       request.done (rawSubjects) =>
-        newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
+        newSubjects = for rawSubject in rawSubjects when rawSubject.zooniverse_id not in @seenThisSession
+          @seenThisSession.push rawSubject.zooniverse_id
+          new @ rawSubject
+
+        # Keep the "seen" list a reasonable size.
+        @seenThisSession.shift() until @seenThisSession.length < 1000
+
         @trigger 'fetch', [newSubjects]
         fetcher.resolve newSubjects
 

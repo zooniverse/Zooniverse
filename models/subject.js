@@ -2,7 +2,8 @@
 (function() {
   var $, Api, BaseModel, Subject, _base,
     __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   if (window.zooniverse == null) {
     window.zooniverse = {};
@@ -22,6 +23,8 @@
     __extends(Subject, _super);
 
     Subject.current = null;
+
+    Subject.seenThisSession = [];
 
     Subject.queueMin = 2;
 
@@ -93,14 +96,21 @@
         request.done(function(rawSubjects) {
           var newSubjects, rawSubject;
           newSubjects = (function() {
-            var _i, _len, _results;
+            var _i, _len, _ref1, _results;
             _results = [];
             for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
               rawSubject = rawSubjects[_i];
+              if (!(_ref1 = rawSubject.zooniverse_id, __indexOf.call(this.seenThisSession, _ref1) < 0)) {
+                continue;
+              }
+              this.seenThisSession.push(rawSubject.zooniverse_id);
               _results.push(new this(rawSubject));
             }
             return _results;
           }).call(_this);
+          while (!(_this.seenThisSession.length < 1000)) {
+            _this.seenThisSession.shift();
+          }
           _this.trigger('fetch', [newSubjects]);
           return fetcher.resolve(newSubjects);
         });
