@@ -8,7 +8,8 @@ $ = window.jQuery
 class Subject extends BaseModel
   @current: null
 
-  @queueLength: 5
+  @queueMin: 2
+  @queueMax: 10
 
   @group: false
 
@@ -52,7 +53,7 @@ class Subject extends BaseModel
       @first().select()
       nexter.resolve @current
 
-      @fetch() if @count() < @queueLength
+      @fetch() if @count() < @queueMin
 
     nexter.promise()
 
@@ -60,7 +61,7 @@ class Subject extends BaseModel
     [done, fail, params] = [params, done, {}] if typeof params is 'function'
 
     {limit} = params || {}
-    limit ?= @queueLength - @count()
+    limit ?= @queueMax - @count()
 
     fetcher = new $.Deferred
     fetcher.then done, fail
@@ -138,7 +139,7 @@ class Subject extends BaseModel
       return false unless (src.split('.').pop() in ['gif', 'jpg', 'png'])
 
     return true
-    
+
   talkHref: ->
     domain = @domain || location.hostname.replace /^www\./, ''
     "http://talk.#{domain}/#/subjects/#{@zooniverse_id}"

@@ -23,7 +23,9 @@
 
     Subject.current = null;
 
-    Subject.queueLength = 5;
+    Subject.queueMin = 2;
+
+    Subject.queueMax = 10;
 
     Subject.group = false;
 
@@ -65,7 +67,7 @@
       } else {
         this.first().select();
         nexter.resolve(this.current);
-        if (this.count() < this.queueLength) {
+        if (this.count() < this.queueMin) {
           this.fetch();
         }
       }
@@ -80,7 +82,7 @@
       }
       limit = (params || {}).limit;
       if (limit == null) {
-        limit = this.queueLength - this.count();
+        limit = this.queueMax - this.count();
       }
       fetcher = new $.Deferred;
       fetcher.then(done, fail);
