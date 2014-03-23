@@ -82,7 +82,7 @@ describe 'Subject', ->
         new Subject
 
         Subject.one 'fetch', (e, subjects) ->
-          expect(Subject.count()).to.equal Subject.queueLength
+          expect(Subject.count()).to.equal Subject.queueMax
           done()
 
         Subject.next()

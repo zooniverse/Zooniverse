@@ -7,8 +7,10 @@ $ = window.jQuery
 
 class Subject extends BaseModel
   @current: null
+  @seenThisSession: []
 
-  @queueLength: 5
+  @queueMin: 2
+  @queueMax: 10
 
   @group: false
 
@@ -52,7 +54,7 @@ class Subject extends BaseModel
       @first().select()
       nexter.resolve @current
 
-      @fetch() if @count() < @queueLength
+      @fetch() if @count() < @queueMin
 
     nexter.promise()
 
@@ -60,7 +62,7 @@ class Subject extends BaseModel
     [done, fail, params] = [params, done, {}] if typeof params is 'function'
 
     {limit} = params || {}
-    limit ?= @queueLength - @count()
+    limit ?= @queueMax - @count()
 
     fetcher = new $.Deferred
     fetcher.then done, fail
@@ -69,7 +71,13 @@ class Subject extends BaseModel
       request = Api.current.get @path(), {limit}
 
       request.done (rawSubjects) =>
-        newSubjects = (new @ rawSubject for rawSubject in rawSubjects)
+        newSubjects = for rawSubject in rawSubjects when rawSubject.zooniverse_id not in @seenThisSession
+          @seenThisSession.push rawSubject.zooniverse_id
+          new @ rawSubject
+
+        # Keep the "seen" list a reasonable size.
+        @seenThisSession.shift() until @seenThisSession.length < 1000
+
         @trigger 'fetch', [newSubjects]
         fetcher.resolve newSubjects
 
@@ -138,7 +146,7 @@ class Subject extends BaseModel
       return false unless (src.split('.').pop() in ['gif', 'jpg', 'png'])
 
     return true
-    
+
   talkHref: ->
     domain = @domain || location.hostname.replace /^www\./, ''
     "http://talk.#{domain}/#/subjects/#{@zooniverse_id}"

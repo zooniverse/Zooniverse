@@ -91,7 +91,7 @@
         return it('fetches more subjects to refill its queue', function(done) {
           new Subject;
           Subject.one('fetch', function(e, subjects) {
-            expect(Subject.count()).to.equal(Subject.queueLength);
+            expect(Subject.count()).to.equal(Subject.queueMax);
             return done();
           });
           return Subject.next();
