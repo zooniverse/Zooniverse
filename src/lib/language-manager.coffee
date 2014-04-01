@@ -49,6 +49,7 @@ class LanguageManager extends EventEmitter
 
     else
       localStorage.setItem 'zooniverse-language-code', @code
+      document.querySelector('html').lang = @code
       @trigger 'change-language', [@code, @translations[@code].strings]
       done? @code, @translations[@code].strings
 
