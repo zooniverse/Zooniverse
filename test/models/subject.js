@@ -19,7 +19,8 @@
       });
       after(function() {
         Api.current.destroy();
-        return Subject.destroyAll();
+        Subject.destroyAll();
+        return Subject.seenThisSession = [];
       });
       return describe('fetch', function() {
         Subject.fallback = './helpers/offline/subjects.json';
@@ -42,7 +43,8 @@
       });
       after(function() {
         Api.current.destroy();
-        return Subject.destroyAll();
+        Subject.destroyAll();
+        return Subject.seenThisSession = [];
       });
       describe('path', function() {
         afterEach(function() {
@@ -63,9 +65,19 @@
       describe('fetch', function() {
         return it('can fetch more subjects', function(done) {
           Subject.one('fetch', function(e, subjects) {
+            var subject;
             expect(subjects.length).not.to.equal(0);
             expect(Subject.count()).not.to.equal(0);
             expect(subjects[0]).to.equal(Subject.first());
+            expect(Subject.seenThisSession).to.have.members((function() {
+              var _i, _len, _results;
+              _results = [];
+              for (_i = 0, _len = subjects.length; _i < _len; _i++) {
+                subject = subjects[_i];
+                _results.push(subject.zooniverse_id);
+              }
+              return _results;
+            })());
             return done();
           });
           return Subject.fetch();
@@ -73,7 +85,8 @@
       });
       return describe('next', function() {
         beforeEach(function() {
-          return Subject.destroyAll();
+          Subject.destroyAll();
+          return Subject.seenThisSession = [];
         });
         it('destroys the current subject and selects the next', function(done) {
           var first, second;
@@ -91,7 +104,17 @@
         return it('fetches more subjects to refill its queue', function(done) {
           new Subject;
           Subject.one('fetch', function(e, subjects) {
+            var subject;
             expect(Subject.count()).to.equal(Subject.queueMax);
+            expect(Subject.seenThisSession).to.have.members((function() {
+              var _i, _len, _results;
+              _results = [];
+              for (_i = 0, _len = subjects.length; _i < _len; _i++) {
+                subject = subjects[_i];
+                _results.push(subject.zooniverse_id);
+              }
+              return _results;
+            })());
             return done();
           });
           return Subject.next();
