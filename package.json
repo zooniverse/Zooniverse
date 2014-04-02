@@ -18,7 +18,6 @@
   "scripts": {
     "start": "cake serve",
     "pretest": "serveup --port 7357 & echo $! > ./serveup.pid",
-    "test": "mocha-phantomjs http://localhost:7357/test/runner.html",
-    "posttest": "kill `cat ./serveup.pid` ; rm ./serveup.pid"
+    "test": "mocha-phantomjs http://localhost:7357/test/runner.html; kill `cat ./serveup.pid`; rm ./serveup.pid"
   }
 }
