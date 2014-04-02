@@ -77,6 +77,15 @@
       return nexter.promise();
     };
 
+    Subject.trackSeenSubject = function(subject) {
+      return this.seenThisSession.push(subject.zooniverse_id);
+    };
+
+    Subject.hasSeenSubject = function(subject) {
+      var _ref;
+      return _ref = subject.zooniverse_id, __indexOf.call(this.seenThisSession, _ref) >= 0;
+    };
+
     Subject.fetch = function(params, done, fail) {
       var fetcher, limit, request, _ref,
         _this = this;
@@ -96,14 +105,14 @@
         request.done(function(rawSubjects) {
           var newSubjects, rawSubject;
           newSubjects = (function() {
-            var _i, _len, _ref1, _results;
+            var _i, _len, _results;
             _results = [];
             for (_i = 0, _len = rawSubjects.length; _i < _len; _i++) {
               rawSubject = rawSubjects[_i];
-              if (!(_ref1 = rawSubject.zooniverse_id, __indexOf.call(this.seenThisSession, _ref1) < 0)) {
+              if (!(!this.hasSeenSubject(rawSubject))) {
                 continue;
               }
-              this.seenThisSession.push(rawSubject.zooniverse_id);
+              this.trackSeenSubject(rawSubject);
               _results.push(new this(rawSubject));
             }
             return _results;
