@@ -13,6 +13,7 @@ describe 'Subject', ->
     after ->
       Api.current.destroy()
       Subject.destroyAll()
+      Subject.seenThisSession = []
 
     describe 'fetch', ->
       Subject.fallback = './helpers/offline/subjects.json'
@@ -34,6 +35,7 @@ describe 'Subject', ->
     after ->
       Api.current.destroy()
       Subject.destroyAll()
+      Subject.seenThisSession = []
 
     describe 'path', ->
       afterEach ->
@@ -56,6 +58,7 @@ describe 'Subject', ->
           expect(subjects.length).not.to.equal 0
           expect(Subject.count()).not.to.equal 0
           expect(subjects[0]).to.equal Subject.first()
+          expect(Subject.seenThisSession).to.have.members(subject.zooniverse_id for subject in subjects)
           done()
 
         Subject.fetch()
@@ -63,6 +66,7 @@ describe 'Subject', ->
     describe 'next', ->
       beforeEach ->
         Subject.destroyAll()
+        Subject.seenThisSession = []
 
       it 'destroys the current subject and selects the next', (done) ->
         first = new Subject
@@ -83,6 +87,7 @@ describe 'Subject', ->
 
         Subject.one 'fetch', (e, subjects) ->
           expect(Subject.count()).to.equal Subject.queueMax
+          expect(Subject.seenThisSession).to.have.members(subject.zooniverse_id for subject in subjects)
           done()
 
         Subject.next()

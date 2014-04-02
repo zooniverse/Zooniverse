@@ -58,6 +58,12 @@ class Subject extends BaseModel
 
     nexter.promise()
 
+  @trackSeenSubject: (subject) ->
+    @seenThisSession.push subject.zooniverse_id
+
+  @hasSeenSubject: (subject) ->
+    subject.zooniverse_id in @seenThisSession
+
   @fetch: (params, done, fail) ->
     [done, fail, params] = [params, done, {}] if typeof params is 'function'
 
@@ -71,8 +77,8 @@ class Subject extends BaseModel
       request = Api.current.get @path(), {limit}
 
       request.done (rawSubjects) =>
-        newSubjects = for rawSubject in rawSubjects when rawSubject.zooniverse_id not in @seenThisSession
-          @seenThisSession.push rawSubject.zooniverse_id
+        newSubjects = for rawSubject in rawSubjects when not @hasSeenSubject(rawSubject)
+          @trackSeenSubject rawSubject
           new @ rawSubject
 
         # Keep the "seen" list a reasonable size.
