@@ -67,13 +67,14 @@
     TopBar.prototype.elements = {
       '.current-user-name': 'currentUserName',
       'button[name="groups"]': 'groupsMenuButton',
-      'button[name="languages"]': 'languagesMenuButton',
+      'button[name="languages-menu-toggle"]': 'languagesMenuButton',
       '.message-count': 'messageCount',
       '.avatar img': 'avatarImage',
       '.group': 'currentGroup'
     };
 
     function TopBar() {
+      this.onLanguageChange = __bind(this.onLanguageChange, this);
       this.onUserChangeGroup = __bind(this.onUserChangeGroup, this);
       this.getMessages = __bind(this.getMessages, this);
       this.onUserChange = __bind(this.onUserChange, this);
@@ -88,6 +89,8 @@
       });
       this.el.toggleClass('has-languages', LanguageManager.current != null);
       if (LanguageManager.current != null) {
+        this.onLanguageChange();
+        LanguageManager.on('change-language', this.onLanguageChange);
         this.languagesMenu = new LanguagesMenu();
         this.languagesDropdown = new Dropdown({
           button: this.languagesMenuButton.get(0),
@@ -143,6 +146,11 @@
 
     TopBar.prototype.onUserChangeGroup = function(e, user, group) {
       return this.el.toggleClass('group-participant', group != null);
+    };
+
+    TopBar.prototype.onLanguageChange = function() {
+      var _ref;
+      return this.languagesMenuButton.html((_ref = LanguageManager.current) != null ? _ref.languageLabel() : void 0);
     };
 
     return TopBar;

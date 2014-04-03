@@ -1,7 +1,6 @@
 <% translate = window.zooniverse?.translate || require '../lib/translate' %>
 <% zooniverseLogoSvg = window.zooniverse?.views?.zooniverseLogoSvg || require './zooniverse-logo-svg' %>
 <% groupIconSvg = window.zooniverse?.views?.groupIconSvg || require './group-icon-svg' %>
-<% languageIconSvg = window.zooniverse?.views?.languageIconSvg || require './language-icon-svg' %>
 <% mailIconSvg = window.zooniverse?.views?.mailIconSvg || require './mail-icon-svg' %>
 
 <div class="corner">
@@ -51,7 +50,5 @@
 </div>
 
 <div class="languages piece">
-  <div class="languages-menu-toggle">
-    <button name="languages"><%- languageIconSvg() %></button>
-  </div>
+  <button name="languages-menu-toggle"></button>  
 </div>
