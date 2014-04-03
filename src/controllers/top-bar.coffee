@@ -31,7 +31,7 @@ class TopBar extends BaseController
   elements:
     '.current-user-name': 'currentUserName'
     'button[name="groups"]': 'groupsMenuButton'
-    'button[name="languages"]': 'languagesMenuButton'
+    'button[name="languages-menu-toggle"]': 'languagesMenuButton'
     '.message-count': 'messageCount'
     '.avatar img': 'avatarImage'
     '.group': 'currentGroup'
@@ -50,6 +50,9 @@ class TopBar extends BaseController
     @el.toggleClass 'has-languages', LanguageManager.current?
 
     if LanguageManager.current?
+      @onLanguageChange()
+      LanguageManager.on 'change-language', @onLanguageChange
+
       @languagesMenu = new LanguagesMenu()
       @languagesDropdown = new Dropdown
         button: @languagesMenuButton.get 0
@@ -93,6 +96,9 @@ class TopBar extends BaseController
 
   onUserChangeGroup: (e, user, group) =>
     @el.toggleClass 'group-participant', group?
+
+  onLanguageChange: =>
+    @languagesMenuButton.html LanguageManager.current?.languageLabel()
 
 window.zooniverse.controllers.TopBar = TopBar
 module?.exports = TopBar

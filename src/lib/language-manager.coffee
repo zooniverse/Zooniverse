@@ -53,6 +53,9 @@ class LanguageManager extends EventEmitter
       @trigger 'change-language', [@code, @translations[@code].strings]
       done? @code, @translations[@code].strings
 
+  languageLabel: =>
+    @translations?[@code].label
+
 window.zooniverse ?= {}
 window.zooniverse.LanguageManager = LanguageManager
 module?.exports = LanguageManager
