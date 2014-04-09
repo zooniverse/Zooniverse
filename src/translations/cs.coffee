@@ -1,7 +1,7 @@
 cs =
   topBarHeading: 'Zooniverse projekt'
-  signUpHeading: 'Vytvoření Zooniverse účtu',
-  signInHeading: 'Přihlašování na Zooniverse účet',
+  signUpHeading: 'Vytvoření Zooniverse účtu'
+  signInHeading: 'Přihlašování na Zooniverse účet'
   signUp: 'Zaregistrovat se'
   signIn: 'Přihlásit se'
   signOut: 'Odhlásit se'
@@ -10,7 +10,7 @@ cs =
   email: 'Email'
   realName: 'Pravé jméno'
   whyRealName: 'Toto jméno bývá použito při děkování přispěvatelům, např. v rozhovorech nebo na posterech. Pokud si nepřejete, aby bylo Vaše jméno zveřejněno, nechte políčko prázdné.'
-  noAccount: 'Nemáte ještě účet?',
+  noAccount: 'Nemáte ještě účet?'
   agreeToPrivacyPolicy: 'Souhlasím se <a href="https://www.zooniverse.org/privacy" target="_blank">zásadami ochrany osobních údajů</a>.'
   betaPreference: 'Chci dostávat oznámení o možnosti testování dosud nezveřejněných Zooniverse projektů a poskytování zpětné vazby.'
   forgotPassword: 'Zapomněli jste heslo?'
