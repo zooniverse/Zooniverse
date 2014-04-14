@@ -16,6 +16,7 @@ translate.strings =
   pl: window.zooniverse?.translations?.pl || require '../translations/pl'
   ru: window.zooniverse?.translations?.ru || require '../translations/ru'
   zh_tw: window.zooniverse?.translations?.zh_tw || require '../translations/zh-tw'
+  zh_cn: window.zooniverse?.translations?.zh_cn || require '../translations/zh-cn'
   de: window.zooniverse?.translations?.de || require '../translations/de'
   cs: window.zooniverse?.translations?.cs || require '../translations/cs'
 
