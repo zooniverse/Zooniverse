@@ -14,6 +14,7 @@ class GoogleAnalytics extends EventEmitter
   account: ''
   domain: ''
   trackHashes: true
+  ignoredSubdomainRefs: ['www']
 
   constructor: (params = {}) ->
     @[property] = value for property, value of params
@@ -23,8 +24,11 @@ class GoogleAnalytics extends EventEmitter
 
     window._gaq ?= []
     window._gaq.push ['_setAccount', @account]
-    window._gaq.push ['_setDomainName', @domain] if @domain
     window._gaq.push ['_trackPageview']
+
+    if @domain
+      window._gaq.push ['_setDomainName', @domain]
+      window._gaq.push ['_addIgnoredRef', "#{ subdomain }.#{ @domain }"] for subdomain in @ignoredSubdomainRefs
 
     $(window).on 'hashchange', (=> @track()) if @trackHashes
 
