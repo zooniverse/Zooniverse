@@ -5,6 +5,7 @@ path = require 'path'
 CoffeeScript = require 'coffee-script'
 eco = require 'eco'
 packageJson = require './package'
+Uglify = require 'uglify-js'
 
 # Only include essential modules in a build.
 # Manually resolve dependency order for now. :(
@@ -156,6 +157,11 @@ task 'build', 'Build the whole library into a single file', ->
   ].join '\n'
 
   fs.writeFileSync outFile, outContent
+
+  minifiedContent = Uglify.minify outFile
+  minifiedFile = "#{ path.basename outFile, '.js' }.min.js"
+
+  fs.writeFileSync minifiedFile, minifiedContent.code
 
 task 'serve', 'Run a dev server', ->
   port = process.env.PORT || 3253
