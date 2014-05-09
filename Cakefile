@@ -4,6 +4,7 @@ fs = require 'fs'
 path = require 'path'
 CoffeeScript = require 'coffee-script'
 eco = require 'eco'
+packageJson = require './package'
 
 # Only include essential modules in a build.
 # Manually resolve dependency order for now. :(
@@ -128,18 +129,7 @@ task 'watch-stylus', 'Recompile Stylus files when they change', ->
   run 'stylus --import node_modules/nib --watch ./src/css --out ./css --inline'
 
 task 'build', 'Build the whole library into a single file', ->
-  d = new Date
-
-  timestamp = [
-    d.getFullYear()
-    d.getMonth() + 1
-    d.getDate()
-    d.getHours()
-    d.getMinutes()
-    d.getSeconds()
-  ].join '-'
-
-  outFile = "zooniverse-#{timestamp}.js"
+  outFile = "zooniverse.js"
 
   console.log "Building the Zooniverse library into '#{outFile}'"
 
@@ -156,6 +146,9 @@ task 'build', 'Build the whole library into a single file', ->
       else throw new Error "Could not compile '#{module}'"
 
   outContent = [
+    '/*!'
+    ' * Zooniverse Library - v' + packageJson.version 
+    ' */'
     ';(function(window) {'
     compiledModules...
     'if (typeof module !== \'undefined\') module.exports = window.zooniverse'
