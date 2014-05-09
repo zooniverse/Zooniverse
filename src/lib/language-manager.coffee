@@ -7,7 +7,9 @@ class LanguageManager extends EventEmitter
   translations: null # {"CODE": {label: "LANGUAGE", strings: {STRINGS: {...}} or "JSON_URL"}
   code: 'en'
 
-  constructor: ({@translations, @code} = {}) ->
+  constructor: (params) ->
+    @[property] = value for own property, value of params when property of @
+
     @translations ?= {}
 
     @code ?= location.search.match(/lang=([^&]+)/)?[1]
@@ -25,12 +27,17 @@ class LanguageManager extends EventEmitter
       @setLanguage @code
 
   setLanguage: (@code, done, fail) ->
-    unless @translations[@code]? then @code = @constructor::code
+    unless @translations[@code]?
+      @code = @constructor::code
 
-    if typeof @translations[@code]?.strings is 'string'
+    unless @translations[@code].strings?
+      @translations[@code].strings = @path()
+
+    if typeof @translations[@code].strings is 'string'
       pathToStrings = @translations[@code]?.strings
 
       localStrings = JSON.parse localStorage.getItem "zooniverse-language-strings-#{@code}"
+
       if localStrings?
         @translations[@code].strings = localStrings
         @setLanguage @code, done, fail
@@ -54,6 +61,9 @@ class LanguageManager extends EventEmitter
 
   languageLabel: =>
     @translations[@code]?.label || @translations[@constructor::code]?.label
+
+  path: =>
+    "./translations/#{ @code }.json"
 
 window.zooniverse ?= {}
 window.zooniverse.LanguageManager = LanguageManager
