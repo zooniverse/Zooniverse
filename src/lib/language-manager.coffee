@@ -31,7 +31,7 @@ class LanguageManager extends EventEmitter
       @code = @constructor::code
 
     unless @translations[@code].strings?
-      @translations[@code].strings = @path()
+      @translations[@code].strings = @defaultStringsFormat()
 
     if typeof @translations[@code].strings is 'string'
       pathToStrings = @translations[@code]?.strings
@@ -59,10 +59,10 @@ class LanguageManager extends EventEmitter
       @trigger 'change-language', [@code, @translations[@code].strings]
       done? @code, @translations[@code].strings
 
-  languageLabel: =>
+  label: =>
     @translations[@code]?.label || @translations[@constructor::code]?.label
 
-  path: =>
+  defaultStringsFormat: =>
     "./translations/#{ @code }.json"
 
 window.zooniverse ?= {}

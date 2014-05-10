@@ -98,7 +98,7 @@ class TopBar extends BaseController
     @el.toggleClass 'group-participant', group?
 
   onLanguageChange: =>
-    @languagesMenuButton.html LanguageManager.current?.languageLabel()
+    @languagesMenuButton.html LanguageManager.current?.label()
 
 window.zooniverse.controllers.TopBar = TopBar
 module?.exports = TopBar
