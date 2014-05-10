@@ -1027,8 +1027,8 @@ window.base64 = {
     LanguageManager.prototype.code = 'en';
 
     function LanguageManager(params) {
-      this.path = __bind(this.path, this);
-      this.languageLabel = __bind(this.languageLabel, this);
+      this.defaultStringsFormat = __bind(this.defaultStringsFormat, this);
+      this.label = __bind(this.label, this);
       var property, value, _base, _name, _ref1, _ref2, _ref3,
         _this = this;
       for (property in params) {
@@ -1078,7 +1078,7 @@ window.base64 = {
         this.code = this.constructor.prototype.code;
       }
       if (this.translations[this.code].strings == null) {
-        this.translations[this.code].strings = this.path();
+        this.translations[this.code].strings = this.defaultStringsFormat();
       }
       if (typeof this.translations[this.code].strings === 'string') {
         pathToStrings = (_ref1 = this.translations[this.code]) != null ? _ref1.strings : void 0;
@@ -1105,12 +1105,12 @@ window.base64 = {
       }
     };
 
-    LanguageManager.prototype.languageLabel = function() {
+    LanguageManager.prototype.label = function() {
       var _ref1, _ref2;
       return ((_ref1 = this.translations[this.code]) != null ? _ref1.label : void 0) || ((_ref2 = this.translations[this.constructor.prototype.code]) != null ? _ref2.label : void 0);
     };
 
-    LanguageManager.prototype.path = function() {
+    LanguageManager.prototype.defaultStringsFormat = function() {
       return "./translations/" + this.code + ".json";
     };
 
@@ -4623,7 +4623,7 @@ if (typeof module !== 'undefined') module.exports = template;
 
     TopBar.prototype.onLanguageChange = function() {
       var _ref;
-      return this.languagesMenuButton.html((_ref = LanguageManager.current) != null ? _ref.languageLabel() : void 0);
+      return this.languagesMenuButton.html((_ref = LanguageManager.current) != null ? _ref.label() : void 0);
     };
 
     return TopBar;
