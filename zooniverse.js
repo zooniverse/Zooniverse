@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.6.7
+ * Zooniverse Library - v0.6.10
  */
 ;(function(window) {
 window.base64 = {
@@ -1007,7 +1007,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, EventEmitter, LanguageManager, _ref,
+  var $, DEFAULT_LOCALE, EventEmitter, LanguageManager, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -1017,6 +1017,8 @@ window.base64 = {
 
   $ = window.jQuery;
 
+  DEFAULT_LOCALE = 'en';
+
   LanguageManager = (function(_super) {
     __extends(LanguageManager, _super);
 
@@ -1024,7 +1026,7 @@ window.base64 = {
 
     LanguageManager.prototype.translations = null;
 
-    LanguageManager.prototype.code = 'en';
+    LanguageManager.prototype.code = null;
 
     function LanguageManager(params) {
       this.defaultStringsFormat = __bind(this.defaultStringsFormat, this);
@@ -1075,7 +1077,7 @@ window.base64 = {
         _this = this;
       this.code = code;
       if (this.translations[this.code] == null) {
-        this.code = this.constructor.prototype.code;
+        this.code = DEFAULT_LOCALE;
       }
       if (this.translations[this.code].strings == null) {
         this.translations[this.code].strings = this.defaultStringsFormat();
