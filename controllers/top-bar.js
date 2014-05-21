@@ -150,7 +150,7 @@
 
     TopBar.prototype.onLanguageChange = function() {
       var _ref;
-      return this.languagesMenuButton.html((_ref = LanguageManager.current) != null ? _ref.languageLabel() : void 0);
+      return this.languagesMenuButton.html((_ref = LanguageManager.current) != null ? _ref.label() : void 0);
     };
 
     return TopBar;

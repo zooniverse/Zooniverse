@@ -1,11 +1,13 @@
 EventEmitter = window.zooniverse?.EventEmitter || require './event-emitter'
 $ = window.jQuery
 
+DEFAULT_LOCALE = 'en'
+
 class LanguageManager extends EventEmitter
   @current: null
 
   translations: null # {"CODE": {label: "LANGUAGE", strings: {STRINGS: {...}} or "JSON_URL"}
-  code: 'en'
+  code: null
 
   constructor: (params) ->
     @[property] = value for own property, value of params when property of @
@@ -17,7 +19,7 @@ class LanguageManager extends EventEmitter
     @code ?= navigator.language?.split('-')[0]
     @code ?= navigator.userLanguage?.split('-')[0]
     @code ?= @constructor::code
-
+    
     if '/' in @code or '.json' in @code
       @translations[@code] ?= label: @code, strings: @code
 
@@ -28,7 +30,7 @@ class LanguageManager extends EventEmitter
 
   setLanguage: (@code, done, fail) ->
     unless @translations[@code]?
-      @code = @constructor::code
+      @code = DEFAULT_LOCALE
 
     unless @translations[@code].strings?
       @translations[@code].strings = @defaultStringsFormat()
