@@ -190,3 +190,15 @@
 .zooniverse-languages-menu button.stop {
   font-size: 10px;
 }
+@media only screen and (max-width: 640px) {
+  .zooniverse-top-bar {
+    left: 0;
+    width: 100%;
+  }
+  .zooniverse-top-bar .no-user .zooniverse-info span {
+    display: none;
+  }
+  html {
+    padding-top: 30px;
+  }
+}

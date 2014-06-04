@@ -201,6 +201,13 @@
   -webkit-box-shadow: 0 100px rgba(0,0,0,0.125) inset;
   box-shadow: 0 100px rgba(0,0,0,0.125) inset;
 }
+@media only screen and (max-width: 640px) {
+  .zooniverse-dialog .underlay .container .dialog {
+    max-height: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
+}
 @-moz-keyframes zooniverse-progress {
   0% {
     background-position: 0 0;
