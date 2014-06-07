@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.6.10
+ * Zooniverse Library - v0.6.11
  */
 ;(function(window) {
 window.base64 = {
@@ -1007,7 +1007,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, DEFAULT_LOCALE, EventEmitter, LanguageManager, _ref,
+  var $, EventEmitter, LanguageManager, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -1017,12 +1017,12 @@ window.base64 = {
 
   $ = window.jQuery;
 
-  DEFAULT_LOCALE = 'en';
-
   LanguageManager = (function(_super) {
     __extends(LanguageManager, _super);
 
     LanguageManager.current = null;
+
+    LanguageManager.defaultLocale = 'en';
 
     LanguageManager.prototype.translations = null;
 
@@ -1077,7 +1077,7 @@ window.base64 = {
         _this = this;
       this.code = code;
       if (this.translations[this.code] == null) {
-        this.code = DEFAULT_LOCALE;
+        this.code = this.constructor.defaultLocale;
       }
       if (this.translations[this.code].strings == null) {
         this.translations[this.code].strings = this.defaultStringsFormat();
@@ -1180,7 +1180,7 @@ window.base64 = {
       }
       property = name.slice(translate.attr.length + 1) || 'innerHTML';
       string = (_ref23 = translate.strings[(_ref24 = LanguageManager.current) != null ? _ref24.code : void 0]) != null ? _ref23[value] : void 0;
-      string || (string = (_ref25 = translate.strings[LanguageManager.prototype.code]) != null ? _ref25[value] : void 0);
+      string || (string = (_ref25 = translate.strings[LanguageManager.defaultLocale]) != null ? _ref25[value] : void 0);
       string || (string = value);
       if (element.hasAttribute(property)) {
         _results.push(element.setAttribute(property, string));
