@@ -27,7 +27,7 @@ translate.refresh = (element, key) ->
     continue unless value
     property = name[translate.attr.length + 1...] || 'innerHTML'
     string = translate.strings[LanguageManager.current?.code]?[value]
-    string ||= translate.strings[LanguageManager::code]?[value] # Fall back to the default language.
+    string ||= translate.strings[LanguageManager.defaultLocale]?[value] # Fall back to the default language.
     string ||= value # Fall back to the key.
     if element.hasAttribute property
       element.setAttribute property, string
