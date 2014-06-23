@@ -38,7 +38,7 @@ class BaseModel extends EventEmitter
 
   constructor: (params = {}) ->
     super
-    @[property] = value for own property, value of params when property of @
+    @[property] = value for property, value of params
 
     @constructor.idCounter += 1
     @id = "C_#{@constructor.idCounter}" unless @id?

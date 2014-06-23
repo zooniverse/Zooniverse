@@ -93,11 +93,8 @@
       }
       BaseModel.__super__.constructor.apply(this, arguments);
       for (property in params) {
-        if (!__hasProp.call(params, property)) continue;
         value = params[property];
-        if (property in this) {
-          this[property] = value;
-        }
+        this[property] = value;
       }
       this.constructor.idCounter += 1;
       if (this.id == null) {
