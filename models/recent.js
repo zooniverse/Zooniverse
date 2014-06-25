@@ -115,6 +115,14 @@
       _ref4 = this.subjects;
       for (i = _i = 0, _len = _ref4.length; _i < _len; i = ++_i) {
         subject = _ref4[i];
+        if (subject.constructor === Subject) {
+          subject = {
+            zooniverse_id: subject.zooniverse_id,
+            location: subject.location,
+            coords: subject.coords,
+            metdata: subject.metadata
+          };
+        }
         this.subjects[i] = new SubjectForRecent(subject);
       }
     }

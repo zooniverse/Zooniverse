@@ -61,6 +61,13 @@ class Recent extends BaseModel
     @created_at ||= (new Date).toUTCString()
 
     for subject, i in @subjects
+      if subject.constructor is Subject
+        subject =
+          zooniverse_id: subject.zooniverse_id
+          location: subject.location
+          coords: subject.coords
+          metdata: subject.metadata
+          
       @subjects[i] = new SubjectForRecent subject
 
 window.zooniverse.models.Recent = Recent
