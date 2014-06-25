@@ -62,11 +62,7 @@ class Recent extends BaseModel
 
     for subject, i in @subjects
       if subject.constructor is Subject
-        subject =
-          zooniverse_id: subject.zooniverse_id
-          location: subject.location
-          coords: subject.coords
-          metdata: subject.metadata
+        subject = JSON.parse(JSON.stringify(subject))
           
       @subjects[i] = new SubjectForRecent subject
 
