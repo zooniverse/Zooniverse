@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.6.11
+ * Zooniverse Library - v0.6.12
  */
 ;(function(window) {
 window.base64 = {
@@ -1429,11 +1429,8 @@ window.base64 = {
       }
       BaseModel.__super__.constructor.apply(this, arguments);
       for (property in params) {
-        if (!__hasProp.call(params, property)) continue;
         value = params[property];
-        if (property in this) {
-          this[property] = value;
-        }
+        this[property] = value;
       }
       this.constructor.idCounter += 1;
       if (this.id == null) {
@@ -2100,6 +2097,9 @@ window.base64 = {
       _ref4 = this.subjects;
       for (i = _i = 0, _len = _ref4.length; _i < _len; i = ++_i) {
         subject = _ref4[i];
+        if (subject.constructor === Subject) {
+          subject = JSON.parse(JSON.stringify(subject));
+        }
         this.subjects[i] = new SubjectForRecent(subject);
       }
     }
