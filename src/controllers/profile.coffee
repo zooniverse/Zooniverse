@@ -12,6 +12,17 @@ itemTemplate = zooniverse.views.profileItem || require '../views/profile-item'
 User = zooniverse.models.User || require '../models/user'
 $ = window.jQuery
 
+class ProfilePaginator extends Paginator
+  typeCount: ->
+    count = if @type is Recent
+      User.current?.project?.classification_count
+    else if @type is Favorite
+      User.current?.project?.favorite_count
+    else
+      super
+
+    count || 0
+
 class Profile extends BaseController
   className: 'zooniverse-profile'
   template: template
@@ -36,14 +47,14 @@ class Profile extends BaseController
     @loginForm = new LoginForm
       el: @el.find '.sign-in-form'
 
-    @recentsList = new Paginator
+    @recentsList = new ProfilePaginator
       type: Recent
       perPage: 12
       className: "#{Paginator::className} recents"
       el: @el.find '.recents'
       itemTemplate: @recentTemplate
 
-    @favoritesList = new Paginator
+    @favoritesList = new ProfilePaginator
       type: Favorite
       perPage: 12
       className: "#{Paginator::className} favorites"

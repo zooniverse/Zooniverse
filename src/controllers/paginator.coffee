@@ -32,7 +32,7 @@ class Paginator extends BaseController
     @type.on 'destroy', @onItemDestroyed
 
   onUserChange: (e, user) =>
-    @reset user?.project?.classification_count || 0
+    @reset @typeCount()
     @onFetch []
     @goTo 1 if user?
 
@@ -60,9 +60,11 @@ class Paginator extends BaseController
     fetch.then @onFetch, @onFetchFail
     fetch.always => @el.removeClass 'loading'
 
+  typeCount: ->
+    User.current?.project?.classification_count || 0
+
   onFetch: (items) =>
     @itemsContainer.empty()
-
     @el.toggleClass 'empty', items.length is 0
 
     for item in items

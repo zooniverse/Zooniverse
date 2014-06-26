@@ -62,8 +62,7 @@
     }
 
     Paginator.prototype.onUserChange = function(e, user) {
-      var _ref;
-      this.reset((user != null ? (_ref = user.project) != null ? _ref.classification_count : void 0 : void 0) || 0);
+      this.reset(this.typeCount());
       this.onFetch([]);
       if (user != null) {
         return this.goTo(1);
@@ -105,6 +104,11 @@
       return fetch.always(function() {
         return _this.el.removeClass('loading');
       });
+    };
+
+    Paginator.prototype.typeCount = function() {
+      var _ref, _ref1;
+      return ((_ref = User.current) != null ? (_ref1 = _ref.project) != null ? _ref1.classification_count : void 0 : void 0) || 0;
     };
 
     Paginator.prototype.onFetch = function(items) {
