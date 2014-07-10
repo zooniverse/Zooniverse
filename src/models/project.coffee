@@ -58,6 +58,7 @@ class Project extends BaseModel
   classification_count: 0
   complete_count: 0
   user_count: 0
+  subject_count: 0
 
   display_name: ''
   name: ''
