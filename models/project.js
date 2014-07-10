@@ -82,6 +82,8 @@
 
     Project.prototype.user_count = 0;
 
+    Project.prototype.subject_count = 0;
+
     Project.prototype.display_name = '';
 
     Project.prototype.name = '';
