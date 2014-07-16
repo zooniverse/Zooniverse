@@ -93,6 +93,7 @@
       }
       BaseModel.__super__.constructor.apply(this, arguments);
       for (property in params) {
+        if (!__hasProp.call(params, property)) continue;
         value = params[property];
         this[property] = value;
       }
