@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.6.11
+ * Zooniverse Library - v0.7.0
  */
 ;(function(window) {
 window.base64 = {
@@ -1431,9 +1431,7 @@ window.base64 = {
       for (property in params) {
         if (!__hasProp.call(params, property)) continue;
         value = params[property];
-        if (property in this) {
-          this[property] = value;
-        }
+        this[property] = value;
       }
       this.constructor.idCounter += 1;
       if (this.id == null) {
@@ -4703,8 +4701,7 @@ if (typeof module !== 'undefined') module.exports = template;
     }
 
     Paginator.prototype.onUserChange = function(e, user) {
-      var _ref;
-      this.reset((user != null ? (_ref = user.project) != null ? _ref.classification_count : void 0 : void 0) || 0);
+      this.reset(this.typeCount());
       this.onFetch([]);
       if (user != null) {
         return this.goTo(1);
@@ -4746,6 +4743,11 @@ if (typeof module !== 'undefined') module.exports = template;
       return fetch.always(function() {
         return _this.el.removeClass('loading');
       });
+    };
+
+    Paginator.prototype.typeCount = function() {
+      var _ref, _ref1;
+      return ((_ref = User.current) != null ? (_ref1 = _ref.project) != null ? _ref1.classification_count : void 0 : void 0) || 0;
     };
 
     Paginator.prototype.onFetch = function(items) {
@@ -4809,7 +4811,7 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var $, BaseController, Favorite, LoginForm, Paginator, Profile, Recent, User, itemTemplate, template, _base, _base1,
+  var $, BaseController, Favorite, LoginForm, Paginator, Profile, ProfilePaginator, Recent, User, itemTemplate, template, _base, _base1, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -4842,6 +4844,24 @@ if (typeof module !== 'undefined') module.exports = template;
   User = zooniverse.models.User || require('../models/user');
 
   $ = window.jQuery;
+
+  ProfilePaginator = (function(_super) {
+    __extends(ProfilePaginator, _super);
+
+    function ProfilePaginator() {
+      _ref = ProfilePaginator.__super__.constructor.apply(this, arguments);
+      return _ref;
+    }
+
+    ProfilePaginator.prototype.typeCount = function() {
+      var count, _ref1, _ref2, _ref3, _ref4;
+      count = this.type === Recent ? (_ref1 = User.current) != null ? (_ref2 = _ref1.project) != null ? _ref2.classification_count : void 0 : void 0 : this.type === Favorite ? (_ref3 = User.current) != null ? (_ref4 = _ref3.project) != null ? _ref4.favorite_count : void 0 : void 0 : ProfilePaginator.__super__.typeCount.apply(this, arguments);
+      return count || 0;
+    };
+
+    return ProfilePaginator;
+
+  })(Paginator);
 
   Profile = (function(_super) {
     __extends(Profile, _super);
@@ -4876,14 +4896,14 @@ if (typeof module !== 'undefined') module.exports = template;
       this.loginForm = new LoginForm({
         el: this.el.find('.sign-in-form')
       });
-      this.recentsList = new Paginator({
+      this.recentsList = new ProfilePaginator({
         type: Recent,
         perPage: 12,
         className: "" + Paginator.prototype.className + " recents",
         el: this.el.find('.recents'),
         itemTemplate: this.recentTemplate
       });
-      this.favoritesList = new Paginator({
+      this.favoritesList = new ProfilePaginator({
         type: Favorite,
         perPage: 12,
         className: "" + Paginator.prototype.className + " favorites",
