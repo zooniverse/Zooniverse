@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.7.0
+ * Zooniverse Library - v0.7.1
  */
 ;(function(window) {
 window.base64 = {
@@ -4692,6 +4692,7 @@ if (typeof module !== 'undefined') module.exports = template;
       this.onItemDestroyed = __bind(this.onItemDestroyed, this);
       this.onItemFromClassification = __bind(this.onItemFromClassification, this);
       this.onFetchFail = __bind(this.onFetchFail, this);
+      this.addItemToContainer = __bind(this.addItemToContainer, this);
       this.onFetch = __bind(this.onFetch, this);
       this.onUserChange = __bind(this.onUserChange, this);
       Paginator.__super__.constructor.apply(this, arguments);
@@ -4751,14 +4752,13 @@ if (typeof module !== 'undefined') module.exports = template;
     };
 
     Paginator.prototype.onFetch = function(items) {
-      var item, itemEl, _i, _len, _results;
+      var item, _i, _len, _results;
       this.itemsContainer.empty();
       this.el.toggleClass('empty', items.length === 0);
       _results = [];
       for (_i = 0, _len = items.length; _i < _len; _i++) {
         item = items[_i];
-        itemEl = this.getItemEl(item);
-        _results.push(itemEl.prependTo(this.itemsContainer));
+        _results.push(this.addItemToContainer(item));
       }
       return _results;
     };
@@ -4776,15 +4776,20 @@ if (typeof module !== 'undefined') module.exports = template;
       return itemEl;
     };
 
+    Paginator.prototype.addItemToContainer = function(item) {
+      var itemEl;
+      itemEl = this.getItemEl(item);
+      itemEl.prependTo(this.itemsContainer);
+      return itemEl;
+    };
+
     Paginator.prototype.onFetchFail = function() {
       return this.el.addClass('failed');
     };
 
     Paginator.prototype.onItemFromClassification = function(e, item) {
-      var itemEl, _results;
-      itemEl = this.getItemEl(item);
-      itemEl.addClass('new');
-      itemEl.prependTo(this.itemsContainer);
+      var _results;
+      this.addItemToContainer(item).addClass('new');
       if (this.itemsContainer.children().length > this.perPage) {
         _results = [];
         while (this.itemsContainer.children().length !== this.perPage) {
