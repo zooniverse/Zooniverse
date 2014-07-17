@@ -67,9 +67,7 @@ class Paginator extends BaseController
     @itemsContainer.empty()
     @el.toggleClass 'empty', items.length is 0
 
-    for item in items
-      itemEl = @getItemEl item
-      itemEl.prependTo @itemsContainer
+    @addItemToContainer item for item in items
 
   getItemEl: (item) ->
     itemEl = @itemsContainer.find "[data-item-id='#{item.id}']"
@@ -85,13 +83,16 @@ class Paginator extends BaseController
 
     itemEl
 
+  addItemToContainer: (item) =>
+    itemEl = @getItemEl item
+    itemEl.prependTo @itemsContainer
+    itemEl
+
   onFetchFail: =>
     @el.addClass 'failed'
 
   onItemFromClassification: (e, item) =>
-    itemEl = @getItemEl item
-    itemEl.addClass 'new'
-    itemEl.prependTo @itemsContainer
+    @addItemToContainer(item).addClass 'new'
 
     if @itemsContainer.children().length > @perPage
       until @itemsContainer.children().length is @perPage
