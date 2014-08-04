@@ -100,6 +100,7 @@
         display: ''
       });
       this.el.attr('aria-hidden', 'false');
+      console.log(Dialog);
       Dialog.focussedElement = window.jQuery(':focus');
       return setTimeout(function() {
         _this.el.addClass('showing');
@@ -113,6 +114,7 @@
       if (Dialog.focussedElement.focus != null) {
         Dialog.focussedElement.focus();
       }
+      console.log(Dialog);
       return setTimeout(function() {
         _this.el.css({
           display: 'none'
