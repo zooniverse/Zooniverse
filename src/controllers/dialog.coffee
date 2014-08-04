@@ -75,7 +75,7 @@ class Dialog extends BaseController
 
   hide: ->
     @el.removeClass 'showing'
-    @focussedElement.focus()
+    @focussedElement.focus() if @focussedElement.focus?
     setTimeout => 
       @el.css display: 'none'
       @el.attr 'aria-hidden', 'true'

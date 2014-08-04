@@ -110,7 +110,9 @@
     Dialog.prototype.hide = function() {
       var _this = this;
       this.el.removeClass('showing');
-      this.focussedElement.focus();
+      if (this.focussedElement.focus != null) {
+        this.focussedElement.focus();
+      }
       return setTimeout(function() {
         _this.el.css({
           display: 'none'
