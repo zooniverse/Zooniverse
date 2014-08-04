@@ -61,7 +61,7 @@
       this.el.attr('aria-hidden', 'true');
       this.contentContainer.append(this.content);
       this.focusableContent = this.contentContainer.find('*').filter(focusableElementsSelector);
-      this.focussedElement = window.jQuery(':focus');
+      this.focussedElement = {};
       this.el.appendTo(document.body);
     }
 

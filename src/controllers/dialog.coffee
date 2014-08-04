@@ -38,7 +38,7 @@ class Dialog extends BaseController
     @contentContainer.append @content
     
     @focusableContent = @contentContainer.find('*').filter focusableElementsSelector
-    @focussedElement = window.jQuery ':focus'
+    @focussedElement = {}
 
     @el.appendTo document.body
 
