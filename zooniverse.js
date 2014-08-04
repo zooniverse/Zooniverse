@@ -3807,7 +3807,7 @@ if (typeof module !== 'undefined') module.exports = template;
     Dialog.prototype.hide = function() {
       var _this = this;
       this.el.removeClass('showing');
-      if (Dialog.focussedElement.focus != null) {
+      if ((Dialog.focussedElement.focus != null) && this.el.is(':visible')) {
         Dialog.focussedElement.focus();
       }
       return setTimeout(function() {
