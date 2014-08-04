@@ -3800,6 +3800,7 @@ if (typeof module !== 'undefined') module.exports = template;
       setTimeout(function() {
         return _this.el.addClass('showing');
       });
+      this.focussedElement = window.jQuery(':focus');
       return this.contentContainer.find('input, textarea, select').first().focus();
     };
 
