@@ -30,6 +30,7 @@ class Dialog extends BaseController
     @el.addClass 'error' if @error
     
     @el.attr 'role', 'dialog'
+    @el.attr 'aria-hidden', 'true'
     
     @contentContainer.append @content
 
@@ -41,6 +42,7 @@ class Dialog extends BaseController
   show: ->
     translate.refresh element for element in @el.get(0).querySelectorAll "[#{translate.attr}]"
     @el.css display: ''
+    @el.attr 'aria-hidden', 'false'
     setTimeout => @el.addClass 'showing'
     
     @focussedElement = window.jQuery ':focus'
@@ -51,6 +53,7 @@ class Dialog extends BaseController
     @el.removeClass 'showing'
     setTimeout (=> 
       @el.css display: 'none'
+      @el.attr 'aria-hidden', 'true'
       @focussedElement.focus()
     ), 500
 
