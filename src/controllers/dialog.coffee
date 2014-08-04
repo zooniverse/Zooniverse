@@ -52,16 +52,15 @@ class Dialog extends BaseController
       
       if evt.shiftKey
         # back tab
-      
+        
         if focusedIndex == 0 
-            @focusableContent.get(@focusableContent.length - 1).focus()
-            e.preventDefault()
+          @focusableContent.get(@focusableContent.length - 1).focus()
+          e.preventDefault()
         
         # forward tab
         if focusedIndex == @focusableContent.length - 1 {
-              @focusableContent.get(0).focus()
-              e.preventDefault()
-      
+          @focusableContent.get(0).focus()
+          e.preventDefault()
 
   show: ->
     translate.refresh element for element in @el.get(0).querySelectorAll "[#{translate.attr}]"
