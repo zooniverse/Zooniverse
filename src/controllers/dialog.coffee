@@ -28,6 +28,9 @@ class Dialog extends BaseController
     @el.css display: 'none' # Start hidden
     @el.addClass 'warning' if @warning
     @el.addClass 'error' if @error
+    
+    @el.attr 'role', 'dialog'
+    
     @contentContainer.append @content
 
     @el.appendTo document.body
