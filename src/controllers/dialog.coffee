@@ -49,15 +49,16 @@ class Dialog extends BaseController
       
       focusedElement = window.jQuery ':focus'
       focusedIndex = @focusableContent.index focusedElement
+      lastIndex = @focusableContent.length - 1
       
-      if evt.shiftKey
+      if e.shiftKey
         # back tab
         if focusedIndex == 0 
-          @focusableContent.get(@focusableContent.length - 1).focus()
+          @focusableContent.get(lastIndex).focus()
           e.preventDefault()
       else
         # forward tab
-        if focusedIndex == @focusableContent.length - 1
+        if focusedIndex == lastIndex
           @focusableContent.get(0).focus()
           e.preventDefault()
 
