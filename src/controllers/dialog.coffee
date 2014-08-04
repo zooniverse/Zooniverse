@@ -38,6 +38,7 @@ class Dialog extends BaseController
     @contentContainer.append @content
     
     @focusableContent = @contentContainer.find('*').filter focusableElementsSelector
+    @focussedElement = window.jQuery ':focus'
 
     @el.appendTo document.body
 
@@ -67,8 +68,6 @@ class Dialog extends BaseController
     @el.css display: ''
     @el.attr 'aria-hidden', 'false'
     setTimeout => @el.addClass 'showing'
-    
-    @focussedElement = window.jQuery ':focus'
 
     @contentContainer.find('input, textarea, select').first().focus()
 

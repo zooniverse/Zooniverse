@@ -61,6 +61,7 @@
       this.el.attr('aria-hidden', 'true');
       this.contentContainer.append(this.content);
       this.focusableContent = this.contentContainer.find('*').filter(focusableElementsSelector);
+      this.focussedElement = window.jQuery(':focus');
       this.el.appendTo(document.body);
     }
 
@@ -102,7 +103,6 @@
       setTimeout(function() {
         return _this.el.addClass('showing');
       });
-      this.focussedElement = window.jQuery(':focus');
       return this.contentContainer.find('input, textarea, select').first().focus();
     };
 
