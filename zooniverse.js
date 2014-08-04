@@ -3797,9 +3797,9 @@ if (typeof module !== 'undefined') module.exports = template;
         display: ''
       });
       this.el.attr('aria-hidden', 'false');
+      this.focussedElement = window.jQuery(':focus');
       return setTimeout(function() {
         _this.el.addClass('showing');
-        _this.focussedElement = window.jQuery(':focus');
         return _this.contentContainer.find('input, textarea, select').first().focus();
       }, 300);
     };
@@ -3807,12 +3807,12 @@ if (typeof module !== 'undefined') module.exports = template;
     Dialog.prototype.hide = function() {
       var _this = this;
       this.el.removeClass('showing');
+      this.focussedElement.focus();
       return setTimeout(function() {
         _this.el.css({
           display: 'none'
         });
-        _this.el.attr('aria-hidden', 'true');
-        return _this.focussedElement.focus();
+        return _this.el.attr('aria-hidden', 'true');
       }, 500);
     };
 
