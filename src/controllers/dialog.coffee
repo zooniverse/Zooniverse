@@ -73,11 +73,11 @@ class Dialog extends BaseController
 
   hide: ->
     @el.removeClass 'showing'
-    setTimeout (=> 
+    setTimeout => 
       @el.css display: 'none'
       @el.attr 'aria-hidden', 'true'
       @focussedElement.focus()
-    ), 500
+    , 500
 
 window.zooniverse.controllers.Dialog = Dialog
 module?.exports = Dialog
