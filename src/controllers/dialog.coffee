@@ -67,7 +67,7 @@ class Dialog extends BaseController
     translate.refresh element for element in @el.get(0).querySelectorAll "[#{translate.attr}]"
     @el.css display: ''
     @el.attr 'aria-hidden', 'false'
-    console.log Dialog
+    console.log Dialog.focussedElement
     Dialog.focussedElement = window.jQuery ':focus'
     setTimeout => 
       @el.addClass 'showing'
@@ -77,7 +77,7 @@ class Dialog extends BaseController
   hide: ->
     @el.removeClass 'showing'
     Dialog.focussedElement.focus() if Dialog.focussedElement.focus?
-    console.log Dialog
+    console.log Dialog.focussedElement
     setTimeout => 
       @el.css display: 'none'
       @el.attr 'aria-hidden', 'true'
