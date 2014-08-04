@@ -69,6 +69,7 @@ class Dialog extends BaseController
     @el.attr 'aria-hidden', 'false'
     setTimeout => @el.addClass 'showing'
 
+    @focussedElement = window.jQuery ':focus'
     @contentContainer.find('input, textarea, select').first().focus()
 
   hide: ->
