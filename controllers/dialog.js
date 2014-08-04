@@ -61,7 +61,7 @@
       this.el.attr('aria-hidden', 'true');
       this.contentContainer.append(this.content);
       this.focusableContent = this.contentContainer.find('*').filter(focusableElementsSelector);
-      this.focussedElement = {};
+      Dialog.focussedElement = {};
       this.el.appendTo(document.body);
     }
 
@@ -100,7 +100,7 @@
         display: ''
       });
       this.el.attr('aria-hidden', 'false');
-      this.focussedElement = window.jQuery(':focus');
+      Dialog.focussedElement = window.jQuery(':focus');
       return setTimeout(function() {
         _this.el.addClass('showing');
         return _this.contentContainer.find('input, textarea, select').first().focus();
@@ -110,8 +110,8 @@
     Dialog.prototype.hide = function() {
       var _this = this;
       this.el.removeClass('showing');
-      if (this.focussedElement.focus != null) {
-        this.focussedElement.focus();
+      if (Dialog.focussedElement.focus != null) {
+        Dialog.focussedElement.focus();
       }
       return setTimeout(function() {
         _this.el.css({
