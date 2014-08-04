@@ -45,7 +45,7 @@ class Dialog extends BaseController
     @hide() if e.which is 27 # ESC
     
     #prevent tabbing to elements outside of the dialog
-    if e.which is 9
+    if e.which == 9
       
       focusedElement = window.jQuery ':focus'
       focusedIndex = @focusableContent.index focusedElement
@@ -57,7 +57,7 @@ class Dialog extends BaseController
           e.preventDefault()
       else
         # forward tab
-        if focusedIndex == @focusableContent.length - 1 {
+        if focusedIndex == @focusableContent.length - 1
           @focusableContent.get(0).focus()
           e.preventDefault()
 
