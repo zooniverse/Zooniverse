@@ -100,7 +100,6 @@
         display: ''
       });
       this.el.attr('aria-hidden', 'false');
-      console.log(Dialog.focussedElement);
       Dialog.focussedElement = window.jQuery(':focus');
       return setTimeout(function() {
         _this.el.addClass('showing');
@@ -111,10 +110,9 @@
     Dialog.prototype.hide = function() {
       var _this = this;
       this.el.removeClass('showing');
-      if (Dialog.focussedElement.focus != null) {
+      if ((Dialog.focussedElement.focus != null) && this.el.is(':visible')) {
         Dialog.focussedElement.focus();
       }
-      console.log(Dialog.focussedElement);
       return setTimeout(function() {
         _this.el.css({
           display: 'none'
