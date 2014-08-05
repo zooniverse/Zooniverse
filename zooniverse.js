@@ -3697,7 +3697,7 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var BaseController, Dialog, template, translate, _base, _base1,
+  var BaseController, Dialog, focusableElementsSelector, template, translate, _base, _base1,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -3718,6 +3718,8 @@ if (typeof module !== 'undefined') module.exports = template;
   template = zooniverse.views.dialog || require('../views/dialog');
 
   translate = zooniverse.translate || require('../lib/translate');
+
+  focusableElementsSelector = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]";
 
   Dialog = (function(_super) {
     __extends(Dialog, _super);
@@ -3752,15 +3754,34 @@ if (typeof module !== 'undefined') module.exports = template;
       if (this.error) {
         this.el.addClass('error');
       }
+      this.el.attr('role', 'dialog');
+      this.el.attr('aria-hidden', 'true');
       this.contentContainer.append(this.content);
+      this.focusableContent = this.contentContainer.find('*').filter(focusableElementsSelector);
+      Dialog.focussedElement = {};
       this.el.appendTo(document.body);
     }
 
-    Dialog.prototype.onKeyDown = function(_arg) {
-      var which;
-      which = _arg.which;
-      if (which === 27) {
-        return this.hide();
+    Dialog.prototype.onKeyDown = function(e) {
+      var focusedElement, focusedIndex, lastIndex;
+      if (e.which === 27) {
+        this.hide();
+      }
+      if (e.which === 9) {
+        focusedElement = window.jQuery(':focus');
+        focusedIndex = this.focusableContent.index(focusedElement);
+        lastIndex = this.focusableContent.length - 1;
+        if (e.shiftKey) {
+          if (focusedIndex === 0) {
+            this.focusableContent.get(lastIndex).focus();
+            return e.preventDefault();
+          }
+        } else {
+          if (focusedIndex === lastIndex) {
+            this.focusableContent.get(0).focus();
+            return e.preventDefault();
+          }
+        }
       }
     };
 
@@ -3775,20 +3796,26 @@ if (typeof module !== 'undefined') module.exports = template;
       this.el.css({
         display: ''
       });
-      setTimeout(function() {
-        return _this.el.addClass('showing');
-      });
-      return this.contentContainer.find('input, textarea, select').first().focus();
+      this.el.attr('aria-hidden', 'false');
+      Dialog.focussedElement = window.jQuery(':focus');
+      return setTimeout(function() {
+        _this.el.addClass('showing');
+        return _this.contentContainer.find('input, textarea, select').first().focus();
+      }, 300);
     };
 
     Dialog.prototype.hide = function() {
       var _this = this;
       this.el.removeClass('showing');
-      return setTimeout((function() {
-        return _this.el.css({
+      if ((Dialog.focussedElement.focus != null) && this.el.is(':visible')) {
+        Dialog.focussedElement.focus();
+      }
+      return setTimeout(function() {
+        _this.el.css({
           display: 'none'
         });
-      }), 500);
+        return _this.el.attr('aria-hidden', 'true');
+      }, 500);
     };
 
     return Dialog;
