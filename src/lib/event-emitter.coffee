@@ -21,7 +21,7 @@ class EventEmitter
     if logTriggers
       console?.info @name || @.toString(), eventName.toUpperCase(), args
 
-    @jQueryEventProxy ?= $({})
+    @jQueryEventProxy = $({}) unless @jQueryEventProxy instanceof $
     @jQueryEventProxy.trigger arguments...
     @constructor.trigger? eventName, [@].concat args
 
