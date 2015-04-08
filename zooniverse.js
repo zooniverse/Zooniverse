@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.7.1
+ * Zooniverse Library - v0.7.4
  */
 ;(function(window) {
 window.base64 = {
@@ -622,7 +622,7 @@ window.base64 = {
           console.info(this.name || this.toString(), eventName.toUpperCase(), args);
         }
       }
-      if (this.jQueryEventProxy == null) {
+      if (!(this.jQueryEventProxy instanceof $)) {
         this.jQueryEventProxy = $({});
       }
       (_ref = this.jQueryEventProxy).trigger.apply(_ref, arguments);
@@ -659,7 +659,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var $, EventEmitter, ProxyFrame, beta, demo, flaggedHost, highPort, html, messageId, _ref,
+  var $, EventEmitter, ProxyFrame, beta, demo, flaggedHost, highPort, html, messageId, preview, _ref,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -680,6 +680,8 @@ window.base64 = {
 
   beta = !!~location.pathname.indexOf('beta');
 
+  preview = !!~location.hostname.indexOf('preview');
+
   highPort = +location.port >= 1024;
 
   flaggedHost = (_ref = location.search.match(/api=([^&]+)/)) != null ? _ref[1] : void 0;
@@ -693,7 +695,7 @@ window.base64 = {
 
     ProxyFrame.REJECTION = 'ProxyFrame not connected';
 
-    ProxyFrame.prototype.host = flaggedHost || ("https://" + (demo || beta || highPort ? 'dev' : 'api') + ".zooniverse.org");
+    ProxyFrame.prototype.host = flaggedHost || ("https://" + (demo || beta || highPort || preview ? 'dev' : 'api') + ".zooniverse.org");
 
     ProxyFrame.prototype.path = '/proxy';
 
@@ -1133,7 +1135,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var LanguageManager, translate, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+  var LanguageManager, translate, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __slice = [].slice;
 
   LanguageManager = ((_ref = window.zooniverse) != null ? _ref.LanguageManager : void 0) || require('./language-manager');
@@ -1163,15 +1165,16 @@ window.base64 = {
     zh_cn: ((_ref13 = window.zooniverse) != null ? (_ref14 = _ref13.translations) != null ? _ref14.zh_cn : void 0 : void 0) || require('../translations/zh-cn'),
     de: ((_ref15 = window.zooniverse) != null ? (_ref16 = _ref15.translations) != null ? _ref16.de : void 0 : void 0) || require('../translations/de'),
     cs: ((_ref17 = window.zooniverse) != null ? (_ref18 = _ref17.translations) != null ? _ref18.cs : void 0 : void 0) || require('../translations/cs'),
-    ro: ((_ref19 = window.zooniverse) != null ? (_ref20 = _ref19.translations) != null ? _ref20.ro : void 0 : void 0) || require('../translations/ro')
+    ro: ((_ref19 = window.zooniverse) != null ? (_ref20 = _ref19.translations) != null ? _ref20.ro : void 0 : void 0) || require('../translations/ro'),
+    ja: ((_ref21 = window.zooniverse) != null ? (_ref22 = _ref21.translations) != null ? _ref22.ja : void 0 : void 0) || require('../translations/ja')
   };
 
   translate.refresh = function(element, key) {
-    var name, property, string, value, _i, _len, _ref21, _ref22, _ref23, _ref24, _ref25, _results;
-    _ref21 = element.attributes;
+    var name, property, string, value, _i, _len, _ref23, _ref24, _ref25, _ref26, _ref27, _results;
+    _ref23 = element.attributes;
     _results = [];
-    for (_i = 0, _len = _ref21.length; _i < _len; _i++) {
-      _ref22 = _ref21[_i], name = _ref22.name, value = _ref22.value;
+    for (_i = 0, _len = _ref23.length; _i < _len; _i++) {
+      _ref24 = _ref23[_i], name = _ref24.name, value = _ref24.value;
       if (name.slice(0, translate.attr.length) !== translate.attr) {
         continue;
       }
@@ -1179,8 +1182,8 @@ window.base64 = {
         continue;
       }
       property = name.slice(translate.attr.length + 1) || 'innerHTML';
-      string = (_ref23 = translate.strings[(_ref24 = LanguageManager.current) != null ? _ref24.code : void 0]) != null ? _ref23[value] : void 0;
-      string || (string = (_ref25 = translate.strings[LanguageManager.defaultLocale]) != null ? _ref25[value] : void 0);
+      string = (_ref25 = translate.strings[(_ref26 = LanguageManager.current) != null ? _ref26.code : void 0]) != null ? _ref25[value] : void 0;
+      string || (string = (_ref27 = translate.strings[LanguageManager.defaultLocale]) != null ? _ref27[value] : void 0);
       string || (string = value);
       if (element.hasAttribute(property)) {
         _results.push(element.setAttribute(property, string));
@@ -1192,11 +1195,11 @@ window.base64 = {
   };
 
   LanguageManager.on('change-language', function() {
-    var element, _i, _len, _ref21, _results;
-    _ref21 = document.querySelectorAll("[" + translate.attr + "]");
+    var element, _i, _len, _ref23, _results;
+    _ref23 = document.querySelectorAll("[" + translate.attr + "]");
     _results = [];
-    for (_i = 0, _len = _ref21.length; _i < _len; _i++) {
-      element = _ref21[_i];
+    for (_i = 0, _len = _ref23.length; _i < _len; _i++) {
+      element = _ref23[_i];
       _results.push(translate.refresh(element));
     }
     return _results;
