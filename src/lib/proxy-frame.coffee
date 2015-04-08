@@ -9,7 +9,7 @@ messageId = -1
 
 demo = !!~location.hostname.indexOf 'demo'
 beta = !!~location.pathname.indexOf 'beta'
-preview = !!~location.pathname.indexOf 'preview'
+preview = !!~location.hostname.indexOf 'preview'
 highPort = +location.port >= 1024
 flaggedHost = location.search.match(/api=([^&]+)/)?[1]
 flaggedHost = "//#{flaggedHost}" if flaggedHost? and not !!~flaggedHost.indexOf '//'
