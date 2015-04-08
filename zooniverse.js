@@ -680,7 +680,7 @@ window.base64 = {
 
   beta = !!~location.pathname.indexOf('beta');
 
-  preview = !!~location.pathname.indexOf('preview');
+  preview = !!~location.hostname.indexOf('preview');
 
   highPort = +location.port >= 1024;
 
