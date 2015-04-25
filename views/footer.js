@@ -78,11 +78,19 @@ template = function(__obj) {
         __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <!--div class="zooniverse-footer-category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="zooniverse-footer-category">\n      <a href="https://www.zooniverse.org/privacy">');
+      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <div class="zooniverse-footer-category">\n      <a href="');
+    
+      __out.push(this.privacyLink);
+    
+      __out.push('">');
     
       __out.push(translate('privacyPolicy'));
     
-      __out.push('</a>\n    </div>\n\n    <div class="zooniverse-footer-category">\n      <a href="https://github.com/zooniverse">');
+      __out.push('</a>\n    </div>\n\n    <div class="zooniverse-footer-category">\n      <a href="');
+    
+      __out.push(this.sourceLink);
+    
+      __out.push('">');
     
       __out.push(translate('forkOnGitHub'));
     

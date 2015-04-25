@@ -25,13 +25,12 @@
   <% end %>
 
   <div class="zooniverse-footer-general">
-    <!--div class="zooniverse-footer-category"><a href="#">Zooniverse Daily</a></div-->
     <div class="zooniverse-footer-category">
-      <a href="https://www.zooniverse.org/privacy"><%- translate 'privacyPolicy' %></a>
+      <a href="<%- @privacyLink %>"><%- translate 'privacyPolicy' %></a>
     </div>
 
     <div class="zooniverse-footer-category">
-      <a href="https://github.com/zooniverse"><%- translate 'forkOnGitHub' %></a>
+      <a href="<%- @sourceLink %>"><%- translate 'forkOnGitHub' %></a>
     </div>
   </div>
 </div>

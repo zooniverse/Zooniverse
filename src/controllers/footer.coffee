@@ -2,34 +2,32 @@ window.zooniverse ?= {}
 window.zooniverse.controllers ?= {}
 window.zooniverse.views ?= {}
 
-template = window.zooniverse.views.footer || require '../views/footer'
-
 $ = window.jQuery
-
-$window = $(window)
-
-window.DEFINE_ZOONIVERSE_PROJECT_LIST = (categories) ->
-  $window.trigger 'get-zooniverse-project-list', [categories]
 
 class Footer
   el: null
+  template: window.zooniverse.views.footer || require '../views/footer'
 
-  projectScript: 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.js'
+  projectJsonUrl: 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.json'
 
-  constructor: ->
+  sourceLink: 'https://github.com/zooniverse'
+  privacyLink: 'https://www.zooniverse.org/privacy'
+
+  constructor: (params) ->
+    @[key] = value for key, value of params
+
     @el = $(document.createElement 'div')
     @el.addClass 'zooniverse-footer'
-    @el.html template
-
-    $window.on 'get-zooniverse-project-list', @onFetch
+    @render()
 
     @fetchProjects()
 
-  fetchProjects: ->
-    $.getScript @projectScript
+  fetchProjects: =>
+    $.getJSON @projectJsonUrl, (@categories) =>
+      @render()
 
-  onFetch: (e, categories) =>
-    @el.html template {categories}
+  render: =>
+    @el.html @template @
 
 window.zooniverse.controllers.Footer = Footer
 module?.exports = Footer
