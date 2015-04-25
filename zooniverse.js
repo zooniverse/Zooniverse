@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.7.4
+ * Zooniverse Library - v0.8.0
  */
 ;(function(window) {
 window.base64 = {
@@ -3391,11 +3391,19 @@ template = function(__obj) {
         __out.push('\n    </div>\n  ');
       }
     
-      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <!--div class="zooniverse-footer-category"><a href="#">Zooniverse Daily</a></div-->\n    <div class="zooniverse-footer-category">\n      <a href="https://www.zooniverse.org/privacy">');
+      __out.push('\n\n  <div class="zooniverse-footer-general">\n    <div class="zooniverse-footer-category">\n      <a href="');
+    
+      __out.push(this.privacyLink);
+    
+      __out.push('">');
     
       __out.push(translate('privacyPolicy'));
     
-      __out.push('</a>\n    </div>\n\n    <div class="zooniverse-footer-category">\n      <a href="https://github.com/zooniverse">');
+      __out.push('</a>\n    </div>\n\n    <div class="zooniverse-footer-category">\n      <a href="');
+    
+      __out.push(this.sourceLink);
+    
+      __out.push('">');
     
       __out.push(translate('forkOnGitHub'));
     
@@ -4988,7 +4996,7 @@ if (typeof module !== 'undefined') module.exports = template;
 }).call(this);
 
 (function() {
-  var $, $window, Footer, template, _base, _base1,
+  var $, Footer, _base, _base1,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   if (window.zooniverse == null) {
@@ -5003,38 +5011,43 @@ if (typeof module !== 'undefined') module.exports = template;
     _base1.views = {};
   }
 
-  template = window.zooniverse.views.footer || require('../views/footer');
-
   $ = window.jQuery;
-
-  $window = $(window);
-
-  window.DEFINE_ZOONIVERSE_PROJECT_LIST = function(categories) {
-    return $window.trigger('get-zooniverse-project-list', [categories]);
-  };
 
   Footer = (function() {
     Footer.prototype.el = null;
 
-    Footer.prototype.projectScript = 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.js';
+    Footer.prototype.template = window.zooniverse.views.footer || require('../views/footer');
 
-    function Footer() {
-      this.onFetch = __bind(this.onFetch, this);
+    Footer.prototype.projectJsonUrl = 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.json';
+
+    Footer.prototype.sourceLink = 'https://github.com/zooniverse';
+
+    Footer.prototype.privacyLink = 'https://www.zooniverse.org/privacy';
+
+    function Footer(params) {
+      this.render = __bind(this.render, this);
+      this.fetchProjects = __bind(this.fetchProjects, this);
+      var key, value;
+      for (key in params) {
+        value = params[key];
+        this[key] = value;
+      }
       this.el = $(document.createElement('div'));
       this.el.addClass('zooniverse-footer');
-      this.el.html(template);
-      $window.on('get-zooniverse-project-list', this.onFetch);
+      this.render();
       this.fetchProjects();
     }
 
     Footer.prototype.fetchProjects = function() {
-      return $.getScript(this.projectScript);
+      var _this = this;
+      return $.getJSON(this.projectJsonUrl, function(categories) {
+        _this.categories = categories;
+        return _this.render();
+      });
     };
 
-    Footer.prototype.onFetch = function(e, categories) {
-      return this.el.html(template({
-        categories: categories
-      }));
+    Footer.prototype.render = function() {
+      return this.el.html(this.template(this));
     };
 
     return Footer;
