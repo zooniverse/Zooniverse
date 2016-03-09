@@ -1,6 +1,6 @@
 {
   "name": "zooniverse",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "devDependencies": {
     "chai": "~1.9.1",
     "chai-jquery": "~1.2.1",

@@ -13,7 +13,7 @@
     password: 'Password',
     email: 'Email',
     realName: 'Nome reale',
-    whyRealName: 'Questo verra\' utilizzato per ringraziare i collaboratori, ad esempio, in presentazioni e posters. Se non vuoi che il tuo nome venga utilizzato in pubblico, lascia questo spazio vuoto.', 
+    whyRealName: 'Questo verra\' utilizzato per ringraziare i collaboratori, ad esempio, in presentazioni e posters. Se non vuoi che il tuo nome venga utilizzato in pubblico, lascia questo spazio vuoto.',
     noAccount: 'Non hai un profilo?',
     agreeToPrivacyPolicy: 'Accetto <a href="https://www.zooniverse.org/privacy" target="_blank">le norme sulla Privacy</a>.',
     betaPreference: 'Vorrei ricevere notifiche per testare e commentare su progetti Zooniverse non ancora pubblicati.',

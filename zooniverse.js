@@ -1,5 +1,5 @@
 /*!
- * Zooniverse Library - v0.8.0
+ * Zooniverse Library - v0.8.1
  */
 ;(function(window) {
 window.base64 = {
@@ -575,6 +575,52 @@ window.base64 = {
 }).call(this);
 
 (function() {
+  var it, _base;
+
+  it = {
+    topBarHeading: 'Un progetto Zooniverse',
+    signUpHeading: 'Crea un profilo Zooniverse',
+    signInHeading: 'Accedi al tuo profilo Zooniverse',
+    signUp: 'Registrati',
+    signIn: 'Accedi',
+    signOut: 'Esci',
+    username: 'Username',
+    password: 'Password',
+    email: 'Email',
+    realName: 'Nome reale',
+    whyRealName: 'Questo verra\' utilizzato per ringraziare i collaboratori, ad esempio, in presentazioni e posters. Se non vuoi che il tuo nome venga utilizzato in pubblico, lascia questo spazio vuoto.',
+    noAccount: 'Non hai un profilo?',
+    agreeToPrivacyPolicy: 'Accetto <a href="https://www.zooniverse.org/privacy" target="_blank">le norme sulla Privacy</a>.',
+    betaPreference: 'Vorrei ricevere notifiche per testare e commentare su progetti Zooniverse non ancora pubblicati.',
+    forgotPassword: 'Hai dimenticato la tua password?',
+    badLogin: 'Username or password incorretti',
+    signInFailed: 'Errore di registrazione',
+    signInForProfile: 'Accedi al tuo profilo.',
+    footerHeading: 'Zooniverse è una raccolta di progetti web di Citizen Science basati sull\'utilizzo di volontari che aiutano i ricercatori nel gestire flussi di dati.',
+    privacyPolicy: 'Privacy',
+    forkOnGitHub: 'Codice & errori',
+    recents: 'Recenti',
+    favorites: 'Favoriti',
+    none: 'Non presente'
+  };
+
+  if (window.zooniverse == null) {
+    window.zooniverse = {};
+  }
+
+  if ((_base = window.zooniverse).translations == null) {
+    _base.translations = {};
+  }
+
+  window.zooniverse.translations.it = it;
+
+  if (typeof module !== "undefined" && module !== null) {
+    module.exports = it;
+  }
+
+}).call(this);
+
+(function() {
   var $, EventEmitter, logTriggers,
     __hasProp = {}.hasOwnProperty;
 
@@ -1135,7 +1181,7 @@ window.base64 = {
 }).call(this);
 
 (function() {
-  var LanguageManager, translate, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+  var LanguageManager, translate, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref19, _ref2, _ref20, _ref21, _ref22, _ref23, _ref24, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __slice = [].slice;
 
   LanguageManager = ((_ref = window.zooniverse) != null ? _ref.LanguageManager : void 0) || require('./language-manager');
@@ -1159,22 +1205,23 @@ window.base64 = {
     en: ((_ref1 = window.zooniverse) != null ? (_ref2 = _ref1.translations) != null ? _ref2.en : void 0 : void 0) || require('../translations/en'),
     es: ((_ref3 = window.zooniverse) != null ? (_ref4 = _ref3.translations) != null ? _ref4.es : void 0 : void 0) || require('../translations/es'),
     fr: ((_ref5 = window.zooniverse) != null ? (_ref6 = _ref5.translations) != null ? _ref6.fr : void 0 : void 0) || require('../translations/fr'),
-    pl: ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.translations) != null ? _ref8.pl : void 0 : void 0) || require('../translations/pl'),
-    ru: ((_ref9 = window.zooniverse) != null ? (_ref10 = _ref9.translations) != null ? _ref10.ru : void 0 : void 0) || require('../translations/ru'),
-    zh_tw: ((_ref11 = window.zooniverse) != null ? (_ref12 = _ref11.translations) != null ? _ref12.zh_tw : void 0 : void 0) || require('../translations/zh-tw'),
-    zh_cn: ((_ref13 = window.zooniverse) != null ? (_ref14 = _ref13.translations) != null ? _ref14.zh_cn : void 0 : void 0) || require('../translations/zh-cn'),
-    de: ((_ref15 = window.zooniverse) != null ? (_ref16 = _ref15.translations) != null ? _ref16.de : void 0 : void 0) || require('../translations/de'),
-    cs: ((_ref17 = window.zooniverse) != null ? (_ref18 = _ref17.translations) != null ? _ref18.cs : void 0 : void 0) || require('../translations/cs'),
-    ro: ((_ref19 = window.zooniverse) != null ? (_ref20 = _ref19.translations) != null ? _ref20.ro : void 0 : void 0) || require('../translations/ro'),
-    ja: ((_ref21 = window.zooniverse) != null ? (_ref22 = _ref21.translations) != null ? _ref22.ja : void 0 : void 0) || require('../translations/ja')
+    it: ((_ref7 = window.zooniverse) != null ? (_ref8 = _ref7.translations) != null ? _ref8.it : void 0 : void 0) || require('../translations/it'),
+    pl: ((_ref9 = window.zooniverse) != null ? (_ref10 = _ref9.translations) != null ? _ref10.pl : void 0 : void 0) || require('../translations/pl'),
+    ru: ((_ref11 = window.zooniverse) != null ? (_ref12 = _ref11.translations) != null ? _ref12.ru : void 0 : void 0) || require('../translations/ru'),
+    zh_tw: ((_ref13 = window.zooniverse) != null ? (_ref14 = _ref13.translations) != null ? _ref14.zh_tw : void 0 : void 0) || require('../translations/zh-tw'),
+    zh_cn: ((_ref15 = window.zooniverse) != null ? (_ref16 = _ref15.translations) != null ? _ref16.zh_cn : void 0 : void 0) || require('../translations/zh-cn'),
+    de: ((_ref17 = window.zooniverse) != null ? (_ref18 = _ref17.translations) != null ? _ref18.de : void 0 : void 0) || require('../translations/de'),
+    cs: ((_ref19 = window.zooniverse) != null ? (_ref20 = _ref19.translations) != null ? _ref20.cs : void 0 : void 0) || require('../translations/cs'),
+    ro: ((_ref21 = window.zooniverse) != null ? (_ref22 = _ref21.translations) != null ? _ref22.ro : void 0 : void 0) || require('../translations/ro'),
+    ja: ((_ref23 = window.zooniverse) != null ? (_ref24 = _ref23.translations) != null ? _ref24.ja : void 0 : void 0) || require('../translations/ja')
   };
 
   translate.refresh = function(element, key) {
-    var name, property, string, value, _i, _len, _ref23, _ref24, _ref25, _ref26, _ref27, _results;
-    _ref23 = element.attributes;
+    var name, property, string, value, _i, _len, _ref25, _ref26, _ref27, _ref28, _ref29, _results;
+    _ref25 = element.attributes;
     _results = [];
-    for (_i = 0, _len = _ref23.length; _i < _len; _i++) {
-      _ref24 = _ref23[_i], name = _ref24.name, value = _ref24.value;
+    for (_i = 0, _len = _ref25.length; _i < _len; _i++) {
+      _ref26 = _ref25[_i], name = _ref26.name, value = _ref26.value;
       if (name.slice(0, translate.attr.length) !== translate.attr) {
         continue;
       }
@@ -1182,8 +1229,8 @@ window.base64 = {
         continue;
       }
       property = name.slice(translate.attr.length + 1) || 'innerHTML';
-      string = (_ref25 = translate.strings[(_ref26 = LanguageManager.current) != null ? _ref26.code : void 0]) != null ? _ref25[value] : void 0;
-      string || (string = (_ref27 = translate.strings[LanguageManager.defaultLocale]) != null ? _ref27[value] : void 0);
+      string = (_ref27 = translate.strings[(_ref28 = LanguageManager.current) != null ? _ref28.code : void 0]) != null ? _ref27[value] : void 0;
+      string || (string = (_ref29 = translate.strings[LanguageManager.defaultLocale]) != null ? _ref29[value] : void 0);
       string || (string = value);
       if (element.hasAttribute(property)) {
         _results.push(element.setAttribute(property, string));
@@ -1195,11 +1242,11 @@ window.base64 = {
   };
 
   LanguageManager.on('change-language', function() {
-    var element, _i, _len, _ref23, _results;
-    _ref23 = document.querySelectorAll("[" + translate.attr + "]");
+    var element, _i, _len, _ref25, _results;
+    _ref25 = document.querySelectorAll("[" + translate.attr + "]");
     _results = [];
-    for (_i = 0, _len = _ref23.length; _i < _len; _i++) {
-      element = _ref23[_i];
+    for (_i = 0, _len = _ref25.length; _i < _len; _i++) {
+      element = _ref25[_i];
       _results.push(translate.refresh(element));
     }
     return _results;
