@@ -22,7 +22,7 @@
 
     Footer.prototype.template = window.zooniverse.views.footer || require('../views/footer');
 
-    Footer.prototype.projectJsonUrl = 'https://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.json';
+    Footer.prototype.projectJsonUrl = 'https://zooniverse-demo.s3.amazonaws.com/projects.json';
 
     Footer.prototype.sourceLink = 'https://github.com/zooniverse';
 
