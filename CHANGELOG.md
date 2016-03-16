@@ -1,5 +1,9 @@
 # Change Log
 
+## [v0.8.6](https://github.com/zooniverse/Zooniverse/tree/v0.8.6) (2016-03-16)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.8.5...v0.8.6)
+
 ## [v0.8.5](https://github.com/zooniverse/Zooniverse/tree/v0.8.5) (2016-03-10)
 
 [Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.8.1...v0.8.5)
