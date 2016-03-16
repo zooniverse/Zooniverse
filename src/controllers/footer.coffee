@@ -8,7 +8,7 @@ class Footer
   el: null
   template: window.zooniverse.views.footer || require '../views/footer'
 
-  projectJsonUrl: 'http://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.json'
+  projectJsonUrl: 'https://zooniverse-demo.s3-website-us-east-1.amazonaws.com/projects.json'
 
   sourceLink: 'https://github.com/zooniverse'
   privacyLink: 'https://www.zooniverse.org/privacy'
