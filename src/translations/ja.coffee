@@ -26,5 +26,5 @@ ja =
 
 window.zooniverse ?= {}
 window.zooniverse.translations ?= {}
-window.zooniverse.translations.en = ja
+window.zooniverse.translations.ja = ja
 module?.exports = ja

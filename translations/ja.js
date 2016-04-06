@@ -37,7 +37,7 @@
     _base.translations = {};
   }
 
-  window.zooniverse.translations.en = ja;
+  window.zooniverse.translations.ja = ja;
 
   if (typeof module !== "undefined" && module !== null) {
     module.exports = ja;
