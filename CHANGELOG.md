@@ -1,5 +1,21 @@
 # Change Log
 
+## [0.8.10](https://github.com/zooniverse/Zooniverse/tree/0.8.10) (2016-04-06)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.8.9...0.8.10)
+
+## [v0.8.9](https://github.com/zooniverse/Zooniverse/tree/v0.8.9) (2016-03-16)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.8.7...v0.8.9)
+
+## [v0.8.7](https://github.com/zooniverse/Zooniverse/tree/v0.8.7) (2016-03-16)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.8.6...v0.8.7)
+
+**Merged pull requests:**
+
+- Load projects.json over SSL [\#47](https://github.com/zooniverse/Zooniverse/pull/47) ([astopy](https://github.com/astopy))
+
 ## [v0.8.6](https://github.com/zooniverse/Zooniverse/tree/v0.8.6) (2016-03-16)
 
 [Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.8.5...v0.8.6)
@@ -24,17 +40,37 @@
 
 ## [v0.8.0](https://github.com/zooniverse/Zooniverse/tree/v0.8.0) (2015-04-25)
 
-[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.7.1...v0.8.0)
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/0.7.5...v0.8.0)
 
-**Closed issues:**
+## [0.7.5](https://github.com/zooniverse/Zooniverse/tree/0.7.5) (2015-04-08)
 
-- Change Zooniverse footer [\#44](https://github.com/zooniverse/Zooniverse/issues/44)
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/0.7.4...0.7.5)
 
 **Merged pull requests:**
 
 - Preview check [\#45](https://github.com/zooniverse/Zooniverse/pull/45) ([eatyourgreens](https://github.com/eatyourgreens))
 
+## [0.7.4](https://github.com/zooniverse/Zooniverse/tree/0.7.4) (2015-03-20)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/0.7.3...0.7.4)
+
+**Closed issues:**
+
+- Change Zooniverse footer [\#44](https://github.com/zooniverse/Zooniverse/issues/44)
+
+## [0.7.3](https://github.com/zooniverse/Zooniverse/tree/0.7.3) (2015-02-04)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/0.7.2...0.7.3)
+
+**Merged pull requests:**
+
 - A11y [\#43](https://github.com/zooniverse/Zooniverse/pull/43) ([eatyourgreens](https://github.com/eatyourgreens))
+
+## [0.7.2](https://github.com/zooniverse/Zooniverse/tree/0.7.2) (2014-11-05)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.7.1...0.7.2)
+
+**Merged pull requests:**
 
 - A11y [\#42](https://github.com/zooniverse/Zooniverse/pull/42) ([eatyourgreens](https://github.com/eatyourgreens))
 
