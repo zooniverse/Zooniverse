@@ -14,6 +14,7 @@ buildModules = [
   'src/translations/en.coffee'
   'src/translations/es.coffee'
   'src/translations/fr.coffee'
+  'src/translations/el.coffee'
   'src/translations/pl.coffee'
   'src/translations/ru.coffee'
   'src/translations/zh-tw.coffee'
