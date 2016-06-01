@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.8.11](https://github.com/zooniverse/Zooniverse/tree/v0.8.11) (2016-06-01)
+
+[Full Changelog](https://github.com/zooniverse/Zooniverse/compare/0.8.10...v0.8.11)
+
+**Merged pull requests:**
+
+- Add Greek translations [\#50](https://github.com/zooniverse/Zooniverse/pull/50) ([eatyourgreens](https://github.com/eatyourgreens))
+
 ## [0.8.10](https://github.com/zooniverse/Zooniverse/tree/0.8.10) (2016-04-06)
 
 [Full Changelog](https://github.com/zooniverse/Zooniverse/compare/v0.8.9...0.8.10)
