@@ -22,6 +22,7 @@ translate.strings =
   cs: window.zooniverse?.translations?.cs || require '../translations/cs'
   ro: window.zooniverse?.translations?.ro || require '../translations/ro'
   ja: window.zooniverse?.translations?.ja || require '../translations/ja'
+  el: window.zooniverse?.translations?.el || require '../translations/el'
 
 translate.refresh = (element, key) ->
   for {name, value} in element.attributes
