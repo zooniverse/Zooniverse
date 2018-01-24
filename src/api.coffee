@@ -1,4 +1,4 @@
-$ = require 'jqueryify'
+$ = require '$ = window.jQuery'
 ProxyFrame = require './proxy_frame'
 Message = require './message'
 

@@ -1,5 +1,5 @@
 Spine = require 'spine'
-$ = require 'jqueryify'
+$ = require '$ = window.jQuery'
 
 days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 

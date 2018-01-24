@@ -1,4 +1,4 @@
-$ = require 'jqueryify'
+$ = require '$ = window.jQuery'
 
 # Basic usage:
 #

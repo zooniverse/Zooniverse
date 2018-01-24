@@ -1,4 +1,4 @@
-$ = require 'jqueryify'
+$ = require '$ = window.jQuery'
 Controller = require './controller'
 Form = require './base_form'
 User = require '../models/user'

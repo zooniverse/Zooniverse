@@ -1,4 +1,4 @@
-$ = require 'jqueryify'
+$ = require '$ = window.jQuery'
 
 class Message
   constructor: (@payload, @proxy) ->

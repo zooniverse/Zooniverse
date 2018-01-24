@@ -1,4 +1,4 @@
-$ = require 'jqueryify'
+$ = require '$ = window.jQuery'
 
 googleAnalyticsSrc = 'http://www.google-analytics.com/ga.js'
 
